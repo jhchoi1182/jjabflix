@@ -9,8 +9,6 @@ interface IBanner {
 }
 
 const Banner = ({ title, detail, poster }: IBanner) => {
-  console.log(posterAPI(poster));
-
   return (
     <ContentsBox bgImg={posterAPI(poster)}>
       <Title>{title}</Title>
