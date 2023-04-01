@@ -59,6 +59,8 @@ body {
   color:black;
   line-height: 1.2;
   font-size: 1.6rem;
+  background-color: black;
+  color: ${(props) => props.theme.white.darker};
 }
 a {
   text-decoration:none;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, Variants, useAnimation } from "framer-motion";
+import { flex } from "../utils/util";
 
 const navVariants: Variants = {
   start: {
@@ -78,16 +79,13 @@ function Header() {
 export default Header;
 
 const NavBar = styled(motion.nav)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${flex("space-between")}
   position: fixed;
   width: 100%;
   top: 0;
   background-color: black;
   font-size: 1.4rem;
   padding: 22px 60px;
-  color: white;
 `;
 
 const ColumnSection = styled.div`
@@ -109,7 +107,6 @@ const Pages = styled.ul`
 
 const Page = styled.li`
   margin-right: 2rem;
-  color: ${(props) => props.theme.white.darker};
   transition: color 0.3s ease-in-out;
   position: relative;
   display: flex;
