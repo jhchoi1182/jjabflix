@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { posterAPI } from "../../../Api/Apis";
 import { IResult } from "../../../Interface/ApiInterface";
+import { useSetRecoilState } from "recoil";
+import { detailAtom } from "../../../Atom/Atoms";
 
 const contentVariants = {
   normal: {
@@ -31,6 +33,7 @@ const infoVariants = {
 };
 
 const Item = (data: IResult) => {
+  const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
   const showDetail = (id: number) => {
     // console.log(id);
@@ -45,6 +48,7 @@ const Item = (data: IResult) => {
         initial="normal"
         transition={{ type: "tween" }}
         onClick={() => {
+          setContentData(data);
           navigate(`/${data.id}`);
           showDetail(data.id);
         }}

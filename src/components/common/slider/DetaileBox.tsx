@@ -1,9 +1,13 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMatch } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { detailAtom } from "../../../Atom/Atoms";
 
 const DetaileBox = () => {
+  const contentData = useRecoilValue(detailAtom);
   const contentsMatch = useMatch("/:dataId");
+  console.log(contentData);
 
   return (
     <AnimatePresence>
