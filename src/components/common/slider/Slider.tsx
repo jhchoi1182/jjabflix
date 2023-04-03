@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 import Item from "./Item";
-import { IGetData, posterAPI } from "../../../api";
+import { IGetData } from "../../../api";
 
 const rowVariants = {
   hidden: {
@@ -34,7 +34,8 @@ const Slider = (data: IGetData) => {
   };
 
   return (
-    <SliderBox onClick={incraseIndex}>
+    <SliderBox>
+      <button onClick={incraseIndex}>넘기기</button>
       <AnimatePresence initial={false} onExitComplete={toggleNextSlice}>
         <RowContainer
           variants={rowVariants}
@@ -44,8 +45,8 @@ const Slider = (data: IGetData) => {
           transition={{ type: "tween", duration: 1 }}
           key={page}
         >
-          {data?.results.slice(showContentsNum * page, showContentsNum * page + showContentsNum).map((content) => (
-            <Item key={content.id} bgImg={posterAPI(content.backdrop_path, "w500")} />
+          {data?.results.slice(showContentsNum * page, showContentsNum * page + showContentsNum).map((data) => (
+            <Item key={data.id} {...data} />
           ))}
         </RowContainer>
       </AnimatePresence>

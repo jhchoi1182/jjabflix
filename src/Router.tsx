@@ -16,6 +16,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/:dataId",
+        element: <Home />,
+      },
+      {
         path: "tv",
         element: <Tv />,
       },
