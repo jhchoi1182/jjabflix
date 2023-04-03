@@ -16,8 +16,8 @@ const DetaileBox = () => {
     <AnimatePresence>
       {contentsMatch && (
         <DetailBox layoutId={contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
-          <Cover bgImg={posterAPI(contentData.backdrop_path || contentData.poster_path, "w500")} />
-          <Title>{contentData.title || contentData.name}</Title>
+          <Cover bgImg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")} />
+          <Title>{contentData.title ?? contentData.name}</Title>
           <Overview>{contentData.overview}</Overview>
         </DetailBox>
       )}

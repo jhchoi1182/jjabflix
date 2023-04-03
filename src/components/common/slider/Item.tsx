@@ -35,9 +35,6 @@ const infoVariants = {
 const Item = (data: IResult) => {
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
-  const showDetail = (id: number) => {
-    // console.log(id);
-  };
 
   return (
     <>
@@ -50,12 +47,11 @@ const Item = (data: IResult) => {
         onClick={() => {
           setContentData(data);
           navigate(`/${data.id}`);
-          showDetail(data.id);
         }}
-        bg={posterAPI(data.backdrop_path || data.poster_path, "w500")}
+        bg={posterAPI(data.backdrop_path ?? data.poster_path, "w500")}
       >
         <ContentInfo variants={infoVariants}>
-          <h4>{data.title || data.name}</h4>
+          <h4>{data.title ?? data.name}</h4>
         </ContentInfo>
       </Content>
     </>

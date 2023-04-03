@@ -3,3 +3,7 @@ export interface IBackdropProps {
   exit?: { opacity: number };
   onClick(): void;
 }
+
+export interface IForm {
+  keyword: string;
+}

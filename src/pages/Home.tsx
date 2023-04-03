@@ -15,7 +15,9 @@ const Home = () => {
   const { data, isLoading } = useQuery<IGetData>(["trending"], homeAPI);
   const contentsMatch = useMatch("/:dataId");
   const navigate = useNavigate();
+  
   const closeOverlay = () => navigate("/");
+
   return (
     <Wrapper>
       {isLoading ? (
