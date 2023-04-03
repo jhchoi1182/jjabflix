@@ -1,6 +1,3 @@
-const BASE_URL = "https://api.themoviedb.org/3";
-const API = process.env.REACT_APP_API;
-
 export interface IResult {
   backdrop_path: string;
   id: number;
@@ -22,12 +19,3 @@ export interface IGetData {
   total_pages: number;
   total_results: number;
 }
-
-
-export const homeAPI = () => {
-  return fetch(`${BASE_URL}/trending/all/day?api_key=${API}`).then((response) => response.json());
-};
-
-export const posterAPI = (id: string, size?: string) => {
-  return `https://image.tmdb.org/t/p/${size ?? "original"}/${id}`;
-};

@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import { flex } from "../utils/util";
+import { flex } from "../../Utils/Util";
 
 const Loading = () => {
   return <LoadingBox>로딩 중...</LoadingBox>;

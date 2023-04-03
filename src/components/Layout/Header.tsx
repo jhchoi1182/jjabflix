@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, Variants, useAnimation } from "framer-motion";
-import { flex } from "../utils/util";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { flex } from "../../Utils/Util";
 
 const navVariants: Variants = {
   start: {

@@ -5,8 +5,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { RecoilRoot } from "recoil";
-import { theme } from "./styles/theme";
-import GlobalStyle from "./styles/GlobalStyle";
+import { theme } from "./Styles/Theme";
+import GlobalStyle from "./Styles/GlobalStyle";
 import router from "./Router";
 
 const queryClient = new QueryClient();

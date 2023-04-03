@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { posterAPI } from "../../api";
-
-interface IBanner {
-  title: string;
-  detail: string;
-  poster: string;
-}
+import { posterAPI } from "../../Api/Apis";
+import { IBanner } from "../../Interface/ContentsInterface";
 
 const Banner = ({ title, detail, poster }: IBanner) => {
   return (

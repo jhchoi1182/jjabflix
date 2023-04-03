@@ -1,12 +1,13 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useMatch } from "react-router-dom";
-import { IGetData, homeAPI } from "../api";
-import DetaileBox from "../components/common/slider/DetaileBox";
-import Loading from "../components/Loading";
-import Wrapper from "../components/common/Wrapper";
-import Banner from "../components/common/Banner";
-import Slider from "../components/common/slider/Slider";
+import { homeAPI } from "../Api/Apis";
+import DetaileBox from "../Components/Common/Slider/DetaileBox";
+import Loading from "../Components/Common/Loading";
+import Wrapper from "../Components/Layout/Wrapper";
+import Banner from "../Components/Common/Banner";
+import Slider from "../Components/Common/Slider/Slider";
+import { IGetData } from "../Interface/ApiInterface";
 
 const Home = () => {
   const { data, isLoading } = useQuery<IGetData>(["trending"], homeAPI);

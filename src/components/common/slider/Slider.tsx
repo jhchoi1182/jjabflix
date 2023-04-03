@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 import Item from "./Item";
-import { IGetData } from "../../../api";
+import { IGetData } from "../../../Interface/ApiInterface";
 
 const rowVariants = {
   hidden: {

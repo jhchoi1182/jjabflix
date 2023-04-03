@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { IResult, posterAPI } from "../../../api";
-import { useNavigate } from "react-router-dom";
+import { posterAPI } from "../../../Api/Apis";
+import { IResult } from "../../../Interface/ApiInterface";
 
 const contentVariants = {
   normal: {
