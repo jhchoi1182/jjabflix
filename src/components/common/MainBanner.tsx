@@ -5,7 +5,7 @@ import { IBanner } from "../../Interface/ContentsInterface";
 
 const MainBanner = ({ title, detail, poster }: IBanner) => {
   return (
-    <Banner bgImg={posterAPI(poster)}>
+    <Banner bg={posterAPI(poster)}>
       <Title>{title}</Title>
       <Detail>{detail}</Detail>
     </Banner>
@@ -14,14 +14,14 @@ const MainBanner = ({ title, detail, poster }: IBanner) => {
 
 export default MainBanner;
 
-const Banner = styled.div<{ bgImg: string }>`
+const Banner = styled.div<{ bg: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 60px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1)),
-    url(${(props) => props.bgImg});
+    url(${(props) => props.bg});
   background-size: cover;
 `;
 

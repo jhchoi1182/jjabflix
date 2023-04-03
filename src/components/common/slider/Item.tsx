@@ -52,7 +52,7 @@ const Item = (data: IResult) => {
           navigate(`/${data.id}`);
           showDetail(data.id);
         }}
-        bgImg={posterAPI(data.backdrop_path || data.poster_path, "w500")}
+        bg={posterAPI(data.backdrop_path || data.poster_path, "w500")}
       >
         <ContentInfo variants={infoVariants}>
           <h4>{data.title || data.name}</h4>
@@ -64,9 +64,9 @@ const Item = (data: IResult) => {
 
 export default Item;
 
-const Content = styled(motion.div)<{ bgImg: string }>`
+const Content = styled(motion.div)<{ bg: string }>`
   background-color: white;
-  background-image: url(${(props) => props.bgImg});
+  background-image: url(${(props) => props.bg});
   background-size: cover;
   background-position: center center;
   height: 200px;
