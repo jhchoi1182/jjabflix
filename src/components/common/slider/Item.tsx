@@ -52,11 +52,11 @@ const Item = (data: IResult) => {
           navigate(`/${data.id}`);
           showDetail(data.id);
         }}
-        bg={posterAPI(data.backdrop_path || data.poster_path, "w500")}
+        bgImg={posterAPI(data.backdrop_path || data.poster_path, "w500")}
       >
-        <ItemInfo variants={infoVariants}>
+        <ContentInfo variants={infoVariants}>
           <h4>{data.title || data.name}</h4>
-        </ItemInfo>
+        </ContentInfo>
       </Content>
     </>
   );
@@ -64,9 +64,9 @@ const Item = (data: IResult) => {
 
 export default Item;
 
-const Content = styled(motion.div)<{ bg: string }>`
+const Content = styled(motion.div)<{ bgImg: string }>`
   background-color: white;
-  background-image: url(${(props) => props.bg});
+  background-image: url(${(props) => props.bgImg});
   background-size: cover;
   background-position: center center;
   height: 200px;
@@ -79,7 +79,7 @@ const Content = styled(motion.div)<{ bg: string }>`
   }
 `;
 
-const ItemInfo = styled(motion.div)`
+const ContentInfo = styled(motion.div)`
   padding: 10px;
   background-color: ${(props) => props.theme.black.lighter};
   opacity: 0;

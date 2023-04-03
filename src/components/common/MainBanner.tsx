@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { posterAPI } from "../../Api/Apis";
 import { IBanner } from "../../Interface/ContentsInterface";
 
-const Banner = ({ title, detail, poster }: IBanner) => {
+const MainBanner = ({ title, detail, poster }: IBanner) => {
   return (
-    <ContentsBox bgImg={posterAPI(poster)}>
+    <Banner bgImg={posterAPI(poster)}>
       <Title>{title}</Title>
       <Detail>{detail}</Detail>
-    </ContentsBox>
+    </Banner>
   );
 };
 
-export default Banner;
+export default MainBanner;
 
-const ContentsBox = styled.div<{ bgImg: string }>`
+const Banner = styled.div<{ bgImg: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
