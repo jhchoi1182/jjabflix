@@ -1,9 +1,7 @@
 import { css } from "styled-components";
 
-export const flex = (
-  justifyContent = "",
-  alignItems = "",
-) => {
+/** Layouts */
+export const flex = (justifyContent = "", alignItems = "") => {
   const jc = () => {
     switch (justifyContent) {
       case "space-between":
@@ -32,3 +30,20 @@ export const flex = (
     align-items: ${ai()};
   `;
 };
+
+/** Fonts */
+export const LargeTitle = css`
+  font-size: 6rem;
+  font-weight: 700;
+`;
+
+export const SmallTitle = css`
+  font-size: 4.6rem;
+`;
+
+export const LargeOverview = css`
+  font-size: 2.5rem;
+  font-weight: 500;
+`;
+
+export const SmallOverview = css``;

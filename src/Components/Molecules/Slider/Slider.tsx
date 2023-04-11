@@ -16,7 +16,7 @@ const rowVariants = {
   },
 };
 
-const Slider = (data: IGetData) => {
+const Slider: React.FC<IGetData> = (data) => {
   const [page, setPage] = useState(0);
   const [isExit, setIsExit] = useState(false);
 

@@ -2,19 +2,27 @@ import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../Api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../Lib/Atoms";
+import * as fonts from "../../../Styles/Css";
+import { ChildrenProps } from "../../../Utils/type";
 
-export interface IBanner {
+export type MainBannerProps = {
   id: number;
   type: string;
-}
+};
 
-const MainBanner = ({ id, type }: IBanner) => {
+type LegibilityProps = {
+  Title: React.FC<ChildrenProps>;
+  Detail: React.FC<ChildrenProps>;
+};
+
+const MainBanner: React.FC<MainBannerProps> & LegibilityProps = ({ id, type }) => {
   const { data } = useQuery<IResult | undefined>(["bannerDetail"], () => detailAPI({ id, type }));
+  const { backdrop_path, poster_path, title, overview } = data || {};
 
   return (
-    <Banner bg={posterAPI(data?.backdrop_path ?? data?.poster_path)}>
-      <Title>{data?.title}</Title>
-      <Detail>{data?.overview}</Detail>
+    <Banner bg={posterAPI(backdrop_path ?? poster_path)}>
+      <MainBanner.Title>{title}</MainBanner.Title>
+      <MainBanner.Detail>{overview}</MainBanner.Detail>
     </Banner>
   );
 };
@@ -32,14 +40,12 @@ const Banner = styled.div<{ bg: string }>`
   background-size: cover;
 `;
 
-const Title = styled.h2`
-  font-size: 6rem;
+MainBanner.Title = styled.h2`
+  ${fonts.LargeTitle}
   margin-bottom: 2rem;
-  font-weight: 700;
 `;
 
-const Detail = styled.p`
+MainBanner.Detail = styled.p`
+  ${fonts.LargeOverview}
   width: 50%;
-  font-size: 2.5rem;
-  font-weight: 500;
 `;

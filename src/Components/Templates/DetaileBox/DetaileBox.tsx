@@ -3,8 +3,8 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useMatch } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { detailAtom } from "../../Lib/Atoms";
-import { posterAPI } from "../../Api/Apis";
+import { detailAtom } from "../../../Lib/Atoms";
+import { posterAPI } from "../../../Api/Apis";
 
 const DetaileBox = () => {
   const contentData = useRecoilValue(detailAtom);
@@ -50,7 +50,7 @@ const Cover = styled.div<{ bgImg: string }>`
 const Title = styled.h3`
   color: ${(props) => props.theme.white.lighter};
   padding: 20px;
-  font-size: 46px;
+  font-size: 4.6rem;
   position: relative;
   top: -80px;
 `;

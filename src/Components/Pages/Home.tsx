@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../Api/Apis";
-import DetaileBox from "../Templates/DetaileBox";
+import DetaileBox from "../Templates/DetaileBox/DetaileBox";
 import Loading from "../Atoms/Loading/Loading";
 import Wrapper from "../Atoms/LayoutCss/Wrapper";
 import MainBanner from "../Organisms/MainBanner/MainBanner";

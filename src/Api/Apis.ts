@@ -1,4 +1,4 @@
-import { IBanner } from "../Components/Organisms/MainBanner/MainBanner";
+import { MainBannerProps } from "../Components/Organisms/MainBanner/MainBanner";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API = process.env.REACT_APP_API;
@@ -18,7 +18,7 @@ export const posterAPI = (path?: string, size?: string) => {
   return `https://image.tmdb.org/t/p/${size ?? "original"}/${path}`;
 };
 
-export const detailAPI = ({ id, type }: IBanner) => {
+export const detailAPI = ({ id, type }: MainBannerProps) => {
   if (id === 0) return;
   if (type === "movie")
     return fetch(`${BASE_URL}/movie/${id}?api_key=${API}&language=ko`).then((response) => response.json());
