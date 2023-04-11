@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import SearchResult from "./Pages/SearchResult";
-import Bookmark from "./Pages/Bookmark";
-import Movie from "./Pages/Movie";
-import Home from "./Pages/Home";
+import SearchResult from "./Components/Pages/SearchResult";
+import Bookmark from "./Components/Pages/Bookmark";
+import Movie from "./Components/Pages/Movie";
+import Home from "./Components/Pages/Home";
 import Root from "./Root";
-import Tv from "./Pages/Tv";
+import Tv from "./Components/Pages/Tv";
 
 const router = createBrowserRouter([
   {

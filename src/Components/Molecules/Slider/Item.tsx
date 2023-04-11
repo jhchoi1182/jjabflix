@@ -2,9 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { posterAPI } from "../../../Api/Apis";
-import { IResult } from "../../../Interface/ApiInterface";
 import { useSetRecoilState } from "recoil";
-import { detailAtom } from "../../../Atom/Atoms";
+import { IResult, detailAtom } from "../../../Lib/Atoms";
 
 const contentVariants = {
   normal: {

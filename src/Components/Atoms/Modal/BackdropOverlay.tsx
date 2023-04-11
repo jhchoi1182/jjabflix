@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { IBackdropProps } from "../../../Interface/CommonInterface";
 
-const BackdropOverlay = ({ animate, exit, onClick }: IBackdropProps) => {
+interface IBackdropProps {
+  animate?: { opacity: number };
+  exit?: { opacity: number };
+  onClick(): void;
+}
+
+const BackdropOverlay: React.FC<IBackdropProps> = ({ animate, exit, onClick }) => {
   return <Overlay animate={animate} exit={exit} onClick={onClick}></Overlay>;
 };
 
