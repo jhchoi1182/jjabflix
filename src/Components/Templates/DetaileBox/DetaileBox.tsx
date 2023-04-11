@@ -15,8 +15,9 @@ const DetaileBox = () => {
     <AnimatePresence>
       {contentsMatch && (
         <DetailBox layoutId={contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
-          <Cover bgImg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")} />
-          <Title>{contentData.title ?? contentData.name}</Title>
+          <Cover bgImg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
+            <Title>{contentData.title ?? contentData.name}</Title>
+          </Cover>
           <Overview>{contentData.overview}</Overview>
         </DetailBox>
       )}
@@ -44,6 +45,7 @@ const Cover = styled.div<{ bgImg: string }>`
     url(${(props) => props.bgImg});
   background-size: cover;
   background-position: center center;
+  position: relative;
   height: 400px;
 `;
 
@@ -51,8 +53,8 @@ const Title = styled.h3`
   color: ${(props) => props.theme.white.lighter};
   padding: 20px;
   font-size: 4.6rem;
-  position: relative;
-  top: -80px;
+  position: absolute;
+  bottom: 0;
 `;
 
 const Overview = styled.p`

@@ -16,10 +16,10 @@ export interface IGetData {
     maximuum: string;
     minimuum: string;
   };
-  page: number;
+  page?: number;
   results: IResult[];
-  total_pages: number;
-  total_results: number;
+  total_pages?: number;
+  total_results?: number;
 }
 
 export const detailAtom = atom<IResult>({

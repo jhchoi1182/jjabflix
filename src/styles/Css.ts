@@ -37,8 +37,14 @@ export const LargeTitle = css`
   font-weight: 700;
 `;
 
-export const SmallTitle = css`
+export const MidTitle = css`
   font-size: 4.6rem;
+  font-weight: 700;
+`;
+
+export const SmallTitle = css`
+  font-size: 2.6rem;
+  font-weight: 700;
 `;
 
 export const LargeOverview = css`

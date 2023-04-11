@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
-import Item from "./Item";
+import Item from "../../Molecules/Slider/Item";
 import { IGetData } from "../../../Lib/Atoms";
 
 const rowVariants = {
@@ -45,7 +45,7 @@ const Slider: React.FC<IGetData> = (data) => {
           transition={{ type: "tween", duration: 0.75 }}
           key={page}
         >
-          {data?.results.slice(showContentsNum * page, showContentsNum * page + showContentsNum).map((data) => (
+          {data?.results?.slice(showContentsNum * page, showContentsNum * page + showContentsNum).map((data) => (
             <Item key={data.id} {...data} />
           ))}
         </RowContainer>
@@ -64,7 +64,7 @@ const SliderBox = styled.div`
 
 const RowContainer = styled(motion.div)`
   display: grid;
-  gap: 5px;
+  gap: 8px;
   grid-template-columns: repeat(6, 1fr);
   position: absolute;
   width: 100%;
