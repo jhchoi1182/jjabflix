@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { IForm } from "../../Interface/CommonInterface";
+
+interface IForm {
+  keyword: string;
+}
 
 const Search = () => {
   const [isSearch, setIsSearch] = useState(false);

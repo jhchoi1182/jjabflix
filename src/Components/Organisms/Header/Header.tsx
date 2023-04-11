@@ -2,8 +2,8 @@ import { motion, useScroll, useMotionValueEvent, Variants, useAnimation } from "
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { flex } from "../../Utils/Util";
-import Search from "./Search";
+import { flex } from "../../../Styles/Css";
+import Search from "../../Molecules/Search/Search";
 
 const navVariants: Variants = {
   start: {
@@ -14,7 +14,7 @@ const navVariants: Variants = {
   },
 };
 
-function Header() {
+const Header = () => {
   const { scrollYProgress } = useScroll();
   const navAnimation = useAnimation();
 
@@ -51,7 +51,7 @@ function Header() {
       </ColumnSection>
     </NavBar>
   );
-}
+};
 
 export default Header;
 
@@ -67,7 +67,6 @@ const NavBar = styled(motion.nav)`
 
 const ColumnSection = styled.div`
   display: flex;
-  align-items: center;
 `;
 
 const Logo = styled.svg`
@@ -79,7 +78,7 @@ const Logo = styled.svg`
 
 const Pages = styled.ul`
   display: flex;
-  align-items: center;
+  margin-top: 1px;
 `;
 
 const Page = styled.li`

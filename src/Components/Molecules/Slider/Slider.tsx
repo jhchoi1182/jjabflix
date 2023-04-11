@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 import Item from "./Item";
-import { IGetData } from "../../../Interface/ApiInterface";
+import { IGetData } from "../../../Lib/Atoms";
 
 const rowVariants = {
   hidden: {
@@ -42,7 +42,7 @@ const Slider = (data: IGetData) => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          transition={{ type: "tween", duration: 1 }}
+          transition={{ type: "tween", duration: 0.75 }}
           key={page}
         >
           {data?.results.slice(showContentsNum * page, showContentsNum * page + showContentsNum).map((data) => (
@@ -59,6 +59,7 @@ export default Slider;
 const SliderBox = styled.div`
   position: relative;
   top: -100px;
+  /* padding-left: 66px; */
 `;
 
 const RowContainer = styled(motion.div)`

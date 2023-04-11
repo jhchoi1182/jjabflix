@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { searchAPI } from "../Api/Apis";
-import { IGetData } from "../Interface/ApiInterface";
+import { searchAPI } from "../../Api/Apis";
+import { IGetData } from "../../Lib/Atoms";
 
 const SearchResult = () => {
   const location = useLocation();

@@ -3,14 +3,13 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useMatch } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { detailAtom } from "../../../Atom/Atoms";
-import { posterAPI } from "../../../Api/Apis";
+import { detailAtom } from "../../Lib/Atoms";
+import { posterAPI } from "../../Api/Apis";
 
 const DetaileBox = () => {
   const contentData = useRecoilValue(detailAtom);
   const { scrollY } = useScroll();
   const contentsMatch = useMatch("/:dataId");
-  console.log(contentData);
 
   return (
     <AnimatePresence>
