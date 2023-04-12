@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../Api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../Lib/Atoms";
-import * as fonts from "../../../Styles/Css";
+import * as fonts from "../../../styles/Css";
 import { ChildrenProps } from "../../../Utils/type";
 
 export type MainBannerProps = {
@@ -35,7 +35,7 @@ const Banner = styled.div<{ bgimg: string }>`
   justify-content: center;
   background-size: cover;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1)),
-  url(${(props) => props.bgimg});
+    url(${(props) => props.bgimg});
   height: 100vh;
   padding: 60px;
 `;

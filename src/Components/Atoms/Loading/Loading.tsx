@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { flex } from "../../../Styles/Css";
+import { flex } from "../../../styles/Css";
 
 const Loading = () => {
   return <LoadingBox>로딩 중...</LoadingBox>;

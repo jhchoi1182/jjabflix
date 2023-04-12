@@ -2,7 +2,7 @@ import { motion, useScroll, useMotionValueEvent, Variants, useAnimation } from "
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { flex } from "../../../Styles/Css";
+import { flex } from "../../../styles/Css";
 import Search from "../../Molecules/Search/Search";
 
 const navVariants: Variants = {

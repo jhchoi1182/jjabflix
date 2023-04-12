@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { posterAPI } from "../../../Api/Apis";
 import { useSetRecoilState } from "recoil";
 import { IResult, detailAtom } from "../../../Lib/Atoms";
-import * as fonts from "../../../Styles/Css";
+import * as fonts from "../../../styles/Css";
 import { bgImg } from "../../Atoms/Banner/Banner";
 
 const contentVariants: Variants = {
