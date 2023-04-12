@@ -6,13 +6,13 @@ import { IGetData } from "../../../Lib/Atoms";
 
 const rowVariants = {
   hidden: (isNext: boolean) => ({
-    x: isNext ? window.outerWidth - 12.5 : -window.outerWidth + 12.5,
+    x: isNext ? window.innerWidth - 9.5 : -window.innerWidth + 9.5,
   }),
   visible: {
     x: 0,
   },
   exit: (isNext: boolean) => ({
-    x: isNext ? -window.outerWidth + 12.5 : window.outerWidth - 12.5,
+    x: isNext ? -window.innerWidth + 9.5 : window.innerWidth - 9.5,
   }),
 };
 
