@@ -5,6 +5,7 @@ import { posterAPI } from "../../../Api/Apis";
 import { useSetRecoilState } from "recoil";
 import { IResult, detailAtom } from "../../../Lib/Atoms";
 import * as fonts from "../../../Styles/Css";
+import { bgImg } from "../../Atoms/Banner/Banner";
 
 const contentVariants: Variants = {
   normal: {
@@ -32,7 +33,7 @@ const infoVariants: Variants = {
   },
 };
 
-const Item = (data: IResult) => {
+const Item: React.FC<IResult> = (data) => {
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
 
@@ -44,17 +45,19 @@ const Item = (data: IResult) => {
       initial="normal"
       transition={{ type: "tween", zIndex: 90 }}
     >
-      <Banner
-        onClick={() => {
-          setContentData(data);
-          navigate(`/${data.id}`);
-        }}
-        bg={posterAPI(data.backdrop_path ?? data.poster_path, "w500")}
-      >
+      <Banner bgimg={posterAPI(data.backdrop_path ?? data.poster_path, "w500")}>
         <Title>{data.title ?? data.name}</Title>
       </Banner>
       <ContentInfo variants={infoVariants}>
         <h4>{data.title ?? data.name}</h4>
+        <button
+          onClick={() => {
+            setContentData(data);
+            navigate(`/${data.id}`);
+          }}
+        >
+          상세보기
+        </button>
       </ContentInfo>
     </Container>
   );
@@ -71,11 +74,8 @@ const Container = styled(motion.div)`
   }
 `;
 
-const Banner = styled(motion.div)<{ bg: string }>`
-  background-color: white;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${(props) => props.bg});
-  background-size: cover;
-  background-position: center center;
+const Banner = styled(motion.div)<{ bgimg: string }>`
+  ${bgImg}
   height: 200px;
   padding: 10px;
   border-top-left-radius: 5px;

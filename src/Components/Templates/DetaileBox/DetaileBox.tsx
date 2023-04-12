@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { detailAtom } from "../../../Lib/Atoms";
 import { posterAPI } from "../../../Api/Apis";
+import { bgImg } from "../../Atoms/Banner/Banner";
 
 const DetaileBox = () => {
   const contentData = useRecoilValue(detailAtom);
@@ -15,7 +16,7 @@ const DetaileBox = () => {
     <AnimatePresence>
       {contentsMatch && (
         <DetailBox layoutId={contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
-          <Cover bgImg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
+          <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
             <Title>{contentData.title ?? contentData.name}</Title>
           </Cover>
           <Overview>{contentData.overview}</Overview>
@@ -39,12 +40,8 @@ const DetailBox = styled(motion.div)`
   border-radius: 8px;
 `;
 
-const Cover = styled.div<{ bgImg: string }>`
-  width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-    url(${(props) => props.bgImg});
-  background-size: cover;
-  background-position: center center;
+const Cover = styled.div<{ bgimg: string }>`
+  ${bgImg}
   position: relative;
   height: 400px;
 `;

@@ -10,17 +10,17 @@ export type MainBannerProps = {
   type: string;
 };
 
-type LegibilityProps = {
+type BannerContentProps = {
   Title: React.FC<ChildrenProps>;
   Detail: React.FC<ChildrenProps>;
 };
 
-const MainBanner: React.FC<MainBannerProps> & LegibilityProps = ({ id, type }) => {
+const MainBanner: React.FC<MainBannerProps> & BannerContentProps = ({ id, type }) => {
   const { data } = useQuery<IResult | undefined>(["bannerDetail"], () => detailAPI({ id, type }));
   const { backdrop_path, poster_path, title, overview } = data || {};
 
   return (
-    <Banner bg={posterAPI(backdrop_path ?? poster_path)}>
+    <Banner bgimg={posterAPI(backdrop_path ?? poster_path)}>
       <MainBanner.Title>{title}</MainBanner.Title>
       <MainBanner.Detail>{overview}</MainBanner.Detail>
     </Banner>
@@ -29,15 +29,15 @@ const MainBanner: React.FC<MainBannerProps> & LegibilityProps = ({ id, type }) =
 
 export default MainBanner;
 
-const Banner = styled.div<{ bg: string }>`
-  height: 100vh;
+const Banner = styled.div<{ bgimg: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1)),
-    url(${(props) => props.bg});
   background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1)),
+  url(${(props) => props.bgimg});
+  height: 100vh;
+  padding: 60px;
 `;
 
 MainBanner.Title = styled.h2`

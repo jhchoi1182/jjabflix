@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../Api/Apis";
 import DetaileBox from "../Templates/DetaileBox/DetaileBox";
 import Loading from "../Atoms/Loading/Loading";
-import Wrapper from "../Atoms/LayoutCss/Wrapper";
+import Wrapper from "../Atoms/Layout/Wrapper";
 import MainBanner from "../Organisms/MainBanner/MainBanner";
 import Slider from "../Organisms/Slider/Slider";
 import { useMatch, useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import BackdropOverlay from "../Atoms/Modal/BackdropOverlay";
 import { IGetData } from "../../Lib/Atoms";
 
 const Home = () => {
-  const { data = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI);
+  const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI);
   const contentsMatch = useMatch("/:dataId");
   const navigate = useNavigate();
 
@@ -23,18 +23,18 @@ const Home = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
-          <MainBanner id={data?.results[0]?.id ?? 0} type={data?.results[0]?.media_type ?? ""} />
-          <Slider {...data} />
+        <React.Fragment>
+          <MainBanner id={trending?.results[0]?.id ?? 0} type={trending?.results[0]?.media_type ?? ""} />
+          <Slider {...trending} category="trending" />
           <AnimatePresence>
             {contentsMatch && (
-              <>
+              <React.Fragment>
                 <BackdropOverlay animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeOverlay} />
                 <DetaileBox />
-              </>
+              </React.Fragment>
             )}
           </AnimatePresence>
-        </>
+        </React.Fragment>
       )}
     </Wrapper>
   );

@@ -20,6 +20,7 @@ export interface IGetData {
   results: IResult[];
   total_pages?: number;
   total_results?: number;
+  category: string;
 }
 
 export const detailAtom = atom<IResult>({

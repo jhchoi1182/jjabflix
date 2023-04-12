@@ -10,7 +10,7 @@ const SearchResult = () => {
 
   const { data, isLoading } = useQuery<IGetData>(["searchKeyword"], () => searchAPI(keyword ?? ""));
 
-  return <>{data ? <div>안녕</div> : "검색결과 없음"}</>;
+  return <React.Fragment>{data ? <div>안녕</div> : "검색결과 없음"}</React.Fragment>;
 };
 
 export default SearchResult;
