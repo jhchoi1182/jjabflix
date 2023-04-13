@@ -77,7 +77,7 @@ const Container = styled(motion.div)`
 const Banner = styled(motion.div)<{ bgimg: string }>`
   ${bgImg}
   height: 200px;
-  padding: 10px;
+  padding: 12px 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;
