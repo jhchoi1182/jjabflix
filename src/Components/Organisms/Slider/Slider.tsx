@@ -8,15 +8,21 @@ type VariantsProps = {
   direction: string;
 };
 
+const screenWidth = window.innerWidth;
+const SlideGap = () => {
+  if (screenWidth === 1920) return 145;
+  else return 0.0698 * screenWidth;
+};
+
 const rowVariants: Variants = {
   appearance: ({ direction }: VariantsProps) => ({
-    x: direction === "next" ? window.innerWidth - 145 : -window.innerWidth + 145,
+    x: direction === "next" ? screenWidth - SlideGap() : -screenWidth + SlideGap(),
   }),
   center: () => ({
     x: 0,
   }),
   exit: ({ direction }: VariantsProps) => ({
-    x: direction === "next" ? -window.innerWidth + 145 : window.innerWidth - 145,
+    x: direction === "next" ? -screenWidth + SlideGap() : screenWidth - SlideGap(),
   }),
 };
 
@@ -48,7 +54,7 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
   };
 
   return (
-    <SliderBox page={page}>
+    <SliderBox>
       {page !== 0 && <PrevBtn onClick={prevSlide}> &#10094;</PrevBtn>}
       {page !== maxPage && <NextBtn onClick={nextSlide}>&#10095;</NextBtn>}
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
@@ -60,7 +66,6 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
           exit="exit"
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
-          num={showContentsNum}
         >
           {page === 0 && <div style={{ width: "calc(100% / 8)" }} />}
           {data?.results
@@ -80,19 +85,20 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
 export default Slider;
 
 const PrevBtn = styled.button`
-  margin-left: 300px;
+  margin-left: 12%;
 `;
 const NextBtn = styled.button`
+  margin-left: 12%;
 `;
 
-const SliderBox = styled.div<{ page: number }>`
+const SliderBox = styled.div`
   position: relative;
   top: -100px;
-  margin-left: -228px;
-  margin-right: -228px;
+  margin-left: -12%;
+  margin-right: -12%;
 `;
 
-const RowContainer = styled(motion.div)<{ num: number }>`
+const RowContainer = styled(motion.div)`
   display: flex;
   gap: 8px;
   position: absolute;
