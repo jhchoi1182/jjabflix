@@ -66,6 +66,7 @@ const Item: React.FC<IResult> = (data) => {
 export default Item;
 
 const Container = styled(motion.div)`
+  width: calc(100% / 8);
   &:first-child {
     transform-origin: center left;
   }
