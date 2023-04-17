@@ -28,6 +28,7 @@ const rowVariants: Variants = {
 
 const Slider: React.FC<IGetData> = ({ category, ...data }) => {
   const [page, setPage] = useState(0);
+  const [buttonVisibility, setButtonVisibility] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
   const [direction, setDirection] = useState("next");
 
@@ -53,10 +54,15 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
     }
   };
 
+  const MouseHoverHandler = () => {
+    setButtonVisibility(true);
+    setTimeout(() => {
+      setButtonVisibility((prev) => !prev);
+    }, 500);
+  };
+
   return (
-    <SliderBox>
-      {page !== 0 && <PrevBtn onClick={prevSlide}> &#10094;</PrevBtn>}
-      {page !== maxPage && <NextBtn onClick={nextSlide}>&#10095;</NextBtn>}
+    <SliderBox buttonVisibility={buttonVisibility}>
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
           variants={rowVariants}
@@ -74,10 +80,16 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
               page === 0 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((data) => (
-              <Item key={data.id} {...data} />
+              <Item key={data.id} {...data} onMouseEnter={MouseHoverHandler} />
             ))}
         </RowContainer>
       </AnimatePresence>
+      {page !== 0 && <PrevBtn onClick={prevSlide}> &#10094;</PrevBtn>}
+      {page !== maxPage && (
+        <NextBtn onClick={nextSlide}>
+          <NextArrow className="hover-Btn">&#10095;</NextArrow>
+        </NextBtn>
+      )}
     </SliderBox>
   );
 };
@@ -88,14 +100,42 @@ const PrevBtn = styled.button`
   margin-left: 12%;
 `;
 const NextBtn = styled.button`
-  margin-left: 12%;
+  position: absolute;
+  right: 9%;
+  width: calc(100% / 30);
+  height: 170px;
+  opacity: 0.5;
+  border: none;
+  background-color: ${(props) => props.theme.black.darker};
+  font-size: 3rem;
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:hover .hover-Btn {
+    opacity: 1.45;
+  }
 `;
 
-const SliderBox = styled.div`
+const NextArrow = styled.div`
+  width: 100%;
+  font-size: 3rem;
+  color: ${(props) => props.theme.white.lighter};
+  opacity: 0;
+  &:hover {
+    font-size: 4rem;
+  }
+`;
+
+const SliderBox = styled.div<{ buttonVisibility: boolean }>`
   position: relative;
   top: -100px;
   margin-left: -12%;
   margin-right: -12%;
+  &:hover .hover-Btn {
+    opacity: ${(props) => props.buttonVisibility && "2"};
+  }
 `;
 
 const RowContainer = styled(motion.div)`

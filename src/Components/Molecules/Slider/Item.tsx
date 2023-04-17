@@ -7,6 +7,10 @@ import { IResult, detailAtom } from "../../../Lib/Atoms";
 import * as fonts from "../../../styles/Css";
 import { bgImg } from "../../Atoms/Banner/Banner";
 
+interface test extends IResult {
+  onMouseEnter: () => void;
+}
+
 const contentVariants: Variants = {
   normal: {
     scale: 1,
@@ -24,7 +28,7 @@ const contentVariants: Variants = {
 
 const infoVariants: Variants = {
   hover: {
-    opacity: 1,
+    display: "flex",
     transition: {
       delay: 0.5,
       duration: 0.15,
@@ -33,7 +37,7 @@ const infoVariants: Variants = {
   },
 };
 
-const Item: React.FC<IResult> = (data) => {
+const Item: React.FC<test> = ({ onMouseEnter, ...data }) => {
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
 
@@ -44,6 +48,7 @@ const Item: React.FC<IResult> = (data) => {
       whileHover="hover"
       initial="normal"
       transition={{ type: "tween", zIndex: 90 }}
+      onMouseEnter={onMouseEnter}
     >
       <Banner bgimg={posterAPI(data.backdrop_path ?? data.poster_path, "w500")}>
         <Title>{data.title ?? data.name}</Title>
@@ -77,7 +82,7 @@ const Container = styled(motion.div)`
 
 const Banner = styled(motion.div)<{ bgimg: string }>`
   ${bgImg}
-  height: 200px;
+  height: 170px;
   padding: 12px 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -94,7 +99,7 @@ const Title = styled(motion.p)`
 const ContentInfo = styled(motion.div)`
   padding: 10px;
   background-color: ${(props) => props.theme.black.lighter};
-  opacity: 0;
+  display: none;
   h4 {
     text-align: center;
     font-size: 18px;
