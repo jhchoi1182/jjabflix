@@ -1,5 +1,4 @@
 import { motion, useScroll, useMotionValueEvent, Variants, useAnimation } from "framer-motion";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { flex } from "../../../styles/Css";

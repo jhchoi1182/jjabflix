@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Item from "../../Molecules/Slider/Item";
 import { IGetData } from "../../../Lib/Atoms";
 
@@ -84,7 +84,11 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
             ))}
         </RowContainer>
       </AnimatePresence>
-      {page !== 0 && <PrevBtn onClick={prevSlide}> &#10094;</PrevBtn>}
+      {page !== 0 && (
+        <PrevBtn onClick={prevSlide}>
+          <PrevArrow className="hover-Btn">&#10094;</PrevArrow>
+        </PrevBtn>
+      )}
       {page !== maxPage && (
         <NextBtn onClick={nextSlide}>
           <NextArrow className="hover-Btn">&#10095;</NextArrow>
@@ -96,29 +100,24 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
 
 export default Slider;
 
-const PrevBtn = styled.button`
-  margin-left: 12%;
-`;
-const NextBtn = styled.button`
+const SliderBtn = css`
   position: absolute;
-  right: 9%;
   width: calc(100% / 30);
   height: 170px;
-  opacity: 0.5;
   border: none;
-  background-color: ${(props) => props.theme.black.darker};
+  background-color: rgba(0, 0, 0, 0.5);
   font-size: 3rem;
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    opacity: 0.7;
+    background-color: rgba(0, 0, 0, 0.7);
   }
   &:hover .hover-Btn {
-    opacity: 1.45;
+    opacity: 1;
   }
 `;
 
-const NextArrow = styled.div`
+const SliderBtnArrow = css`
   width: 100%;
   font-size: 3rem;
   color: ${(props) => props.theme.white.lighter};
@@ -128,13 +127,31 @@ const NextArrow = styled.div`
   }
 `;
 
+const PrevBtn = styled.button`
+  ${SliderBtn}
+  left: 9%;
+`;
+
+const NextBtn = styled.button`
+  ${SliderBtn}
+  right: 9%;
+`;
+
+const PrevArrow = styled.div`
+  ${SliderBtnArrow}
+`;
+
+const NextArrow = styled.div`
+  ${SliderBtnArrow}
+`;
+
 const SliderBox = styled.div<{ buttonVisibility: boolean }>`
   position: relative;
   top: -100px;
   margin-left: -12%;
   margin-right: -12%;
   &:hover .hover-Btn {
-    opacity: ${(props) => props.buttonVisibility && "2"};
+    opacity: ${(props) => props.buttonVisibility && "1"};
   }
 `;
 
