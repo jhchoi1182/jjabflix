@@ -57,6 +57,7 @@ export default Header;
 const NavBar = styled(motion.nav)`
   ${flex("space-between")}
   position: fixed;
+  z-index: 99;
   width: 100%;
   top: 0;
   background-color: black;
