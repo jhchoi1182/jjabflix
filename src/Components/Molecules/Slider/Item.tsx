@@ -19,9 +19,9 @@ const contentVariants: Variants = {
     scale: 1.3,
     y: -80,
     transition: {
+      type: "tween",
       delay: 0.5,
       duration: 0.15,
-      type: "tween",
     },
   },
 };
@@ -30,9 +30,9 @@ const infoVariants: Variants = {
   hover: {
     display: "flex",
     transition: {
+      type: "tween",
       delay: 0.5,
       duration: 0.15,
-      type: "tween",
     },
   },
 };
@@ -75,7 +75,7 @@ const Container = styled(motion.div)`
   &:nth-child(2) {
     transform-origin: center left;
   }
-  &:nth-last-child(2) {
+  &:nth-child(7) {
     transform-origin: center right;
   }
 `;

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled, { css } from "styled-components";
 import Item from "../../Molecules/Slider/Item";
-import { IGetData, IResult } from "../../../Lib/Atoms";
+import { IGetData } from "../../../Lib/Atoms";
+import SliderNum from "../../Atoms/SliderNum";
 
 type VariantsProps = {
   direction: string;
@@ -32,12 +33,11 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
   const [isSliding, setIsSliding] = useState(false);
   const [opacity, setOpacity] = useState(0);
   const [page, setPage] = useState(1);
+  const ulOpacityRef = useRef<HTMLUListElement>(null);
 
   const showContentsNum = page === 1 ? 7 : 8;
   const totalContents = data.results.length;
   const maxPage = Math.ceil(totalContents / showContentsNum);
-
-  let sliderContents: IResult[] = [];
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
@@ -58,9 +58,14 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
   };
 
   const mouseHoverHandler = () => {
-    setButtonVisibility(true);
+    const ulOpacity = ulOpacityRef?.current;
+    if (ulOpacity) {
+      ulOpacity.style.opacity = "1";
+    }
     setTimeout(() => {
-      setButtonVisibility((prev) => !prev);
+      if (ulOpacity) {
+        ulOpacity.style.opacity = "0";
+      }
     }, 500);
   };
 
@@ -72,21 +77,9 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
     setOpacity(0);
   };
 
-  const SliderNum = () => {
-    let sliderNumBox = [];
-    for (let i = 1; i < maxPage + 1; i++) {
-      sliderNumBox.push(<li key={i} className={i === page ? "active" : ""} />);
-    }
-    return (
-      <SliderNumBox className="hover-Btn" opacity={opacity}>
-        {sliderNumBox}
-      </SliderNumBox>
-    );
-  };
-
   return (
     <SliderBox buttonVisibility={buttonVisibility}>
-      <SliderNum />
+      <SliderNum ref={ulOpacityRef} maxPage={maxPage} page={page} opacity={opacity} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
           variants={rowVariants}
@@ -104,7 +97,6 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
               page === 1 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((content) => {
-              sliderContents.push(content);
               return <Item key={content.id} onMouseEnter={mouseHoverHandler} {...content} />;
             })}
         </RowContainer>
@@ -140,23 +132,6 @@ const RowContainer = styled(motion.div)`
   gap: 8px;
   position: absolute;
   width: 100%;
-`;
-
-const SliderNumBox = styled.ul<{ opacity: number }>`
-  position: absolute;
-  margin-top: -10px;
-  right: 12.5%;
-  display: flex;
-  gap: 1px;
-  opacity: ${(props) => props.opacity};
-  li {
-    width: 12px;
-    height: 2px;
-    background-color: #4d4d4d;
-  }
-  .active {
-    background-color: #aaa;
-  }
 `;
 
 const SliderBtn = css`
