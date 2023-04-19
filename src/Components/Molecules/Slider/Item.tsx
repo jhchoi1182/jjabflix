@@ -7,7 +7,7 @@ import { IResult, detailAtom } from "../../../Lib/Atoms";
 import * as fonts from "../../../styles/Css";
 import { bgImg } from "../../Atoms/Banner/Banner";
 
-interface test extends IResult {
+interface IItemProps extends IResult {
   onMouseEnter: () => void;
 }
 
@@ -37,28 +37,28 @@ const infoVariants: Variants = {
   },
 };
 
-const Item: React.FC<test> = ({ onMouseEnter, ...data }) => {
+const Item: React.FC<IItemProps> = ({ onMouseEnter, ...content }) => {
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
 
   return (
     <Container
-      layoutId={String(data.id)}
+      layoutId={String(content.id)}
       variants={contentVariants}
       whileHover="hover"
       initial="normal"
       transition={{ type: "tween", zIndex: 90 }}
       onMouseEnter={onMouseEnter}
     >
-      <Banner bgimg={posterAPI(data.backdrop_path ?? data.poster_path, "w500")}>
-        <Title>{data.title ?? data.name}</Title>
+      <Banner bgimg={posterAPI(content.backdrop_path ?? content.poster_path, "w500")}>
+        <Title>{content.title ?? content.name}</Title>
       </Banner>
       <ContentInfo variants={infoVariants}>
-        <h4>{data.title ?? data.name}</h4>
+        <h4>{content.title ?? content.name}</h4>
         <button
           onClick={() => {
-            setContentData(data);
-            navigate(`/${data.id}`);
+            setContentData(content);
+            navigate(`/${content.id}`);
           }}
         >
           상세보기
@@ -72,10 +72,10 @@ export default Item;
 
 const Container = styled(motion.div)`
   width: calc(100% / 8);
-  &:first-child {
+  &:nth-child(2) {
     transform-origin: center left;
   }
-  &:last-child {
+  &:nth-last-child(2) {
     transform-origin: center right;
   }
 `;

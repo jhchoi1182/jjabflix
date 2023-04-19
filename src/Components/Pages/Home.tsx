@@ -12,7 +12,14 @@ import BackdropOverlay from "../Atoms/Modal/BackdropOverlay";
 import { IGetData } from "../../Lib/Atoms";
 
 const Home = () => {
-  const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI);
+  const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI, {
+    // select: (data) => {
+    //   const test = data.results;
+    //   data.results.push(...test);
+    //   return data;
+    // },
+    staleTime: 10000,
+  });
   const contentsMatch = useMatch("/:dataId");
   const navigate = useNavigate();
 

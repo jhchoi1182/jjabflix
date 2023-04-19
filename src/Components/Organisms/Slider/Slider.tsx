@@ -2,39 +2,42 @@ import { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled, { css } from "styled-components";
 import Item from "../../Molecules/Slider/Item";
-import { IGetData } from "../../../Lib/Atoms";
+import { IGetData, IResult } from "../../../Lib/Atoms";
 
 type VariantsProps = {
   direction: string;
 };
 
 const screenWidth = window.innerWidth;
-const SlideGap = () => {
+const slideGap = () => {
   if (screenWidth === 1920) return 145;
   else return 0.0698 * screenWidth;
 };
 
 const rowVariants: Variants = {
   appearance: ({ direction }: VariantsProps) => ({
-    x: direction === "next" ? screenWidth - SlideGap() : -screenWidth + SlideGap(),
+    x: direction === "next" ? screenWidth - slideGap() : -screenWidth + slideGap(),
   }),
   center: () => ({
     x: 0,
   }),
   exit: ({ direction }: VariantsProps) => ({
-    x: direction === "next" ? -screenWidth + SlideGap() : screenWidth - SlideGap(),
+    x: direction === "next" ? -screenWidth + slideGap() : screenWidth - slideGap(),
   }),
 };
 
 const Slider: React.FC<IGetData> = ({ category, ...data }) => {
-  const [page, setPage] = useState(0);
   const [buttonVisibility, setButtonVisibility] = useState(true);
-  const [isSliding, setIsSliding] = useState(false);
   const [direction, setDirection] = useState("next");
+  const [isSliding, setIsSliding] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+  const [page, setPage] = useState(1);
 
-  const showContentsNum = page === 0 ? 7 : 8;
+  const showContentsNum = page === 1 ? 7 : 8;
   const totalContents = data.results.length;
   const maxPage = Math.ceil(totalContents / showContentsNum);
+
+  let sliderContents: IResult[] = [];
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
@@ -42,7 +45,7 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
       if (isSliding) return;
       await setDirection("prev");
       slidePrevent();
-      setPage((prev) => (prev === 0 ? maxPage : prev - 1));
+      setPage((prev) => (prev === 1 ? maxPage : prev - 1));
     }
   };
   const nextSlide = async () => {
@@ -50,19 +53,40 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
       if (isSliding) return;
       await setDirection("next");
       slidePrevent();
-      setPage((prev) => (prev === maxPage ? 0 : prev + 1));
+      setPage((prev) => (prev === maxPage ? 1 : prev + 1));
     }
   };
 
-  const MouseHoverHandler = () => {
+  const mouseHoverHandler = () => {
     setButtonVisibility(true);
     setTimeout(() => {
       setButtonVisibility((prev) => !prev);
     }, 500);
   };
 
+  const handleMouseOver = () => {
+    setOpacity(1);
+  };
+
+  const handleMouseOut = () => {
+    setOpacity(0);
+  };
+
+  const SliderNum = () => {
+    let sliderNumBox = [];
+    for (let i = 1; i < maxPage + 1; i++) {
+      sliderNumBox.push(<li key={i} className={i === page ? "active" : ""} />);
+    }
+    return (
+      <SliderNumBox className="hover-Btn" opacity={opacity}>
+        {sliderNumBox}
+      </SliderNumBox>
+    );
+  };
+
   return (
     <SliderBox buttonVisibility={buttonVisibility}>
+      <SliderNum />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
           variants={rowVariants}
@@ -73,32 +97,67 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
         >
-          {page === 0 && <div style={{ width: "calc(100% / 8)" }} />}
+          {page === 1 && <div style={{ width: "calc(100% / 8)" }} />}
           {data?.results
             ?.slice(
-              page === 0 ? 0 : (showContentsNum - 2) * page - 1,
-              page === 0 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
+              page === 1 ? 0 : (showContentsNum - 2) * page - 1,
+              page === 1 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
-            .map((data) => (
-              <Item key={data.id} {...data} onMouseEnter={MouseHoverHandler} />
-            ))}
+            .map((content) => {
+              sliderContents.push(content);
+              return <Item key={content.id} onMouseEnter={mouseHoverHandler} {...content} />;
+            })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 0 && (
-        <PrevBtn onClick={prevSlide}>
+      {page !== 1 && (
+        <PrevBtn onClick={prevSlide} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
           <PrevArrow className="hover-Btn">&#10094;</PrevArrow>
         </PrevBtn>
       )}
-      {page !== maxPage && (
-        <NextBtn onClick={nextSlide}>
+      {
+        <NextBtn onClick={nextSlide} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
           <NextArrow className="hover-Btn">&#10095;</NextArrow>
         </NextBtn>
-      )}
+      }
     </SliderBox>
   );
 };
 
 export default Slider;
+
+const SliderBox = styled.div<{ buttonVisibility: boolean }>`
+  position: relative;
+  top: -100px;
+  margin-left: -12%;
+  margin-right: -12%;
+  &:hover .hover-Btn {
+    opacity: ${(props) => props.buttonVisibility && "1"};
+  }
+`;
+
+const RowContainer = styled(motion.div)`
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  width: 100%;
+`;
+
+const SliderNumBox = styled.ul<{ opacity: number }>`
+  position: absolute;
+  margin-top: -10px;
+  right: 12.5%;
+  display: flex;
+  gap: 1px;
+  opacity: ${(props) => props.opacity};
+  li {
+    width: 12px;
+    height: 2px;
+    background-color: #4d4d4d;
+  }
+  .active {
+    background-color: #aaa;
+  }
+`;
 
 const SliderBtn = css`
   position: absolute;
@@ -143,21 +202,4 @@ const PrevArrow = styled.div`
 
 const NextArrow = styled.div`
   ${SliderBtnArrow}
-`;
-
-const SliderBox = styled.div<{ buttonVisibility: boolean }>`
-  position: relative;
-  top: -100px;
-  margin-left: -12%;
-  margin-right: -12%;
-  &:hover .hover-Btn {
-    opacity: ${(props) => props.buttonVisibility && "1"};
-  }
-`;
-
-const RowContainer = styled(motion.div)`
-  display: flex;
-  gap: 8px;
-  position: absolute;
-  width: 100%;
 `;

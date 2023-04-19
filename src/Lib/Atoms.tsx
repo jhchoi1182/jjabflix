@@ -36,3 +36,8 @@ export const detailAtom = atom<IResult>({
     media_type: "",
   },
 });
+
+// export const contentArrayAtom = atom<IResult[]>({
+//   key: "content",
+//   default: [],
+// });
