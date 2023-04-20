@@ -1,26 +1,31 @@
-import { forwardRef, useRef } from "react";
-import { useRecoilState } from "recoil";
+import { useRef } from "react";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { css } from "styled-components";
-import { opacityAtom } from "../../../Lib/Atoms";
+import { sliderRefSelector } from "../../../Lib/Atoms";
 
 interface ArrowProps {
   direction: "prev" | "next";
 }
 
 interface SliderButtonProps extends ArrowProps {
-  ref?: React.RefObject<HTMLDivElement>;
   prevSlide?: () => Promise<void>;
   nextSlide?: () => Promise<void>;
 }
 
-const Arrow = forwardRef<HTMLDivElement, ArrowProps>(({ direction }, ref) => {
+const Arrow: React.FC<ArrowProps> = ({ direction }) => {
+  const setsetSliderRef = useSetRecoilState(sliderRefSelector);
+
+  const arrowRefHandler = (ref: HTMLElement | null) => {
+    if (ref) setsetSliderRef({ sliderArrowRef: ref });
+  };
+
   return (
-    <ArrowStyle ref={ref} className="hover-Btn">
+    <ArrowStyle ref={arrowRefHandler} className="slider-hover">
       {direction === "next" ? String.fromCharCode(10095) : String.fromCharCode(10094)}
     </ArrowStyle>
   );
-});
+};
 
 const SliderButton: React.FC<SliderButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
   const opacityRef = useRef<HTMLButtonElement>(null);
@@ -72,7 +77,7 @@ const SliderBtn = styled.button<ArrowProps>`
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
   }
-  &:hover .hover-Btn {
+  &:hover .slider-hover {
     opacity: 1;
   }
 `;

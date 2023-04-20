@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export interface IResult {
   backdrop_path: string;
@@ -37,7 +37,28 @@ export const detailAtom = atom<IResult>({
   },
 });
 
-// export const contentArrayAtom = atom<IResult[]>({
-//   key: "content",
-//   default: [],
-// });
+/** 슬라이더 버튼, 페이지 표시의 opacity 설정하기 위한 atom */
+
+type SliderRef = {
+  sliderArrowRef?: HTMLElement | null;
+  sliderIndicatorRef?: HTMLElement | null;
+};
+
+const sliderRefAtom = atom<SliderRef>({
+  key: "sliderRefAtom",
+  default: {
+    sliderArrowRef: null,
+    sliderIndicatorRef: null,
+  },
+});
+
+export const sliderRefSelector = selector<SliderRef>({
+  key: "sliderRefSelector",
+  get: ({ get }) => {
+    const { sliderArrowRef, sliderIndicatorRef } = get(sliderRefAtom);
+    return { sliderArrowRef, sliderIndicatorRef };
+  },
+  set: ({ set, get }, data) => {
+    set(sliderRefAtom, { ...get(sliderRefAtom), ...data });
+  },
+});

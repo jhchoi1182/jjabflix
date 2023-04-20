@@ -1,9 +1,9 @@
-import { useState, useRef } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import Item from "../../Molecules/Slider/Item";
 import { IGetData } from "../../../Lib/Atoms";
-import SliderNum from "../../Atoms/SliderNum";
+import PageIndicator from "../../Atoms/PageIndicator";
 import SliderButton from "../../Atoms/Button/SliderButton";
 
 type VariantsProps = {
@@ -32,8 +32,6 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(1);
-  const ulOpacityRef = useRef<HTMLUListElement>(null);
-  const arrowOpacityRef = useRef<HTMLDivElement>(null);
 
   const showContentsNum = page === 1 ? 7 : 8;
   const totalContents = data.results.length;
@@ -57,24 +55,9 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
     }
   };
 
-  const mouseHoverHandler = () => {
-    const ulOpacity = ulOpacityRef?.current;
-    const arrowOpacity = arrowOpacityRef?.current;
-    if (ulOpacity && arrowOpacity) {
-      ulOpacity.style.opacity = "1";
-      arrowOpacity.style.opacity = "1";
-    }
-    setTimeout(() => {
-      if (ulOpacity && arrowOpacity) {
-        ulOpacity.style.opacity = "0";
-        arrowOpacity.style.opacity = "0";
-      }
-    }, 500);
-  };
-
   return (
     <SliderBox>
-      <SliderNum ref={ulOpacityRef} maxPage={maxPage} page={page} />
+      <PageIndicator maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
           variants={rowVariants}
@@ -92,12 +75,12 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
               page === 1 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((content) => {
-              return <Item key={content.id} onMouseEnter={mouseHoverHandler} {...content} />;
+              return <Item key={content.id} {...content} />;
             })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 1 && <SliderButton direction="prev" ref={arrowOpacityRef} prevSlide={prevSlide} />}
-      {<SliderButton direction="next" ref={arrowOpacityRef} nextSlide={nextSlide} />}
+      {page !== 1 && <SliderButton direction="prev" prevSlide={prevSlide} />}
+      {<SliderButton direction="next" nextSlide={nextSlide} />}
     </SliderBox>
   );
 };
@@ -109,7 +92,7 @@ const SliderBox = styled.div`
   top: -100px;
   margin-left: -12%;
   margin-right: -12%;
-  &:hover .hover-Btn {
+  &:hover .slider-hover {
     opacity: 1;
   }
 `;
