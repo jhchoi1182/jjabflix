@@ -1,13 +1,16 @@
 import { forwardRef } from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { opacityAtom } from "../../Lib/Atoms";
 
 type SliderNumProps = {
   page: number;
   maxPage: number;
-  opacity: number;
 };
 
-const SliderNum = forwardRef<HTMLUListElement, SliderNumProps>(({ maxPage, page, opacity }, ref) => {
+const SliderNum = forwardRef<HTMLUListElement, SliderNumProps>(({ maxPage, page }, ref) => {
+  const opacity = useRecoilValue(opacityAtom);
+
   let sliderNumBox = [];
   for (let i = 1; i < maxPage + 1; i++) {
     sliderNumBox.push(<li key={i} className={i === page ? "active" : ""} />);

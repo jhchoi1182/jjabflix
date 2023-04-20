@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Item from "../../Molecules/Slider/Item";
 import { IGetData } from "../../../Lib/Atoms";
 import SliderNum from "../../Atoms/SliderNum";
+import SliderButton from "../../Atoms/Button/SliderButton";
 
 type VariantsProps = {
   direction: string;
@@ -28,12 +29,11 @@ const rowVariants: Variants = {
 };
 
 const Slider: React.FC<IGetData> = ({ category, ...data }) => {
-  const [buttonVisibility, setButtonVisibility] = useState(true);
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
-  const [opacity, setOpacity] = useState(0);
   const [page, setPage] = useState(1);
   const ulOpacityRef = useRef<HTMLUListElement>(null);
+  const arrowOpacityRef = useRef<HTMLDivElement>(null);
 
   const showContentsNum = page === 1 ? 7 : 8;
   const totalContents = data.results.length;
@@ -59,27 +59,22 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
 
   const mouseHoverHandler = () => {
     const ulOpacity = ulOpacityRef?.current;
-    if (ulOpacity) {
+    const arrowOpacity = arrowOpacityRef?.current;
+    if (ulOpacity && arrowOpacity) {
       ulOpacity.style.opacity = "1";
+      arrowOpacity.style.opacity = "1";
     }
     setTimeout(() => {
-      if (ulOpacity) {
+      if (ulOpacity && arrowOpacity) {
         ulOpacity.style.opacity = "0";
+        arrowOpacity.style.opacity = "0";
       }
     }, 500);
   };
 
-  const handleMouseOver = () => {
-    setOpacity(1);
-  };
-
-  const handleMouseOut = () => {
-    setOpacity(0);
-  };
-
   return (
-    <SliderBox buttonVisibility={buttonVisibility}>
-      <SliderNum ref={ulOpacityRef} maxPage={maxPage} page={page} opacity={opacity} />
+    <SliderBox>
+      <SliderNum ref={ulOpacityRef} maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
           variants={rowVariants}
@@ -101,29 +96,21 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
             })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 1 && (
-        <PrevBtn onClick={prevSlide} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-          <PrevArrow className="hover-Btn">&#10094;</PrevArrow>
-        </PrevBtn>
-      )}
-      {
-        <NextBtn onClick={nextSlide} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-          <NextArrow className="hover-Btn">&#10095;</NextArrow>
-        </NextBtn>
-      }
+      {page !== 1 && <SliderButton direction="prev" ref={arrowOpacityRef} prevSlide={prevSlide} />}
+      {<SliderButton direction="next" ref={arrowOpacityRef} nextSlide={nextSlide} />}
     </SliderBox>
   );
 };
 
 export default Slider;
 
-const SliderBox = styled.div<{ buttonVisibility: boolean }>`
+const SliderBox = styled.div`
   position: relative;
   top: -100px;
   margin-left: -12%;
   margin-right: -12%;
   &:hover .hover-Btn {
-    opacity: ${(props) => props.buttonVisibility && "1"};
+    opacity: 1;
   }
 `;
 
@@ -132,49 +119,4 @@ const RowContainer = styled(motion.div)`
   gap: 8px;
   position: absolute;
   width: 100%;
-`;
-
-const SliderBtn = css`
-  position: absolute;
-  width: calc(100% / 30);
-  height: 170px;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.5);
-  font-size: 3rem;
-  border-radius: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  &:hover .hover-Btn {
-    opacity: 1;
-  }
-`;
-
-const SliderBtnArrow = css`
-  width: 100%;
-  font-size: 3rem;
-  color: ${(props) => props.theme.white.lighter};
-  opacity: 0;
-  &:hover {
-    font-size: 4rem;
-  }
-`;
-
-const PrevBtn = styled.button`
-  ${SliderBtn}
-  left: 9%;
-`;
-
-const NextBtn = styled.button`
-  ${SliderBtn}
-  right: 9%;
-`;
-
-const PrevArrow = styled.div`
-  ${SliderBtnArrow}
-`;
-
-const NextArrow = styled.div`
-  ${SliderBtnArrow}
 `;
