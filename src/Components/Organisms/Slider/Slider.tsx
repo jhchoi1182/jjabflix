@@ -5,6 +5,7 @@ import Item from "../../Molecules/Slider/Item";
 import { IGetData } from "../../../Lib/Atoms";
 import PageIndicator from "../../Atoms/PageIndicator";
 import SliderButton from "../../Atoms/Button/SliderButton";
+import { useOpacity } from "../../../Utils/hooks";
 
 type VariantsProps = {
   direction: string;
@@ -29,6 +30,7 @@ const rowVariants: Variants = {
 };
 
 const Slider: React.FC<IGetData> = ({ category, ...data }) => {
+  const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(1);
@@ -54,9 +56,8 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
       setPage((prev) => (prev === maxPage ? 1 : prev + 1));
     }
   };
-
   return (
-    <SliderBox>
+    <SliderBox onMouseOver={mouseOver} onMouseOut={mouseOut}>
       <PageIndicator maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
@@ -92,9 +93,6 @@ const SliderBox = styled.div`
   top: -100px;
   margin-left: -12%;
   margin-right: -12%;
-  &:hover .slider-hover {
-    opacity: 1;
-  }
 `;
 
 const RowContainer = styled(motion.div)`

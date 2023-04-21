@@ -1,5 +1,3 @@
-// import styled from "styled-components";
-
 import { css } from "styled-components";
 
 export const bgImg = css<{ bgimg: string }>`

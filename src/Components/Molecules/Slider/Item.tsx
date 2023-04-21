@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import { posterAPI } from "../../../Api/Apis";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { IResult, detailAtom, sliderRefSelector } from "../../../Lib/Atoms";
+import { useSetRecoilState } from "recoil";
+import { IResult, detailAtom } from "../../../Lib/Atoms";
 import * as fonts from "../../../styles/Css";
 import { bgImg } from "../../Atoms/Banner/Banner";
+import { useOpacity } from "../../../Utils/hooks";
 
 const contentVariants: Variants = {
   normal: {
@@ -34,24 +35,9 @@ const infoVariants: Variants = {
 };
 
 const Item: React.FC<IResult> = ({ ...content }) => {
+  const { resetOpacityAfterDelay, resetOpacityAfterDelayInvalidation } = useOpacity({ out: 0 });
   const setContentData = useSetRecoilState(detailAtom);
-  const sliderRef = useRecoilValue(sliderRefSelector);
-
   const navigate = useNavigate();
-
-  const mouseHoverHandler = () => {
-    const { sliderArrowRef, sliderIndicatorRef } = sliderRef;
-    if (sliderArrowRef && sliderIndicatorRef) {
-      sliderArrowRef.style.opacity = "1";
-      sliderIndicatorRef.style.opacity = "1";
-    }
-    setTimeout(() => {
-      if (sliderArrowRef && sliderIndicatorRef) {
-        sliderArrowRef.style.opacity = "0";
-        sliderIndicatorRef.style.opacity = "0";
-      }
-    }, 500);
-  };
 
   return (
     <Container
@@ -60,7 +46,8 @@ const Item: React.FC<IResult> = ({ ...content }) => {
       whileHover="hover"
       initial="normal"
       transition={{ type: "tween", zIndex: 90 }}
-      onMouseEnter={mouseHoverHandler}
+      onMouseEnter={resetOpacityAfterDelay}
+      onMouseLeave={resetOpacityAfterDelayInvalidation}
     >
       <Banner bgimg={posterAPI(content.backdrop_path ?? content.poster_path, "w500")}>
         <Title>{content.title ?? content.name}</Title>
