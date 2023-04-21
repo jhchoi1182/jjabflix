@@ -64,7 +64,7 @@ a {
   text-decoration:none;
   color:inherit;
 }
-.slider-hover {
+.slide-hover {
   opacity: var(--opacity);
 }
 `;

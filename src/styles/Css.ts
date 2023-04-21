@@ -43,8 +43,13 @@ export const MidTitle = css`
 `;
 
 export const SmallTitle = css`
-  font-size: 2.6rem;
+  font-size: 1.35vw;
   font-weight: 700;
+`;
+
+export const SlideTitle = css`
+  font-size: 1.4vw;
+  font-weight: 500;
 `;
 
 export const LargeOverview = css`

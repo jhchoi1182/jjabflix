@@ -6,35 +6,35 @@ interface ArrowProps {
   direction: "prev" | "next";
 }
 
-interface SliderButtonProps extends ArrowProps {
+interface SlideButtonProps extends ArrowProps {
   prevSlide?: () => Promise<void>;
   nextSlide?: () => Promise<void>;
 }
 
 const Arrow: React.FC<ArrowProps> = ({ direction }) => {
   return (
-    <ArrowStyle className="slider-hover">
+    <ArrowStyle className="slide-hover">
       {direction === "next" ? String.fromCharCode(10095) : String.fromCharCode(10094)}
     </ArrowStyle>
   );
 };
 
-const SliderButton: React.FC<SliderButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
+const SlideButton: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
   const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
 
   return (
-    <SliderBtn
+    <SlideBtn
       onClick={prevSlide ?? nextSlide}
       direction={props.direction}
       onMouseOver={mouseOver}
       onMouseOut={mouseOut}
     >
       <Arrow {...props} />
-    </SliderBtn>
+    </SlideBtn>
   );
 };
 
-export default SliderButton;
+export default SlideButton;
 
 const prev = css`
   left: 9%;
@@ -46,7 +46,7 @@ const next = css`
 
 const direction = { prev, next };
 
-const SliderBtn = styled.button<ArrowProps>`
+const SlideBtn = styled.button<ArrowProps>`
   position: absolute;
   width: calc(100% / 30);
   height: 170px;

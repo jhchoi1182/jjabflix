@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
-import Item from "../../Molecules/Slider/Item";
+import Item from "../../Molecules/Slide/Item";
 import { IGetData } from "../../../Lib/Atoms";
 import PageIndicator from "../../Atoms/PageIndicator";
-import SliderButton from "../../Atoms/Button/SliderButton";
+import SlideButton from "../../Atoms/Button/SlideButton";
 import { useOpacity } from "../../../Utils/hooks";
+import SlideTitle from "../../Atoms/SlideTitle";
 
 type VariantsProps = {
   direction: string;
@@ -29,7 +30,7 @@ const rowVariants: Variants = {
   }),
 };
 
-const Slider: React.FC<IGetData> = ({ category, ...data }) => {
+const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
   const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
@@ -57,7 +58,8 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
     }
   };
   return (
-    <SliderBox onMouseOver={mouseOver} onMouseOut={mouseOut}>
+    <SlideBox onMouseOver={mouseOver} onMouseOut={mouseOut}>
+      <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
@@ -80,15 +82,15 @@ const Slider: React.FC<IGetData> = ({ category, ...data }) => {
             })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 1 && <SliderButton direction="prev" prevSlide={prevSlide} />}
-      {<SliderButton direction="next" nextSlide={nextSlide} />}
-    </SliderBox>
+      {page !== 1 && <SlideButton direction="prev" prevSlide={prevSlide} />}
+      {<SlideButton direction="next" nextSlide={nextSlide} />}
+    </SlideBox>
   );
 };
 
-export default Slider;
+export default Slide;
 
-const SliderBox = styled.div`
+const SlideBox = styled.div`
   position: relative;
   top: -100px;
   margin-left: -12%;

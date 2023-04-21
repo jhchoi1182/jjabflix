@@ -5,7 +5,7 @@ import DetaileBox from "../Templates/DetaileBox/DetaileBox";
 import Loading from "../Atoms/Loading/Loading";
 import Wrapper from "../Atoms/Layout/Wrapper";
 import MainBanner from "../Organisms/MainBanner/MainBanner";
-import Slider from "../Organisms/Slider/Slider";
+import Slide from "../Organisms/Slide/Slide";
 import { useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import BackdropOverlay from "../Atoms/Modal/BackdropOverlay";
@@ -32,7 +32,7 @@ const Home = () => {
       ) : (
         <React.Fragment>
           <MainBanner id={trending?.results[0]?.id ?? 0} type={trending?.results[0]?.media_type ?? ""} />
-          <Slider {...trending} category="trending" />
+          <Slide title="지금 뜨는 콘텐츠" {...trending} category="trending" />
           <AnimatePresence>
             {contentsMatch && (
               <React.Fragment>

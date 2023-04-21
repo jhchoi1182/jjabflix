@@ -4,10 +4,9 @@ type useOpacityProps = {
 };
 
 export const useOpacity = ({ over, out }: useOpacityProps) => {
-  const OPACITY_PROPERTY = "--opacity";
   let opacitySetTimeout: ReturnType<typeof setTimeout>;
   const setOpacity = (opacity: number | undefined) => {
-    document.documentElement.style.setProperty(OPACITY_PROPERTY, `${opacity}`);
+    document.documentElement.style.setProperty("--opacity", `${opacity}`);
   };
 
   const mouseOver = () => {

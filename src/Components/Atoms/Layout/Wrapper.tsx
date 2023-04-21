@@ -1,11 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { ChildrenProps } from "../../../Utils/type";
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const Wrapper: React.FC<Props> = ({ children }) => {
+const Wrapper: React.FC<ChildrenProps> = ({ children }) => {
   return <WrapperDiv>{children}</WrapperDiv>;
 };
 

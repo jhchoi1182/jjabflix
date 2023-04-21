@@ -12,7 +12,7 @@ const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page }) => {
   }
 
   return (
-    <IndicatorBox className="slider-hover">
+    <IndicatorBox className="slide-hover">
       {numBox}
     </IndicatorBox>
   );
