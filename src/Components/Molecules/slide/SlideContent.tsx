@@ -72,10 +72,10 @@ export default SlideContent;
 const Container = styled(motion.div)`
   width: calc(100% / 8);
   &:nth-child(2) {
-    transform-origin: center left;
+    transform-origin: center left !important;
   }
   &:nth-child(7) {
-    transform-origin: center right;
+    transform-origin: center right !important;
   }
 `;
 
