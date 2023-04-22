@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Arrow, { ArrowProps } from "../../Atoms/button/Arrow";
+import Arrow, { ArrowProps } from "../../Atoms/Button/Arrow";
 import { useOpacity } from "../../../Utils/hooks";
 
 interface SlideButtonProps extends ArrowProps {

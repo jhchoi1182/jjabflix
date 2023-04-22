@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
-import SlideContent from "../../Molecules/slide/SlideContent";
+import SlideContent from "../../Molecules/Slide/SlideContent";
 import { IGetData } from "../../../Lib/Atoms";
-import PageIndicator from "../../Atoms/slide/PageIndicator";
-import SlideMoveBtn from "../../Molecules/slide/SlideMoveBtn";
+import PageIndicator from "../../Atoms/Slide/PageIndicator";
+import SlideMoveBtn from "../../Molecules/Slide/SlideMoveBtn";
 import { useOpacity } from "../../../Utils/hooks";
-import SlideTitle from "../../Atoms/slide/SlideTitle";
+import SlideTitle from "../../Atoms/Slide/SlideTitle";
 
 type VariantsProps = {
   direction: string;

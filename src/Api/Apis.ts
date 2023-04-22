@@ -1,4 +1,4 @@
-import { MainBannerProps } from "../Components/Organisms/mainBanner/MainBanner";
+import { MainBannerProps } from "../Components/Organisms/MainBanner/MainBanner";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API = process.env.REACT_APP_API;

@@ -1,14 +1,14 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../Api/Apis";
-import DetaileBox from "../Templates/detaileBox/DetaileBox";
-import Loading from "../Atoms/loading/Loading";
-import Wrapper from "../Atoms/layout/Wrapper";
-import MainBanner from "../Organisms/mainBanner/MainBanner";
-import Slide from "../Organisms/slide/Slide";
+import DetaileBox from "../Templates/DetaileBox/DetaileBox";
+import Loading from "../Atoms/Loading/Loading";
+import Wrapper from "../Atoms/Layout/Wrapper";
+import MainBanner from "../Organisms/MainBanner/MainBanner";
+import Slide from "../Organisms/Slide/Slide";
 import { useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import BackdropOverlay from "../Atoms/modal/BackdropOverlay";
+import BackdropOverlay from "../Atoms/Modal/BackdropOverlay";
 import { IGetData } from "../../Lib/Atoms";
 
 const Home = () => {
