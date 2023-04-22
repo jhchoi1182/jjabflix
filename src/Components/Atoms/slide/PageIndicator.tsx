@@ -19,7 +19,7 @@ export default PageIndicator;
 const IndicatorBox = styled.ul`
   position: absolute;
   margin-top: -10px;
-  right: 12.5%;
+  right: 12.6%;
   display: flex;
   gap: 1px;
   li {
