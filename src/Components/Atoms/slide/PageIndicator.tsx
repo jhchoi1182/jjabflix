@@ -7,15 +7,11 @@ type PageIndicatorProps = {
 
 const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page }) => {
   let numBox = [];
-  for (let i = 1; i < maxPage + 1; i++) {
+  for (let i = 0; i < maxPage + 1; i++) {
     numBox.push(<li key={i} className={i === page ? "active" : ""} />);
   }
 
-  return (
-    <IndicatorBox className="slide-hover">
-      {numBox}
-    </IndicatorBox>
-  );
+  return <IndicatorBox className="slide-hover">{numBox}</IndicatorBox>;
 };
 
 export default PageIndicator;

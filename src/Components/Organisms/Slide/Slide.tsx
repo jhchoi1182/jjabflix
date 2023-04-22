@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SlideContent from "../../Molecules/slide/SlideContent";
 import { IGetData } from "../../../Lib/Atoms";
 import PageIndicator from "../../Atoms/slide/PageIndicator";
-import SlideMoveBtn from "../../Atoms/button/SlideMoveBtn";
+import SlideMoveBtn from "../../Molecules/slide/SlideMoveBtn";
 import { useOpacity } from "../../../Utils/hooks";
 import SlideTitle from "../../Atoms/slide/SlideTitle";
 
@@ -34,9 +34,9 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
   const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
-  const showContentsNum = page === 1 ? 7 : 8;
+  const showContentsNum = page === 0 ? 7 : 8;
   const totalContents = data.results.length;
   const maxPage = Math.ceil(totalContents / showContentsNum);
 
@@ -46,7 +46,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
       if (isSliding) return;
       await setDirection("prev");
       slidePrevent();
-      setPage((prev) => (prev === 1 ? maxPage : prev - 1));
+      setPage((prev) => (prev === 0 ? maxPage : prev - 1));
     }
   };
   const nextSlide = async () => {
@@ -54,7 +54,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
       if (isSliding) return;
       await setDirection("next");
       slidePrevent();
-      setPage((prev) => (prev === maxPage ? 1 : prev + 1));
+      setPage((prev) => (prev === maxPage ? 0 : prev + 1));
     }
   };
   return (
@@ -71,18 +71,18 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
         >
-          {page === 1 && <div style={{ width: "calc(100% / 8)" }} />}
+          {page === 0 && <div style={{ width: "calc(100% / 8)" }} />}
           {data?.results
             ?.slice(
-              page === 1 ? 0 : (showContentsNum - 2) * page - 1,
-              page === 1 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
+              page === 0 ? 0 : (showContentsNum - 2) * page - 1,
+              page === 0 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((content) => {
               return <SlideContent key={content.id} {...content} />;
             })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 1 && <SlideMoveBtn direction="prev" prevSlide={prevSlide} />}
+      {page !== 0 && <SlideMoveBtn direction="prev" prevSlide={prevSlide} />}
       {<SlideMoveBtn direction="next" nextSlide={nextSlide} />}
     </SlideBox>
   );

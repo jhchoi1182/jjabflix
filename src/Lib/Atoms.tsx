@@ -37,3 +37,4 @@ export const detailAtom = atom<IResult>({
     media_type: "",
   },
 });
+

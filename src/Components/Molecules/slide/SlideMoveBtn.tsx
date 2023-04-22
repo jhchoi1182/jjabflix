@@ -1,23 +1,11 @@
-import styled from "styled-components";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
+import Arrow, { ArrowProps } from "../../Atoms/button/Arrow";
 import { useOpacity } from "../../../Utils/hooks";
-
-interface ArrowProps {
-  direction: "prev" | "next";
-}
 
 interface SlideButtonProps extends ArrowProps {
   prevSlide?: () => Promise<void>;
   nextSlide?: () => Promise<void>;
 }
-
-const Arrow: React.FC<ArrowProps> = ({ direction }) => {
-  return (
-    <ArrowStyle className="slide-hover">
-      {direction === "next" ? String.fromCharCode(10095) : String.fromCharCode(10094)}
-    </ArrowStyle>
-  );
-};
 
 const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
   const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
@@ -58,14 +46,5 @@ const SlideBtn = styled.button<ArrowProps>`
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
-  }
-`;
-
-const ArrowStyle = styled.div`
-  width: 100%;
-  font-size: 3rem;
-  color: ${(props) => props.theme.white.lighter};
-  &:hover {
-    font-size: 4rem;
   }
 `;
