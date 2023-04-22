@@ -70,7 +70,7 @@ const SlideContent: React.FC<IResult> = ({ ...content }) => {
 export default SlideContent;
 
 const Container = styled(motion.div)`
-  width: calc(100% / 8);
+  width: calc(100% / 8.2);
   &:nth-child(2) {
     transform-origin: center left !important;
   }
