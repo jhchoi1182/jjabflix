@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as fonts from "../../styles/Css";
-import { ChildrenProps } from "../../Utils/type";
+import * as fonts from "../../../styles/Css";
+import { ChildrenProps } from "../../../Utils/type";
 
 const SlideTitle: React.FC<ChildrenProps> = ({ children }) => {
   return <Title>{children}</Title>;

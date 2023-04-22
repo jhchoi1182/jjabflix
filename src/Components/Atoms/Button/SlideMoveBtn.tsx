@@ -19,7 +19,7 @@ const Arrow: React.FC<ArrowProps> = ({ direction }) => {
   );
 };
 
-const SlideButton: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
+const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
   const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
 
   return (
@@ -34,7 +34,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, ...prop
   );
 };
 
-export default SlideButton;
+export default SlideMoveBtn;
 
 const prev = css`
   left: 9%;

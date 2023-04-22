@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
-import Item from "../../Molecules/Slide/Item";
+import SlideContent from "../../Molecules/slide/SlideContent";
 import { IGetData } from "../../../Lib/Atoms";
-import PageIndicator from "../../Atoms/PageIndicator";
-import SlideButton from "../../Atoms/Button/SlideButton";
+import PageIndicator from "../../Atoms/slide/PageIndicator";
+import SlideMoveBtn from "../../Atoms/button/SlideMoveBtn";
 import { useOpacity } from "../../../Utils/hooks";
-import SlideTitle from "../../Atoms/SlideTitle";
+import SlideTitle from "../../Atoms/slide/SlideTitle";
 
 type VariantsProps = {
   direction: string;
@@ -78,12 +78,12 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
               page === 1 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((content) => {
-              return <Item key={content.id} {...content} />;
+              return <SlideContent key={content.id} {...content} />;
             })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 1 && <SlideButton direction="prev" prevSlide={prevSlide} />}
-      {<SlideButton direction="next" nextSlide={nextSlide} />}
+      {page !== 1 && <SlideMoveBtn direction="prev" prevSlide={prevSlide} />}
+      {<SlideMoveBtn direction="next" nextSlide={nextSlide} />}
     </SlideBox>
   );
 };

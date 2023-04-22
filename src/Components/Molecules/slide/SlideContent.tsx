@@ -5,7 +5,7 @@ import { posterAPI } from "../../../Api/Apis";
 import { useSetRecoilState } from "recoil";
 import { IResult, detailAtom } from "../../../Lib/Atoms";
 import * as fonts from "../../../styles/Css";
-import { bgImg } from "../../Atoms/Banner/Banner";
+import { bgImg } from "../../Atoms/Banner";
 import { useOpacity } from "../../../Utils/hooks";
 
 const contentVariants: Variants = {
@@ -34,7 +34,7 @@ const infoVariants: Variants = {
   },
 };
 
-const Item: React.FC<IResult> = ({ ...content }) => {
+const SlideContent: React.FC<IResult> = ({ ...content }) => {
   const { resetOpacityAfterDelay, resetOpacityAfterDelayInvalidation } = useOpacity({ out: 0 });
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const Item: React.FC<IResult> = ({ ...content }) => {
       variants={contentVariants}
       whileHover="hover"
       initial="normal"
-      transition={{ type: "tween", zIndex: 90 }}
+      transition={{ type: "tween" }}
       onMouseEnter={resetOpacityAfterDelay}
       onMouseLeave={resetOpacityAfterDelayInvalidation}
     >
@@ -67,7 +67,7 @@ const Item: React.FC<IResult> = ({ ...content }) => {
   );
 };
 
-export default Item;
+export default SlideContent;
 
 const Container = styled(motion.div)`
   width: calc(100% / 8);
