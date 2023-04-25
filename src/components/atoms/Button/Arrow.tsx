@@ -5,17 +5,12 @@ export interface ArrowProps {
 }
 
 const Arrow: React.FC<ArrowProps> = ({ direction }) => {
-  return (
-    <ArrowStyle className="slide-hover">
-      {direction === "next" ? String.fromCharCode(10095) : String.fromCharCode(10094)}
-    </ArrowStyle>
-  );
+  return <ArrowStyle className="slide-hover">{direction === "next" ? "&#10094;" : "&#10095;"}</ArrowStyle>;
 };
 
 export default Arrow;
 
 const ArrowStyle = styled.div`
-  width: 100%;
   font-size: 3rem;
   color: ${(props) => props.theme.white.lighter};
   &:hover {
