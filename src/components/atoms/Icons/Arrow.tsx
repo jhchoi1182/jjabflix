@@ -4,8 +4,13 @@ export interface ArrowProps {
   direction: "prev" | "next";
 }
 
+const nextArrow = "\u276F"; /** ❯ */
+const prevArrow = "\u276E"; /** ❮ */
+
 const Arrow: React.FC<ArrowProps> = ({ direction }) => {
-  return <ArrowStyle className="slide-hover">{direction === "next" ? "&#10094;" : "&#10095;"}</ArrowStyle>;
+  const arrow = direction === "next" ? nextArrow : prevArrow;
+
+  return <ArrowStyle className="slide-hover">{arrow}</ArrowStyle>;
 };
 
 export default Arrow;

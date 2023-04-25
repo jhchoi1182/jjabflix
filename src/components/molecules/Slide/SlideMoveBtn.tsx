@@ -8,17 +8,12 @@ interface SlideButtonProps extends ArrowProps {
   nextSlide?: () => Promise<void>;
 }
 
-const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, ...props }) => {
+const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction }) => {
   const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
 
   return (
-    <SlideBtn
-      onClick={prevSlide ?? nextSlide}
-      direction={props.direction}
-      onMouseOver={mouseOver}
-      onMouseOut={mouseOut}
-    >
-      <Arrow {...props} />
+    <SlideBtn onClick={prevSlide ?? nextSlide} onMouseOver={mouseOver} onMouseOut={mouseOut} direction={direction}>
+      <Arrow direction={direction} />
     </SlideBtn>
   );
 };
