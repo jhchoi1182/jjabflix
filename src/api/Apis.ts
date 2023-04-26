@@ -18,15 +18,11 @@ export const posterAPI = (path?: string, size?: string) => {
   return `https://image.tmdb.org/t/p/${size ?? "original"}/${path}`;
 };
 
-export const detailAPI = ({ id, type }: MainBannerProps) => {
+export const detailAPI = ({ id, media_type }: MainBannerProps) => {
   if (id === 0) return;
-  if (type === "movie")
+  if (media_type === "movie")
     return fetch(`${BASE_URL}/movie/${id}?api_key=${API}&language=ko`).then((response) => response.json());
-  if (type === "tv")
+  if (media_type === "tv")
     return fetch(`${BASE_URL}/tv/${id}?api_key=${API}&language=ko`).then((response) => response.json());
   else return;
-};
-
-export const tvDetailAPI = (id: number) => {
-  return;
 };

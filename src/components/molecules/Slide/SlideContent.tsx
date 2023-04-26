@@ -1,12 +1,16 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
-import { posterAPI } from "../../../api/Apis";
+import { detailAPI, posterAPI } from "../../../api/Apis";
 import { useSetRecoilState } from "recoil";
-import { IResult, detailAtom } from "../../../lib/Atoms";
+import { detailAtom } from "../../../lib/Atoms";
 import { bgImg } from "../../atoms/Banner";
 import { useOpacity } from "../../../utils/hooks";
 import { flex, SmallTitle } from "../../../styles/Css";
+import { useQuery } from "@tanstack/react-query";
+import { IResult } from "../../../interface/Interface";
+import Loading from "../../atoms/Loading/Loading";
 
 const contentVariants: Variants = {
   normal: {
@@ -25,7 +29,7 @@ const contentVariants: Variants = {
 
 const infoVariants: Variants = {
   hover: {
-    display: "flex",
+    display: "block",
     transition: {
       type: "tween",
       delay: 0.5,
@@ -34,34 +38,60 @@ const infoVariants: Variants = {
   },
 };
 
-const SlideContent: React.FC<IResult> = ({ ...content }) => {
+const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
+  const [isHover, setIsHover] = useState(false);
   const { resetOpacityAfterDelay, resetOpacityAfterDelayInvalidation } = useOpacity({ out: 0 });
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
 
+  const { data, isLoading, isError } = useQuery(["detail", title], () => detailAPI({ id, media_type }), {
+    enabled: isHover,
+    cacheTime: 360000,
+    staleTime: 360000,
+  });
+
+  const onMouseEnterHandler = () => {
+    setIsHover((prev) => !prev);
+    resetOpacityAfterDelay();
+  };
+  const onMouseLeaveHandler = () => {
+    resetOpacityAfterDelayInvalidation();
+  };
+
+  useEffect(() => {
+    if (isHover) setIsHover(false);
+  }, [isHover]);
+
   return (
     <Container
-      layoutId={String(content.id)}
+      layoutId={String(id)}
       variants={contentVariants}
       whileHover="hover"
       initial="normal"
       transition={{ type: "tween" }}
-      onMouseEnter={resetOpacityAfterDelay}
-      onMouseLeave={resetOpacityAfterDelayInvalidation}
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
     >
-      <Banner bgimg={posterAPI(content.backdrop_path ?? content.poster_path, "w500")}>
-        <Title>{content.title ?? content.name}</Title>
+      <Banner bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
+        <Title>{title ?? name}</Title>
       </Banner>
       <ContentInfo variants={infoVariants}>
-        <h4>{content.title ?? content.name}</h4>
-        <button
-          onClick={() => {
-            setContentData(content);
-            navigate(`/${content.id}`);
-          }}
-        >
-          상세보기
-        </button>
+        {isLoading ? (
+          <Loading />
+        ) : isError ? (
+          <div>에러</div>
+        ) : (
+          <React.Fragment>
+            <button
+              onClick={() => {
+                setContentData(data);
+                navigate(`/${id}`);
+              }}
+            >
+              상세보기
+            </button>
+          </React.Fragment>
+        )}
       </ContentInfo>
     </Container>
   );
@@ -95,11 +125,7 @@ const Title = styled(motion.p)`
 `;
 
 const ContentInfo = styled(motion.div)`
-  padding: 10px;
-  background-color: ${(props) => props.theme.black.lighter};
+  padding: 1.5rem;
+  background-color: ${(props) => props.theme.black.veryDark};
   display: none;
-  h4 {
-    text-align: center;
-    font-size: 18px;
-  }
 `;

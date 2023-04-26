@@ -31,7 +31,7 @@ const Home = () => {
         <Loading />
       ) : (
         <React.Fragment>
-          <MainBanner id={trending?.results[0]?.id ?? 0} type={trending?.results[0]?.media_type ?? ""} />
+          <MainBanner id={trending?.results[0]?.id ?? 0} media_type={trending?.results[0]?.media_type ?? ""} />
           <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
           <AnimatePresence>
             {contentsMatch && (

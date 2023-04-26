@@ -8,7 +8,7 @@ import { ChildrenProps } from "../../../utils/type";
 
 export type MainBannerProps = {
   id: number;
-  type: string;
+  media_type: string;
 };
 
 type BannerContentProps = {
@@ -16,8 +16,8 @@ type BannerContentProps = {
   Detail: React.FC<ChildrenProps>;
 };
 
-const MainBanner: React.FC<MainBannerProps> & BannerContentProps = ({ id, type }) => {
-  const { data } = useQuery<IResult | undefined>(["bannerDetail"], () => detailAPI({ id, type }));
+const MainBanner: React.FC<MainBannerProps> & BannerContentProps = ({ id, media_type }) => {
+  const { data } = useQuery<IResult | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
   const { backdrop_path, poster_path, title, overview } = data || {};
 
   return (
