@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { useOpacity } from "../../../utils/hooks";
 import { Arrow } from "../../atoms/Icons/";
-import { ArrowProps } from "../../atoms/Icons/Arrow";
+import { ArrowProps } from "../../atoms/Icons/NextPrevIcon";
 
 interface SlideButtonProps extends ArrowProps {
   prevSlide?: () => Promise<void>;

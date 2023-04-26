@@ -1,2 +1,3 @@
-export { default as Arrow } from "./Arrow";
-export { PlayIcon, DetailIcon, AddIcon, Logo, ContentOpenIcon } from "./SvgIcons";
+export { default as Arrow } from "./NextPrevIcon";
+export { PlayIcon, DetailIcon, AddIcon, ContentOpenIcon } from "./ButtonIcon";
+export { Logo } from "./UIIcon";
