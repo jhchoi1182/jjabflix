@@ -9,7 +9,7 @@ import Slide from "../organisms/Slide/Slide";
 import { useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import BackdropOverlay from "../atoms/Modal/BackdropOverlay";
-import { IGetData } from "../../lib/Atoms";
+import { IGetData } from "../../interface/Interface";
 
 const Home = () => {
   const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI, {

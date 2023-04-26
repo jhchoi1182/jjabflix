@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
-import { IResult } from "../../../lib/Atoms";
+import { IResult } from "../../../interface/Interface";
 import * as fonts from "../../../styles/Css";
 import * as Button from "../../molecules/Button/RectangleButton";
 import { ChildrenProps } from "../../../utils/type";

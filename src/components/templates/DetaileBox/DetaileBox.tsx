@@ -17,7 +17,7 @@ const DetaileBox = () => {
       {contentsMatch && (
         <DetailBox layoutId={contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
           <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
-            <Title>{contentData.title ?? contentData.name}</Title>
+            <Title>{contentData.title}</Title>
           </Cover>
           <Overview>{contentData.overview}</Overview>
         </DetailBox>

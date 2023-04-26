@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import SlideContent from "../../molecules/Slide/SlideContent";
-import { IGetData } from "../../../lib/Atoms";
+import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
 import SlideMoveBtn from "../../molecules/Slide/SlideMoveBtn";
 import { useOpacity } from "../../../utils/hooks";
