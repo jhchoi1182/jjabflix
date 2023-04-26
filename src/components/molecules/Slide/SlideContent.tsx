@@ -11,6 +11,9 @@ import { flex, SmallTitle } from "../../../styles/Css";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
+import * as Button from "../../molecules/Button/CircleButton";
+import FlexBox from "../../atoms/Layout/FlexBox";
+import { AdultIcon } from "../../atoms/Icons";
 
 const contentVariants: Variants = {
   normal: {
@@ -82,14 +85,23 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
           <div>에러</div>
         ) : (
           <React.Fragment>
-            <button
+            <ButtonBox>
+              <FlexDiv>
+                <Button.CirclePlay />
+                <Button.CircleAdd />
+              </FlexDiv>
+              <RightBox>
+                <Button.CircleDetail />
+              </RightBox>
+            </ButtonBox>
+            {/* <button
               onClick={() => {
                 setContentData(data);
                 navigate(`/${id}`);
               }}
             >
               상세보기
-            </button>
+            </button> */}
           </React.Fragment>
         )}
       </ContentInfo>
@@ -128,4 +140,19 @@ const ContentInfo = styled(motion.div)`
   padding: 1.5rem;
   background-color: ${(props) => props.theme.black.veryDark};
   display: none;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+`;
+
+const FlexDiv = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const RightBox = styled.div`
+  margin-left: auto;
 `;
