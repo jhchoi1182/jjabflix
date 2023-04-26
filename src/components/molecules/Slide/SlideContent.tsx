@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { posterAPI } from "../../../api/Apis";
 import { useSetRecoilState } from "recoil";
 import { IResult, detailAtom } from "../../../lib/Atoms";
-import * as fonts from "../../../styles/Css";
 import { bgImg } from "../../atoms/Banner";
 import { useOpacity } from "../../../utils/hooks";
+import { flex, SmallTitle } from "../../../styles/Css";
 
 const contentVariants: Variants = {
   normal: {
@@ -89,10 +89,9 @@ const Banner = styled(motion.div)<{ bgimg: string }>`
 
 const Title = styled(motion.p)`
   height: 100%;
-  display: flex;
-  align-items: end;
+  ${flex("none", "end")}
   white-space: pre-wrap;
-  ${fonts.SmallTitle}
+  ${SmallTitle}
 `;
 
 const ContentInfo = styled(motion.div)`

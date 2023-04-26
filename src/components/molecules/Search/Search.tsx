@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { flex } from "../../../styles/Css";
 
 interface IForm {
   keyword: string;
@@ -49,8 +50,7 @@ export default Search;
 
 const SearchBox = styled.form`
   color: white;
-  display: flex;
-  align-items: center;
+  ${flex("none")}
   position: relative;
   svg {
     height: 2.5rem;
