@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
 /** Layouts */
-export const flex = (justifyContent = "", alignItems = "") => {
+export const flex = (justifyContent = "center", alignItems = "center") => {
   const jc = () => {
     switch (justifyContent) {
       case "space-between":
@@ -10,8 +10,12 @@ export const flex = (justifyContent = "", alignItems = "") => {
         return "space-evenly";
       case "flex-start":
         return "flex-start";
-      default:
+      case "center":
         return "center";
+      case "none":
+        return "none";
+      default:
+        throw new Error(`유효한 ${justifyContent}값이 입력되지 않았습니다.`);
     }
   };
 
@@ -19,14 +23,20 @@ export const flex = (justifyContent = "", alignItems = "") => {
     switch (alignItems) {
       case "flex-start":
         return "flex-start";
-      default:
+      case "end":
+        return "end";
+      case "center":
         return "center";
+      default:
+        throw new Error(`유효한 ${alignItems}값이 입력되지 않았습니다.`);
     }
   };
 
+  const justifyContentValue = justifyContent === "none" ? "" : `justify-content: ${jc()};`;
+
   return css`
     display: flex;
-    justify-content: ${jc()};
+    ${justifyContentValue}
     align-items: ${ai()};
   `;
 };
