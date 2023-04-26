@@ -5,7 +5,7 @@ import Button from "../../atoms/Button/Button";
 export const CirclePlay = () => {
   return (
     <CirclePlayButton circle borderColor="white">
-      <PlayIcon size={1.4} />
+      <PlayIcon size={1.1} />
     </CirclePlayButton>
   );
 };
@@ -19,21 +19,21 @@ const CirclePlayButton = styled(Button)`
 
 export const CircleAdd = () => {
   return (
-    <CircleButton circle whiteFont borderColor="grey">
-      <AddIcon size={1.4} />
-    </CircleButton>
+    <CircleGreyButton circle whiteFont borderColor="grey">
+      <AddIcon size={1.1} />
+    </CircleGreyButton>
   );
 };
 
 export const CircleDetail = () => {
   return (
-    <CircleButton circle whiteFont borderColor="grey">
-      <ContentOpenIcon size={1.4} />
-    </CircleButton>
+    <CircleGreyButton circle whiteFont borderColor="grey">
+      <ContentOpenIcon size={1.1} />
+    </CircleGreyButton>
   );
 };
 
-const CircleButton = styled(Button)`
+const CircleGreyButton = styled(Button)`
   background-color: ${(props) => props.theme.black.lighter};
   &:hover {
     border: 2px solid ${(props) => props.theme.white.lighter};

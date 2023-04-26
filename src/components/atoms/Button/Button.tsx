@@ -42,7 +42,7 @@ const ButtonContainer = styled.button<IButtonProps>`
   ${({ circle }) =>
     circle &&
     css`
-      padding: 0.8rem;
+      padding: 0.4rem;
     `};
   cursor: pointer;
 `;
