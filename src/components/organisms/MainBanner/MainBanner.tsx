@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
-import * as fonts from "../../../styles/Css";
 import * as Button from "../../molecules/Button/RectangleButton";
 import { ChildrenProps } from "../../../utils/type";
+import * as fonts from "../../../styles/Fonts";
 
 export type MainBannerProps = {
   id: number;
@@ -46,12 +46,14 @@ const Banner = styled.div<{ bgimg: string }>`
 `;
 
 MainBanner.Title = styled.h2`
-  ${fonts.LargeTitle}
+  ${fonts.big}
+  ${fonts.bold}
   margin-bottom: 2rem;
 `;
 
 MainBanner.Detail = styled.p`
-  ${fonts.LargeOverview}
+  ${fonts.mid1}
+  ${fonts.bold}
   width: 50%;
 `;
 

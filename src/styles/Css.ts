@@ -41,30 +41,3 @@ export const flex = (justifyContent = "center", alignItems = "center") => {
   `;
 };
 
-/** Fonts */
-export const LargeTitle = css`
-  font-size: 6rem;
-  font-weight: 700;
-`;
-
-export const MidTitle = css`
-  font-size: 4.6rem;
-  font-weight: 700;
-`;
-
-export const SmallTitle = css`
-  font-size: 1.35vw;
-  font-weight: 700;
-`;
-
-export const SlideTitle = css`
-  font-size: 1.4vw;
-  font-weight: 500;
-`;
-
-export const LargeOverview = css`
-  font-size: 2.5rem;
-  font-weight: 500;
-`;
-
-export const SmallOverview = css``;
