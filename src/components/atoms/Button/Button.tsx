@@ -2,18 +2,22 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { flex } from "../../../styles/Css";
 
-export interface IButtonProps {
+export interface IButtonEventProps {
+  onClick?: () => void;
+}
+
+interface IButtonProps extends IButtonEventProps {
   children?: React.ReactNode;
   borderColor: "none" | "white" | "grey";
   whiteFont?: boolean;
   circle?: boolean;
 }
 
-const Button: React.FC<IButtonProps> = ({ children, borderColor, whiteFont, circle, ...rest }) => {
+const Button: React.FC<IButtonProps> = ({ children, onClick, borderColor, whiteFont, circle, ...rest }) => {
   const styles = { whiteFont, borderColor, circle };
 
   return (
-    <ButtonContainer {...styles} {...rest}>
+    <ButtonContainer onClick={onClick} {...styles} {...rest}>
       {children}
     </ButtonContainer>
   );

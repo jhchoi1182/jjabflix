@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Button from "../../atoms/Button/Button";
+import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 import { DetailIcon, PlayIcon } from "../../atoms/Icons";
 
-export const Play = () => {
+export const Play: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
     <PlayButton borderColor="none">
       <PlayIcon size={1.75} />
@@ -21,7 +21,7 @@ const PlayButton = styled(Button)`
   }
 `;
 
-export const Detaile = () => {
+export const Detaile: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
     <DetaileButton borderColor="none" whiteFont>
       <DetailIcon size={1.75} />

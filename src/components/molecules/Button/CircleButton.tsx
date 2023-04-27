@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { AddIcon, ContentOpenIcon, PlayIcon } from "../../atoms/Icons";
-import Button from "../../atoms/Button/Button";
+import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 
-export const CirclePlay = () => {
+export const CirclePlay: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
-    <CirclePlayButton circle borderColor="white">
+    <CirclePlayButton circle borderColor="white" onClick={onClick}>
       <PlayIcon size={1.1} />
     </CirclePlayButton>
   );
@@ -17,17 +17,17 @@ const CirclePlayButton = styled(Button)`
   }
 `;
 
-export const CircleAdd = () => {
+export const CircleAdd: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
-    <CircleGreyButton circle whiteFont borderColor="grey">
+    <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick}>
       <AddIcon size={1.1} />
     </CircleGreyButton>
   );
 };
 
-export const CircleDetail = () => {
+export const CircleDetail: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
-    <CircleGreyButton circle whiteFont borderColor="grey">
+    <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick}>
       <ContentOpenIcon size={1.1} />
     </CircleGreyButton>
   );
