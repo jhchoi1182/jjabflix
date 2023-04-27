@@ -122,6 +122,11 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
               )}
               <HD>HD</HD>
             </InfoBox>
+            <TagBox>
+              {data?.genres.map((genre, i) => (
+                <li key={`genre_${i}`}>{genre.name}</li>
+              ))}
+            </TagBox>
             {/* <div>
               <AdultIcon size={1.1} />
             </div> */}
@@ -172,6 +177,9 @@ const ContentInfo = styled(motion.div)`
   padding: 1.5rem;
   background-color: ${(props) => props.theme.black.veryDark};
   display: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-top: -0.1rem;
 `;
 
 const ButtonBox = styled.div`
@@ -213,4 +221,30 @@ const Age = styled.button`
 
 const HD = styled(Age)`
   font-size: 1rem;
+`;
+
+const TagBox = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  ${fonts.normal}
+  li {
+    position: relative;
+  }
+  li:not(:first-child) {
+    padding-left: 1rem;
+  }
+  li:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: ${(props) => props.theme.black.vertLighter};
+    border-radius: 100%;
+  }
 `;
