@@ -21,3 +21,8 @@ export const mid1 = css`
 export const mid2 = css`
   font-size: 1.4vw;
 `;
+
+export const normal = css`
+  font-size: 1.2rem;
+  ${bold}
+`;

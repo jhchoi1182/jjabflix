@@ -7,13 +7,14 @@ import { useSetRecoilState } from "recoil";
 import { detailAtom } from "../../../lib/Atoms";
 import { bgImg } from "../../atoms/Banner";
 import { useOpacity } from "../../../utils/hooks";
-import { flex, SmallTitle } from "../../../styles/Css";
+import { flex } from "../../../styles/Css";
+import * as fonts from "../../../styles/Fonts";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
 import * as Button from "../../molecules/Button/CircleButton";
-import FlexBox from "../../atoms/Layout/FlexBox";
 import { AdultIcon } from "../../atoms/Icons";
+import { IDetail } from "../../../lib/Atoms";
 
 const contentVariants: Variants = {
   normal: {
@@ -47,11 +48,21 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
 
-  const { data, isLoading, isError } = useQuery(["detail", title], () => detailAPI({ id, media_type }), {
-    enabled: isHover,
-    cacheTime: 360000,
-    staleTime: 360000,
-  });
+  const { data, isLoading, isError } = useQuery<IDetail | undefined>(
+    ["detail", title || name],
+    () => detailAPI({ id, media_type }),
+    {
+      enabled: isHover,
+      cacheTime: 360000,
+      staleTime: 360000,
+    }
+  );
+
+  const totalMinutes = data?.runtime ?? 0;
+  const { hours, minutes } = {
+    hours: Math.floor(totalMinutes / 60),
+    minutes: totalMinutes % 60,
+  };
 
   const onMouseEnterHandler = () => {
     setIsHover((prev) => !prev);
@@ -86,14 +97,34 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
         ) : (
           <React.Fragment>
             <ButtonBox>
-              <FlexDiv>
+              <FlexLeftDiv>
                 <Button.CirclePlay />
                 <Button.CircleAdd />
-              </FlexDiv>
-              <RightBox>
+              </FlexLeftDiv>
+              <FlexRightBox>
                 <Button.CircleDetail />
-              </RightBox>
+              </FlexRightBox>
             </ButtonBox>
+            <InfoBox>
+              {data?.vote_average !== 0 && (
+                <Rating>
+                  <p>평점</p>
+                  <span>{data?.vote_average.toFixed(1)}</span>
+                </Rating>
+              )}
+              {data?.adult ? <AdultIcon size={1.1} /> : <Age>15+</Age>}
+              {data?.seasons ? (
+                <span>{`시즌 ${data?.seasons.length}개`}</span>
+              ) : data?.runtime !== 0 ? (
+                <span>{`${hours}시간 ${minutes}분`}</span>
+              ) : (
+                ""
+              )}
+              <HD>HD</HD>
+            </InfoBox>
+            {/* <div>
+              <AdultIcon size={1.1} />
+            </div> */}
             {/* <button
               onClick={() => {
                 setContentData(data);
@@ -133,7 +164,8 @@ const Title = styled(motion.p)`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
-  ${SmallTitle}
+  ${fonts.mid1}
+  ${fonts.Heavy}
 `;
 
 const ContentInfo = styled(motion.div)`
@@ -148,11 +180,37 @@ const ButtonBox = styled.div`
   padding-right: 0.2rem;
 `;
 
-const FlexDiv = styled.div`
+const FlexLeftDiv = styled.div`
   display: flex;
   gap: 0.5rem;
 `;
 
-const RightBox = styled.div`
+const FlexRightBox = styled.div`
   margin-left: auto;
+`;
+
+const InfoBox = styled.div`
+  ${flex("none")}
+  ${fonts.normal}
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+`;
+
+const Rating = styled.span`
+  display: flex;
+  color: #45d068;
+  gap: 0.3rem;
+  span {
+    ${fonts.Heavy}
+  }
+`;
+
+const Age = styled.button`
+  background-color: transparent;
+  color: ${(props) => props.theme.white.lighter};
+  border: 0.1px solid ${(props) => props.theme.black.vertLighter};
+`;
+
+const HD = styled(Age)`
+  font-size: 1rem;
 `;

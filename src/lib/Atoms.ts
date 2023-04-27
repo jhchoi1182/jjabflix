@@ -14,7 +14,8 @@ export interface IDetail {
   overview: string;
   poster_path: string;
   release_date: Date;
-  runtime: number;
+  seasons?: [];
+  runtime?: number;
   tagline: string;
   title: string;
   vote_average: number;
