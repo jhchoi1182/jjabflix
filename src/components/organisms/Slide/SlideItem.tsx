@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
-import { useSetRecoilState } from "recoil";
-import { detailAtom } from "../../../lib/Atoms";
 import { bgImg } from "../../atoms/Banner";
 import { useOpacity } from "../../../utils/hooks";
 import { flex } from "../../../styles/Css";
@@ -12,9 +9,9 @@ import * as fonts from "../../../styles/Fonts";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
-import * as Button from "../../molecules/Button/CircleButton";
 import { AdultIcon } from "../../atoms/Icons";
 import { IDetail } from "../../../lib/Atoms";
+import SlideButtonBox from "../../atoms/Slide/SlideButtonBox";
 
 const contentVariants: Variants = {
   normal: {
@@ -42,11 +39,9 @@ const infoVariants: Variants = {
   },
 };
 
-const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
+const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
   const [isHover, setIsHover] = useState(false);
   const { resetOpacityAfterDelay, resetOpacityAfterDelayInvalidation } = useOpacity({ out: 0 });
-  const setContentData = useSetRecoilState(detailAtom);
-  const navigate = useNavigate();
 
   const { data, isLoading, isError } = useQuery<IDetail | undefined>(
     ["detail", title || name],
@@ -77,7 +72,7 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
   }, [isHover]);
 
   return (
-    <Container
+    <SlideContent
       layoutId={String(id)}
       variants={contentVariants}
       whileHover="hover"
@@ -86,25 +81,17 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <Banner bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
+      <SlideImage bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
         <Title>{title ?? name}</Title>
-      </Banner>
-      <ContentInfo variants={infoVariants}>
+      </SlideImage>
+      <SlideCaption variants={infoVariants}>
         {isLoading ? (
           <Loading />
         ) : isError ? (
           <div>에러</div>
         ) : (
           <React.Fragment>
-            <ButtonBox>
-              <FlexLeftDiv>
-                <Button.CirclePlay />
-                <Button.CircleAdd />
-              </FlexLeftDiv>
-              <FlexRightBox>
-                <Button.CircleDetail />
-              </FlexRightBox>
-            </ButtonBox>
+            <SlideButtonBox {...(data as IDetail)} />
             <InfoBox>
               {data?.vote_average !== 0 && (
                 <Rating>
@@ -127,27 +114,16 @@ const SlideContent: React.FC<IResult> = ({ id, title, name, backdrop_path, poste
                 <li key={`genre_${i}`}>{genre.name}</li>
               ))}
             </TagBox>
-            {/* <div>
-              <AdultIcon size={1.1} />
-            </div> */}
-            {/* <button
-              onClick={() => {
-                setContentData(data);
-                navigate(`/${id}`);
-              }}
-            >
-              상세보기
-            </button> */}
           </React.Fragment>
         )}
-      </ContentInfo>
-    </Container>
+      </SlideCaption>
+    </SlideContent>
   );
 };
 
-export default SlideContent;
+export default SlideItem;
 
-const Container = styled(motion.div)`
+const SlideContent = styled(motion.div)`
   width: calc(100% / 8.2);
   &:nth-child(2) {
     transform-origin: center left !important;
@@ -157,7 +133,7 @@ const Container = styled(motion.div)`
   }
 `;
 
-const Banner = styled(motion.div)<{ bgimg: string }>`
+const SlideImage = styled(motion.div)<{ bgimg: string }>`
   ${bgImg}
   height: 170px;
   padding: 12px 10px;
@@ -173,28 +149,13 @@ const Title = styled(motion.p)`
   ${fonts.Heavy}
 `;
 
-const ContentInfo = styled(motion.div)`
+const SlideCaption = styled(motion.div)`
   padding: 1.5rem;
   background-color: ${(props) => props.theme.black.veryDark};
   display: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   margin-top: -0.1rem;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
-`;
-
-const FlexLeftDiv = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
-const FlexRightBox = styled.div`
-  margin-left: auto;
 `;
 
 const InfoBox = styled.div`

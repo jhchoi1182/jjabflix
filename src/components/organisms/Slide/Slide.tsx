@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
-import SlideContent from "../../molecules/Slide/SlideContent";
+import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
 import SlideMoveBtn from "../../molecules/Slide/SlideMoveBtn";
@@ -78,7 +78,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
               page === 0 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((content) => {
-              return <SlideContent key={content.id} {...content} />;
+              return <SlideItem key={content.id} {...content} />;
             })}
         </RowContainer>
       </AnimatePresence>
