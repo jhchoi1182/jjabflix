@@ -18,11 +18,11 @@ type BannerContentProps = {
 
 const MainBanner: React.FC<MainBannerProps> & BannerContentProps = ({ id, media_type }) => {
   const { data } = useQuery<IResult | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
-  const { backdrop_path, poster_path, title, overview } = data || {};
+  const { backdrop_path, poster_path, title, name, overview } = data || {};
 
   return (
     <Banner bgimg={posterAPI(backdrop_path ?? poster_path)}>
-      <MainBanner.Title>{title}</MainBanner.Title>
+      <MainBanner.Title>{title ?? name}</MainBanner.Title>
       <MainBanner.Detail>{overview}</MainBanner.Detail>
       <ButtonBox>
         <Button.Play />

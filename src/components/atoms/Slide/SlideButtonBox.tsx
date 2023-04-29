@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import * as Button from "../../molecules/Button/CircleButton";
-import { IDetail, detailAtom } from "../../../lib/Atoms";
-import { useSetRecoilState } from "recoil";
+import { FavoriteContentsSelector, IDetail, detailAtom } from "../../../lib/Atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
   const setContentData = useSetRecoilState(detailAtom);
+  const [isFavorite, setIsFavorite] = useRecoilState(FavoriteContentsSelector);
   const navigate = useNavigate();
 
   const showDetailHandler = () => {
@@ -21,11 +22,19 @@ const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
     }
   };
 
+  const removeFavoriteContens = () => {};
+
+  console.log(isFavorite);
+
   return (
     <ButtonBox>
       <FlexLeftDiv>
         <Button.CirclePlay />
-        <Button.CircleAdd onClick={addFavoriteContents} />
+        {isFavorite ? (
+          <Button.CircleCheck onClick={removeFavoriteContens} />
+        ) : (
+          <Button.CircleAdd onClick={addFavoriteContents} />
+        )}
       </FlexLeftDiv>
       <FlexRightBox>
         <Button.CircleDetail onClick={showDetailHandler} />

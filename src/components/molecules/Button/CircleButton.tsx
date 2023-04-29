@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AddIcon, ContentOpenIcon, PlayIcon } from "../../atoms/Icons";
 import Button, { IButtonEventProps } from "../../atoms/Button/Button";
+import { CheckIcon } from "../../atoms/Icons/ButtonIcon";
 
 export const CirclePlay: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
@@ -21,6 +22,14 @@ export const CircleAdd: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
     <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick}>
       <AddIcon size={1.1} />
+    </CircleGreyButton>
+  );
+};
+
+export const CircleCheck: React.FC<IButtonEventProps> = ({ onClick }) => {
+  return (
+    <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick}>
+      <CheckIcon size={1.1} />
     </CircleGreyButton>
   );
 };
