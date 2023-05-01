@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as Button from "../../molecules/Button/CircleButton";
-import { FavoriteContentsSelector, IDetail, detailAtom } from "../../../lib/Atoms";
+import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
+import { setFavoriteLocal } from "../../../utils/Local";
 
 const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
+  const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
-  const [isFavorite, setIsFavorite] = useRecoilState(FavoriteContentsSelector);
   const navigate = useNavigate();
+
+  const isAdded = favoriteContents.some((content) => content.id === data.id);
 
   const showDetailHandler = () => {
     if (data) {
@@ -17,20 +20,30 @@ const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
     }
   };
 
+  const setFavoriteHandler = (data: IDetail[]) => {
+    setFavoriteContents(data);
+    setFavoriteLocal(data);
+  };
+
   const addFavoriteContents = () => {
     if (data) {
+      const addedContents = [data, ...favoriteContents];
+      setFavoriteHandler(addedContents);
     }
   };
 
-  const removeFavoriteContens = () => {};
-
-  console.log(isFavorite);
+  const removeFavoriteContens = () => {
+    if (data) {
+      const removedContents = favoriteContents.filter((content) => content.id !== data.id);
+      setFavoriteHandler(removedContents);
+    }
+  };
 
   return (
     <ButtonBox>
       <FlexLeftDiv>
         <Button.CirclePlay />
-        {isFavorite ? (
+        {isAdded ? (
           <Button.CircleCheck onClick={removeFavoriteContens} />
         ) : (
           <Button.CircleAdd onClick={addFavoriteContents} />

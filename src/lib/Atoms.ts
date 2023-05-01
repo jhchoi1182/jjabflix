@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 import { getFavoriteLocal } from "../utils/Local";
 
 interface Genre {
@@ -33,6 +33,7 @@ export const detailAtom = atom<IDetail>({
     overview: "",
     poster_path: "",
     release_date: new Date(),
+    seasons: [],
     runtime: 0,
     tagline: "",
     title: "",
@@ -42,15 +43,7 @@ export const detailAtom = atom<IDetail>({
 
 /** 즐겨찾기 */
 
-const isFavoriteAtom = atom({
-  key: "isFavorite",
-  default: false,
-});
-
-export const FavoriteContentsSelector = selector({
-  key: "sliderRefSelector",
-  get: ({ get }) => {
-    return get(isFavoriteAtom);
-  },
-  set: ({ set }, data) => {},
+export const FavoriteAtom = atom({
+  key: "favoriteContents",
+  default: getFavoriteLocal,
 });
