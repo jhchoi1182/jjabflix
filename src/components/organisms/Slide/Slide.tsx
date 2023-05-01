@@ -31,10 +31,10 @@ const rowVariants: Variants = {
 };
 
 const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
-  const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(0);
+  const { setOpacity } = useOpacity();
 
   const showContentsNum = page === 0 ? 7 : 8;
   const totalContents = data.results.length;
@@ -58,7 +58,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
     }
   };
   return (
-    <SlideBox onMouseOver={mouseOver} onMouseOut={mouseOut}>
+    <SlideContainer onMouseOver={() => setOpacity(1)} onMouseOut={() => setOpacity(0)}>
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
@@ -84,13 +84,13 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
       </AnimatePresence>
       {page !== 0 && <SlideMoveBtn direction="prev" prevSlide={prevSlide} />}
       {<SlideMoveBtn direction="next" nextSlide={nextSlide} />}
-    </SlideBox>
+    </SlideContainer>
   );
 };
 
 export default Slide;
 
-const SlideBox = styled.div`
+const SlideContainer = styled.div`
   position: relative;
   top: -100px;
   margin-left: -12%;

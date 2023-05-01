@@ -1,28 +1,19 @@
-type useOpacityProps = {
-  over?: number;
-  out?: number;
-};
-
-export const useOpacity = ({ over, out }: useOpacityProps) => {
+export const useOpacity = () => {
   let opacitySetTimeout: ReturnType<typeof setTimeout>;
-  const setOpacity = (opacity: number | undefined) => {
+
+  const setOpacity = (opacity: number) => {
     document.documentElement.style.setProperty("--opacity", `${opacity}`);
   };
 
-  const mouseOver = () => {
-    setOpacity(over);
-  };
-  const mouseOut = () => {
-    setOpacity(out);
-  };
-  const resetOpacityAfterDelay = () => {
+  const setOpacityAfterDelay = (opacity: number) => {
     opacitySetTimeout = setTimeout(() => {
-      setOpacity(out);
+      setOpacity(opacity);
     }, 500);
   };
-  const resetOpacityAfterDelayInvalidation = () => {
+  
+  const setOpacityAfterDelayInvalidation = () => {
     clearTimeout(opacitySetTimeout);
   };
 
-  return { mouseOver, mouseOut, resetOpacityAfterDelay, resetOpacityAfterDelayInvalidation };
+  return { setOpacity, setOpacityAfterDelay, setOpacityAfterDelayInvalidation };
 };

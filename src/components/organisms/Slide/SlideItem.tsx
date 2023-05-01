@@ -41,7 +41,7 @@ const infoVariants: Variants = {
 
 const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
   const [isHover, setIsHover] = useState(false);
-  const { resetOpacityAfterDelay, resetOpacityAfterDelayInvalidation } = useOpacity({ out: 0 });
+  const { setOpacity, setOpacityAfterDelay, setOpacityAfterDelayInvalidation } = useOpacity();
 
   const { data, isLoading, isError } = useQuery<IDetail | undefined>(
     ["detail", title || name],
@@ -52,24 +52,25 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
       staleTime: 360000,
     }
   );
+  console.log(document.documentElement.style.getPropertyValue("--opacity"));
 
   const totalMinutes = data?.runtime ?? 0;
   const { hours, minutes } = {
     hours: Math.floor(totalMinutes / 60),
     minutes: totalMinutes % 60,
   };
+  
+    useEffect(() => {
+      if (isHover) setIsHover(false);
+    }, [isHover]);
 
   const onMouseEnterHandler = () => {
     setIsHover((prev) => !prev);
-    resetOpacityAfterDelay();
+    setOpacityAfterDelay(0);
   };
   const onMouseLeaveHandler = () => {
-    resetOpacityAfterDelayInvalidation();
+    setOpacityAfterDelayInvalidation();
   };
-
-  useEffect(() => {
-    if (isHover) setIsHover(false);
-  }, [isHover]);
 
   return (
     <SlideContent

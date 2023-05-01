@@ -9,10 +9,10 @@ interface SlideButtonProps extends ArrowProps {
 }
 
 const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction }) => {
-  const { mouseOver, mouseOut } = useOpacity({ over: 1, out: 0 });
+  const { setOpacity } = useOpacity();
 
   return (
-    <SlideBtn onClick={prevSlide ?? nextSlide} onMouseOver={mouseOver} onMouseOut={mouseOut} direction={direction}>
+    <SlideBtn onClick={prevSlide ?? nextSlide} onMouseOver={() => setOpacity(1)} onMouseOut={() => setOpacity(0)} direction={direction}>
       <Arrow direction={direction} />
     </SlideBtn>
   );
