@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
@@ -6,7 +6,7 @@ import { bgImg } from "../../atoms/Banner";
 import { useOpacity } from "../../../utils/hooks";
 import { flex } from "../../../styles/Css";
 import * as fonts from "../../../styles/Fonts";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
 import { AdultIcon } from "../../atoms/Icons";
@@ -40,32 +40,26 @@ const infoVariants: Variants = {
 };
 
 const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
-  const [isHover, setIsHover] = useState(false);
-  const { setOpacity, setOpacityAfterDelay, setOpacityAfterDelayInvalidation } = useOpacity();
+  const { setOpacityAfterDelay, setOpacityAfterDelayInvalidation } = useOpacity();
+  const queryClient = useQueryClient();
 
-  const { data, isLoading, isError } = useQuery<IDetail | undefined>(
-    ["detail", title || name],
-    () => detailAPI({ id, media_type }),
-    {
-      enabled: isHover,
-      cacheTime: 360000,
-      staleTime: 360000,
-    }
-  );
-  console.log(document.documentElement.style.getPropertyValue("--opacity"));
+  const queryKey = ["detail", title || name];
+  const queryFn = () => detailAPI({ id, media_type });
+  const dataOption = { cacheTime: 360000, staleTime: 360000 };
+
+  const { data, isLoading, isError } = useQuery<IDetail | undefined>(queryKey, queryFn, {
+    enabled: false,
+    ...dataOption,
+  });
 
   const totalMinutes = data?.runtime ?? 0;
   const { hours, minutes } = {
     hours: Math.floor(totalMinutes / 60),
     minutes: totalMinutes % 60,
   };
-  
-    useEffect(() => {
-      if (isHover) setIsHover(false);
-    }, [isHover]);
 
   const onMouseEnterHandler = () => {
-    setIsHover((prev) => !prev);
+    queryClient.fetchQuery(queryKey, queryFn, dataOption);
     setOpacityAfterDelay(0);
   };
   const onMouseLeaveHandler = () => {
