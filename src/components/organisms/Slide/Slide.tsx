@@ -7,6 +7,7 @@ import PageIndicator from "../../atoms/Slide/PageIndicator";
 import SlideMoveBtn from "../../molecules/Slide/SlideMoveBtn";
 import { useOpacity } from "../../../utils/hooks";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
+import DummyItem from "../../atoms/Slide/DummyItem";
 
 type VariantsProps = {
   direction: string;
@@ -71,7 +72,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
         >
-          {page === 0 && <div style={{ width: "calc(100% / 8.2)" }} />}
+          {page === 0 && <DummyItem />}
           {data?.results
             ?.slice(
               page === 0 ? 0 : (showContentsNum - 2) * page - 1,
