@@ -1,19 +1,19 @@
-export const useOpacity = () => {
+export const useButtonOpacity = () => {
   let opacitySetTimeout: ReturnType<typeof setTimeout>;
 
-  const setOpacity = (opacity: number) => {
+  const setButtonOpacity = (opacity: number) => {
     document.documentElement.style.setProperty("--opacity", `${opacity}`);
   };
 
-  const setOpacityAfterDelay = (opacity: number) => {
+  const setButtonOpacityAfterDelay = (opacity: number) => {
     opacitySetTimeout = setTimeout(() => {
-      setOpacity(opacity);
+      setButtonOpacity(opacity);
     }, 500);
   };
-  
-  const setOpacityAfterDelayInvalidation = () => {
+
+  const setButtonOpacityAfterDelayInvalidation = () => {
     clearTimeout(opacitySetTimeout);
   };
 
-  return { setOpacity, setOpacityAfterDelay, setOpacityAfterDelayInvalidation };
+  return { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation };
 };

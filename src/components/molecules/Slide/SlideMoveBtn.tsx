@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/hooks";
 import { Arrow } from "../../atoms/Icons/";
 import { ArrowProps } from "../../atoms/Icons/NextPrevIcon";
 
@@ -9,10 +9,15 @@ interface SlideButtonProps extends ArrowProps {
 }
 
 const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction }) => {
-  const { setOpacity } = useOpacity();
+  const { setButtonOpacity } = useButtonOpacity();
 
   return (
-    <SlideBtn onClick={prevSlide ?? nextSlide} onMouseOver={() => setOpacity(1)} onMouseOut={() => setOpacity(0)} direction={direction}>
+    <SlideBtn
+      onClick={prevSlide ?? nextSlide}
+      onMouseOver={() => setButtonOpacity(1)}
+      onMouseOut={() => setButtonOpacity(0)}
+      direction={direction}
+    >
       <Arrow direction={direction} />
     </SlideBtn>
   );

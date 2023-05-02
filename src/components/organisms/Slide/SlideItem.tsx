@@ -3,7 +3,7 @@ import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
 import { bgImg } from "../../atoms/Banner";
-import { useOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/hooks";
 import { flex } from "../../../styles/Css";
 import * as fonts from "../../../styles/Fonts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -40,7 +40,7 @@ const infoVariants: Variants = {
 };
 
 const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
-  const { setOpacityAfterDelay, setOpacityAfterDelayInvalidation } = useOpacity();
+  const { setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
 
   const queryKey = ["detail", title || name];
@@ -60,10 +60,10 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
 
   const onMouseEnterHandler = () => {
     queryClient.fetchQuery(queryKey, queryFn, dataOption);
-    setOpacityAfterDelay(0);
+    setButtonOpacityAfterDelay(0);
   };
   const onMouseLeaveHandler = () => {
-    setOpacityAfterDelayInvalidation();
+    setButtonOpacityAfterDelayInvalidation();
   };
 
   return (

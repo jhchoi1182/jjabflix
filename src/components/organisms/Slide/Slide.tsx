@@ -5,7 +5,7 @@ import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
 import SlideMoveBtn from "../../molecules/Slide/SlideMoveBtn";
-import { useOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/hooks";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import DummyItem from "../../atoms/Slide/DummyItem";
 
@@ -35,7 +35,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(0);
-  const { setOpacity } = useOpacity();
+  const { setButtonOpacity } = useButtonOpacity();
 
   const showContentsNum = page === 0 ? 7 : 8;
   const totalContents = data.results.length;
@@ -59,7 +59,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
     }
   };
   return (
-    <SlideContainer onMouseOver={() => setOpacity(1)} onMouseOut={() => setOpacity(0)}>
+    <SlideContainer onMouseOver={() => setButtonOpacity(1)} onMouseOut={() => setButtonOpacity(0)}>
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>

@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { useOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/hooks";
 
 const DummyItem = () => {
-  const { setOpacityAfterDelay, setOpacityAfterDelayInvalidation } = useOpacity();
+  const { setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
 
-  return <Dummy onMouseEnter={() => setOpacityAfterDelay(0)} onMouseLeave={() => setOpacityAfterDelayInvalidation()} />;
+  return (
+    <Dummy
+      onMouseEnter={() => setButtonOpacityAfterDelay(0)}
+      onMouseLeave={() => setButtonOpacityAfterDelayInvalidation()}
+    />
+  );
 };
 
 export default DummyItem;
