@@ -41,6 +41,7 @@ body {
   font-weight: 300;
   background-color: black;
   color: ${(props) => props.theme.white.darker};
+  font-family: 'Noto Sans KR', sans-serif;
 }
 menu, ol, ul, li {
   list-style: none;
