@@ -141,7 +141,7 @@ const Title = styled(motion.p)`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
-  ${fonts.mid1}
+  ${fonts.mid2}
   ${fonts.Heavy}
 `;
 

@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
-import * as Button from "../../molecules/Button/RectangleButton";
 import { ChildrenProps } from "../../../utils/type";
+import * as Button from "../../molecules/Button/RectangleButton";
 import * as fonts from "../../../styles/Fonts";
 
 export type MainBannerProps = {
@@ -37,7 +37,7 @@ export default MainBanner;
 const Banner = styled.div<{ bgimg: string }>`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   background-size: cover;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1)),
     url(${(props) => props.bgimg});
@@ -48,16 +48,18 @@ const Banner = styled.div<{ bgimg: string }>`
 MainBanner.Title = styled.h2`
   ${fonts.big}
   ${fonts.bold}
-  margin-bottom: 2rem;
+  margin-bottom: 2.3rem;
 `;
 
 MainBanner.Detail = styled.p`
-  ${fonts.mid1}
+  ${fonts.mid2}
   ${fonts.bold}
-  width: 50%;
+  width: 37%;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
   gap: 1.4rem;
+  margin-top: 3.2rem;
+  margin-bottom: 19rem;
 `;

@@ -12,7 +12,7 @@ const Title = styled.label`
   position: absolute;
   margin-top: -2%;
   left: 12.5%;
-  ${fonts.mid2}
+  ${fonts.mid3}
   ${fonts.bold}
   color: ${(props) => props.theme.white.darker};
 `;

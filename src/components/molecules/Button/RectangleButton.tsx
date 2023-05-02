@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 import { DetailIcon, PlayIcon } from "../../atoms/Icons";
+import * as fonts from "../../../styles/Fonts";
 
 export const Play: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
     <PlayButton borderColor="none">
       <PlayIcon size={1.75} />
-      재생
+      <span>재생</span>
     </PlayButton>
   );
 };
 
 const PlayButton = styled(Button)`
   gap: 1rem;
-  font-size: 1.3vw;
+  ${fonts.mid1}
   padding: 0.65vw 1.7vw;
   background-color: ${(props) => props.theme.white.lighter};
   &:hover {
@@ -25,14 +26,14 @@ export const Detaile: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
     <DetaileButton borderColor="none" whiteFont>
       <DetailIcon size={1.75} />
-      상세 정보
+      <span>상세 정보</span>
     </DetaileButton>
   );
 };
 
 const DetaileButton = styled(Button)`
   gap: 1rem;
-  font-size: 1.3vw;
+  ${fonts.mid1}
   padding: 0.65vw 1.7vw;
   background-color: rgba(109, 109, 110, 0.7);
   &:hover {
