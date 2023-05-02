@@ -3,8 +3,13 @@ import { MainBannerProps } from "../components/organisms/MainBanner/MainBanner";
 const BASE_URL = "https://api.themoviedb.org/3";
 const API = process.env.REACT_APP_API;
 
-export const homeAPI = () => {
-  return fetch(`${BASE_URL}/trending/all/day?api_key=${API}&language=ko`).then((response) => response.json());
+export const homeAPI = {
+  trending: () => {
+    return fetch(`${BASE_URL}/trending/all/day?api_key=${API}&language=ko`).then((response) => response.json());
+  },
+  nowPlaying: () => {
+    return fetch(`${BASE_URL}/movie/now_playing?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
 };
 
 export const searchAPI = (keyword: string) => {

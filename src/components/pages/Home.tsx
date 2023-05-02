@@ -10,16 +10,21 @@ import { useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import BackdropOverlay from "../atoms/Modal/BackdropOverlay";
 import { IGetData } from "../../interface/Interface";
+import styled from "styled-components";
 
 const Home = () => {
-  const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI, {
+  const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI.trending, {
     // select: (data) => {
-    //   const test = data.results;
-    //   data.results.push(...test);
-    //   return data;
+    //   const test = data.results.slice(1);
+    //
+    //   return test;
     // },
     staleTime: 100000,
   });
+  const { data: nowPlaying = { results: [] } } = useQuery<IGetData>(["nowPlaying"], homeAPI.nowPlaying, {
+    staleTime: 100000,
+  });
+
   const contentsMatch = useMatch("/:dataId");
   const navigate = useNavigate();
 
@@ -32,7 +37,10 @@ const Home = () => {
       ) : (
         <React.Fragment>
           <MainBanner id={trending?.results[0]?.id ?? 0} media_type={trending?.results[0]?.media_type ?? ""} />
-          <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
+          <SlideContainer>
+            <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
+            <Slide title="상영중인 영화" category="nowPlaying" {...nowPlaying} />
+          </SlideContainer>
           <AnimatePresence>
             {contentsMatch && (
               <React.Fragment>
@@ -48,3 +56,9 @@ const Home = () => {
 };
 
 export default Home;
+
+const SlideContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 34rem;
+`;
