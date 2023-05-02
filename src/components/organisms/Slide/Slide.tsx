@@ -33,6 +33,7 @@ const rowVariants: Variants = {
 
 const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
   const [direction, setDirection] = useState("next");
+  const [isHovered, setIsHovered] = useState(false);
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(0);
   const { setButtonOpacity } = useButtonOpacity();
@@ -59,10 +60,20 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
     }
   };
 
+  const onMouseEnterHandler = () => {
+    setIsHovered((prev) => !prev);
+    setButtonOpacity(1);
+  };
+
+  const onMouseLeaveHandler = () => {
+    setIsHovered((prev) => !prev);
+    setButtonOpacity(0);
+  };
+
   return (
-    <SlideContainer onMouseEnter={() => setButtonOpacity(1)} onMouseLeave={() => setButtonOpacity(0)}>
+    <SlideContainer onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <SlideTitle>{title}</SlideTitle>
-      <PageIndicator maxPage={maxPage} page={page} />
+      <PageIndicator maxPage={maxPage} page={page} isHovered={isHovered} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <RowContainer
           variants={rowVariants}
@@ -86,8 +97,8 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
             })}
         </RowContainer>
       </AnimatePresence>
-      {page !== 0 && <SlideMoveBtn direction="prev" prevSlide={prevSlide} />}
-      {<SlideMoveBtn direction="next" nextSlide={nextSlide} />}
+      {page !== 0 && <SlideMoveBtn isHovered={isHovered} direction="prev" prevSlide={prevSlide} />}
+      {<SlideMoveBtn isHovered={isHovered} direction="next" nextSlide={nextSlide} />}
     </SlideContainer>
   );
 };

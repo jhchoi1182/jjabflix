@@ -3,15 +3,16 @@ import styled from "styled-components";
 type PageIndicatorProps = {
   page: number;
   maxPage: number;
+  isHovered: boolean;
 };
 
-const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page }) => {
+const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page, isHovered }) => {
   let numBox = [];
   for (let i = 0; i < maxPage + 1; i++) {
     numBox.push(<li key={i} className={i === page ? "active" : ""} />);
   }
 
-  return <IndicatorBox className="slide-hover">{numBox}</IndicatorBox>;
+  return <IndicatorBox className={isHovered ? "slide-hover" : "pagination-item"}>{numBox}</IndicatorBox>;
 };
 
 export default PageIndicator;

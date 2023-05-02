@@ -68,6 +68,9 @@ a {
 .slide-hover {
   opacity: var(--opacity);
 }
+.pagination-item {
+  opacity: 0;
+}
 `;
 
 export default GlobalStyle;
