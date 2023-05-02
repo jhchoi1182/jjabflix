@@ -1,15 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import * as Button from "../../molecules/Button/CircleButton";
-import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
+import { FavoriteAtom, IDetail, detailAtom, categoryAtom } from "../../../lib/Atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteLocal } from "../../../utils/Local";
 import { useButtonOpacity } from "../../../utils/hooks";
 
-const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
+interface SlideButtonBoxProps extends IDetail {
+  category: string;
+}
+
+const SlideButtonBox: React.FC<SlideButtonBoxProps> = ({ category, ...data }) => {
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
+  const setCategory = useSetRecoilState(categoryAtom);
   const navigate = useNavigate();
   const { setButtonOpacity } = useButtonOpacity();
 
@@ -27,7 +32,7 @@ const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
     setFavoriteLocal(data);
   };
 
-  const addFavoriteContents = () => {
+  const addFavoriteContents = async () => {
     if (data) {
       const addedContents = [data, ...favoriteContents];
       setFavoriteHandler(addedContents);
@@ -42,7 +47,12 @@ const SlideButtonBox: React.FC<IDetail> = ({ ...data }) => {
   };
 
   return (
-    <ButtonBox onMouseEnter={() => setButtonOpacity(0)}>
+    <ButtonBox
+      onMouseEnter={() => {
+        setCategory(category);
+        setButtonOpacity(0);
+      }}
+    >
       <FlexLeftDiv>
         <Button.CirclePlay />
         {isAdded ? (

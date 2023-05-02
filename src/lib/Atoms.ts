@@ -47,3 +47,10 @@ export const FavoriteAtom = atom({
   key: "favoriteContents",
   default: getFavoriteLocal,
 });
+
+/** 레이아웃id */
+
+export const categoryAtom = atom({
+  key: "layoutId",
+  default: "",
+});

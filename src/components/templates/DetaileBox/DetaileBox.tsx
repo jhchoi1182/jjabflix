@@ -3,19 +3,20 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useMatch } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { detailAtom } from "../../../lib/Atoms";
+import { categoryAtom, detailAtom } from "../../../lib/Atoms";
 import { posterAPI } from "../../../api/Apis";
 import { bgImg } from "../../atoms/Banner";
 
 const DetaileBox = () => {
   const contentData = useRecoilValue(detailAtom);
+  const category = useRecoilValue(categoryAtom);
   const { scrollY } = useScroll();
   const contentsMatch = useMatch("/:dataId");
 
   return (
     <AnimatePresence>
       {contentsMatch && (
-        <DetailBox layoutId={contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
+        <DetailBox layoutId={category + contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
           <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
             <Title>{contentData.title}</Title>
           </Cover>
