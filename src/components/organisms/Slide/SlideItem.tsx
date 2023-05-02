@@ -58,8 +58,8 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
     minutes: totalMinutes % 60,
   };
 
-  const onMouseEnterHandler = () => {
-    queryClient.fetchQuery(queryKey, queryFn, dataOption);
+  const onMouseEnterHandler = async () => {
+    await queryClient.fetchQuery(queryKey, queryFn, dataOption);
     setButtonOpacityAfterDelay(0);
   };
   const onMouseLeaveHandler = () => {

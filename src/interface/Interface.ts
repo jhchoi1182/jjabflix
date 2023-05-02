@@ -7,6 +7,7 @@ export interface IResult {
   overview: string;
   poster_path: string;
   media_type: string;
+  category: string;
 }
 
 export interface IGetData {
@@ -20,4 +21,5 @@ export interface IGetData {
   total_results?: number;
   category: string;
   title: string;
+  type?: string;
 }

@@ -31,7 +31,7 @@ const rowVariants: Variants = {
   }),
 };
 
-const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
+const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(0);
@@ -58,6 +58,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
       setPage((prev) => (prev === maxPage ? 0 : prev + 1));
     }
   };
+
   return (
     <SlideContainer onMouseEnter={() => setButtonOpacity(1)} onMouseLeave={() => setButtonOpacity(0)}>
       <SlideTitle>{title}</SlideTitle>
@@ -79,7 +80,9 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
               page === 0 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
             )
             .map((content) => {
-              return <SlideItem key={content.id} {...content} />;
+              return (
+                <SlideItem key={content.id} {...content} media_type={content.media_type ?? type} category={category} />
+              );
             })}
         </RowContainer>
       </AnimatePresence>
@@ -93,9 +96,7 @@ export default Slide;
 
 const SlideContainer = styled.div`
   position: relative;
-  top: -100px;
-  margin-left: -12%;
-  margin-right: -12%;
+  margin: -65px -12% 0px -12%;
 `;
 
 const RowContainer = styled(motion.div)`
