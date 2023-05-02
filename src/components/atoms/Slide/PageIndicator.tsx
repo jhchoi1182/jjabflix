@@ -1,18 +1,24 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { categoryAtom } from "../../../lib/Atoms";
 
 type PageIndicatorProps = {
   page: number;
   maxPage: number;
-  isHovered: boolean;
+  category: string;
 };
 
-const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page, isHovered }) => {
+const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page, category }) => {
+  const hoveredCategory = useRecoilValue(categoryAtom);
+  
   let numBox = [];
   for (let i = 0; i < maxPage + 1; i++) {
     numBox.push(<li key={i} className={i === page ? "active" : ""} />);
   }
 
-  return <IndicatorBox className={isHovered ? "slide-hover" : "pagination-item"}>{numBox}</IndicatorBox>;
+  return (
+    <IndicatorBox className={category === hoveredCategory ? "slide-hover" : "pagination-item"}>{numBox}</IndicatorBox>
+  );
 };
 
 export default PageIndicator;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import * as Button from "../../molecules/Button/CircleButton";
-import { FavoriteAtom, IDetail, detailAtom, categoryAtom } from "../../../lib/Atoms";
+import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteLocal } from "../../../utils/Local";
@@ -10,7 +10,6 @@ import { useButtonOpacity } from "../../../utils/hooks";
 const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) => {
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
-  const setCategory = useSetRecoilState(categoryAtom);
   const navigate = useNavigate();
   const { setButtonOpacity } = useButtonOpacity();
 
@@ -24,7 +23,6 @@ const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) =>
   };
 
   const onMouseEnterHandler = () => {
-    setCategory(category);
     setButtonOpacity(0);
   };
 

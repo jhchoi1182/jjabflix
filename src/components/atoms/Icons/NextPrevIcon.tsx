@@ -1,17 +1,21 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { categoryAtom } from "../../../lib/Atoms";
 
 export interface ArrowProps {
   direction: "prev" | "next";
-  isHovered?: boolean;
+  category?: string;
 }
 
 const nextArrow = "\u276F"; /** ❯ */
 const prevArrow = "\u276E"; /** ❮ */
 
-const Arrow: React.FC<ArrowProps> = ({ direction, isHovered }) => {
+const Arrow: React.FC<ArrowProps> = ({ direction, category }) => {
+  const hoveredCategory = useRecoilValue(categoryAtom);
+
   const arrow = direction === "next" ? nextArrow : prevArrow;
 
-  return <ArrowStyle className={isHovered ? "slide-hover" : "pagination-item"}>{arrow}</ArrowStyle>;
+  return <ArrowStyle className={category === hoveredCategory ? "slide-hover" : "pagination-item"}>{arrow}</ArrowStyle>;
 };
 
 export default Arrow;

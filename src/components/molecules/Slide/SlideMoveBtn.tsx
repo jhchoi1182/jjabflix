@@ -8,7 +8,7 @@ interface SlideButtonProps extends ArrowProps {
   nextSlide?: () => Promise<void>;
 }
 
-const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction, isHovered }) => {
+const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction, category }) => {
   const { setButtonOpacity } = useButtonOpacity();
 
   return (
@@ -18,7 +18,7 @@ const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direct
       onMouseOut={() => setButtonOpacity(0)}
       direction={direction}
     >
-      <Arrow direction={direction} isHovered={isHovered} />
+      <Arrow direction={direction} category={category} />
     </SlideBtn>
   );
 };
