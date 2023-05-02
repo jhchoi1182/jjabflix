@@ -7,11 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { setFavoriteLocal } from "../../../utils/Local";
 import { useButtonOpacity } from "../../../utils/hooks";
 
-interface SlideButtonBoxProps extends IDetail {
-  category: string;
-}
-
-const SlideButtonBox: React.FC<SlideButtonBoxProps> = ({ category, ...data }) => {
+const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) => {
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const setCategory = useSetRecoilState(categoryAtom);
@@ -22,9 +18,14 @@ const SlideButtonBox: React.FC<SlideButtonBoxProps> = ({ category, ...data }) =>
 
   const showDetailHandler = () => {
     if (data) {
-      setContentData(data);
+      setContentData({ category, media_type, ...data });
       navigate(`/${data.id}`);
     }
+  };
+
+  const onMouseEnterHandler = () => {
+    setCategory(category);
+    setButtonOpacity(0);
   };
 
   const setFavoriteHandler = (data: IDetail[]) => {
@@ -34,7 +35,7 @@ const SlideButtonBox: React.FC<SlideButtonBoxProps> = ({ category, ...data }) =>
 
   const addFavoriteContents = async () => {
     if (data) {
-      const addedContents = [data, ...favoriteContents];
+      const addedContents = [{ category, media_type, ...data }, ...favoriteContents];
       setFavoriteHandler(addedContents);
     }
   };
@@ -47,12 +48,7 @@ const SlideButtonBox: React.FC<SlideButtonBoxProps> = ({ category, ...data }) =>
   };
 
   return (
-    <ButtonBox
-      onMouseEnter={() => {
-        setCategory(category);
-        setButtonOpacity(0);
-      }}
-    >
+    <ButtonBox onMouseEnter={onMouseEnterHandler}>
       <FlexLeftDiv>
         <Button.CirclePlay />
         {isAdded ? (

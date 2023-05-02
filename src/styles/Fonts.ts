@@ -14,6 +14,10 @@ export const big = css`
   font-size: 5vw;
 `;
 
+export const large = css`
+  font-size: 2vw;
+`;
+
 export const mid1 = css`
   font-size: 1.2vw;
 `;

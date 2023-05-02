@@ -88,7 +88,7 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
           <div>에러</div>
         ) : (
           <React.Fragment>
-            <SlideButtonBox category={category} {...(data as IDetail)} />
+            <SlideButtonBox {...(data as IDetail)} media_type={media_type} category={category} />
             <InfoBox>
               {data?.vote_average !== 0 && (
                 <Rating>

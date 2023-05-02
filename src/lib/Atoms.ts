@@ -20,6 +20,8 @@ export interface IDetail {
   tagline: string;
   title: string;
   vote_average: number;
+  category: string;
+  media_type: "movie" | "tv";
 }
 
 export const detailAtom = atom<IDetail>({
@@ -38,6 +40,8 @@ export const detailAtom = atom<IDetail>({
     tagline: "",
     title: "",
     vote_average: 0,
+    category: "",
+    media_type: "movie",
   },
 });
 
