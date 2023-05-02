@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
@@ -39,7 +39,7 @@ const infoVariants: Variants = {
   },
 };
 
-const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
+const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
 
@@ -69,7 +69,7 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
 
   return (
     <SlideContent
-      layoutId={String(id)}
+      layoutId={category + id}
       variants={contentVariants}
       whileHover="hover"
       initial="normal"
