@@ -5,7 +5,7 @@ import { flex } from "../../../styles/Css";
 import Search from "../../molecules/Search/Search";
 
 const navVariants: Variants = {
-  start: {
+  transparent: {
     backgroundColor: "rgb(0, 0, 0, 0)",
   },
   scrolled: {
@@ -18,12 +18,12 @@ const Header = () => {
   const navAnimation = useAnimation();
 
   useMotionValueEvent(scrollYProgress, "change", (y) => {
-    if (y < 0.1) navAnimation.start("start");
+    if (y < 0.1) navAnimation.start("transparent");
     else navAnimation.start("scrolled");
   });
 
   return (
-    <NavBar variants={navVariants} initial="start" animate={navAnimation}>
+    <NavBar variants={navVariants} initial="transparent" animate={navAnimation}>
       <ColumnSection>
         <Link to="/">
           <Logo xmlns="http://www.w3.org/2000/svg" width="1024" height="276.742" viewBox="0 0 1024 276.742">
@@ -61,8 +61,8 @@ const NavBar = styled(motion.nav)`
   width: 100%;
   top: 0;
   background-color: black;
-  font-size: 1.4rem;
-  padding: 22px 60px;
+  font-size: 1.5rem;
+  padding: 20px 60px;
 `;
 
 const ColumnSection = styled.div`
@@ -78,16 +78,13 @@ const Logo = styled.svg`
 
 const Pages = styled.ul`
   display: flex;
-  margin-top: 1px;
+  margin-top: 2px;
 `;
 
 const Page = styled.li`
   margin-right: 2rem;
   transition: color 0.3s ease-in-out;
   position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   &:hover {
     color: ${(props) => props.theme.white.lighter};
   }
