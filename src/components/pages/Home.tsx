@@ -39,7 +39,7 @@ const Home = () => {
           <MainBanner id={trending?.results[0]?.id ?? 0} media_type={trending?.results[0]?.media_type ?? ""} />
           <SlideContainer>
             <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
-            <Slide title="상영중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+            <Slide title="상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
           </SlideContainer>
           <AnimatePresence>
             {contentsMatch && (

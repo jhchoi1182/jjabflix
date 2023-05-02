@@ -27,6 +27,6 @@ export const mid3 = css`
 `;
 
 export const normal = css`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   ${bold}
 `;

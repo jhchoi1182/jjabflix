@@ -18,8 +18,8 @@ const contentVariants: Variants = {
     scale: 1,
   },
   hover: {
-    scale: 1.3,
-    y: -80,
+    scale: 1.4,
+    y: -70,
     transition: {
       type: "tween",
       delay: 0.5,
@@ -157,7 +157,7 @@ const SlideCaption = styled(motion.div)`
 const InfoBox = styled.div`
   ${flex("none")}
   ${fonts.normal}
-  gap: 0.7rem;
+  gap: 0.6rem;
   margin-top: 1.5rem;
 `;
 
@@ -171,6 +171,7 @@ const Rating = styled.span`
 `;
 
 const Age = styled.button`
+  ${fonts.normal}
   background-color: transparent;
   color: ${(props) => props.theme.white.lighter};
   border: 0.1px solid ${(props) => props.theme.black.vertLighter};
