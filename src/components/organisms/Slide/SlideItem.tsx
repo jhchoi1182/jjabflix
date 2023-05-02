@@ -19,6 +19,7 @@ const contentVariants: Variants = {
   },
   hover: {
     scale: 1.4,
+    zIndex: 1,
     y: -70,
     transition: {
       type: "tween",
