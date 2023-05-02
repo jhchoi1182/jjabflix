@@ -40,7 +40,7 @@ const infoVariants: Variants = {
 };
 
 const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type }) => {
-  const { setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
+  const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
 
   const queryKey = ["detail", title || name];
@@ -64,6 +64,7 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
   };
   const onMouseLeaveHandler = () => {
     setButtonOpacityAfterDelayInvalidation();
+    setButtonOpacity(1);
   };
 
   return (

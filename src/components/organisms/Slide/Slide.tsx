@@ -59,7 +59,7 @@ const Slide: React.FC<IGetData> = ({ title, category, ...data }) => {
     }
   };
   return (
-    <SlideContainer onMouseOver={() => setButtonOpacity(1)} onMouseOut={() => setButtonOpacity(0)}>
+    <SlideContainer onMouseEnter={() => setButtonOpacity(1)} onMouseLeave={() => setButtonOpacity(0)}>
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
