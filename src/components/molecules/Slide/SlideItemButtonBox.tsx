@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import * as Button from "../Button/CircleButton";
 import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
@@ -12,6 +12,7 @@ interface ISlideItemButtonBox extends IDetail {
 
 const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, ...data }) => {
   const { id } = data;
+
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
@@ -25,24 +26,27 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, ...da
     }
   };
 
-  const setFavoriteHandler = (data: IDetail[]) => {
-    setFavoriteContents(data);
-    setFavoriteLocal(data);
-  };
+  const setFavoriteHandler = useCallback(
+    (data: IDetail[]) => {
+      setFavoriteContents(data);
+      setFavoriteLocal(data);
+    },
+    [setFavoriteContents]
+  );
 
-  const addFavoriteContents = async () => {
+  const addFavoriteContents = useCallback(() => {
     if (data) {
       const addedContents = [data, ...favoriteContents];
       setFavoriteHandler(addedContents);
     }
-  };
+  }, [isAdded]);
 
-  const removeFavoriteContens = () => {
+  const removeFavoriteContens = useCallback(() => {
     if (data) {
       const removedContents = favoriteContents.filter((content) => content.id !== id);
       setFavoriteHandler(removedContents);
     }
-  };
+  }, [isAdded]);
 
   return (
     <ButtonBox onMouseEnter={onMouseEnter}>
