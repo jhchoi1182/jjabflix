@@ -6,13 +6,13 @@ import { flex } from "../../../styles/Css";
 import * as fonts from "../../../styles/Fonts";
 import { bgImg } from "../../atoms/BannerImage";
 
-type SlideBannerImageProps = {
+type SlideItemBannerImageProps = {
   backdrop: string;
   poster: string;
   title: string;
   name?: string;
 };
-const SlideBannerImage: React.FC<SlideBannerImageProps> = ({ backdrop, poster, title, name }) => {
+const SlideItemBannerImage: React.FC<SlideItemBannerImageProps> = ({ backdrop, poster, title, name }) => {
   return (
     <SlideImage bgimg={posterAPI(backdrop ?? poster, "w500")}>
       <Title>{title ?? name}</Title>
@@ -20,7 +20,7 @@ const SlideBannerImage: React.FC<SlideBannerImageProps> = ({ backdrop, poster, t
   );
 };
 
-export default SlideBannerImage;
+export default SlideItemBannerImage;
 
 const SlideImage = styled(motion.div)<{ bgimg: string }>`
   ${bgImg}

@@ -7,7 +7,7 @@ import { categoryAtom, detailAtom } from "../../../lib/Atoms";
 import { posterAPI } from "../../../api/Apis";
 import { bgImg } from "../../atoms/BannerImage";
 
-const DetaileBox = () => {
+const DetaileContainer = () => {
   const contentData = useRecoilValue(detailAtom);
   const category = useRecoilValue(categoryAtom);
   const { scrollY } = useScroll();
@@ -27,7 +27,7 @@ const DetaileBox = () => {
   );
 };
 
-export default DetaileBox;
+export default DetaileContainer;
 
 const DetailBox = styled(motion.div)`
   position: absolute;
