@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import * as Button from "../../molecules/Button/CircleButton";
+import * as Button from "../Button/CircleButton";
 import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";

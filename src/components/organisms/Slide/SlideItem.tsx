@@ -11,7 +11,8 @@ import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
 import { AdultIcon } from "../../atoms/Icons";
 import { IDetail } from "../../../lib/Atoms";
-import SlideButtonBox from "../../atoms/Slide/SlideButtonBox";
+import SlideButtonBox from "../../molecules/Slide/SlideButtonBox";
+import SlideInfoBox from "../../molecules/Slide/SlideInfoBox";
 
 const contentVariants: Variants = {
   normal: {
@@ -53,12 +54,6 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
     ...dataOption,
   });
 
-  const totalMinutes = data?.runtime ?? 0;
-  const { hours, minutes } = {
-    hours: Math.floor(totalMinutes / 60),
-    minutes: totalMinutes % 60,
-  };
-
   const onMouseEnterHandler = async () => {
     await queryClient.fetchQuery(queryKey, queryFn, dataOption);
     setButtonOpacityAfterDelay(0);
@@ -89,23 +84,7 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
         ) : (
           <React.Fragment>
             <SlideButtonBox {...(data as IDetail)} media_type={media_type} category={category} />
-            <InfoBox>
-              {data?.vote_average !== 0 && (
-                <Rating>
-                  <p>평점</p>
-                  <span>{data?.vote_average.toFixed(1)}</span>
-                </Rating>
-              )}
-              {data?.adult ? <AdultIcon size={1.1} /> : <Age>15+</Age>}
-              {data?.seasons ? (
-                <span>{`시즌 ${data?.seasons.length}개`}</span>
-              ) : data?.runtime !== 0 ? (
-                <span>{`${hours}시간 ${minutes}분`}</span>
-              ) : (
-                ""
-              )}
-              <HD>HD</HD>
-            </InfoBox>
+            <SlideInfoBox {...(data as IDetail)} />
             <TagBox>
               {data?.genres.map((genre, i) => (
                 <li key={`genre_${i}`}>{genre.name}</li>
@@ -153,33 +132,6 @@ const SlideCaption = styled(motion.div)`
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   margin-top: -0.1rem;
-`;
-
-const InfoBox = styled.div`
-  ${flex("none")}
-  ${fonts.normal}
-  gap: 0.6rem;
-  margin-top: 1.5rem;
-`;
-
-const Rating = styled.span`
-  display: flex;
-  color: #45d068;
-  gap: 0.3rem;
-  span {
-    ${fonts.Heavy}
-  }
-`;
-
-const Age = styled.button`
-  ${fonts.normal}
-  background-color: transparent;
-  color: ${(props) => props.theme.white.lighter};
-  border: 0.1px solid ${(props) => props.theme.black.vertLighter};
-`;
-
-const HD = styled(Age)`
-  font-size: 1rem;
 `;
 
 const TagBox = styled.ul`
