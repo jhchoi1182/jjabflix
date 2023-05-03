@@ -52,4 +52,11 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
 
 export default BookmarkItem;
 
-const BookmarkContent = styled(motion.div)``;
+const BookmarkContent = styled(motion.div)`
+  &:nth-child(6n + 1) {
+    transform-origin: center left;
+  }
+  &:nth-child(6n) {
+    transform-origin: center right;
+  }
+`;

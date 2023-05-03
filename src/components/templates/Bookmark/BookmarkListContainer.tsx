@@ -19,7 +19,8 @@ const BookmarkListContainer = () => {
 export default BookmarkListContainer;
 
 const BookmarkContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 78px;
+  grid-column-gap: 8px;
 `;

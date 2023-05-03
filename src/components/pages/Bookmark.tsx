@@ -21,5 +21,5 @@ const BookmarkWrapper = styled.div`
 const Title = styled.h1`
   ${fonts.large}
   ${fonts.bold}
-  padding-bottom: 5%;
+  padding-bottom: 8.5%;
 `;
