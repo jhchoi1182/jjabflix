@@ -1,7 +1,7 @@
-import { IDetail } from "../lib/Atoms";
+import { IContent } from "../interface/Interface";
 
-export const getFavoriteLocal: IDetail[] = JSON.parse(localStorage.getItem("favorite") ?? "[]");
+export const getFavoriteLocal: IContent[] = JSON.parse(localStorage.getItem("favorite") ?? "[]");
 
-export const setFavoriteLocal = (data: IDetail[]) => {
+export const setFavoriteLocal = (data: IContent[]) => {
   return localStorage.setItem("favorite", JSON.stringify(data));
 };

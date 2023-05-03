@@ -1,13 +1,25 @@
-export interface IResult {
-  backdrop_path: string;
+export interface Genre {
   id: number;
-  title: string;
-  name?: string;
-  original_title?: string;
+  name: string;
+}
+
+export interface IContent {
+  adult: boolean;
+  backdrop_path: string;
+  genres: Genre[];
+  id: number;
+  original_title: string;
   overview: string;
   poster_path: string;
-  media_type: "movie" | "tv";
+  release_date: Date;
+  seasons?: [];
+  runtime?: number;
+  tagline: string;
+  title: string;
+  name?: string;
+  vote_average: number;
   category: string;
+  media_type: "movie" | "tv";
 }
 
 export interface IGetData {
@@ -16,7 +28,7 @@ export interface IGetData {
     minimuum: string;
   };
   page?: number;
-  results: IResult[];
+  results: IContent[];
   total_pages?: number;
   total_results?: number;
   category: string;

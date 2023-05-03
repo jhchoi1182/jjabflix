@@ -5,7 +5,7 @@ import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "../../atoms/Loading/Loading";
-import { IDetail } from "../../../lib/Atoms";
+import { IContent } from "../../../interface/Interface";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
 import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
@@ -39,7 +39,7 @@ const infoVariants: Variants = {
   },
 };
 
-const SlideItem: React.FC<IDetail> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
+const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
 
@@ -47,7 +47,7 @@ const SlideItem: React.FC<IDetail> = ({ id, title, name, backdrop_path, poster_p
   const queryFn = () => detailAPI({ id, media_type });
   const dataOption = { cacheTime: 360000, staleTime: 360000 };
 
-  const { data, isLoading, isError } = useQuery<IDetail | undefined>(queryKey, queryFn, {
+  const { data, isLoading, isError } = useQuery<IContent | undefined>(queryKey, queryFn, {
     enabled: false,
     ...dataOption,
   });

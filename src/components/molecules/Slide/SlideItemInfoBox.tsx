@@ -3,9 +3,9 @@ import * as fonts from "../../../styles/Fonts";
 import styled from "styled-components";
 import { flex } from "../../../styles/Css";
 import { AdultIcon } from "../../atoms/Icons";
-import { IDetail } from "../../../lib/Atoms";
+import { IContent } from "../../../interface/Interface";
 
-const SlideInfoBox: React.FC<IDetail> = ({ vote_average, adult, seasons, runtime }) => {
+const SlideItemInfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, runtime }) => {
   const totalMinutes = runtime ?? 0;
   const { hours, minutes } = {
     hours: Math.floor(totalMinutes / 60),
@@ -33,7 +33,7 @@ const SlideInfoBox: React.FC<IDetail> = ({ vote_average, adult, seasons, runtime
   );
 };
 
-export default SlideInfoBox;
+export default SlideItemInfoBox;
 
 const InfoBox = styled.div`
   ${flex("none")}

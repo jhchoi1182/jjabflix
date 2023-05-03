@@ -1,30 +1,8 @@
 import { atom } from "recoil";
 import { getFavoriteLocal } from "../utils/Local";
+import { IContent } from "../interface/Interface";
 
-export interface Genre {
-  id: number;
-  name: string;
-}
-
-export interface IDetail {
-  adult: boolean;
-  backdrop_path: string;
-  genres: Genre[];
-  id: number;
-  original_title: string;
-  overview: string;
-  poster_path: string;
-  release_date: Date;
-  seasons?: [];
-  runtime?: number;
-  tagline: string;
-  title: string;
-  vote_average: number;
-  category: string;
-  media_type: "movie" | "tv";
-}
-
-export const detailAtom = atom<IDetail>({
+export const detailAtom = atom<IContent>({
   key: "content",
   default: {
     adult: false,

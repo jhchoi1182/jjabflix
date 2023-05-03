@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import * as Button from "../Button/CircleButton";
-import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
+import { IContent } from "../../../interface/Interface";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteLocal } from "../../../utils/Local";
+import { FavoriteAtom, detailAtom } from "../../../lib/Atoms";
 
-interface ISlideItemButtonBox extends IDetail {
+interface ISlideItemButtonBox extends IContent {
   onMouseEnter?: () => void;
 }
 
@@ -27,7 +28,7 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, ...da
   };
 
   const setFavoriteHandler = useCallback(
-    (data: IDetail[]) => {
+    (data: IContent[]) => {
       setFavoriteContents(data);
       setFavoriteLocal(data);
     },

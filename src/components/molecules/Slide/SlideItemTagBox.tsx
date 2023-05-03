@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Genre } from "../../../lib/Atoms";
+import { Genre } from "../../../interface/Interface";
 import * as fonts from "../../../styles/Fonts";
 
-type SlideTagBoxProps = {
+type SlideItemTagBoxProps = {
   genres: Genre[];
 };
-const SlideTagBox: React.FC<SlideTagBoxProps> = ({ genres }) => {
+const SlideItemTagBox: React.FC<SlideItemTagBoxProps> = ({ genres }) => {
   return (
     <TagBox>
       {genres.map((genre, i) => (
@@ -16,7 +16,7 @@ const SlideTagBox: React.FC<SlideTagBoxProps> = ({ genres }) => {
   );
 };
 
-export default SlideTagBox;
+export default SlideItemTagBox;
 
 const TagBox = styled.ul`
   display: flex;

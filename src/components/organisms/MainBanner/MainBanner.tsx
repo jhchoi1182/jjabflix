@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { detailAPI, posterAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
-import { IResult } from "../../../interface/Interface";
+import { IContent } from "../../../interface/Interface";
 import * as Button from "../../molecules/Button/RectangleButton";
 import * as fonts from "../../../styles/Fonts";
 
@@ -11,7 +11,7 @@ export type MainBannerProps = {
 };
 
 const MainBanner: React.FC<MainBannerProps> = ({ id, media_type }) => {
-  const { data } = useQuery<IResult | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
+  const { data } = useQuery<IContent | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
   const { backdrop_path, poster_path, title, name, overview } = data || {};
 
   return (
