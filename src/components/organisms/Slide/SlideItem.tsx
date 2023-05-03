@@ -1,19 +1,16 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
-import { detailAPI, posterAPI } from "../../../api/Apis";
-import { bgImg } from "../../atoms/Banner";
+import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/hooks";
-import { flex } from "../../../styles/Css";
-import * as fonts from "../../../styles/Fonts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
-import { AdultIcon } from "../../atoms/Icons";
 import { IDetail } from "../../../lib/Atoms";
-import SlideButtonBox from "../../molecules/Slide/SlideButtonBox";
-import SlideInfoBox from "../../molecules/Slide/SlideInfoBox";
-import SlideTagBox from "../../molecules/Slide/SlideTagBox";
+import SlideButtonBox from "../../molecules/Slide/SlideItemButtonBox";
+import SlideInfoBox from "../../molecules/Slide/SlideItemInfoBox";
+import SlideTagBox from "../../molecules/Slide/SlideItemTagBox";
+import SlideBannerImage from "../../molecules/Slide/SlideItemBannerImage";
 
 const contentVariants: Variants = {
   normal: {
@@ -74,9 +71,7 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <SlideImage bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
-        <Title>{title ?? name}</Title>
-      </SlideImage>
+      <SlideBannerImage backdrop={backdrop_path} poster={poster_path} title={title} name={name} />
       <SlideCaption variants={infoVariants}>
         {isLoading ? (
           <Loading />
@@ -104,22 +99,6 @@ const SlideContent = styled(motion.div)`
   &:nth-child(7) {
     transform-origin: center right !important;
   }
-`;
-
-const SlideImage = styled(motion.div)<{ bgimg: string }>`
-  ${bgImg}
-  height: 170px;
-  padding: 12px 10px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-`;
-
-const Title = styled(motion.p)`
-  height: 100%;
-  ${flex("none", "end")}
-  white-space: pre-wrap;
-  ${fonts.mid2}
-  ${fonts.Heavy}
 `;
 
 const SlideCaption = styled(motion.div)`

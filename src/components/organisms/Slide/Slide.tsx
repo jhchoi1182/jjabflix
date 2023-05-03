@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
-import SlideMoveBtn from "../../molecules/Slide/SlideMoveBtn";
+import SlideMoveBtn from "../../molecules/Slide/SlidePaginationButton";
 import { useButtonOpacity } from "../../../utils/hooks";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import DummyItem from "../../atoms/Slide/DummyItem";

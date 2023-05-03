@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useButtonOpacity } from "../../../utils/hooks";
-import { Arrow } from "../../atoms/Icons/";
+import { Arrow } from "../../atoms/Icons";
 import { ArrowProps } from "../../atoms/Icons/NextPrevIcon";
 
 interface SlideButtonProps extends ArrowProps {
@@ -8,7 +8,7 @@ interface SlideButtonProps extends ArrowProps {
   nextSlide?: () => Promise<void>;
 }
 
-const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction, category }) => {
+const SlidePaginationButton: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direction, category }) => {
   const { setButtonOpacity } = useButtonOpacity();
 
   return (
@@ -23,7 +23,7 @@ const SlideMoveBtn: React.FC<SlideButtonProps> = ({ prevSlide, nextSlide, direct
   );
 };
 
-export default SlideMoveBtn;
+export default SlidePaginationButton;
 
 const prev = css`
   left: 9%;

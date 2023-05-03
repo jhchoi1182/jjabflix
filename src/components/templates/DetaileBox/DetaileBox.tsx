@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom, detailAtom } from "../../../lib/Atoms";
 import { posterAPI } from "../../../api/Apis";
-import { bgImg } from "../../atoms/Banner";
+import { bgImg } from "../../atoms/BannerImage";
 
 const DetaileBox = () => {
   const contentData = useRecoilValue(detailAtom);
