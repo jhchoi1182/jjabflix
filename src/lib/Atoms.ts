@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { getFavoriteLocal } from "../utils/Local";
 
-interface Genre {
+export interface Genre {
   id: number;
   name: string;
 }
