@@ -5,13 +5,15 @@ import { FavoriteAtom, IDetail, detailAtom } from "../../../lib/Atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteLocal } from "../../../utils/Local";
-import { useButtonOpacity } from "../../../utils/hooks";
 
-const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) => {
+interface ISlideItemButtonBox extends IDetail {
+  onMouseEnter?: () => void;
+}
+
+const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, category, media_type, ...data }) => {
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
-  const { setButtonOpacity } = useButtonOpacity();
 
   const isAdded = favoriteContents.some((content) => content.id === data.id);
 
@@ -20,10 +22,6 @@ const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) =>
       setContentData({ category, media_type, ...data });
       navigate(`/${data.id}`);
     }
-  };
-
-  const onMouseEnterHandler = () => {
-    setButtonOpacity(0);
   };
 
   const setFavoriteHandler = (data: IDetail[]) => {
@@ -46,7 +44,7 @@ const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) =>
   };
 
   return (
-    <ButtonBox onMouseEnter={onMouseEnterHandler}>
+    <ButtonBox onMouseEnter={onMouseEnter}>
       <FlexLeftDiv>
         <Button.CirclePlay />
         {isAdded ? (
@@ -62,7 +60,7 @@ const SlideButtonBox: React.FC<IDetail> = ({ category, media_type, ...data }) =>
   );
 };
 
-export default SlideButtonBox;
+export default SlideItemButtonBox;
 
 const ButtonBox = styled.div`
   display: flex;

@@ -7,10 +7,11 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
 import { IDetail } from "../../../lib/Atoms";
-import SlideButtonBox from "../../molecules/Slide/SlideItemButtonBox";
-import SlideInfoBox from "../../molecules/Slide/SlideItemInfoBox";
-import SlideTagBox from "../../molecules/Slide/SlideItemTagBox";
-import SlideBannerImage from "../../molecules/Slide/SlideItemBannerImage";
+import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
+import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
+import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
+import SlideItemBannerImage from "../../molecules/Slide/SlideItemBannerImage";
+import SlideCaptionSection from "../../atoms/SlideCaptionSection";
 
 const contentVariants: Variants = {
   normal: {
@@ -61,6 +62,10 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
     setButtonOpacity(1);
   };
 
+  const setButtonOpacityHandler = () => {
+    setButtonOpacity(0);
+  };
+
   return (
     <SlideContent
       layoutId={category + id}
@@ -71,20 +76,25 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <SlideBannerImage backdrop={backdrop_path} poster={poster_path} title={title} name={name} />
-      <SlideCaption variants={infoVariants}>
+      <SlideItemBannerImage backdrop={backdrop_path} poster={poster_path} title={title} name={name} />
+      <SlideCaptionSection variants={infoVariants}>
         {isLoading ? (
           <Loading />
         ) : isError ? (
           <div>에러</div>
         ) : (
           <React.Fragment>
-            <SlideButtonBox {...(data as IDetail)} media_type={media_type} category={category} />
-            <SlideInfoBox {...(data as IDetail)} />
-            <SlideTagBox genres={data?.genres ?? []} />
+            <SlideItemButtonBox
+              onMouseEnter={setButtonOpacityHandler}
+              {...(data as IDetail)}
+              media_type={media_type}
+              category={category}
+            />
+            <SlideItemInfoBox {...(data as IDetail)} />
+            <SlideItemTagBox genres={data?.genres ?? []} />
           </React.Fragment>
         )}
-      </SlideCaption>
+      </SlideCaptionSection>
     </SlideContent>
   );
 };
@@ -99,13 +109,4 @@ const SlideContent = styled(motion.div)`
   &:nth-child(7) {
     transform-origin: center right !important;
   }
-`;
-
-const SlideCaption = styled(motion.div)`
-  padding: 1.5rem;
-  background-color: ${(props) => props.theme.black.veryDark};
-  display: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  margin-top: -0.1rem;
 `;
