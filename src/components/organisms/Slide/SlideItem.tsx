@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { IResult } from "../../../interface/Interface";
 import Loading from "../../atoms/Loading/Loading";
 import { IDetail } from "../../../lib/Atoms";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
@@ -40,7 +39,7 @@ const infoVariants: Variants = {
   },
 };
 
-const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
+const SlideItem: React.FC<IDetail> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
 
@@ -82,18 +81,18 @@ const SlideItem: React.FC<IResult> = ({ id, title, name, backdrop_path, poster_p
           <Loading />
         ) : isError ? (
           <div>에러</div>
-        ) : (
+        ) : data ? (
           <React.Fragment>
             <SlideItemButtonBox
               onMouseEnter={setButtonOpacityHandler}
-              {...(data as IDetail)}
+              {...data}
               media_type={media_type}
               category={category}
             />
-            <SlideItemInfoBox {...(data as IDetail)} />
-            <SlideItemTagBox genres={data?.genres ?? []} />
+            <SlideItemInfoBox {...data} />
+            <SlideItemTagBox genres={data?.genres} />
           </React.Fragment>
-        )}
+        ) : null}
       </SlideCaptionSection>
     </SlideContent>
   );
