@@ -10,17 +10,18 @@ interface ISlideItemButtonBox extends IDetail {
   onMouseEnter?: () => void;
 }
 
-const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, category, media_type, ...data }) => {
+const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, ...data }) => {
+  const { id } = data;
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
 
-  const isAdded = favoriteContents.some((content) => content.id === data.id);
+  const isAdded = favoriteContents.some((content) => content.id === id);
 
   const showDetailHandler = () => {
     if (data) {
-      setContentData({ category, media_type, ...data });
-      navigate(`/${data.id}`);
+      setContentData(data);
+      navigate(`/${id}`);
     }
   };
 
@@ -31,14 +32,14 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, categ
 
   const addFavoriteContents = async () => {
     if (data) {
-      const addedContents = [{ category, media_type, ...data }, ...favoriteContents];
+      const addedContents = [data, ...favoriteContents];
       setFavoriteHandler(addedContents);
     }
   };
 
   const removeFavoriteContens = () => {
     if (data) {
-      const removedContents = favoriteContents.filter((content) => content.id !== data.id);
+      const removedContents = favoriteContents.filter((content) => content.id !== id);
       setFavoriteHandler(removedContents);
     }
   };
