@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import * as Button from "../../molecules/Button/RectangleButton";
 import * as fonts from "../../../styles/Fonts";
+import { useNavigate } from "react-router-dom";
 
 export type MainBannerProps = {
   id: number;
@@ -43,6 +44,7 @@ const Title = styled.h2`
   ${fonts.big}
   ${fonts.bold}
   margin-bottom: 2.3rem;
+  width: 37%;
 `;
 
 const Overview = styled.p`
