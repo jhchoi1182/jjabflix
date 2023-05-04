@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../api/Apis";
-import DetaileBox from "../templates/DetaileBox/DetaileContainer";
+import DetailModalContainer from "../templates/DetaileBox/DetailModalContainer";
 import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import BackdropOverlay from "../atoms/Modal/BackdropOverlay";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
 
@@ -25,10 +24,7 @@ const Home = () => {
     staleTime: 100000,
   });
 
-  const contentsMatch = useMatch("/:dataId");
-  const navigate = useNavigate();
-
-  const closeOverlay = () => navigate("/");
+  const contentsMatch = useMatch(":dataId");
 
   return (
     <Wrapper>
@@ -41,14 +37,7 @@ const Home = () => {
             <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
             <Slide title="상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
           </SlideContainer>
-          <AnimatePresence>
-            {contentsMatch && (
-              <React.Fragment>
-                <BackdropOverlay animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeOverlay} />
-                <DetaileBox />
-              </React.Fragment>
-            )}
-          </AnimatePresence>
+          <AnimatePresence>{contentsMatch && <DetailModalContainer />}</AnimatePresence>
         </React.Fragment>
       )}
     </Wrapper>
