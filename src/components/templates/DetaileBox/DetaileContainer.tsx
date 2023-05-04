@@ -1,6 +1,6 @@
 import React from "react";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom, detailAtom } from "../../../lib/Atoms";
@@ -12,16 +12,21 @@ const DetaileContainer = () => {
   const category = useRecoilValue(categoryAtom);
   const { scrollY } = useScroll();
   const contentsMatch = useMatch("/:dataId");
+  const navigate = useNavigate();
+
+  const closeOverlay = () => navigate("/");
 
   return (
     <AnimatePresence>
       {contentsMatch && (
-        <DetailBox layoutId={category + contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
-          <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
-            <Title>{contentData.title}</Title>
-          </Cover>
-          <Overview>{contentData.overview}</Overview>
-        </DetailBox>
+        <DetailContainer onClick={closeOverlay}>
+          <DetailBox layoutId={category + contentsMatch?.params.dataId} style={{ top: scrollY.get() + 100 }}>
+            <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
+              <Title>{contentData.title}</Title>
+            </Cover>
+            <Overview>{contentData.overview}</Overview>
+          </DetailBox>
+        </DetailContainer>
       )}
     </AnimatePresence>
   );
@@ -29,10 +34,20 @@ const DetaileContainer = () => {
 
 export default DetaileContainer;
 
+const DetailContainer = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  z-index: 999;
+`;
+
 const DetailBox = styled(motion.div)`
   position: absolute;
   width: 40vw;
-  height: 80vh;
+  height: 200vh;
   left: 0;
   right: 0;
   margin: 0 auto;

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
@@ -8,6 +9,13 @@ interface IBackdropProps {
 }
 
 const BackdropOverlay: React.FC<IBackdropProps> = ({ animate, exit, onClick }) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return <Overlay animate={animate} exit={exit} onClick={onClick}></Overlay>;
 };
 
@@ -20,4 +28,5 @@ const Overlay = styled(motion.div)`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
+  z-index: 99;
 `;
