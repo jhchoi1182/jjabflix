@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../api/Apis";
-import DetailModalContainer from "../templates/DetaileBox/DetailModalContainer";
+import DetailModalContainer from "../templates/DetailBox/DetailModalContainer";
 import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";
@@ -49,5 +49,5 @@ export default Home;
 const SlideContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 34rem;
 `;
+

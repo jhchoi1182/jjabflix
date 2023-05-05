@@ -109,11 +109,12 @@ export default Slide;
 const SlideContainer = styled.div`
   position: relative;
   margin: -65px -12% 0px -12%;
+  margin-bottom: 34rem;
 `;
 
 const RowContainer = styled(motion.div)`
   display: flex;
-  gap: 8px;
   position: absolute;
+  gap: 8px;
   width: 100%;
 `;
