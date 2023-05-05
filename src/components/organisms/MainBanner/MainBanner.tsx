@@ -21,7 +21,7 @@ const MainBanner: React.FC<MainBannerProps> = ({ id, media_type }) => {
       <Overview>{overview}</Overview>
       <ButtonBox>
         <Button.Play />
-        <Button.Detaile />
+        <Button.Detail />
       </ButtonBox>
     </Banner>
   );

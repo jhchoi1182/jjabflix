@@ -22,16 +22,16 @@ const PlayButton = styled(Button)`
   }
 `;
 
-export const Detaile: React.FC<IButtonEventProps> = ({ onClick }) => {
+export const Detail: React.FC<IButtonEventProps> = ({ onClick }) => {
   return (
-    <DetaileButton borderColor="none" whiteFont>
+    <DetailButton borderColor="none" whiteFont onClick={onClick}>
       <DetailIcon size={1.75} />
       <span>상세 정보</span>
-    </DetaileButton>
+    </DetailButton>
   );
 };
 
-const DetaileButton = styled(Button)`
+const DetailButton = styled(Button)`
   gap: 1rem;
   ${fonts.mid1}
   padding: 0.65vw 1.7vw;
