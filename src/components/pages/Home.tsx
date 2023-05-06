@@ -6,12 +6,13 @@ import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
-import { useMatch } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
 
 const Home = () => {
+  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI.trending, {
     // select: (data) => {
     //   const test = data.results.slice(1);
@@ -24,8 +25,6 @@ const Home = () => {
     staleTime: 100000,
   });
 
-  const contentsMatch = useMatch(":dataId");
-
   return (
     <Wrapper>
       {isLoading ? (
@@ -37,7 +36,7 @@ const Home = () => {
             <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
             <Slide title="상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
           </SlideContainer>
-          <AnimatePresence>{contentsMatch && <DetailModalContainer />}</AnimatePresence>
+          <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
         </React.Fragment>
       )}
     </Wrapper>
@@ -50,4 +49,3 @@ const SlideContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
