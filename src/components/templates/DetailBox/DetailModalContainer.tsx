@@ -65,7 +65,6 @@ const Container = styled(motion.div)`
 
 const DetailBox = styled(motion.div)`
   width: 902.5px;
-  /* height: 200vh; */
   margin: 30px auto 0px;
   background-color: ${(props) => props.theme.black.darker};
 `;

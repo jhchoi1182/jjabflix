@@ -10,7 +10,7 @@ import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
 import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
 import SlideItemBannerImage from "../../molecules/Slide/SlideItemBannerImage";
-import SlideCaptionSection from "../../atoms/SlideCaptionSection";
+import CaptionSection from "../../atoms/SlideCaptionSection";
 
 const contentVariants: Variants = {
   normal: {
@@ -76,7 +76,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
       onMouseLeave={onMouseLeaveHandler}
     >
       <SlideItemBannerImage backdrop={backdrop_path} poster={poster_path} title={title} name={name} />
-      <SlideCaptionSection variants={infoVariants}>
+      <SlideItemCaptionSection variants={infoVariants}>
         {isLoading ? (
           <Loading />
         ) : isError ? (
@@ -93,7 +93,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
             <SlideItemTagBox genres={data?.genres} />
           </React.Fragment>
         ) : null}
-      </SlideCaptionSection>
+      </SlideItemCaptionSection>
     </SlideContent>
   );
 };
@@ -108,4 +108,8 @@ const SlideContent = styled(motion.div)`
   &:nth-child(7) {
     transform-origin: center right !important;
   }
+`;
+
+const SlideItemCaptionSection = styled(CaptionSection)`
+  display: none;
 `;

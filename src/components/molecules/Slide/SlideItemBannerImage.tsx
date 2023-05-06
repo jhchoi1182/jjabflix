@@ -11,10 +11,11 @@ type SlideItemBannerImageProps = {
   poster: string;
   title: string;
   name?: string;
+  onMouseEnter?: () => void;
 };
-const SlideItemBannerImage: React.FC<SlideItemBannerImageProps> = ({ backdrop, poster, title, name }) => {
+const SlideItemBannerImage: React.FC<SlideItemBannerImageProps> = ({ onMouseEnter, backdrop, poster, title, name }) => {
   return (
-    <SlideImage bgimg={posterAPI(backdrop ?? poster, "w500")}>
+    <SlideImage onMouseEnter={onMouseEnter} bgimg={posterAPI(backdrop ?? poster, "w500")}>
       <Title>{title ?? name}</Title>
     </SlideImage>
   );
