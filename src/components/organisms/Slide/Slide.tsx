@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import SlideItem from "./SlideItem";
@@ -38,6 +38,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [page, setPage] = useState(0);
+  const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
 
   const showContentsNum = page === 0 ? 7 : 8;
@@ -65,14 +66,20 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
   const onMouseEnterHandler = () => {
     setHoveredCategory(category);
     setButtonOpacity(1);
+    if (zIndexRef.current) {
+      zIndexRef.current.style.zIndex = "1";
+    }
   };
 
   const onMouseLeaveHandler = () => {
     setButtonOpacity(0);
+    if (zIndexRef.current) {
+      zIndexRef.current.style.zIndex = "0";
+    }
   };
 
   return (
-    <SlideContainer onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
+    <SlideContainer ref={zIndexRef} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} category={category} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>

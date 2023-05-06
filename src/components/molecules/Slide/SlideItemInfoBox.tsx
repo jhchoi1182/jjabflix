@@ -35,14 +35,14 @@ const SlideItemInfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, ru
 
 export default SlideItemInfoBox;
 
-const InfoBox = styled.div`
+export const InfoBox = styled.div`
   ${flex("none")}
   ${fonts.normal}
   gap: 0.6rem;
   margin-top: 1.5rem;
 `;
 
-const Rating = styled.span`
+export const Rating = styled.span`
   display: flex;
   color: #45d068;
   gap: 0.3rem;
@@ -51,13 +51,13 @@ const Rating = styled.span`
   }
 `;
 
-const Age = styled.button`
+export const Age = styled.button`
   ${fonts.normal}
   background-color: transparent;
   color: ${(props) => props.theme.white.lighter};
   border: 0.1px solid ${(props) => props.theme.black.vertLighter};
 `;
 
-const HD = styled(Age)`
+export const HD = styled(Age)`
   font-size: 1rem;
 `;

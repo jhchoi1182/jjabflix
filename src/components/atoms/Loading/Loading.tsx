@@ -8,6 +8,5 @@ const Loading = () => {
 export default Loading;
 
 const LoadingBox = styled.div`
-  height: 20vh;
   ${flex()}
 `;

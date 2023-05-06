@@ -1,24 +1,24 @@
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import styled from "styled-components";
 import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Loading from "../../atoms/Loading/Loading";
 import { IContent } from "../../../interface/Interface";
+import SlideItemCaptionSection from "../../atoms/SlideCaptionSection";
+import SlideItemBannerImage from "../../molecules/Slide/SlideItemBannerImage";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
 import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
-import SlideItemBannerImage from "../../molecules/Slide/SlideItemBannerImage";
-import CaptionSection from "../../atoms/SlideCaptionSection";
+import SkeletonCaption from "../../molecules/Slide/SkeletonCaption";
 
 const contentVariants: Variants = {
   normal: {
     scale: 1,
+    y: 0,
   },
   hover: {
     scale: 1.4,
-    zIndex: 1,
     y: -70,
     transition: {
       type: "tween",
@@ -29,8 +29,13 @@ const contentVariants: Variants = {
 };
 
 const infoVariants: Variants = {
+  normal: {
+    opacity: 0,
+    pointerEvents: "none",
+  },
   hover: {
-    display: "block",
+    opacity: 1,
+    pointerEvents: "auto",
     transition: {
       type: "tween",
       delay: 0.5,
@@ -42,12 +47,13 @@ const infoVariants: Variants = {
 const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
+  const control = useAnimation();
 
   const queryKey = ["detail", title || name];
   const queryFn = () => detailAPI({ id, media_type });
   const dataOption = { cacheTime: 360000, staleTime: 360000 };
 
-  const { data, isLoading, isError } = useQuery<IContent | undefined>(queryKey, queryFn, {
+  const { data, isError } = useQuery<IContent | undefined>(queryKey, queryFn, {
     enabled: false,
     ...dataOption,
   });
@@ -59,6 +65,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
   const onMouseLeaveHandler = () => {
     setButtonOpacityAfterDelayInvalidation();
     setButtonOpacity(1);
+    control.start("normal");
   };
 
   const setButtonOpacityHandler = () => {
@@ -69,17 +76,21 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
     <SlideContent
       layoutId={category + id}
       variants={contentVariants}
-      whileHover="hover"
+      animate={control}
       initial="normal"
       transition={{ type: "tween" }}
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <SlideItemBannerImage backdrop={backdrop_path} poster={poster_path} title={title} name={name} />
+      <SlideItemBannerImage
+        onMouseEnter={() => control.start("hover")}
+        backdrop={backdrop_path}
+        poster={poster_path}
+        title={title}
+        name={name}
+      />
       <SlideItemCaptionSection variants={infoVariants}>
-        {isLoading ? (
-          <Loading />
-        ) : isError ? (
+        {isError ? (
           <div>에러</div>
         ) : data ? (
           <React.Fragment>
@@ -92,7 +103,9 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
             <SlideItemInfoBox {...data} />
             <SlideItemTagBox genres={data?.genres} />
           </React.Fragment>
-        ) : null}
+        ) : (
+          <SkeletonCaption />
+        )}
       </SlideItemCaptionSection>
     </SlideContent>
   );
@@ -108,8 +121,4 @@ const SlideContent = styled(motion.div)`
   &:nth-child(7) {
     transform-origin: center right !important;
   }
-`;
-
-const SlideItemCaptionSection = styled(CaptionSection)`
-  display: none;
 `;

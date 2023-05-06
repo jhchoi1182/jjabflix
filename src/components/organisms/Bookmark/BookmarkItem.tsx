@@ -1,12 +1,12 @@
 import { Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
+import SlideItemCaptionSection from "../../atoms/SlideCaptionSection";
 import SlideItemBannerImage from "../../molecules/Slide/SlideItemBannerImage";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
 import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
 import { IContent } from "../../../interface/Interface";
-import CaptionSection from "../../atoms/SlideCaptionSection";
 
 const contentVariants: Variants = {
   normal: {
@@ -55,11 +55,11 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
         title={title}
         name={name}
       />
-      <BookmarkItemCaptionSection variants={infoVariants}>
+      <SlideItemCaptionSection variants={infoVariants}>
         <SlideItemButtonBox {...data} />
         <SlideItemInfoBox {...data} />
         <SlideItemTagBox genres={data?.genres} />
-      </BookmarkItemCaptionSection>
+      </SlideItemCaptionSection>
     </BookmarkContent>
   );
 };
@@ -74,9 +74,4 @@ const BookmarkContent = styled(motion.div)`
   &:nth-child(6n) {
     transform-origin: center right;
   }
-`;
-
-const BookmarkItemCaptionSection = styled(CaptionSection)`
-  opacity: 0;
-  pointer-events: none;
 `;

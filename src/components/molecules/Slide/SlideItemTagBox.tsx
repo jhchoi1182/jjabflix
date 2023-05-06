@@ -18,7 +18,7 @@ const SlideItemTagBox: React.FC<SlideItemTagBoxProps> = ({ genres }) => {
 
 export default SlideItemTagBox;
 
-const TagBox = styled.ul`
+export const TagBox = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;

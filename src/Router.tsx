@@ -32,6 +32,10 @@ const router = createBrowserRouter([
         element: <Bookmark />,
       },
       {
+        path: "/bookmark/:dataId",
+        element: <Bookmark />,
+      },
+      {
         path: "search",
         element: <SearchResult />,
       },

@@ -9,9 +9,10 @@ import { FavoriteAtom, detailAtom } from "../../../lib/Atoms";
 
 interface ISlideItemButtonBox extends IContent {
   onMouseEnter?: () => void;
+  skeleton?: boolean;
 }
 
-const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, ...data }) => {
+const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
   const { id } = data;
 
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
@@ -68,17 +69,17 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, ...da
 
 export default SlideItemButtonBox;
 
-const ButtonBox = styled.div`
+export const ButtonBox = styled.div`
   display: flex;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
 `;
 
-const FlexLeftDiv = styled.div`
+export const FlexLeftDiv = styled.div`
   display: flex;
   gap: 0.5rem;
 `;
 
-const FlexRightBox = styled.div`
+export const FlexRightBox = styled.div`
   margin-left: auto;
 `;
