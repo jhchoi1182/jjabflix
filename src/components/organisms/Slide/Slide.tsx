@@ -124,4 +124,5 @@ const RowContainer = styled(motion.div)`
   position: absolute;
   gap: 8px;
   width: 100%;
+  height: 170px;
 `;

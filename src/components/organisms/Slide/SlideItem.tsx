@@ -6,7 +6,7 @@ import { useButtonOpacity } from "../../../utils/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import SlideItemCaptionSection from "../../atoms/SlideCaptionSection";
-import SlideItemBannerImage from "../../molecules/Slide/SlideItemBannerImage";
+import SlideItemImageBanner from "../../molecules/Slide/SlideItemImageBanner";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
 import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
@@ -82,7 +82,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <SlideItemBannerImage
+      <SlideItemImageBanner
         onMouseEnter={() => control.start("hover")}
         backdrop={backdrop_path}
         poster={poster_path}

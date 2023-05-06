@@ -6,22 +6,30 @@ import { flex } from "../../../styles/Css";
 import * as fonts from "../../../styles/Fonts";
 import { bgImg } from "../../atoms/BannerImage";
 
-type SlideItemBannerImageProps = {
+type SlideItemImageBannerProps = {
   backdrop: string;
   poster: string;
   title: string;
   name?: string;
   onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
-const SlideItemBannerImage: React.FC<SlideItemBannerImageProps> = ({ onMouseEnter, backdrop, poster, title, name }) => {
+const SlideItemImageBanner: React.FC<SlideItemImageBannerProps> = ({
+  onMouseEnter,
+  onMouseLeave,
+  backdrop,
+  poster,
+  title,
+  name,
+}) => {
   return (
-    <SlideImage onMouseEnter={onMouseEnter} bgimg={posterAPI(backdrop ?? poster, "w500")}>
+    <SlideImage onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} bgimg={posterAPI(backdrop ?? poster, "w500")}>
       <Title>{title ?? name}</Title>
     </SlideImage>
   );
 };
 
-export default SlideItemBannerImage;
+export default SlideItemImageBanner;
 
 const SlideImage = styled(motion.div)<{ bgimg: string }>`
   ${bgImg}
