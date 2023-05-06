@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import SlideItem from "./SlideItem";
@@ -10,6 +10,7 @@ import SlideTitle from "../../atoms/Slide/SlideTitle";
 import DummyItem from "../../atoms/Slide/DummyItem";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../../lib/Atoms";
+import { useOutletContext } from "react-router-dom";
 
 type VariantsProps = {
   direction: string;
@@ -34,9 +35,11 @@ const rowVariants: Variants = {
 };
 
 const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
+  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
+  const [overflowY, setOverflowY] = useState("inherit");
   const [page, setPage] = useState(0);
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
@@ -78,6 +81,15 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
     }
   };
 
+  useEffect(() => {
+    if (pathnameId) setOverflowY("hidden");
+    if (pathnameId === undefined) {
+      setTimeout(() => {
+        setOverflowY("inherit");
+      }, 500);
+    }
+  }, [pathnameId]);
+
   return (
     <SlideContainer ref={zIndexRef} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <SlideTitle>{title}</SlideTitle>
@@ -91,6 +103,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
           exit="exit"
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
+          overflowY={overflowY}
         >
           {page === 0 && <DummyItem />}
           {data?.results
@@ -105,6 +118,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
             })}
         </RowContainer>
       </AnimatePresence>
+      {/* <Test /> */}
       {page !== 0 && <SlideMoveBtn category={category} direction="prev" prevSlide={prevSlide} />}
       {<SlideMoveBtn category={category} direction="next" nextSlide={nextSlide} />}
     </SlideContainer>
@@ -119,10 +133,11 @@ const SlideContainer = styled.div`
   margin-bottom: 34rem;
 `;
 
-const RowContainer = styled(motion.div)`
+const RowContainer = styled(motion.div)<{ overflowY: string }>`
   display: flex;
   position: absolute;
   gap: 8px;
   width: 100%;
   height: 170px;
+  overflow-y: ${(props) => props.overflowY};
 `;
