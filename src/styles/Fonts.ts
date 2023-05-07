@@ -36,6 +36,6 @@ export const normal1 = css`
 `;
 
 export const normal2 = css`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   ${bold}
 `;
