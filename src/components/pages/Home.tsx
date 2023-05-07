@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailBox/DetailModalContainer";
@@ -14,6 +14,7 @@ import { FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon } from "../atoms/
 import { normal2 } from "../../styles/Fonts";
 
 const Home = () => {
+  const [serviceCode, setServiceCode] = useState<string>("서비스 코드");
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const { data: trending = { results: [] }, isLoading } = useQuery<IGetData>(["trending"], homeAPI.trending, {
     // select: (data) => {
@@ -26,6 +27,12 @@ const Home = () => {
   const { data: nowPlaying = { results: [] } } = useQuery<IGetData>(["nowPlaying"], homeAPI.nowPlaying, {
     staleTime: 100000,
   });
+
+  const serviceCodeGenerator = () => {
+    const num = Math.random().toFixed(6).split(".")[1];
+    const code = `${num.substring(0, 3)}-${num.substring(3)}`;
+    setServiceCode(code);
+  };
 
   return (
     <Wrapper>
@@ -122,6 +129,11 @@ const Home = () => {
             </a>
           </li>
         </FooterMenuBox>
+        <FooterServiceCodeBox>
+          <button disabled={serviceCode !== "서비스 코드" && true} onClick={serviceCodeGenerator}>
+            {serviceCode}
+          </button>
+        </FooterServiceCodeBox>
       </Footer>
     </Wrapper>
   );
@@ -157,6 +169,7 @@ const FooterMenuBox = styled.ul`
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 18px;
   color: ${(props) => props.theme.grey.lighter};
+  margin-bottom: 3rem;
   a {
     &:hover {
       text-decoration: underline;
@@ -164,5 +177,19 @@ const FooterMenuBox = styled.ul`
   }
   span {
     ${normal2}
+  }
+`;
+
+const FooterServiceCodeBox = styled.div`
+  button {
+    height: 3.2rem;
+    background-color: transparent;
+    color: ${(props) => props.theme.grey.lighter};
+    border: 1px solid;
+    cursor: pointer;
+    &:hover {
+      color: ${(props) => props.theme.white.darker};
+      border: 1px solid ${(props) => props.theme.grey.lighter};
+    }
   }
 `;
