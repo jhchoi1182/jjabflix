@@ -6,10 +6,11 @@ import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
+import { FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon } from "../atoms/Icons";
 
 const Home = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -39,13 +40,49 @@ const Home = () => {
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
         </React.Fragment>
       )}
+      <Footer>
+        <FooterIconbox>
+          <a href="https://www.facebook.com/NetflixKR" rel="noopener noreferrer" target="_blank">
+            <FacebookIcon size={2.4} />
+          </a>
+          <a href="https://www.instagram.com/netflixkr/" rel="noopener noreferrer" target="_blank">
+            <InstagramIcon size={2.4} />
+          </a>
+          <a href="https://twitter.com/netflixkr" rel="noopener noreferrer" target="_blank">
+            <TwitterIcon size={2.4} />
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <YoutubeIcon size={2.4} />
+          </a>
+        </FooterIconbox>
+      </Footer>
     </Wrapper>
   );
 };
 
 export default Home;
 
-const SlideContainer = styled.div`
+const SlideContainer = styled.section`
   display: flex;
   flex-direction: column;
+  margin-bottom: -40px;
+`;
+
+const Footer = styled.section`
+  width: 113.2rem;
+  height: 34.8rem;
+  margin: 0 auto;
+`;
+
+const FooterIconbox = styled.div`
+  display: flex;
+  gap: 1.9rem;
+  a {
+    width: 3.2rem;
+    height: 3.7rem;
+  }
 `;

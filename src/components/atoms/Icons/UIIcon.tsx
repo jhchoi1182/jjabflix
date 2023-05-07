@@ -28,8 +28,8 @@ export const AdultIcon = ({ size }: SizeProps) => {
 export const FacebookIcon = ({ size }: SizeProps) => {
   return (
     <svg
-      width={`${size}vw`}
-      height={`${size}vw`}
+      width={`${size}rem`}
+      height={`${size}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +46,8 @@ export const FacebookIcon = ({ size }: SizeProps) => {
 export const InstagramIcon = ({ size }: SizeProps) => {
   return (
     <svg
-      width={`${size}vw`}
-      height={`${size}vw`}
+      width={`${size}rem`}
+      height={`${size}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +64,8 @@ export const InstagramIcon = ({ size }: SizeProps) => {
 export const TwitterIcon = ({ size }: SizeProps) => {
   return (
     <svg
-      width={`${size}vw`}
-      height={`${size}vw`}
+      width={`${size}rem`}
+      height={`${size}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +82,8 @@ export const TwitterIcon = ({ size }: SizeProps) => {
 export const YoutubeIcon = ({ size }: SizeProps) => {
   return (
     <svg
-      width={`${size}vw`}
-      height={`${size}vw`}
+      width={`${size}rem`}
+      height={`${size}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
