@@ -7,7 +7,10 @@ declare module "styled-components" {
       veryDark: string;
       darker: string;
       lighter: string;
-      vertLighter: string;
+    };
+    grey: {
+      darker: string;
+      lighter: string;
     };
     white: {
       darker: string;

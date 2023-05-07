@@ -32,7 +32,7 @@ const white = css`
   border: 2px solid ${(props) => props.theme.white.lighter};
 `;
 const grey = css`
-  border: 2px solid ${(props) => props.theme.black.vertLighter};
+  border: 2px solid ${(props) => props.theme.grey.darker};
 `;
 
 const border = { none, white, grey };

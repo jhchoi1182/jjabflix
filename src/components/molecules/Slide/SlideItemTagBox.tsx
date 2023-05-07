@@ -39,7 +39,7 @@ export const TagBox = styled.ul`
     transform: translateY(-50%);
     width: 4px;
     height: 4px;
-    background: ${(props) => props.theme.black.vertLighter};
+    background: ${(props) => props.theme.grey.darker};
     border-radius: 100%;
   }
 `;

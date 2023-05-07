@@ -55,7 +55,7 @@ export const Age = styled.button`
   ${fonts.normal}
   background-color: transparent;
   color: ${(props) => props.theme.white.lighter};
-  border: 0.1px solid ${(props) => props.theme.black.vertLighter};
+  border: 0.1px solid ${(props) => props.theme.grey.darker};
 `;
 
 export const HD = styled(Age)`
