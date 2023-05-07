@@ -11,7 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
 import { FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon } from "../atoms/Icons";
-import { normal2 } from "../../styles/Fonts";
+import { normal2, small } from "../../styles/Fonts";
 
 const Home = () => {
   const [serviceCode, setServiceCode] = useState<string>("서비스 코드");
@@ -134,7 +134,19 @@ const Home = () => {
             {serviceCode}
           </button>
         </FooterServiceCodeBox>
-        <FooterInfoBox></FooterInfoBox>
+        <FooterInfoBox>
+          <div>짭플릭스서비스코리아 통신판매업신고번호: 없음 전화번호: 010-6262-1182</div>
+          <div>대표: 최지현</div>
+          <div>이메일 주소: jhchoi1182@gmail.com</div>
+          <div>주소: 경기도 어딘가 우편번호 00000</div>
+          <div>사업자등록번호: 없음</div>
+          <div>클라우드 호스팅: Vercel.</div>
+          <div>
+            <a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1658700119" rel="noopener noreferrer" target="_blank">
+              공정거래위원회 웹사이트
+            </a>
+          </div>
+        </FooterInfoBox>
       </Footer>
     </Wrapper>
   );
@@ -151,7 +163,7 @@ const SlideContainer = styled.section`
 const Footer = styled.section`
   width: 113.2rem;
   height: 34.8rem;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
 `;
 
 const FooterIconbox = styled.div`
@@ -195,4 +207,16 @@ const FooterServiceCodeBox = styled.div`
   }
 `;
 
-const FooterInfoBox = styled.div``;
+const FooterInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${(props) => props.theme.grey.lighter};
+  margin-top: 2rem;
+  gap: 0.5rem;
+  ${small}
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;

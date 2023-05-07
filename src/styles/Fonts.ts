@@ -39,3 +39,8 @@ export const normal2 = css`
   font-size: 1.4rem;
   ${bold}
 `;
+
+export const small = css`
+  font-size: 1.2rem;
+  ${bold}
+`;
