@@ -37,7 +37,7 @@ export default SlideItemInfoBox;
 
 export const InfoBox = styled.div`
   ${flex("none")}
-  ${fonts.normal}
+  ${fonts.normal1}
   gap: 0.6rem;
   margin-top: 1.5rem;
 `;
@@ -52,7 +52,7 @@ export const Rating = styled.span`
 `;
 
 export const Age = styled.button`
-  ${fonts.normal}
+  ${fonts.normal1}
   background-color: transparent;
   color: ${(props) => props.theme.white.lighter};
   border: 0.1px solid ${(props) => props.theme.grey.darker};

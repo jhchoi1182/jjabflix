@@ -24,7 +24,7 @@ export const TagBox = styled.ul`
   gap: 0.7rem;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  ${fonts.normal}
+  ${fonts.normal1}
   li {
     position: relative;
   }

@@ -30,7 +30,12 @@ export const mid3 = css`
   font-size: 1.4vw;
 `;
 
-export const normal = css`
+export const normal1 = css`
   font-size: 1.1rem;
+  ${bold}
+`;
+
+export const normal2 = css`
+  font-size: 1.5rem;
   ${bold}
 `;
