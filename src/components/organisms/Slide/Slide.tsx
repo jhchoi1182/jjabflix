@@ -103,7 +103,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
           exit="exit"
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
-          overflowY={overflowY}
+          overflowy={overflowY}
         >
           {page === 0 && <DummyItem />}
           {data?.results
@@ -133,11 +133,11 @@ const SlideContainer = styled.div`
   margin-bottom: 34rem;
 `;
 
-const RowContainer = styled(motion.div)<{ overflowY: string }>`
+const RowContainer = styled(motion.div)<{ overflowy: string }>`
   display: flex;
   position: absolute;
   gap: 8px;
   width: 100%;
   height: 170px;
-  overflow-y: ${(props) => props.overflowY};
+  overflow-y: ${(props) => props.overflowy};
 `;

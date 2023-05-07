@@ -134,6 +134,7 @@ const Home = () => {
             {serviceCode}
           </button>
         </FooterServiceCodeBox>
+        <FooterInfoBox></FooterInfoBox>
       </Footer>
     </Wrapper>
   );
@@ -193,3 +194,5 @@ const FooterServiceCodeBox = styled.div`
     }
   }
 `;
+
+const FooterInfoBox = styled.div``;
