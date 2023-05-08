@@ -1,9 +1,10 @@
 import React from "react";
 import { ButtonBox, FlexLeftDiv, FlexRightBox } from "./SlideItemButtonBox";
 import * as Button from "../Button/CircleButton";
-import { InfoBox, Rating } from "./SlideItemInfoBox";
+import { InfoBox } from "./SlideItemInfoBox";
 import { TagBox } from "./SlideItemTagBox";
 import { Age15, HD } from "../../atoms/Icons";
+import Rating from "../../atoms/Slide/Rating";
 
 const SkeletonCaption = () => {
   return (
@@ -18,9 +19,7 @@ const SkeletonCaption = () => {
         </FlexRightBox>
       </ButtonBox>
       <InfoBox>
-        <Rating>
-          <p>평점</p>
-        </Rating>
+        <Rating />
         <Age15 size="basic" />
         <HD size="basic" />
       </InfoBox>

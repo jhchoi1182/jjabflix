@@ -5,7 +5,7 @@ import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/hooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
-import SlideItemCaptionSection from "../../atoms/SlideCaptionSection";
+import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";
 import SlideItemImageBanner from "../../molecules/Slide/SlideItemImageBanner";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";

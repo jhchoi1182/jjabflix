@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
-import SlideItemCaptionSection from "../../atoms/SlideCaptionSection";
+import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";
 import SlideItemBannerImage from "../../molecules/Slide/SlideItemImageBanner";
 import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
 import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
