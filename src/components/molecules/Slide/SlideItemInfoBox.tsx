@@ -5,25 +5,14 @@ import { flex } from "../../../styles/Css";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { IContent } from "../../../interface/Interface";
 import Rating from "../../atoms/Slide/Rating";
+import { RunningTime, Seasons } from "../../atoms/Slide/RunningTime";
 
 const SlideItemInfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, runtime }) => {
-  const totalMinutes = runtime ?? 0;
-  const { hours, minutes } = {
-    hours: Math.floor(totalMinutes / 60),
-    minutes: totalMinutes % 60,
-  };
-
   return (
     <InfoBox>
       {vote_average !== 0 && <Rating voteAverage={vote_average} />}
       {adult ? <AdultIcon size="basic" /> : <Age15 size="basic" />}
-      {seasons ? (
-        <span>{`시즌 ${seasons?.length}개`}</span>
-      ) : runtime !== 0 ? (
-        <span>{`${hours}시간 ${minutes}분`}</span>
-      ) : (
-        ""
-      )}
+      {(seasons && <Seasons seasons={seasons} />) || (runtime && <RunningTime runtime={runtime} />)}
       <HD size="basic" />
     </InfoBox>
   );
