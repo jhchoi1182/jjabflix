@@ -11,7 +11,7 @@ import { Play } from "../../molecules/Button/RectangleButton";
 import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
 import { FavoriteContentsAddRemove } from "../../../utils/hooks";
 
-const DetailContainer = () => {
+const DetailModalContainer = () => {
   const { addFavoriteContents, removeFavoriteContents } = FavoriteContentsAddRemove();
   const favoriteContents = useRecoilValue(FavoriteAtom);
   const contentData = useRecoilValue(detailAtom);
@@ -21,8 +21,8 @@ const DetailContainer = () => {
 
   const isAdded = favoriteContents.some((content) => content.id === contentData.id);
 
-  const closeOverlay = () => {
-    navigate(-1);
+  const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
   };
 
   useEffect(() => {
@@ -37,38 +37,31 @@ const DetailContainer = () => {
   }, []);
 
   return (
-    <Container onClick={closeOverlay}>
-      <DetailBox layoutId={category + contentsMatch?.params.dataId}>
-        <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
+    <BackdropOverlay onClick={() => navigate(-1)}>
+      <Container layoutId={category + contentsMatch?.params.dataId} onClick={stopPropagationHandler}>
+        <CoverBox bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
           <Title>{contentData.title || contentData.name}</Title>
-          <ButtonBox>
-            <Play buttonSize="detail" />
+          <CoverButtonBox>
+            <Play buttonSize="detailButton" />
             {isAdded ? (
-              <CircleCheck buttonSize="detail" onClick={() => removeFavoriteContents(contentData)} />
+              <CircleCheck buttonSize="detailButton" onClick={() => removeFavoriteContents(contentData)} />
             ) : (
-              <CircleAdd buttonSize="detail" onClick={() => addFavoriteContents(contentData)} />
+              <CircleAdd buttonSize="detailButton" onClick={() => addFavoriteContents(contentData)} />
             )}
-          </ButtonBox>
-        </Cover>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-        <div style={{ fontSize: "4rem" }}>안녕</div>
-      </DetailBox>
-    </Container>
+          </CoverButtonBox>
+        </CoverBox>
+        <TopInfoBox>
+          <LeftDescriptionDiv></LeftDescriptionDiv>
+          <RightDescriptionDiv></RightDescriptionDiv>
+        </TopInfoBox>
+      </Container>
+    </BackdropOverlay>
   );
 };
 
-export default DetailContainer;
+export default DetailModalContainer;
 
-const Container = styled(motion.div)`
+const BackdropOverlay = styled(motion.div)`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -79,13 +72,13 @@ const Container = styled(motion.div)`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const DetailBox = styled(motion.div)`
+const Container = styled(motion.div)`
   width: 902.5px;
   margin: 30px auto 0px;
   background-color: ${(props) => props.theme.black.darker};
 `;
 
-const Cover = styled.div<{ bgimg: string }>`
+const CoverBox = styled.div<{ bgimg: string }>`
   ${bgImg}
   background-image: linear-gradient(rgba(24, 24, 24, 0), rgba(24, 24, 24, 0), rgba(24, 24, 24, 1)),
     url(${(props) => props.bgimg});
@@ -106,9 +99,22 @@ const Title = styled.h3`
   margin-bottom: 2rem;
 `;
 
-const ButtonBox = styled.div`
+const CoverButtonBox = styled.div`
   display: flex;
   gap: 2rem;
+`;
+
+const TopInfoBox = styled.div`
+  display: flex;
+`;
+
+const LeftDescriptionDiv = styled.div`
+  width: 70%;
+  background-color: green;
+`;
+const RightDescriptionDiv = styled.div`
+  width: 30%;
+  background-color: pink;
 `;
 
 const Overview = styled.p`

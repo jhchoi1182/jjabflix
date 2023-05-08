@@ -4,13 +4,18 @@ import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 import { CheckIcon } from "../../atoms/Icons/ButtonIcon";
 
 interface ICircleButtonProps extends IButtonEventProps {
-  buttonSize?: "slide" | "detail";
+  buttonSize: "slideButton" | "detailButton";
 }
+
+const iconSize = {
+  slideButton: 1.1,
+  detailButton: 1.4,
+};
 
 export const CirclePlay: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
   return (
     <CirclePlayButton circle borderColor="white" onClick={onClick} {...props}>
-      <PlayIcon size={1.1} />
+      <PlayIcon size={iconSize[props.buttonSize]} />
     </CirclePlayButton>
   );
 };
@@ -26,7 +31,7 @@ const CirclePlayButton = styled(Button)`
 export const CircleAdd: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
   return (
     <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick} {...props}>
-      <AddIcon size={iconSize[props.buttonSize ?? "slide"]} />
+      <AddIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );
 };
@@ -34,7 +39,7 @@ export const CircleAdd: React.FC<ICircleButtonProps> = ({ onClick, ...props }) =
 export const CircleCheck: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
   return (
     <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick} {...props}>
-      <CheckIcon size={iconSize[props.buttonSize ?? "slide"]} />
+      <CheckIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );
 };
@@ -42,27 +47,22 @@ export const CircleCheck: React.FC<ICircleButtonProps> = ({ onClick, ...props })
 export const CircleDetail: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
   return (
     <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick} {...props}>
-      <ContentOpenIcon size={1.1} />
+      <ContentOpenIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );
 };
 
-const slide = css`
+const slideButton = css`
   padding: 0.3rem;
 `;
-const detail = css`
+const detailButton = css`
   padding: 0.5rem;
 `;
-
-const buttonSize = { slide, detail };
-const iconSize = {
-  slide: 1.1,
-  detail: 1.4,
-};
+const buttonSize = { slideButton, detailButton };
 
 const CircleGreyButton = styled(Button)<ICircleButtonProps>`
   background-color: ${(props) => props.theme.black.lighter};
-  ${(props) => (props.buttonSize ? buttonSize[props.buttonSize] : buttonSize["slide"])};
+  ${(props) => props.buttonSize && buttonSize[props.buttonSize]};
   &:hover {
     border: 2px solid ${(props) => props.theme.white.lighter};
   }

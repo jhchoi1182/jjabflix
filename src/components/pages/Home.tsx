@@ -11,7 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
 import { FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon } from "../atoms/Icons";
-import { normal2, small } from "../../styles/Fonts";
+import { normal1, small3 } from "../../styles/Fonts";
 
 const Home = () => {
   const [serviceCode, setServiceCode] = useState<string>("서비스 코드");
@@ -51,20 +51,20 @@ const Home = () => {
       <Footer>
         <FooterIconbox>
           <a href="https://www.facebook.com/NetflixKR" rel="noopener noreferrer" target="_blank">
-            <FacebookIcon size={2.4} />
+            <FacebookIcon size="big" />
           </a>
           <a href="https://www.instagram.com/netflixkr/" rel="noopener noreferrer" target="_blank">
-            <InstagramIcon size={2.4} />
+            <InstagramIcon size="big" />
           </a>
           <a href="https://twitter.com/netflixkr" rel="noopener noreferrer" target="_blank">
-            <TwitterIcon size={2.4} />
+            <TwitterIcon size="big" />
           </a>
           <a
             href="https://www.youtube.com/channel/UCiEEF51uRAeZeCo8CJFhGWw/featured"
             rel="noopener noreferrer"
             target="_blank"
           >
-            <YoutubeIcon size={2.4} />
+            <YoutubeIcon size="big" />
           </a>
         </FooterIconbox>
         <FooterMenuBox>
@@ -189,7 +189,7 @@ const FooterMenuBox = styled.ul`
     }
   }
   span {
-    ${normal2}
+    ${normal1}
   }
 `;
 
@@ -213,7 +213,7 @@ const FooterInfoBox = styled.div`
   color: ${(props) => props.theme.grey.lighter};
   margin-top: 2rem;
   gap: 0.5rem;
-  ${small}
+  ${small3}
   a {
     &:hover {
       text-decoration: underline;

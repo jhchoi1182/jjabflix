@@ -2,7 +2,7 @@ import React from "react";
 import * as fonts from "../../../styles/Fonts";
 import styled from "styled-components";
 import { flex } from "../../../styles/Css";
-import { AdultIcon } from "../../atoms/Icons";
+import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { IContent } from "../../../interface/Interface";
 
 const SlideItemInfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, runtime }) => {
@@ -20,7 +20,7 @@ const SlideItemInfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, ru
           <span>{vote_average.toFixed(1)}</span>
         </Rating>
       )}
-      {adult ? <AdultIcon size={1.1} /> : <Age>15+</Age>}
+      {adult ? <AdultIcon size="basic" /> : <Age15 size="basic" />}
       {seasons ? (
         <span>{`시즌 ${seasons?.length}개`}</span>
       ) : runtime !== 0 ? (
@@ -28,7 +28,7 @@ const SlideItemInfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, ru
       ) : (
         ""
       )}
-      <HD>HD</HD>
+      <HD size="basic" />
     </InfoBox>
   );
 };
@@ -37,7 +37,7 @@ export default SlideItemInfoBox;
 
 export const InfoBox = styled.div`
   ${flex("none")}
-  ${fonts.normal1}
+  ${fonts.small2}
   gap: 0.6rem;
   margin-top: 1.5rem;
 `;
@@ -49,15 +49,4 @@ export const Rating = styled.span`
   span {
     ${fonts.Heavy}
   }
-`;
-
-export const Age = styled.button`
-  ${fonts.normal1}
-  background-color: transparent;
-  color: ${(props) => props.theme.white.lighter};
-  border: 0.1px solid ${(props) => props.theme.grey.darker};
-`;
-
-export const HD = styled(Age)`
-  font-size: 1rem;
 `;

@@ -31,15 +31,15 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
   return (
     <ButtonBox onMouseEnter={onMouseEnter}>
       <FlexLeftDiv>
-        <Button.CirclePlay />
+        <Button.CirclePlay buttonSize="slideButton" />
         {isAdded ? (
-          <Button.CircleCheck onClick={() => removeFavoriteContents(data)} />
+          <Button.CircleCheck onClick={() => removeFavoriteContents(data)} buttonSize="slideButton" />
         ) : (
-          <Button.CircleAdd onClick={() => addFavoriteContents(data)} />
+          <Button.CircleAdd onClick={() => addFavoriteContents(data)} buttonSize="slideButton" />
         )}
       </FlexLeftDiv>
       <FlexRightBox>
-        <Button.CircleDetail onClick={showDetailHandler} />
+        <Button.CircleDetail onClick={showDetailHandler} buttonSize="slideButton" />
       </FlexRightBox>
     </ButtonBox>
   );

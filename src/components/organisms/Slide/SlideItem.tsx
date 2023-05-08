@@ -62,6 +62,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
     await queryClient.fetchQuery(queryKey, queryFn, dataOption);
     setButtonOpacityAfterDelay(0);
   };
+  console.log(data);
 
   const onMouseLeaveHandler = () => {
     setButtonOpacityAfterDelayInvalidation();

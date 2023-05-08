@@ -1,6 +1,8 @@
-import { SizeProps } from ".";
+export type IconSizeProps = {
+  size: number;
+};
 
-export const PlayIcon = ({ size }: SizeProps) => {
+export const PlayIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
       width={`${size}vw`}
@@ -18,7 +20,7 @@ export const PlayIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const DetailIcon = ({ size }: SizeProps) => {
+export const DetailIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
       width={`${size}vw`}
@@ -36,7 +38,7 @@ export const DetailIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const AddIcon = ({ size }: SizeProps) => {
+export const AddIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
       width={`${size}vw`}
@@ -51,7 +53,7 @@ export const AddIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const CheckIcon = ({ size }: SizeProps) => {
+export const CheckIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
       width={`${size}vw`}
@@ -69,7 +71,7 @@ export const CheckIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const ContentOpenIcon = ({ size }: SizeProps) => {
+export const ContentOpenIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
       width={`${size}vw`}

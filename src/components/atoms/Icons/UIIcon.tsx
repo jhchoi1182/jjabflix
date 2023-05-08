@@ -1,4 +1,13 @@
-import { SizeProps } from ".";
+import { IconSizeProps } from "./ButtonIcon";
+
+type UIIconProps = {
+  size: "basic" | "big";
+};
+
+const iconSize = {
+  basic: "1.1",
+  big: "2.4",
+};
 
 export const Logo = () => {
   return (
@@ -8,9 +17,9 @@ export const Logo = () => {
   );
 };
 
-export const AdultIcon = ({ size }: SizeProps) => {
+export const AdultIcon = ({ size }: UIIconProps) => {
   return (
-    <svg width={`${size}vw`} height={`${size}vw`} viewBox="0 0 100 100">
+    <svg width={`${iconSize[size]}vw`} height={`${iconSize[size]}vw`} viewBox="0 0 100 100">
       <path
         id="FIll---Red"
         fill="#C52E37"
@@ -25,11 +34,11 @@ export const AdultIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const FacebookIcon = ({ size }: SizeProps) => {
+export const FacebookIcon = ({ size }: UIIconProps) => {
   return (
     <svg
-      width={`${size}rem`}
-      height={`${size}rem`}
+      width={`${iconSize[size]}rem`}
+      height={`${iconSize[size]}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -43,11 +52,11 @@ export const FacebookIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const InstagramIcon = ({ size }: SizeProps) => {
+export const InstagramIcon = ({ size }: UIIconProps) => {
   return (
     <svg
-      width={`${size}rem`}
-      height={`${size}rem`}
+      width={`${iconSize[size]}rem`}
+      height={`${iconSize[size]}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -61,11 +70,11 @@ export const InstagramIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const TwitterIcon = ({ size }: SizeProps) => {
+export const TwitterIcon = ({ size }: UIIconProps) => {
   return (
     <svg
-      width={`${size}rem`}
-      height={`${size}rem`}
+      width={`${iconSize[size]}rem`}
+      height={`${iconSize[size]}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -79,11 +88,11 @@ export const TwitterIcon = ({ size }: SizeProps) => {
   );
 };
 
-export const YoutubeIcon = ({ size }: SizeProps) => {
+export const YoutubeIcon = ({ size }: UIIconProps) => {
   return (
     <svg
-      width={`${size}rem`}
-      height={`${size}rem`}
+      width={`${iconSize[size]}rem`}
+      height={`${iconSize[size]}rem`}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

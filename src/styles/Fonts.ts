@@ -35,16 +35,21 @@ export const mid3 = css`
 `;
 
 export const normal1 = css`
-  font-size: 1.1rem;
-  ${bold}
-`;
-
-export const normal2 = css`
   font-size: 1.4rem;
   ${bold}
 `;
 
-export const small = css`
+export const small1 = css`
+  font-size: 1rem;
+  ${bold}
+`;
+
+export const small2 = css`
+  font-size: 1.1rem;
+  ${bold}
+`;
+
+export const small3 = css`
   font-size: 1.2rem;
   ${bold}
 `;
