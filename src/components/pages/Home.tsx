@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailBox/DetailModalContainer";
@@ -6,7 +6,7 @@ import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
@@ -161,7 +161,7 @@ const SlideContainer = styled.section`
 `;
 
 const Footer = styled.section`
-  width: 113.2rem;
+  width: 59vw;
   height: 34.8rem;
   margin: 0 auto 2rem;
 `;
