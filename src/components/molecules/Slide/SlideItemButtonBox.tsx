@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as Button from "../Button/CircleButton";
 import { IContent } from "../../../interface/Interface";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { setFavoriteLocal } from "../../../utils/Local";
 import { FavoriteAtom, detailAtom } from "../../../lib/Atoms";
+import { FavoriteContentsAddRemove } from "../../../utils/hooks";
 
 interface ISlideItemButtonBox extends IContent {
   onMouseEnter?: () => void;
@@ -13,11 +13,11 @@ interface ISlideItemButtonBox extends IContent {
 }
 
 const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
-  const { id } = data;
-
-  const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
+  const { addFavoriteContents, removeFavoriteContents } = FavoriteContentsAddRemove();
+  const favoriteContents = useRecoilValue(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
+  const { id } = data;
 
   const isAdded = favoriteContents.some((content) => content.id === id);
 
@@ -28,36 +28,14 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
     }
   };
 
-  const setFavoriteHandler = useCallback(
-    (data: IContent[]) => {
-      setFavoriteContents(data);
-      setFavoriteLocal(data);
-    },
-    [setFavoriteContents]
-  );
-
-  const addFavoriteContents = useCallback(() => {
-    if (data) {
-      const addedContents = [data, ...favoriteContents];
-      setFavoriteHandler(addedContents);
-    }
-  }, [isAdded]);
-
-  const removeFavoriteContens = useCallback(() => {
-    if (data) {
-      const removedContents = favoriteContents.filter((content) => content.id !== id);
-      setFavoriteHandler(removedContents);
-    }
-  }, [isAdded]);
-
   return (
     <ButtonBox onMouseEnter={onMouseEnter}>
       <FlexLeftDiv>
         <Button.CirclePlay />
         {isAdded ? (
-          <Button.CircleCheck onClick={removeFavoriteContens} />
+          <Button.CircleCheck onClick={() => removeFavoriteContents(data)} />
         ) : (
-          <Button.CircleAdd onClick={addFavoriteContents} />
+          <Button.CircleAdd onClick={() => addFavoriteContents(data)} />
         )}
       </FlexLeftDiv>
       <FlexRightBox>
