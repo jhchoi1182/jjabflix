@@ -40,7 +40,7 @@ const Banner = styled.div<{ bgimg: string }>`
 `;
 
 const Title = styled.h2`
-  ${fonts.big}
+  ${fonts.big2}
   ${fonts.bold}
   margin-bottom: 2.3rem;
   width: 37%;

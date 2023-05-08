@@ -10,7 +10,11 @@ export const Heavy = css`
 `;
 
 /** font-size */
-export const big = css`
+export const big1 = css`
+  font-size: 3.5vw;
+`;
+
+export const big2 = css`
   font-size: 5vw;
 `;
 

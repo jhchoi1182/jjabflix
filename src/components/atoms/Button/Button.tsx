@@ -43,10 +43,5 @@ const ButtonContainer = styled.button<IButtonProps>`
   color: ${(props) => props.whiteFont && props.theme.white.lighter};
 
   border-radius: ${({ circle }) => (circle ? "100%" : "4px")};
-  ${({ circle }) =>
-    circle &&
-    css`
-      padding: 0.3rem;
-    `};
   cursor: pointer;
 `;

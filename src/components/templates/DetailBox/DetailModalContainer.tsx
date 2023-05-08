@@ -3,15 +3,23 @@ import { motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { categoryAtom, detailAtom } from "../../../lib/Atoms";
+import { FavoriteAtom, categoryAtom, detailAtom } from "../../../lib/Atoms";
 import { posterAPI } from "../../../api/Apis";
 import { bgImg } from "../../atoms/BannerImage";
+import * as fonts from "../../../styles/Fonts";
+import { Play } from "../../molecules/Button/RectangleButton";
+import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
+import { FavoriteContentsAddRemove } from "../../../utils/hooks";
 
 const DetailContainer = () => {
+  const { addFavoriteContents, removeFavoriteContents } = FavoriteContentsAddRemove();
+  const favoriteContents = useRecoilValue(FavoriteAtom);
   const contentData = useRecoilValue(detailAtom);
   const category = useRecoilValue(categoryAtom);
   const contentsMatch = useMatch("/:dataId");
   const navigate = useNavigate();
+
+  const isAdded = favoriteContents.some((content) => content.id === contentData.id);
 
   const closeOverlay = () => {
     navigate(-1);
@@ -32,7 +40,15 @@ const DetailContainer = () => {
     <Container onClick={closeOverlay}>
       <DetailBox layoutId={category + contentsMatch?.params.dataId}>
         <Cover bgimg={posterAPI(contentData.backdrop_path ?? contentData.poster_path, "w500")}>
-          <Title>{contentData.title}</Title>
+          <Title>{contentData.title || contentData.name}</Title>
+          <ButtonBox>
+            <Play buttonSize="detail" />
+            {isAdded ? (
+              <CircleCheck buttonSize="detail" onClick={() => removeFavoriteContents(contentData)} />
+            ) : (
+              <CircleAdd buttonSize="detail" onClick={() => addFavoriteContents(contentData)} />
+            )}
+          </ButtonBox>
         </Cover>
         <div style={{ fontSize: "4rem" }}>안녕</div>
         <div style={{ fontSize: "4rem" }}>안녕</div>
@@ -77,14 +93,22 @@ const Cover = styled.div<{ bgimg: string }>`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 20px;
+  padding: 53px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
 `;
 
 const Title = styled.h3`
+  ${fonts.big1}
+  ${fonts.bold}
   color: ${(props) => props.theme.white.lighter};
-  font-size: 4.6rem;
+  width: 50%;
+  margin-bottom: 2rem;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  gap: 2rem;
 `;
 
 const Overview = styled.p`
