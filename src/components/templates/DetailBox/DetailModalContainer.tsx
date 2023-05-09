@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -22,6 +22,7 @@ const DetailModalContainer = () => {
   const contentData = useRecoilValue<IContent>(detailAtom);
   const category = useRecoilValue<string>(categoryAtom);
   const contentsMatch = useMatch("/:dataId");
+  const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   const {
@@ -45,6 +46,12 @@ const DetailModalContainer = () => {
 
   const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
+  };
+
+  const toBottomScrollHandler = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -96,7 +103,7 @@ const DetailModalContainer = () => {
                     }
                   })}
                 </TextBox>
-                <More>더 보기</More>
+                <More onClick={toBottomScrollHandler}>더 보기</More>
               </DetailMetaData>
               <DetailMetaData>
                 <div>
@@ -120,7 +127,7 @@ const DetailModalContainer = () => {
               )}
             </RightInfoDiv>
           </TopDescription>
-          <BottomDescription>
+          <BottomDescription ref={scrollRef}>
             <BottomTitle>{`${title || name} 상세 정보`}</BottomTitle>
             <BottomDetailMetaDataBox>
               <BottomDetailMetaData>
