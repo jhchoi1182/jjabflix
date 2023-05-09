@@ -53,7 +53,7 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
       </FlexLeftDiv>
       <FlexRightBox>
         <Button.CircleDetail
-          data-tooltip-text={`${(data.seasons && "회차 및 상세 정보") || (data.runtime && "상세 정보")}`}
+          data-tooltip-text="상세 정보"
           onMouseEnter={(event) => setTooltipHandler({ x: 225, size: "slideTooltip" }, event)}
           onMouseLeave={resetTooltipHandler}
           onClick={showDetailHandler}
