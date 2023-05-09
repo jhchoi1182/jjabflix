@@ -3,6 +3,17 @@ export interface Genre {
   name: string;
 }
 
+interface productionCompanies {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
+interface productionCountries {
+  name: string;
+}
+
 export interface IContent {
   adult: boolean;
   backdrop_path: string;
@@ -20,6 +31,8 @@ export interface IContent {
   vote_average: number;
   category: string;
   media_type: "movie" | "tv";
+  production_companies: productionCompanies[];
+  production_countries: productionCountries[];
 }
 
 export interface IGetData {

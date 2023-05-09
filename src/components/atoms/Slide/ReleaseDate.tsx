@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 type ReleaseDateProps = {
   ReleaseDate: Date;
@@ -7,9 +6,7 @@ type ReleaseDateProps = {
 const ReleaseDate: React.FC<ReleaseDateProps> = ({ ReleaseDate }) => {
   const ReleaseYear = new Date(ReleaseDate).getFullYear();
 
-  return <ReleaseDateSpan>{ReleaseYear}</ReleaseDateSpan>;
+  return <span>{ReleaseYear}</span>;
 };
 
 export default ReleaseDate;
-
-const ReleaseDateSpan = styled.span``;

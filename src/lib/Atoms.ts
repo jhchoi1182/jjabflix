@@ -20,6 +20,8 @@ export const detailAtom = atom<IContent>({
     vote_average: 0,
     category: "",
     media_type: "movie",
+    production_companies: [],
+    production_countries: [],
   },
 });
 

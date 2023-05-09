@@ -30,12 +30,26 @@ export const mid2 = css`
   font-size: 1.3vw;
 `;
 
+export const mid2rem = css`
+  font-size: 2.6rem;
+  ${bold}
+`;
+
 export const mid3 = css`
   font-size: 1.4vw;
 `;
 
 export const normal1 = css`
   font-size: 1.4rem;
+  ${bold}
+`;
+
+export const normal2 = css`
+  ${bold}
+`;
+
+export const normal3 = css`
+  font-size: 1.7rem;
   ${bold}
 `;
 
