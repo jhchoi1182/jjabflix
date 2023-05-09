@@ -69,6 +69,7 @@ const DetailModalContainer = () => {
     <BackdropOverlay onClick={() => navigate(-1)}>
       <Container layoutId={category + contentsMatch?.params.dataId} onClick={stopPropagationHandler}>
         <CoverBox bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
+          <CloseButton onClick={() => navigate(-1)}>X</CloseButton>
           <Title>{title || name}</Title>
           <CoverButtonBox>
             <Play buttonSize="detailButton" />
@@ -110,9 +111,9 @@ const DetailModalContainer = () => {
                   <Label>장르:</Label>
                   {genres.map((genre, i) => {
                     if (i === genres.length - 1) {
-                      return <Text>{`${genre.name}`}</Text>;
+                      return <Text key={genre.name}>{`${genre.name}`}</Text>;
                     } else {
-                      return <Text>{`${genre.name},`}</Text>;
+                      return <Text key={genre.name}>{`${genre.name},`}</Text>;
                     }
                   })}
                 </div>
@@ -159,9 +160,9 @@ const DetailModalContainer = () => {
                   <Label>장르:</Label>
                   {genres.map((genre, i) => {
                     if (i === genres.length - 1) {
-                      return <Text>{`${genre.name}`}</Text>;
+                      return <Text key={genre.name}>{`${genre.name}`}</Text>;
                     } else {
-                      return <Text>{`${genre.name},`}</Text>;
+                      return <Text key={genre.name}>{`${genre.name},`}</Text>;
                     }
                   })}
                 </div>
@@ -218,6 +219,7 @@ const Container = styled(motion.div)`
 `;
 
 const CoverBox = styled.div<{ bgimg: string }>`
+  position: relative;
   ${bgImg}
   background-image: linear-gradient(rgba(24, 24, 24, 0), rgba(24, 24, 24, 0), rgba(24, 24, 24, 1)),
     url(${(props) => props.bgimg});
@@ -228,6 +230,20 @@ const CoverBox = styled.div<{ bgimg: string }>`
   padding: 53px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 100%;
+  background-color: ${(props) => props.theme.black.darker};
+  color: ${(props) => props.theme.white.lighter};
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
 `;
 
 const Title = styled.h3`
