@@ -14,7 +14,7 @@ interface ISlideItemButtonBox extends IContent {
 
 const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
-  const { isHovered, onMouseEnterHandler, onMouseLeaveHandler, renderTooltip } = useTooltip();
+  const { isHovered, setTooltipHandler, resetTooltipHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
@@ -34,18 +34,33 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
       <FlexLeftDiv>
         <Button.CirclePlay buttonSize="slideButton" />
         {isAdded ? (
-          <Button.CircleCheck onClick={() => removeFavoriteContents(data)} buttonSize="slideButton" />
+          <Button.CircleCheck
+            onMouseEnter={() => setTooltipHandler({ text: "내가 찜한 콘텐츠에서 삭제", x: -37.5 })}
+            onMouseLeave={resetTooltipHandler}
+            onClick={() => removeFavoriteContents(data)}
+            buttonSize="slideButton"
+          />
         ) : (
           <Button.CircleAdd
-            onMouseEnter={() => onMouseEnterHandler({ text: "내가 찜한 콘텐츠에 추가", left: -30 })}
-            onMouseLeave={onMouseLeaveHandler}
+            onMouseEnter={() => setTooltipHandler({ text: "내가 찜한 콘텐츠에 추가", x: -30 })}
+            onMouseLeave={resetTooltipHandler}
             onClick={() => addFavoriteContents(data)}
             buttonSize="slideButton"
           />
         )}
       </FlexLeftDiv>
       <FlexRightBox>
-        <Button.CircleDetail onClick={showDetailHandler} buttonSize="slideButton" />
+        <Button.CircleDetail
+          onMouseEnter={() =>
+            setTooltipHandler({
+              text: `${(data.seasons && "회차 및 상세 정보") || (data.runtime && "상세 정보")}`,
+              x: 225,
+            })
+          }
+          onMouseLeave={resetTooltipHandler}
+          onClick={showDetailHandler}
+          buttonSize="slideButton"
+        />
       </FlexRightBox>
       {isHovered && renderTooltip()}
     </ButtonBox>

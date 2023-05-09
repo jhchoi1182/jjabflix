@@ -47,17 +47,33 @@ export const CircleAdd: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseL
   );
 };
 
-export const CircleCheck: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
+export const CircleCheck: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
   return (
-    <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick} {...props}>
+    <CircleGreyButton
+      circle
+      whiteFont
+      borderColor="grey"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      {...props}
+    >
       <CheckIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );
 };
 
-export const CircleDetail: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
+export const CircleDetail: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
   return (
-    <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick} {...props}>
+    <CircleGreyButton
+      circle
+      whiteFont
+      borderColor="grey"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      {...props}
+    >
       <ContentOpenIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );

@@ -1,51 +1,50 @@
 /** 마우스 호버 시 툴팁 */
 
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { bold } from "../../styles/Fonts";
 
 interface IUseTooltip {
   isHovered: boolean;
-  onMouseEnterHandler: ({ text, left }: IonMouseEnterHandler) => void;
-  onMouseLeaveHandler: () => void;
+  setTooltipHandler: ({ text, x }: IonMouseEnterHandler) => void;
+  resetTooltipHandler: () => void;
   renderTooltip: () => React.ReactNode;
 }
 
 interface IonMouseEnterHandler {
   text: string;
-  left: number;
+  x: number;
 }
 
 const useTooltip = (): IUseTooltip => {
   const [isHovered, setIsHovered] = useState(false);
-  const [tooltip, setTooltip] = useState({ text: "", left: 0 });
+  const [tooltip, setTooltip] = useState({ text: "", x: 0 });
 
-  const onMouseEnterHandler = ({ text, left }: IonMouseEnterHandler) => {
+  const setTooltipHandler = ({ text, x }: IonMouseEnterHandler) => {
     setIsHovered(true);
-    setTooltip({ text, left });
+    setTooltip({ text, x });
   };
 
-  const onMouseLeaveHandler = () => {
+  const resetTooltipHandler = () => {
     setIsHovered(false);
-    setTooltip({ text: "", left: 0 });
+    setTooltip({ text: "", x: 0 });
   };
-  console.log(tooltip);
 
   const renderTooltip = () => {
-    return <TooltipBox left={tooltip.left}>{tooltip.text}</TooltipBox>;
+    return <TooltipBox x={tooltip.x}>{tooltip.text}</TooltipBox>;
   };
 
   return {
     isHovered,
-    onMouseEnterHandler,
-    onMouseLeaveHandler,
+    setTooltipHandler,
+    resetTooltipHandler,
     renderTooltip,
   };
 };
 
 export default useTooltip;
 
-const TooltipBox = styled.div<{ left: number }>`
+const TooltipBox = styled.div<{ x: number }>`
   position: absolute;
   padding: 7px 20px;
   background-color: ${(props) => props.theme.white.lighter};
@@ -54,7 +53,20 @@ const TooltipBox = styled.div<{ left: number }>`
   ${bold};
   border-radius: 4px;
   bottom: 3px;
-  left: ${(props) => props.left}px;
+  ${(props) => {
+    switch (true) {
+      case props.x < 0:
+        return css`
+          left: ${props.x}px;
+        `;
+      case props.x > 0:
+        return css`
+          right: calc(71% - ${props.x}px);
+        `;
+      default:
+        return css``;
+    }
+  }}
   :before {
     content: "";
     position: absolute;
