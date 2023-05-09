@@ -35,14 +35,16 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
         <Button.CirclePlay buttonSize="slideButton" />
         {isAdded ? (
           <Button.CircleCheck
-            onMouseEnter={() => setTooltipHandler({ text: "내가 찜한 콘텐츠에서 삭제", x: -37.5 })}
+            data-tooltip-text="내가 찜한 콘텐츠에서 삭제"
+            onMouseEnter={(event) => setTooltipHandler({ x: -37.5, size: "slideTooltip" }, event)}
             onMouseLeave={resetTooltipHandler}
             onClick={() => removeFavoriteContents(data)}
             buttonSize="slideButton"
           />
         ) : (
           <Button.CircleAdd
-            onMouseEnter={() => setTooltipHandler({ text: "내가 찜한 콘텐츠에 추가", x: -30 })}
+            data-tooltip-text="내가 찜한 콘텐츠에 추가"
+            onMouseEnter={(event) => setTooltipHandler({ x: -30, size: "slideTooltip" }, event)}
             onMouseLeave={resetTooltipHandler}
             onClick={() => addFavoriteContents(data)}
             buttonSize="slideButton"
@@ -51,12 +53,8 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
       </FlexLeftDiv>
       <FlexRightBox>
         <Button.CircleDetail
-          onMouseEnter={() =>
-            setTooltipHandler({
-              text: `${(data.seasons && "회차 및 상세 정보") || (data.runtime && "상세 정보")}`,
-              x: 225,
-            })
-          }
+          data-tooltip-text={`${(data.seasons && "회차 및 상세 정보") || (data.runtime && "상세 정보")}`}
+          onMouseEnter={(event) => setTooltipHandler({ x: 225, size: "slideTooltip" }, event)}
           onMouseLeave={resetTooltipHandler}
           onClick={showDetailHandler}
           buttonSize="slideButton"
