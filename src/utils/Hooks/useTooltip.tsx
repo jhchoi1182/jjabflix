@@ -2,7 +2,7 @@
 
 import React, { useState, MouseEvent } from "react";
 import styled, { css } from "styled-components";
-import { normal2 } from "../../styles/Fonts";
+import { bold, mid1, mid2rem, normal2, normal3 } from "../../styles/Fonts";
 
 interface IUseTooltip {
   isHovered: boolean;
@@ -22,11 +22,11 @@ const useTooltip = (): IUseTooltip => {
   const [isHovered, setIsHovered] = useState(false);
   const [tooltip, setTooltip] = useState<IsetTooltipHandler>({ text: "", top: 0, x: 0, size: "slideTooltip" });
 
-  const setTooltipHandler = ({ x, size }: IsetTooltipHandler, event: MouseEvent<HTMLElement>) => {
+  const setTooltipHandler = ({ top, x, size }: IsetTooltipHandler, event: MouseEvent<HTMLElement>) => {
     setIsHovered(true);
     setTooltip({
       text: event.currentTarget.dataset.tooltipText ?? "",
-      top: event.currentTarget.offsetTop ?? 0,
+      top: top ?? event.currentTarget.offsetTop,
       x,
       size,
     });
@@ -59,7 +59,11 @@ const slideTooltip = css`
   padding: 7px 20px;
   ${normal2}
 `;
-const detailTooltip = css``;
+const detailTooltip = css`
+  padding: 7px 20px;
+  ${mid1}
+  ${bold}
+`;
 const tooltipSize = { slideTooltip, detailTooltip };
 
 const TooltipBox = styled.div<IsetTooltipHandler>`

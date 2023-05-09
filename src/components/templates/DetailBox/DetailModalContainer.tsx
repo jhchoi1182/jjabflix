@@ -14,9 +14,10 @@ import { IContent } from "../../../interface/Interface";
 import ReleaseDate from "../../atoms/Slide/ReleaseDate";
 import { RunningTime, Seasons } from "../../atoms/Slide/RunningTime";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
-import { useBookmark } from "../../../utils/Hooks";
+import { useBookmark, useTooltip } from "../../../utils/Hooks";
 
 const DetailModalContainer = () => {
+  const { isHovered, setTooltipHandler, resetTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
   const contentData = useRecoilValue<IContent>(detailAtom);
@@ -74,10 +75,23 @@ const DetailModalContainer = () => {
           <CoverButtonBox>
             <Play buttonSize="detailButton" />
             {isAdded ? (
-              <CircleCheck buttonSize="detailButton" onClick={() => removeFavoriteContents(contentData)} />
+              <CircleCheck
+                data-tooltip-text="내가 찜한 콘텐츠에서 삭제"
+                onMouseEnter={(event) => setTooltipHandler({ top: 390, x: 130, size: "detailTooltip" }, event)}
+                onMouseLeave={resetTooltipHandler}
+                buttonSize="detailButton"
+                onClick={() => removeFavoriteContents(contentData)}
+              />
             ) : (
-              <CircleAdd buttonSize="detailButton" onClick={() => addFavoriteContents(contentData)} />
+              <CircleAdd
+                data-tooltip-text="내가 찜한 콘텐츠에 추가"
+                onMouseEnter={(event) => setTooltipHandler({ top: 390, x: 130, size: "detailTooltip" }, event)}
+                onMouseLeave={resetTooltipHandler}
+                buttonSize="detailButton"
+                onClick={() => addFavoriteContents(contentData)}
+              />
             )}
+            {isHovered && renderTooltip()}
           </CoverButtonBox>
         </CoverBox>
         <DescriptionBox>
