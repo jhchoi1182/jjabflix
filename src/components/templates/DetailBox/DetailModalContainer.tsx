@@ -85,7 +85,7 @@ const DetailModalContainer = () => {
             ) : (
               <CircleAdd
                 data-tooltip-text="내가 찜한 콘텐츠에 추가"
-                onMouseEnter={(event) => setTooltipHandler({ top: 390, x: 130, size: "detailTooltip" }, event)}
+                onMouseEnter={(event) => setTooltipHandler({ top: 390, x: 121, size: "detailTooltip" }, event)}
                 onMouseLeave={resetTooltipHandler}
                 buttonSize="detailButton"
                 onClick={() => addFavoriteContents(contentData)}
