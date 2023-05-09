@@ -5,7 +5,7 @@ import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
 import SlideMoveBtn from "../../molecules/Slide/SlidePaginationButton";
-import { useButtonOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import DummyItem from "../../atoms/Slide/DummyItem";
 import { useSetRecoilState } from "recoil";

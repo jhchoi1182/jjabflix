@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import * as Button from "../Button/CircleButton";
 import { IContent } from "../../../interface/Interface";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { FavoriteAtom, detailAtom } from "../../../lib/Atoms";
-import { FavoriteContentsAddRemove } from "../../../utils/hooks";
+import { useBookmark, useTooltip } from "../../../utils/Hooks";
 
 interface ISlideItemButtonBox extends IContent {
   onMouseEnter?: () => void;
@@ -13,7 +13,8 @@ interface ISlideItemButtonBox extends IContent {
 }
 
 const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
-  const { addFavoriteContents, removeFavoriteContents } = FavoriteContentsAddRemove();
+  const { addFavoriteContents, removeFavoriteContents } = useBookmark();
+  const { isHovered, onMouseEnterHandler, onMouseLeaveHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);
   const setContentData = useSetRecoilState(detailAtom);
   const navigate = useNavigate();
@@ -35,12 +36,18 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
         {isAdded ? (
           <Button.CircleCheck onClick={() => removeFavoriteContents(data)} buttonSize="slideButton" />
         ) : (
-          <Button.CircleAdd onClick={() => addFavoriteContents(data)} buttonSize="slideButton" />
+          <Button.CircleAdd
+            onMouseEnter={() => onMouseEnterHandler({ text: "내가 찜한 콘텐츠에 추가", left: -30 })}
+            onMouseLeave={onMouseLeaveHandler}
+            onClick={() => addFavoriteContents(data)}
+            buttonSize="slideButton"
+          />
         )}
       </FlexLeftDiv>
       <FlexRightBox>
         <Button.CircleDetail onClick={showDetailHandler} buttonSize="slideButton" />
       </FlexRightBox>
+      {isHovered && renderTooltip()}
     </ButtonBox>
   );
 };

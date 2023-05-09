@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { AddIcon, ContentOpenIcon, PlayIcon } from "../../atoms/Icons";
 import Button, { IButtonEventProps } from "../../atoms/Button/Button";
@@ -5,6 +6,8 @@ import { CheckIcon } from "../../atoms/Icons/ButtonIcon";
 
 interface ICircleButtonProps extends IButtonEventProps {
   buttonSize: "slideButton" | "detailButton";
+  onMouseEnter?: (event: MouseEvent<HTMLElement>) => void;
+  onMouseLeave?: () => void;
 }
 
 const iconSize = {
@@ -28,9 +31,17 @@ const CirclePlayButton = styled(Button)`
   }
 `;
 
-export const CircleAdd: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
+export const CircleAdd: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
   return (
-    <CircleGreyButton circle whiteFont borderColor="grey" onClick={onClick} {...props}>
+    <CircleGreyButton
+      circle
+      whiteFont
+      borderColor="grey"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      {...props}
+    >
       <AddIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );

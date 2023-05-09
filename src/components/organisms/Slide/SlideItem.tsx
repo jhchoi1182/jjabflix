@@ -2,7 +2,7 @@ import React from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
 import styled from "styled-components";
 import { detailAPI } from "../../../api/Apis";
-import { useButtonOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";

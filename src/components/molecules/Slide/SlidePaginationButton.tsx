@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useButtonOpacity } from "../../../utils/hooks";
+import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { Arrow } from "../../atoms/Icons";
 import { ArrowProps } from "../../atoms/Icons/NextPrevIcon";
 

@@ -9,15 +9,15 @@ import { bgImg } from "../../atoms/BannerImage";
 import * as fonts from "../../../styles/Fonts";
 import { Play } from "../../molecules/Button/RectangleButton";
 import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
-import { FavoriteContentsAddRemove } from "../../../utils/hooks";
 import Rating from "../../atoms/Slide/Rating";
 import { IContent } from "../../../interface/Interface";
 import ReleaseDate from "../../atoms/Slide/ReleaseDate";
 import { RunningTime, Seasons } from "../../atoms/Slide/RunningTime";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
+import { useBookmark } from "../../../utils/Hooks";
 
 const DetailModalContainer = () => {
-  const { addFavoriteContents, removeFavoriteContents } = FavoriteContentsAddRemove();
+  const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
   const contentData = useRecoilValue<IContent>(detailAtom);
   const category = useRecoilValue<string>(categoryAtom);
