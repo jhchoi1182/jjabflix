@@ -15,7 +15,7 @@ export const flex = (justifyContent = "center", alignItems = "center") => {
       case "none":
         return "none";
       default:
-        throw new Error(`유효한 ${justifyContent}값이 입력되지 않았습니다.`);
+        throw new Error(`설정된 ${justifyContent}값이 없습니다. ${justifyContent}를 추가해주세요.`);
     }
   };
 
@@ -28,7 +28,7 @@ export const flex = (justifyContent = "center", alignItems = "center") => {
       case "center":
         return "center";
       default:
-        throw new Error(`유효한 ${alignItems}값이 입력되지 않았습니다.`);
+        throw new Error(`설정된 ${alignItems}값이 없습니다. ${alignItems}를 추가해주세요.`);
     }
   };
 
@@ -40,4 +40,3 @@ export const flex = (justifyContent = "center", alignItems = "center") => {
     align-items: ${ai()};
   `;
 };
-
