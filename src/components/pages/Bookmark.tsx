@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import * as fonts from "../../styles/Fonts";
-import BookmarkListContainer from "../templates/Bookmark/BookmarkListContainer";
+import BookmarkListContainer from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
 import { useMatch } from "react-router-dom";
 import DetailContainer from "../templates/DetailBox/DetailModalContainer";
