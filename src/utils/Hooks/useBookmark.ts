@@ -3,13 +3,13 @@
 import { useRecoilState } from "recoil";
 import { FavoriteAtom } from "../../lib/Atoms";
 import { IContent } from "../../interface/Interface";
-import { setFavoriteLocal } from "../Local";
+import { saveBookmarkDataToLocalStorage } from "../Local";
 
 export const useBookmark = () => {
   const [favoriteContents, setFavoriteContents] = useRecoilState(FavoriteAtom);
   const setFavoriteHandler = (contents: IContent[]) => {
     setFavoriteContents(contents);
-    setFavoriteLocal(contents);
+    saveBookmarkDataToLocalStorage(contents);
   };
 
   const addFavoriteContents = (data: IContent) => {

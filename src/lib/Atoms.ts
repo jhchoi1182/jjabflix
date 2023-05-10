@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { getFavoriteLocal } from "../utils/Local";
+import { bookmarkedLocalStorage } from "../utils/Local";
 import { IContent } from "../interface/Interface";
 
 export const detailAtom = atom<IContent>({
@@ -29,7 +29,7 @@ export const detailAtom = atom<IContent>({
 
 export const FavoriteAtom = atom({
   key: "favoriteContents",
-  default: getFavoriteLocal,
+  default: bookmarkedLocalStorage,
 });
 
 /** 레이아웃id */
