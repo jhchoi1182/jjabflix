@@ -13,13 +13,7 @@ const Bookmark = () => {
     <BookmarkWrapper>
       <Title>내가 찜한 콘텐츠</Title>
       <BookmarkListContainer />
-      <AnimatePresence>
-        {contentsMatch && (
-          <React.Fragment>
-            <DetailContainer />
-          </React.Fragment>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{contentsMatch && <DetailContainer />}</AnimatePresence>
     </BookmarkWrapper>
   );
 };
