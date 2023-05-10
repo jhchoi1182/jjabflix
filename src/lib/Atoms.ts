@@ -1,33 +1,28 @@
-import { atom } from "recoil";
-import { bookmarkedLocalStorage } from "../utils/Local";
+import { atom, selector } from "recoil";
+import { bookmarkedLocalStorage, detailLocalStorage, saveDetailDataToLocalStorage } from "../utils/Local";
 import { IContent } from "../interface/Interface";
 
-export const detailAtom = atom<IContent>({
-  key: "content",
-  default: {
-    adult: false,
-    backdrop_path: "",
-    genres: [],
-    id: 0,
-    original_title: "",
-    overview: "",
-    poster_path: "",
-    release_date: new Date(),
-    seasons: [],
-    runtime: 0,
-    tagline: "",
-    title: "",
-    vote_average: 0,
-    category: "",
-    media_type: "movie",
-    production_companies: [],
-    production_countries: [],
+/** 상세 정보 */
+
+const detailAtom = atom<IContent>({
+  key: "detail",
+  default: detailLocalStorage,
+});
+
+export const detailSelector = selector({
+  key: "detailSelector",
+  get: ({ get }) => {
+    return get(detailAtom);
+  },
+  set: ({ set }, content) => {
+    saveDetailDataToLocalStorage(content);
+    set(detailAtom, content);
   },
 });
 
 /** 즐겨찾기 */
 
-export const FavoriteAtom = atom({
+export const FavoriteAtom = atom<IContent[]>({
   key: "favoriteContents",
   default: bookmarkedLocalStorage,
 });

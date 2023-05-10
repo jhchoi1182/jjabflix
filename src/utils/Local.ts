@@ -1,3 +1,4 @@
+import { DefaultValue } from "recoil";
 import { IContent } from "../interface/Interface";
 
 /** 로컬스토리지를 활용한 즐겨찾기 기능 구현 */
@@ -12,6 +13,6 @@ export const saveBookmarkDataToLocalStorage = (contents: IContent[]) => {
 
 export const detailLocalStorage: IContent = JSON.parse(localStorage.getItem("detail") ?? "{}");
 
-export const saveDetailDataToLocalStorage = (content: IContent) => {
+export const saveDetailDataToLocalStorage = (content: IContent | DefaultValue) => {
   return localStorage.setItem("detail", JSON.stringify(content));
 };

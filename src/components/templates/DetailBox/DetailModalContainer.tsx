@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { FavoriteAtom, categoryAtom, detailAtom } from "../../../lib/Atoms";
+import { FavoriteAtom, categoryAtom, detailSelector } from "../../../lib/Atoms";
 import { posterAPI } from "../../../api/Apis";
 import { bgImg } from "../../atoms/BannerImage";
 import * as fonts from "../../../styles/Fonts";
@@ -20,7 +20,7 @@ const DetailModalContainer = () => {
   const { isHovered, setTooltipHandler, resetTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
-  const contentData = useRecoilValue<IContent>(detailAtom);
+  const contentData = useRecoilValue<IContent>(detailSelector);
   const category = useRecoilValue<string>(categoryAtom);
   const contentsMatch = useMatch("/:dataId");
   const scrollRef = useRef<HTMLDivElement>(null);

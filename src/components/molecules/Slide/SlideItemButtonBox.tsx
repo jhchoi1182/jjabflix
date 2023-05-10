@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as Button from "../Button/CircleButton";
 import { IContent } from "../../../interface/Interface";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { FavoriteAtom, detailAtom } from "../../../lib/Atoms";
+import { FavoriteAtom, detailSelector } from "../../../lib/Atoms";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
 
 interface ISlideItemButtonBox extends IContent {
@@ -16,7 +16,7 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const { isHovered, setTooltipHandler, resetTooltipHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);
-  const setContentData = useSetRecoilState(detailAtom);
+  const setDetail = useSetRecoilState(detailSelector);
   const navigate = useNavigate();
   const { id } = data;
 
@@ -24,7 +24,7 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
 
   const showDetailHandler = () => {
     if (data) {
-      setContentData(data);
+      setDetail(data);
       navigate(`/${id}`);
     }
   };
