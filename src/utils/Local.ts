@@ -4,6 +4,14 @@ import { IContent } from "../interface/Interface";
 
 export const bookmarkedLocalStorage: IContent[] = JSON.parse(localStorage.getItem("favorite") ?? "[]");
 
-export const saveBookmarkDataToLocalStorage = (data: IContent[]) => {
-  return localStorage.setItem("favorite", JSON.stringify(data));
+export const saveBookmarkDataToLocalStorage = (contents: IContent[]) => {
+  return localStorage.setItem("favorite", JSON.stringify(contents));
+};
+
+/** 새로고침 방지용 상세 정보 데이터 */
+
+export const detailLocalStorage: IContent = JSON.parse(localStorage.getItem("detail") ?? "{}");
+
+export const saveDetailDataToLocalStorage = (content: IContent) => {
+  return localStorage.setItem("detail", JSON.stringify(content));
 };
