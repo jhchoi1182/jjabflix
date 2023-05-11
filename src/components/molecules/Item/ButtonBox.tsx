@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import * as Button from "../Button/CircleButton";
 import { IContent } from "../../../interface/Interface";
 import { useRecoilValue, useSetRecoilState } from "recoil";

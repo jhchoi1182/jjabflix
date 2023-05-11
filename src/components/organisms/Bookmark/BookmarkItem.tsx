@@ -1,12 +1,9 @@
 import { Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
-import ImageBanner from "../../molecules/Item/ImageBanner";
-import ButtonBox from "../../molecules/Item/ButtonBox";
-import InfoBox from "../../molecules/Item/InfoBox";
-import TagBox from "../../molecules/Item/TagBox";
 import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
+import { ButtonBox, ImageBanner, InfoBox, TagBox } from "../../molecules/Item";
 
 const contentVariants: Variants = {
   normal: {

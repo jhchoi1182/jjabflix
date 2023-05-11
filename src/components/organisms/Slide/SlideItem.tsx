@@ -5,12 +5,8 @@ import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
-import ImageBanner from "../../molecules/Item/ImageBanner";
-import ButtonBox from "../../molecules/Item/ButtonBox";
-import InfoBox from "../../molecules/Item/InfoBox";
-import TagBox from "../../molecules/Item/TagBox";
-import SkeletonCaption from "../../molecules/Item/SkeletonCaption";
 import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
+import { ButtonBox, ImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 
 const contentVariants: Variants = {
   normal: {
