@@ -20,7 +20,7 @@ const DetailMetaDataRight: React.FC<IDetailMetaDataRight> = ({
 }) => {
   return (
     <WidthContainer>
-      <TagBox>
+      <MetaTagBox>
         <TagLabel>제작사:</TagLabel>
         <EllipsisBox>
           {production_companies.map((company, i) => {
@@ -32,9 +32,9 @@ const DetailMetaDataRight: React.FC<IDetailMetaDataRight> = ({
           })}
         </EllipsisBox>
         <ItalicText onClick={toBottomScrollHandler}>더 보기</ItalicText>
-      </TagBox>
-      <TagBox>
-        <EllipsisBox>
+      </MetaTagBox>
+      <MetaTagBox>
+        <div>
           <TagLabel>장르:</TagLabel>
           {genres.map((genre, i) => {
             if (i === genres.length - 1) {
@@ -43,15 +43,15 @@ const DetailMetaDataRight: React.FC<IDetailMetaDataRight> = ({
               return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
             }
           })}
-        </EllipsisBox>
-      </TagBox>
+        </div>
+      </MetaTagBox>
       {tagline && tagline !== "" && (
-        <TagBox>
-          <EllipsisBox>
+        <MetaTagBox>
+          <div>
             <TagLabel>태그라인:</TagLabel>
             <TagText>{tagline}</TagText>
-          </EllipsisBox>
-        </TagBox>
+          </div>
+        </MetaTagBox>
       )}
     </WidthContainer>
   );
@@ -64,7 +64,7 @@ const WidthContainer = styled.div`
   margin-top: -2.5rem;
 `;
 
-const TagBox = styled.div`
+const MetaTagBox = styled.div`
   display: flex;
   margin-bottom: 1.7rem;
 `;

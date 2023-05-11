@@ -8,7 +8,7 @@ interface ItoBottomScrollHandler extends IContent {
   toBottomScrollHandler: () => void;
 }
 
-const TopDescriptionBox: React.FC<ItoBottomScrollHandler> = ({
+const DetailInformationBox: React.FC<ItoBottomScrollHandler> = ({
   vote_average,
   release_date,
   seasons,
@@ -44,7 +44,7 @@ const TopDescriptionBox: React.FC<ItoBottomScrollHandler> = ({
   );
 };
 
-export default TopDescriptionBox;
+export default DetailInformationBox;
 
 const FlexContainer = styled.div`
   display: flex;

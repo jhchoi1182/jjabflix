@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { IContent } from "../../../../interface/Interface";
-import TopDescriptionBox from "./TopDescriptionBox";
-import BottomDescriptionBox from "./BottomDescriptionBox";
+import DetailInformationBox from "./DetailInformationBox";
+import DetailAboutBox from "./DetailAboutBox";
 
 const Description: React.FC<IContent> = ({ ...contentData }) => {
   /** 더 보기 클릭 시 스크롤 맨 밑으로 */
@@ -16,8 +16,8 @@ const Description: React.FC<IContent> = ({ ...contentData }) => {
 
   return (
     <PaddingContainer>
-      <TopDescriptionBox toBottomScrollHandler={toBottomScrollHandler} {...contentData} />
-      <BottomDescriptionBox ref={scrollRef} {...contentData}/>
+      <DetailInformationBox toBottomScrollHandler={toBottomScrollHandler} {...contentData} />
+      <DetailAboutBox ref={scrollRef} {...contentData}/>
     </PaddingContainer>
   );
 };
