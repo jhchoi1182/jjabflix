@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom, detailSelector } from "../../../lib/Atoms";
 import { IContent } from "../../../interface/Interface";
 import Cover from "../../organisms/Detail/Cover";
-import DescriptionBox from "../../organisms/Detail/Description/DescriptionContainer";
+import Description from "../../organisms/Detail/Description/Description";
+import BackdropOverlay from "../../atoms/Layout/BackdropOverlay";
 
 const DetailModalContainer = () => {
   const contentData = useRecoilValue<IContent>(detailSelector);
   const category = useRecoilValue<string>(categoryAtom);
 
   const contentsMatch = useMatch("/:dataId");
-  const navigate = useNavigate();
+
 
   const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
@@ -31,29 +32,20 @@ const DetailModalContainer = () => {
   }, []);
 
   return (
-    <BackdropOverlay onClick={() => navigate(-1)}>
-      <Container layoutId={category + contentsMatch?.params.dataId} onClick={stopPropagationHandler}>
+    <BackdropOverlay>
+      <ContentsContainer layoutId={category + contentsMatch?.params.dataId} onClick={stopPropagationHandler}>
         <Cover {...contentData} />
-        <DescriptionBox {...contentData} />
-      </Container>
+        <Description {...contentData} />
+      </ContentsContainer>
     </BackdropOverlay>
   );
 };
 
 export default DetailModalContainer;
 
-const BackdropOverlay = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: auto;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.5);
-`;
 
-const Container = styled(motion.div)`
+
+const ContentsContainer = styled(motion.div)`
   width: 902.5px;
   margin: 30px auto 0px;
   background-color: ${(props) => props.theme.black.darker};
