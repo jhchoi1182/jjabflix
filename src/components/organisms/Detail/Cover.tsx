@@ -6,16 +6,15 @@ import { useBookmark, useTooltip } from "../../../utils/Hooks";
 import { useRecoilValue } from "recoil";
 import { IContent } from "../../../interface/Interface";
 import { FavoriteAtom } from "../../../lib/Atoms";
-import { useNavigate } from "react-router-dom";
 import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
 import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";
+import CloseButton from "../../atoms/Button/CloseButton";
 
 const Cover: React.FC<IContent> = ({ ...contentData }) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
-  const navigate = useNavigate();
 
   const { id, backdrop_path, poster_path, title, name } = contentData;
 
@@ -24,7 +23,7 @@ const Cover: React.FC<IContent> = ({ ...contentData }) => {
 
   return (
     <CoverBox bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
-      <Close onClick={() => navigate(-1)}>X</Close>
+      <CloseButton top="17px" right="17px" size="detailButton" />
       <Title>{title || name}</Title>
       <ButtonBox>
         <Play buttonSize="detailButton" />
@@ -65,20 +64,6 @@ const CoverBox = styled.div<{ bgimg: string }>`
   padding: 53px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
-`;
-
-const Close = styled.button`
-  position: absolute;
-  top: 17px;
-  right: 17px;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 100%;
-  background-color: ${(props) => props.theme.black.darker};
-  color: ${(props) => props.theme.white.lighter};
-  font-size: 2rem;
-  border: none;
-  cursor: pointer;
 `;
 
 const Title = styled.h3`
