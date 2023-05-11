@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { categoryAtom, detailSelector } from "../../../lib/Atoms";
 import { IContent } from "../../../interface/Interface";
 import Cover from "../../organisms/Detail/Cover";
-import DescriptionBox from "../../organisms/Detail/DescriptionBox";
+import DescriptionBox from "../../organisms/Detail/Description/DescriptionContainer";
 
 const DetailModalContainer = () => {
   const contentData = useRecoilValue<IContent>(detailSelector);
