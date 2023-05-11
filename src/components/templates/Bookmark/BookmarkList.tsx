@@ -4,21 +4,21 @@ import BookmarkItem from "../../organisms/Bookmark/BookmarkItem";
 import styled from "styled-components";
 import { FavoriteAtom } from "../../../lib/atoms";
 
-const BookmarkListContainer = () => {
+const BookmarkList = () => {
   const favoriteContents = useRecoilValue(FavoriteAtom);
 
   return (
-    <BookmarkContainer>
+    <BookmarkListContainer>
       {favoriteContents?.map((data) => (
         <BookmarkItem key={data.id} {...data} />
       ))}
-    </BookmarkContainer>
+    </BookmarkListContainer>
   );
 };
 
-export default BookmarkListContainer;
+export default BookmarkList;
 
-const BookmarkContainer = styled.div`
+const BookmarkListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 78px;

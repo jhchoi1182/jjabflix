@@ -1,30 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 import * as fonts from "../../styles/Fonts";
-import BookmarkListContainer from "../templates/Bookmark/BookmarkList";
+import BookmarkList from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
 import { useMatch } from "react-router-dom";
 import DetailContainer from "../templates/DetailModal/DetailModalContainer";
+import { ChildrenProps } from "../../interface/type";
 
-const Bookmark = () => {
+const Bookmark: React.FC & {
+  Wrapper: React.FC<ChildrenProps>;
+  Title: React.FC<ChildrenProps>;
+} = () => {
   const contentsMatch = useMatch("/bookmark/:dataId");
 
   return (
-    <BookmarkWrapper>
-      <Title>내가 찜한 콘텐츠</Title>
-      <BookmarkListContainer />
+    <Bookmark.Wrapper>
+      <Bookmark.Title>내가 찜한 콘텐츠</Bookmark.Title>
+      <BookmarkList />
       <AnimatePresence>{contentsMatch && <DetailContainer />}</AnimatePresence>
-    </BookmarkWrapper>
+    </Bookmark.Wrapper>
   );
 };
 
 export default Bookmark;
 
-const BookmarkWrapper = styled.div`
+Bookmark.Wrapper = styled.div`
   padding: 76px 60px;
 `;
 
-const Title = styled.h1`
+Bookmark.Title = styled.h1`
   ${fonts.large}
   ${fonts.bold}
   padding-bottom: 8.5%;
