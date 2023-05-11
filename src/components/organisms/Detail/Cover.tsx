@@ -18,6 +18,8 @@ const Cover: React.FC<IContent> = ({ ...contentData }) => {
   const navigate = useNavigate();
 
   const { id, backdrop_path, poster_path, title, name } = contentData;
+
+  /** 즐겨찾기된 콘텐츠인지 */
   const isAdded = favoriteContents.some((content) => content.id === id);
 
   return (

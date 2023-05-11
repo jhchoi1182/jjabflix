@@ -1,4 +1,4 @@
-/** 즐겨찾기 */
+/** 즐겨찾기 기능 커스텀훅 */
 
 import { useRecoilState } from "recoil";
 import { FavoriteAtom } from "../../lib/Atoms";
