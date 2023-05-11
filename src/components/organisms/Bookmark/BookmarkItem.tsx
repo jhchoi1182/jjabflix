@@ -1,12 +1,12 @@
 import { Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
-import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";
-import SlideItemBannerImage from "../../molecules/Item/ImageBanner";
+import ImageBanner from "../../molecules/Item/ImageBanner";
 import ButtonBox from "../../molecules/Item/ButtonBox";
 import InfoBox from "../../molecules/Item/InfoBox";
 import TagBox from "../../molecules/Item/TagBox";
 import { IContent } from "../../../interface/Interface";
+import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
 
 const contentVariants: Variants = {
   normal: {
@@ -48,18 +48,18 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
       transition={{ type: "tween" }}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <SlideItemBannerImage
+      <ImageBanner
         onMouseEnter={() => setIsHovered(true)}
         backdrop={backdrop_path}
         poster={poster_path}
         title={title}
         name={name}
       />
-      <SlideItemCaptionSection variants={infoVariants}>
+      <ItemCaptionWrapper variants={infoVariants}>
         <ButtonBox {...data} />
         <InfoBox {...data} />
         <TagBox genres={data?.genres} />
-      </SlideItemCaptionSection>
+      </ItemCaptionWrapper>
     </HoverBigScaleContainer>
   );
 };

@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import { small2 } from "../../../../styles/Fonts";
 import { flex } from "../../../../styles/css";
+import { motion } from "framer-motion";
+
+/** 콘텐츠 아이템 상세 정보 레이아웃 */
+export const ItemCaptionWrapper = styled(motion.div)`
+  padding: 1.5rem;
+  background-color: ${(props) => props.theme.black.veryDark};
+  margin-top: -0.1rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+`;
 
 /** ButtonBox의 레이아웃 */
 export const FlexPaddingContainer = styled.div`

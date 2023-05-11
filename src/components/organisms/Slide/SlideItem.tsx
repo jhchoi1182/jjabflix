@@ -5,12 +5,12 @@ import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
-import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";
 import ImageBanner from "../../molecules/Item/ImageBanner";
 import ButtonBox from "../../molecules/Item/ButtonBox";
 import InfoBox from "../../molecules/Item/InfoBox";
 import TagBox from "../../molecules/Item/TagBox";
 import SkeletonCaption from "../../molecules/Item/SkeletonCaption";
+import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
 
 const contentVariants: Variants = {
   normal: {
@@ -90,7 +90,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
         title={title}
         name={name}
       />
-      <SlideItemCaptionSection variants={infoVariants}>
+      <ItemCaptionWrapper variants={infoVariants}>
         {isError ? (
           <div>에러</div>
         ) : data ? (
@@ -102,7 +102,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
         ) : (
           <SkeletonCaption />
         )}
-      </SlideItemCaptionSection>
+      </ItemCaptionWrapper>
     </SlideContent>
   );
 };
