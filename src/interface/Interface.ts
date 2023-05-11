@@ -3,14 +3,14 @@ export interface Genre {
   name: string;
 }
 
-interface productionCompanies {
+export interface productionCompanies {
   id: number;
   logo_path: string;
   name: string;
   origin_country: string;
 }
 
-interface productionCountries {
+export interface productionCountries {
   name: string;
 }
 
