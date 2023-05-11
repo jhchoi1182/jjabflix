@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { useMatch } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { categoryAtom, detailSelector } from "../../../lib/Atoms";
+import { categoryAtom, detailSelector } from "../../../lib/atoms";
 import { IContent } from "../../../interface/Interface";
 import Cover from "../../organisms/Detail/Cover";
-import Description from "../../organisms/Detail/Description/Description";
+import DescriptionContainer from "../../organisms/Detail/Description/DescriptionContainer";
 import BackdropOverlay from "../../atoms/Layout/BackdropOverlay";
 
 const DetailModalContainer = () => {
@@ -14,7 +14,6 @@ const DetailModalContainer = () => {
   const category = useRecoilValue<string>(categoryAtom);
 
   const contentsMatch = useMatch("/:dataId");
-
 
   const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
@@ -35,15 +34,13 @@ const DetailModalContainer = () => {
     <BackdropOverlay>
       <ContentsContainer layoutId={category + contentsMatch?.params.dataId} onClick={stopPropagationHandler}>
         <Cover {...contentData} />
-        <Description {...contentData} />
+        <DescriptionContainer {...contentData} />
       </ContentsContainer>
     </BackdropOverlay>
   );
 };
 
 export default DetailModalContainer;
-
-
 
 const ContentsContainer = styled(motion.div)`
   width: 902.5px;

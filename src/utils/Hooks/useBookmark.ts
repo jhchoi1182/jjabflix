@@ -1,7 +1,7 @@
 /** 즐겨찾기 기능 커스텀훅 */
 
 import { useRecoilState } from "recoil";
-import { FavoriteAtom } from "../../lib/Atoms";
+import { FavoriteAtom } from "../../lib/atoms";
 import { IContent } from "../../interface/Interface";
 import { saveBookmarkDataToLocalStorage } from "../Local";
 

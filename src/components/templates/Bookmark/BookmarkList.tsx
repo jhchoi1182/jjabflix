@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import BookmarkItem from "../../organisms/Bookmark/BookmarkItem";
 import styled from "styled-components";
-import { FavoriteAtom } from "../../../lib/Atoms";
+import { FavoriteAtom } from "../../../lib/atoms";
 
 const BookmarkListContainer = () => {
   const favoriteContents = useRecoilValue(FavoriteAtom);

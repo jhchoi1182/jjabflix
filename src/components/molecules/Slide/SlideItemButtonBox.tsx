@@ -4,7 +4,7 @@ import * as Button from "../Button/CircleButton";
 import { IContent } from "../../../interface/Interface";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { FavoriteAtom, detailSelector } from "../../../lib/Atoms";
+import { FavoriteAtom, detailSelector } from "../../../lib/atoms";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
 
 interface ISlideItemButtonBox extends IContent {

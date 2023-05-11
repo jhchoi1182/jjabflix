@@ -4,7 +4,7 @@ import { IContent } from "../../../../interface/Interface";
 import DetailInformationBox from "./DetailInformationBox";
 import DetailAboutBox from "./DetailAboutBox";
 
-const Description: React.FC<IContent> = ({ ...contentData }) => {
+const DescriptionContainer: React.FC<IContent> = ({ ...contentData }) => {
   /** 더 보기 클릭 시 스크롤 맨 밑으로 */
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +22,7 @@ const Description: React.FC<IContent> = ({ ...contentData }) => {
   );
 };
 
-export default Description;
+export default DescriptionContainer;
 
 const PaddingContainer = styled.section`
   padding: 3.5rem 5rem;

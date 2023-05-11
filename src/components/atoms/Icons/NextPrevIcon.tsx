@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { categoryAtom } from "../../../lib/Atoms";
+import { categoryAtom } from "../../../lib/atoms";
 
 export interface ArrowProps {
   direction: "prev" | "next";

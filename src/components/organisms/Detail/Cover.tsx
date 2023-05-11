@@ -5,7 +5,7 @@ import { big1, bold } from "../../../styles/Fonts";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
 import { useRecoilValue } from "recoil";
 import { IContent } from "../../../interface/Interface";
-import { FavoriteAtom } from "../../../lib/Atoms";
+import { FavoriteAtom } from "../../../lib/atoms";
 import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
 import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";

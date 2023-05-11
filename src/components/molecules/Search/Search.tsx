@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { flex } from "../../../styles/Css";
+import { flex } from "../../../styles/css";
 
 interface IForm {
   keyword: string;

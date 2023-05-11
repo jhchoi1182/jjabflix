@@ -41,7 +41,7 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <BookmarkContent
+    <HoverBigScaleContainer
       variants={contentVariants}
       whileHover={isHovered ? "hover" : "normal"}
       initial="normal"
@@ -60,13 +60,13 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
         <SlideItemInfoBox {...data} />
         <SlideItemTagBox genres={data?.genres} />
       </SlideItemCaptionSection>
-    </BookmarkContent>
+    </HoverBigScaleContainer>
   );
 };
 
 export default BookmarkItem;
 
-const BookmarkContent = styled(motion.div)`
+const HoverBigScaleContainer = styled(motion.div)`
   margin-bottom: -129px;
   &:nth-child(6n + 1) {
     transform-origin: center left;

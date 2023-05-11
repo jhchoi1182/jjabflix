@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { flex } from "../../../styles/Css";
+import { flex } from "../../../styles/css";
 
 export interface IButtonEventProps {
   onClick?: () => void;

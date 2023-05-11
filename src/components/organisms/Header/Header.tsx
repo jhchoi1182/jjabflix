@@ -1,7 +1,7 @@
 import { motion, useScroll, useMotionValueEvent, Variants, useAnimation } from "framer-motion";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { flex } from "../../../styles/Css";
+import { flex } from "../../../styles/css";
 import Search from "../../molecules/Search/Search";
 
 const navVariants: Variants = {

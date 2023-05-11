@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../api/Apis";
-import DetailModalContainer from "../templates/DetailBox/DetailModalContainer";
+import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";

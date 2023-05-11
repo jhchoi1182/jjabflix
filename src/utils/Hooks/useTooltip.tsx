@@ -18,7 +18,7 @@ interface IshowTooltipHandler {
   size: "slideTooltip" | "detailTooltip";
 }
 
-const useTooltip = (): IUseTooltip => {
+export const useTooltip = (): IUseTooltip => {
   const [isHovered, setIsHovered] = useState(false);
   const [tooltip, setTooltip] = useState<IshowTooltipHandler>({ text: "", top: 0, x: 0, size: "slideTooltip" });
 
@@ -52,8 +52,6 @@ const useTooltip = (): IUseTooltip => {
     renderTooltip,
   };
 };
-
-export default useTooltip;
 
 const slideTooltip = css`
   padding: 7px 20px;

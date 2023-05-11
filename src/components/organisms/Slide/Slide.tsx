@@ -9,7 +9,7 @@ import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import DummyItem from "../../atoms/Slide/DummyItem";
 import { useSetRecoilState } from "recoil";
-import { categoryAtom } from "../../../lib/Atoms";
+import { categoryAtom } from "../../../lib/atoms";
 import { useOutletContext } from "react-router-dom";
 
 type VariantsProps = {

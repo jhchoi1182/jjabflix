@@ -1,7 +1,7 @@
 import React from "react";
 import * as fonts from "../../../styles/Fonts";
 import styled from "styled-components";
-import { flex } from "../../../styles/Css";
+import { flex } from "../../../styles/css";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { IContent } from "../../../interface/Interface";
 import Rating from "../../atoms/Slide/Rating";

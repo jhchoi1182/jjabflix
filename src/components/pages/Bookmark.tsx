@@ -4,7 +4,7 @@ import * as fonts from "../../styles/Fonts";
 import BookmarkListContainer from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
 import { useMatch } from "react-router-dom";
-import DetailContainer from "../templates/DetailBox/DetailModalContainer";
+import DetailContainer from "../templates/DetailModal/DetailModalContainer";
 
 const Bookmark = () => {
   const contentsMatch = useMatch("/bookmark/:dataId");

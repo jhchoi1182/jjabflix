@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { posterAPI } from "../../../api/Apis";
-import { flex } from "../../../styles/Css";
+import { flex } from "../../../styles/css";
 import * as fonts from "../../../styles/Fonts";
 import { bgImg } from "../../atoms/BannerImage";
 
