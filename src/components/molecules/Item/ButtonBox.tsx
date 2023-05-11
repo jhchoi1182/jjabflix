@@ -6,13 +6,14 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { FavoriteAtom, detailSelector } from "../../../lib/atoms";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
+import { FlexDivLeft, FlexDivRight, FlexPaddingContainer } from "../../atoms/Layout/Item/ItemCaptionLayouts";
 
-interface ISlideItemButtonBox extends IContent {
+interface IButtonBox extends IContent {
   onMouseEnter?: () => void;
   skeleton?: boolean;
 }
 
-const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
+const ButtonBox: React.FC<IButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);
@@ -30,8 +31,8 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
   };
 
   return (
-    <ButtonBox onMouseEnter={onMouseEnter}>
-      <FlexLeftDiv>
+    <FlexPaddingContainer onMouseEnter={onMouseEnter}>
+      <FlexDivLeft>
         <Button.CirclePlay buttonSize="slideButton" />
         {isAdded ? (
           <Button.CircleCheck
@@ -50,8 +51,8 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
             buttonSize="slideButton"
           />
         )}
-      </FlexLeftDiv>
-      <FlexRightBox>
+      </FlexDivLeft>
+      <FlexDivRight>
         <Button.CircleDetail
           data-tooltip-text="상세 정보"
           onMouseEnter={(event) => showTooltipHandler({ x: 225, size: "slideTooltip" }, event)}
@@ -59,25 +60,10 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
           onClick={showDetailHandler}
           buttonSize="slideButton"
         />
-      </FlexRightBox>
+      </FlexDivRight>
       {isHovered && renderTooltip()}
-    </ButtonBox>
+    </FlexPaddingContainer>
   );
 };
 
-export default SlideItemButtonBox;
-
-export const ButtonBox = styled.div`
-  display: flex;
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
-`;
-
-export const FlexLeftDiv = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
-export const FlexRightBox = styled.div`
-  margin-left: auto;
-`;
+export default ButtonBox;

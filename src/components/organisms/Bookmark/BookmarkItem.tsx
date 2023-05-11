@@ -2,10 +2,10 @@ import { Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
 import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";
-import SlideItemBannerImage from "../../molecules/Slide/SlideItemImageBanner";
-import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
-import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
-import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
+import SlideItemBannerImage from "../../molecules/Item/ImageBanner";
+import ButtonBox from "../../molecules/Item/ButtonBox";
+import InfoBox from "../../molecules/Item/InfoBox";
+import TagBox from "../../molecules/Item/TagBox";
 import { IContent } from "../../../interface/Interface";
 
 const contentVariants: Variants = {
@@ -56,9 +56,9 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
         name={name}
       />
       <SlideItemCaptionSection variants={infoVariants}>
-        <SlideItemButtonBox {...data} />
-        <SlideItemInfoBox {...data} />
-        <SlideItemTagBox genres={data?.genres} />
+        <ButtonBox {...data} />
+        <InfoBox {...data} />
+        <TagBox genres={data?.genres} />
       </SlideItemCaptionSection>
     </HoverBigScaleContainer>
   );

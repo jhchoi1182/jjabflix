@@ -6,11 +6,11 @@ import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import SlideItemCaptionSection from "../../atoms/Layout/SlideCaptionSection";
-import SlideItemImageBanner from "../../molecules/Slide/SlideItemImageBanner";
-import SlideItemButtonBox from "../../molecules/Slide/SlideItemButtonBox";
-import SlideItemInfoBox from "../../molecules/Slide/SlideItemInfoBox";
-import SlideItemTagBox from "../../molecules/Slide/SlideItemTagBox";
-import SkeletonCaption from "../../molecules/Slide/SkeletonCaption";
+import ImageBanner from "../../molecules/Item/ImageBanner";
+import ButtonBox from "../../molecules/Item/ButtonBox";
+import InfoBox from "../../molecules/Item/InfoBox";
+import TagBox from "../../molecules/Item/TagBox";
+import SkeletonCaption from "../../molecules/Item/SkeletonCaption";
 
 const contentVariants: Variants = {
   normal: {
@@ -83,7 +83,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <SlideItemImageBanner
+      <ImageBanner
         onMouseEnter={() => control.start("hover")}
         backdrop={backdrop_path}
         poster={poster_path}
@@ -95,14 +95,9 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
           <div>에러</div>
         ) : data ? (
           <React.Fragment>
-            <SlideItemButtonBox
-              onMouseEnter={setButtonOpacityHandler}
-              {...data}
-              media_type={media_type}
-              category={category}
-            />
-            <SlideItemInfoBox {...data} />
-            <SlideItemTagBox genres={data?.genres} />
+            <ButtonBox onMouseEnter={setButtonOpacityHandler} {...data} media_type={media_type} category={category} />
+            <InfoBox {...data} />
+            <TagBox genres={data?.genres} />
           </React.Fragment>
         ) : (
           <SkeletonCaption />
