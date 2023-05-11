@@ -8,6 +8,7 @@ import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
 import { ButtonBox, ImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 
+/** 아이템 전체 Variants */
 const contentVariants: Variants = {
   normal: {
     scale: 1,
@@ -24,7 +25,8 @@ const contentVariants: Variants = {
   },
 };
 
-const infoVariants: Variants = {
+/** 초기에 보이지 말아야 할 정보 박스에 대한 Variants */
+const captionVariants: Variants = {
   normal: {
     opacity: 0,
     pointerEvents: "none",
@@ -86,7 +88,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
         title={title}
         name={name}
       />
-      <ItemCaptionWrapper variants={infoVariants}>
+      <ItemCaptionWrapper variants={captionVariants}>
         {isError ? (
           <div>에러</div>
         ) : data ? (
