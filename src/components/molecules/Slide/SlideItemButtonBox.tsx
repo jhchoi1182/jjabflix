@@ -14,7 +14,7 @@ interface ISlideItemButtonBox extends IContent {
 
 const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
-  const { isHovered, setTooltipHandler, resetTooltipHandler, renderTooltip } = useTooltip();
+  const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);
   const setDetail = useSetRecoilState(detailSelector);
   const navigate = useNavigate();
@@ -36,16 +36,16 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
         {isAdded ? (
           <Button.CircleCheck
             data-tooltip-text="내가 찜한 콘텐츠에서 삭제"
-            onMouseEnter={(event) => setTooltipHandler({ x: -37.5, size: "slideTooltip" }, event)}
-            onMouseLeave={resetTooltipHandler}
+            onMouseEnter={(event) => showTooltipHandler({ x: -37.5, size: "slideTooltip" }, event)}
+            onMouseLeave={disappearTooltipHandler}
             onClick={() => removeFavoriteContents(data)}
             buttonSize="slideButton"
           />
         ) : (
           <Button.CircleAdd
             data-tooltip-text="내가 찜한 콘텐츠에 추가"
-            onMouseEnter={(event) => setTooltipHandler({ x: -30, size: "slideTooltip" }, event)}
-            onMouseLeave={resetTooltipHandler}
+            onMouseEnter={(event) => showTooltipHandler({ x: -30, size: "slideTooltip" }, event)}
+            onMouseLeave={disappearTooltipHandler}
             onClick={() => addFavoriteContents(data)}
             buttonSize="slideButton"
           />
@@ -54,8 +54,8 @@ const SlideItemButtonBox: React.FC<ISlideItemButtonBox> = ({ onMouseEnter, skele
       <FlexRightBox>
         <Button.CircleDetail
           data-tooltip-text="상세 정보"
-          onMouseEnter={(event) => setTooltipHandler({ x: 225, size: "slideTooltip" }, event)}
-          onMouseLeave={resetTooltipHandler}
+          onMouseEnter={(event) => showTooltipHandler({ x: 225, size: "slideTooltip" }, event)}
+          onMouseLeave={disappearTooltipHandler}
           onClick={showDetailHandler}
           buttonSize="slideButton"
         />

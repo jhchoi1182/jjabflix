@@ -2,16 +2,16 @@
 
 import React, { useState, MouseEvent } from "react";
 import styled, { css } from "styled-components";
-import { bold, mid1, mid2rem, normal2, normal3 } from "../../styles/Fonts";
+import { bold, mid1, normal2 } from "../../styles/Fonts";
 
 interface IUseTooltip {
   isHovered: boolean;
-  setTooltipHandler: (x: IsetTooltipHandler, event: MouseEvent<HTMLElement>) => void;
-  resetTooltipHandler: () => void;
+  showTooltipHandler: (x: IshowTooltipHandler, event: MouseEvent<HTMLElement>) => void;
+  disappearTooltipHandler: () => void;
   renderTooltip: () => React.ReactNode;
 }
 
-interface IsetTooltipHandler {
+interface IshowTooltipHandler {
   text?: string;
   top?: number;
   x: number;
@@ -20,9 +20,9 @@ interface IsetTooltipHandler {
 
 const useTooltip = (): IUseTooltip => {
   const [isHovered, setIsHovered] = useState(false);
-  const [tooltip, setTooltip] = useState<IsetTooltipHandler>({ text: "", top: 0, x: 0, size: "slideTooltip" });
+  const [tooltip, setTooltip] = useState<IshowTooltipHandler>({ text: "", top: 0, x: 0, size: "slideTooltip" });
 
-  const setTooltipHandler = ({ top, x, size }: IsetTooltipHandler, event: MouseEvent<HTMLElement>) => {
+  const showTooltipHandler = ({ top, x, size }: IshowTooltipHandler, event: MouseEvent<HTMLElement>) => {
     setIsHovered(true);
     setTooltip({
       text: event.currentTarget.dataset.tooltipText ?? "",
@@ -32,7 +32,7 @@ const useTooltip = (): IUseTooltip => {
     });
   };
 
-  const resetTooltipHandler = () => {
+  const disappearTooltipHandler = () => {
     setIsHovered(false);
     setTooltip({ text: "", top: 0, x: 0, size: "slideTooltip" });
   };
@@ -47,8 +47,8 @@ const useTooltip = (): IUseTooltip => {
 
   return {
     isHovered,
-    setTooltipHandler,
-    resetTooltipHandler,
+    showTooltipHandler,
+    disappearTooltipHandler,
     renderTooltip,
   };
 };
@@ -66,7 +66,7 @@ const detailTooltip = css`
 `;
 const tooltipSize = { slideTooltip, detailTooltip };
 
-const TooltipBox = styled.div<IsetTooltipHandler>`
+const TooltipBox = styled.div<IshowTooltipHandler>`
   position: absolute;
   background-color: ${(props) => props.theme.white.lighter};
   opacity: 0.95;

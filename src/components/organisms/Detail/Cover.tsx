@@ -12,7 +12,7 @@ import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";
 
 const Cover: React.FC<IContent> = ({ ...contentData }) => {
-  const { isHovered, setTooltipHandler, resetTooltipHandler, renderTooltip } = useTooltip();
+  const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
   const navigate = useNavigate();
@@ -29,16 +29,16 @@ const Cover: React.FC<IContent> = ({ ...contentData }) => {
         {isAdded ? (
           <CircleCheck
             data-tooltip-text="내가 찜한 콘텐츠에서 삭제"
-            onMouseEnter={(event) => setTooltipHandler({ top: 390, x: 130, size: "detailTooltip" }, event)}
-            onMouseLeave={resetTooltipHandler}
+            onMouseEnter={(event) => showTooltipHandler({ top: 390, x: 130, size: "detailTooltip" }, event)}
+            onMouseLeave={disappearTooltipHandler}
             buttonSize="detailButton"
             onClick={() => removeFavoriteContents(contentData)}
           />
         ) : (
           <CircleAdd
             data-tooltip-text="내가 찜한 콘텐츠에 추가"
-            onMouseEnter={(event) => setTooltipHandler({ top: 390, x: 121, size: "detailTooltip" }, event)}
-            onMouseLeave={resetTooltipHandler}
+            onMouseEnter={(event) => showTooltipHandler({ top: 390, x: 121, size: "detailTooltip" }, event)}
+            onMouseLeave={disappearTooltipHandler}
             buttonSize="detailButton"
             onClick={() => addFavoriteContents(contentData)}
           />
