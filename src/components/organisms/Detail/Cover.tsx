@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { bgImg } from "../../atoms/UI/BannerImage";
 import { big1, bold } from "../../../styles/Fonts";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
 import { useRecoilValue } from "recoil";
@@ -11,6 +10,7 @@ import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";
 import CloseButton from "../../atoms/Button/CloseButton";
 import { ChildrenProps } from "../../../interface/type";
+import { ContentCoverImage } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 
 const Cover: React.FC<IContent> & {
   Title: React.FC<ChildrenProps>;
@@ -62,7 +62,7 @@ export default Cover;
 
 const CoverBox = styled.div<{ bgimg: string }>`
   position: relative;
-  ${bgImg}
+  ${ContentCoverImage}
   background-image: linear-gradient(rgba(24, 24, 24, 0), rgba(24, 24, 24, 0), rgba(24, 24, 24, 1)),
     url(${(props) => props.bgimg});
   height: 500px;

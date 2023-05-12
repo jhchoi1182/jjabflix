@@ -1,7 +1,15 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { small2 } from "../../../../styles/Fonts";
 import { flex } from "../../../../styles/css";
 import { motion } from "framer-motion";
+
+/** 아이템 콘텐츠 커버 이미지 */
+export const ContentCoverImage = css<{ bgimg: string }>`
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+    url(${(props) => props.bgimg});
+  background-size: cover;
+  background-position: center center;
+`;
 
 /** 콘텐츠 아이템 상세 정보 레이아웃 */
 export const ItemCaptionWrapper = styled(motion.div)`

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { posterAPI } from "../../../api/Apis";
 import { flex } from "../../../styles/css";
 import * as fonts from "../../../styles/Fonts";
-import { bgImg } from "../../atoms/UI/BannerImage";
+import { ContentCoverImage } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 
 type ImageBannerProps = {
   backdrop: string;
@@ -25,7 +25,7 @@ const ImageBanner: React.FC<ImageBannerProps> = ({ onMouseEnter, onMouseLeave, b
 export default ImageBanner;
 
 const Image = styled(motion.div)<{ bgimg: string }>`
-  ${bgImg}
+  ${ContentCoverImage}
   height: 170px;
   padding: 12px 10px;
   border-top-left-radius: 5px;
