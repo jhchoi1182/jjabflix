@@ -27,7 +27,7 @@ const ButtonBox: React.FC<IButtonBox> = ({ onMouseEnter, skeleton, ...data }) =>
   const showDetailHandler = () => {
     if (data) {
       setDetail(data);
-      navigate(`/${id}`);
+      navigate(`${id}`);
     }
   };
 

@@ -6,20 +6,37 @@ import * as Button from "../../molecules/Button/RectangleButton";
 import * as fonts from "../../../styles/Fonts";
 import { ChildrenProps } from "../../../interface/type";
 import { useTooltip } from "../../../utils/Hooks";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { detailSelector } from "../../../lib/atoms";
+import { categoryAtom } from "../../../lib/atoms";
 
 export type MainBannerProps = {
   id: number;
   media_type: string;
+  category: string;
 };
 
 const MainBanner: React.FC<MainBannerProps> & {
   Title: React.FC<ChildrenProps>;
   Overview: React.FC<ChildrenProps>;
   BackgroundImage: React.FC<ChildrenProps>;
-} = ({ id, media_type }) => {
+} = ({ id, media_type, category }) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
+  const setHoveredCategory = useSetRecoilState(categoryAtom);
+  const setDetail = useSetRecoilState(detailSelector);
+  const navigate = useNavigate();
   const { data } = useQuery<IContent | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
   const { title, name, overview } = data || {};
+
+  /** 상세 정보 모달 띄우기 */
+  const showDetailHandler = () => {
+    if (data) {
+      setHoveredCategory(category);
+      setDetail(data);
+      navigate(`${id}`);
+    }
+  };
 
   return (
     <MainBanner.BackgroundImage>
@@ -32,7 +49,7 @@ const MainBanner: React.FC<MainBannerProps> & {
           onMouseLeave={disappearTooltipHandler}
           buttonSize="mainButton"
         />
-        <Button.Detail buttonSize="mainButton" />
+        <Button.Detail onClick={showDetailHandler} buttonSize="mainButton" />
       </ButtonBox>
       {isHovered && renderTooltip()}
     </MainBanner.BackgroundImage>

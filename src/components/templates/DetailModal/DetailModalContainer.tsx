@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { useMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom, detailSelector } from "../../../lib/atoms";
@@ -14,8 +14,7 @@ const DetailModalContainer = () => {
 
   /** 콘텐츠 아이템 눌렀을 때 해당 아이템의 layoutId와 상세 정보 모달의 layoutId를 매칭시켜 자연스럽게 모달로 연결되도록 애니메이션 구현 */
   const category = useRecoilValue<string>(categoryAtom);
-  const contentsMatch = useMatch("/:dataId");
-
+  const { dataId } = useParams();
   /** 배경 눌렀을 때 navigate(-1)되는 이벤트 캡쳐링 막기 */
   const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
@@ -35,7 +34,7 @@ const DetailModalContainer = () => {
 
   return (
     <BackdropOverlay>
-      <ContentsContainer layoutId={category + contentsMatch?.params.dataId} onClick={stopPropagationHandler}>
+      <ContentsContainer layoutId={category + dataId} onClick={stopPropagationHandler}>
         <Cover {...contentData} />
         <DescriptionContainer {...contentData} />
       </ContentsContainer>

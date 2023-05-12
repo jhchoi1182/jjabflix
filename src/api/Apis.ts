@@ -1,5 +1,3 @@
-import { MainBannerProps } from "../components/organisms/MainBanner/MainBanner";
-
 const BASE_URL = "https://api.themoviedb.org/3";
 const API = process.env.REACT_APP_API;
 
@@ -23,7 +21,12 @@ export const posterAPI = (path?: string, size?: string) => {
   return `https://image.tmdb.org/t/p/${size ?? "original"}/${path}`;
 };
 
-export const detailAPI = ({ id, media_type }: MainBannerProps) => {
+type detailAPIParameter = {
+  id: number;
+  media_type: string;
+};
+
+export const detailAPI = ({ id, media_type }: detailAPIParameter) => {
   if (id === 0) return;
   if (media_type === "movie")
     return fetch(`${BASE_URL}/movie/${id}?api_key=${API}&language=ko`).then((response) => response.json());

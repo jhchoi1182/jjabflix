@@ -38,7 +38,7 @@ const Home = () => {
       ) : (
         <React.Fragment>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-            <MainBanner id={id} media_type={mediaType} />
+            <MainBanner id={id} media_type={mediaType} category="trending" />
           </BannerCoverImage>
           <SlideContainer>
             <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
