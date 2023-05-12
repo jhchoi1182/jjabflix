@@ -2,14 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { ChildrenProps } from "../../../interface/type";
 
-const SlideContainer: React.FC<ChildrenProps> = ({ children }) => {
-  return <ColumnContainer>{children}</ColumnContainer>;
+type SlideContainerProps = {
+  marginTop?: string;
+};
+
+const SlideContainer: React.FC<ChildrenProps & SlideContainerProps> = ({ marginTop, children }) => {
+  return <ColumnContainer marginTop={marginTop}>{children}</ColumnContainer>;
 };
 
 export default SlideContainer;
 
-const ColumnContainer = styled.section`
+const ColumnContainer = styled.section<SlideContainerProps>`
   display: flex;
   flex-direction: column;
+  margin-top: ${(props) => props.marginTop};
   margin-bottom: -40px;
 `;
