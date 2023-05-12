@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
@@ -9,8 +9,8 @@ import Slide from "../organisms/Slide/Slide";
 import { useOutletContext } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
-import styled from "styled-components";
 import Footer from "../organisms/Footer/Footer";
+import SlideContainer from "../atoms/Slide/SlideContainer";
 
 const Home = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -46,9 +46,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const SlideContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: -40px;
-`;
