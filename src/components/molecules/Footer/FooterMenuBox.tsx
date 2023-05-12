@@ -2,69 +2,67 @@ import React from "react";
 import styled from "styled-components";
 import { normal1 } from "../../../styles/Fonts";
 
+const menuItems = [
+  {
+    href: "https://www.netflix.com/browse/audio-description",
+    text: "화면 해설",
+  },
+  {
+    href: "https://help.netflix.com/ko/",
+    text: "고객 센터",
+  },
+  {
+    href: "https://www.netflix.com/kr/redeem",
+    text: "기프트 카드",
+  },
+  {
+    href: "https://media.netflix.com/ko/",
+    text: "미디어 센터",
+  },
+  {
+    href: "https://ir.netflix.net/ir-overview/profile/default.aspx",
+    text: "투자 정보(IR)",
+  },
+  {
+    href: "https://jobs.netflix.com/",
+    text: "입사 정보",
+  },
+  {
+    href: "https://help.netflix.com/legal/termsofuse",
+    text: "이용 약관",
+  },
+  {
+    href: "https://help.netflix.com/legal/privacy",
+    text: "개인정보",
+  },
+  {
+    href: "https://help.netflix.com/legal/notices",
+    text: "법적 고지",
+  },
+  {
+    href: "https://help.netflix.com/legal/privacy#cookies",
+    text: "쿠키 설정",
+  },
+  {
+    href: "https://help.netflix.com/legal/corpinfo",
+    text: "회사 정보",
+  },
+  {
+    href: "https://help.netflix.com/ko/contactus",
+    text: "문의하기",
+  },
+];
+
 const FooterMenuBox = () => {
   return (
     <FooterMenu>
-      <li>
-        <a href="https://www.netflix.com/browse/audio-description">
-          <span>화면 해설</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/ko/">
-          <span>고객 센터</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.netflix.com/kr/redeem">
-          <span>기프트카드</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://media.netflix.com/ko/">
-          <span>미디어 센터</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://ir.netflix.net/ir-overview/profile/default.aspx">
-          <span>투자 정보(IR)</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://jobs.netflix.com/">
-          <span>입사 정보</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/legal/termsofuse">
-          <span>이용 약관</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/legal/privacy">
-          <span>개인정보</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/legal/notices">
-          <span>법적 고지</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/legal/privacy#cookies">
-          <span>쿠키 설정</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/legal/corpinfo">
-          <span>회사 정보</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://help.netflix.com/ko/contactus">
-          <span>문의하기</span>
-        </a>
-      </li>
+      {menuItems.map((menuItem) => (
+        <li key={menuItem.text}>
+          <a href={menuItem.href}>
+            <span>{menuItem.text}</span>
+          </a>
+        </li>
+      ))}
     </FooterMenu>
   );
 };
