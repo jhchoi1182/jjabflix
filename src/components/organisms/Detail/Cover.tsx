@@ -10,8 +10,11 @@ import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
 import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";
 import CloseButton from "../../atoms/Button/CloseButton";
+import { ChildrenProps } from "../../../interface/type";
 
-const Cover: React.FC<IContent> = ({ ...contentData }) => {
+const Cover: React.FC<IContent> & {
+  Title: React.FC<ChildrenProps>;
+} = ({ ...contentData }) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
@@ -24,9 +27,14 @@ const Cover: React.FC<IContent> = ({ ...contentData }) => {
   return (
     <CoverBox bgimg={posterAPI(backdrop_path ?? poster_path, "w500")}>
       <CloseButton top="17px" right="17px" size="detailButton" />
-      <Title>{title || name}</Title>
+      <Cover.Title>{title || name}</Cover.Title>
       <ButtonBox>
-        <Play buttonSize="detailButton" />
+        <Play
+          data-tooltip-text="지원하지 않는 기능입니다."
+          onClick={(event) => showTooltipHandler({ top: 390, x: -15, size: "detailTooltip" }, event)}
+          onMouseLeave={disappearTooltipHandler}
+          buttonSize="detailButton"
+        />
         {isAdded ? (
           <CircleCheck
             data-tooltip-text="내가 찜한 콘텐츠에서 삭제"
@@ -66,7 +74,7 @@ const CoverBox = styled.div<{ bgimg: string }>`
   border-top-left-radius: 8px;
 `;
 
-const Title = styled.h3`
+Cover.Title = styled.h3`
   ${big1}
   ${bold}
   color: ${(props) => props.theme.white.lighter};

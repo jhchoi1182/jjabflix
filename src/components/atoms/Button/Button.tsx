@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { flex } from "../../../styles/css";
 
 export interface IButtonEventProps {
-  onClick?: () => void;
+  onClick?: (() => void) | ((event: any) => void);
 }
 
 interface IButtonProps extends IButtonEventProps {

@@ -5,6 +5,7 @@ import * as fonts from "../../../styles/Fonts";
 
 interface IRectangleButtonProps extends IButtonEventProps {
   buttonSize: "mainButton" | "detailButton";
+  onMouseLeave?: () => void;
 }
 
 const IconSize = {
@@ -12,9 +13,9 @@ const IconSize = {
   detailButton: 1.75,
 };
 
-export const Play: React.FC<IRectangleButtonProps> = ({ onClick, ...props }) => {
+export const Play: React.FC<IRectangleButtonProps> = ({ onMouseLeave, onClick, ...props }) => {
   return (
-    <PlayButton borderColor="none" {...props}>
+    <PlayButton borderColor="none" {...props} onMouseLeave={onMouseLeave} onClick={onClick}>
       <PlayIcon size={IconSize[props.buttonSize]} />
       <span>재생</span>
     </PlayButton>

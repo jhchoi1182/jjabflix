@@ -15,15 +15,22 @@ const iconSize = {
   detailButton: 1.4,
 };
 
-export const CirclePlay: React.FC<ICircleButtonProps> = ({ onClick, ...props }) => {
+export const CirclePlay: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
   return (
-    <CirclePlayButton circle borderColor="white" onClick={onClick} {...props}>
+    <CirclePlayButton
+      circle
+      borderColor="white"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      {...props}
+    >
       <PlayIcon size={iconSize[props.buttonSize]} />
     </CirclePlayButton>
   );
 };
 
-const CirclePlayButton = styled(Button)`
+const CirclePlayButton = styled(Button)<ICircleButtonProps>`
   background-color: ${(props) => props.theme.white.lighter};
   padding: 0.3rem;
   &:hover {
