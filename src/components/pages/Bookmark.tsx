@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import * as fonts from "../../styles/Fonts";
 import BookmarkList from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
-import { useMatch } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import DetailContainer from "../templates/DetailModal/DetailModalContainer";
 import { ChildrenProps } from "../../interface/type";
+import { useSetRecoilState } from "recoil";
+import { categoryAtom } from "../../lib/atoms";
 
 const Bookmark: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
   Title: React.FC<ChildrenProps>;
 } = () => {
-  const contentsMatch = useMatch("/bookmark/:dataId");
+  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const setHoveredCategory = useSetRecoilState(categoryAtom);
+
+  useEffect(() => {
+    setHoveredCategory("bookmark");
+  }, [setHoveredCategory]);
 
   return (
     <Bookmark.Wrapper>
       <Bookmark.Title>내가 찜한 콘텐츠</Bookmark.Title>
       <BookmarkList />
-      <AnimatePresence>{contentsMatch && <DetailContainer />}</AnimatePresence>
+      <AnimatePresence>{pathnameId && <DetailContainer />}</AnimatePresence>
     </Bookmark.Wrapper>
   );
 };

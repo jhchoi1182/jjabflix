@@ -36,11 +36,12 @@ const captionVariants: Variants = {
 };
 
 const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
-  const { title, name, backdrop_path, poster_path } = data;
+  const { id, title, name, backdrop_path, poster_path } = data;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <HoverBigScaleContainer
+      layoutId={"bookmark" + id}
       variants={contentVariants}
       whileHover={isHovered ? "hover" : "normal"}
       initial="normal"
