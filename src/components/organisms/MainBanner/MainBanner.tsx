@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { detailAPI, posterAPI } from "../../../api/Apis";
+import { detailAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import * as Button from "../../molecules/Button/RectangleButton";
@@ -15,20 +15,20 @@ export type MainBannerProps = {
 const MainBanner: React.FC<MainBannerProps> & {
   Title: React.FC<ChildrenProps>;
   Overview: React.FC<ChildrenProps>;
-  BackgroundImage: React.FC<ChildrenProps & { bgimg: string }>;
+  BackgroundImage: React.FC<ChildrenProps>;
 } = ({ id, media_type }) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const { data } = useQuery<IContent | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
-  const { backdrop_path, poster_path, title, name, overview } = data || {};
+  const { title, name, overview } = data || {};
 
   return (
-    <MainBanner.BackgroundImage bgimg={posterAPI(backdrop_path ?? poster_path)}>
+    <MainBanner.BackgroundImage>
       <MainBanner.Title>{title ?? name}</MainBanner.Title>
       <MainBanner.Overview>{overview}</MainBanner.Overview>
       <ButtonBox>
         <Button.Play
           data-tooltip-text="지원하지 않는 기능입니다."
-          onClick={(event) => showTooltipHandler({ top: 480, x: -8, size: "detailTooltip" }, event)}
+          onClick={(event) => showTooltipHandler({ top: 610, x: -8, size: "detailTooltip" }, event)}
           onMouseLeave={disappearTooltipHandler}
           buttonSize="mainButton"
         />
@@ -41,13 +41,11 @@ const MainBanner: React.FC<MainBannerProps> & {
 
 export default MainBanner;
 
-MainBanner.BackgroundImage = styled.div<{ bgimg: string }>`
+MainBanner.BackgroundImage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background-size: cover;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1)),
-    url(${(props) => props.bgimg});
+  height: 100vh;
   padding: 60px;
 `;
 

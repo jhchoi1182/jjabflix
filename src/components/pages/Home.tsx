@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { homeAPI } from "../../api/Apis";
+import { homeAPI, posterAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import Loading from "../atoms/Loading/Loading";
 import Wrapper from "../atoms/Layout/Wrapper";
@@ -11,6 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import { IGetData } from "../../interface/Interface";
 import Footer from "../organisms/Footer/Footer";
 import SlideContainer from "../atoms/Slide/SlideContainer";
+import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 
 const Home = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -26,13 +27,19 @@ const Home = () => {
     staleTime: 100000,
   });
 
+  const backgroundImg = trending?.results[0]?.backdrop_path ?? trending?.results[0]?.poster_path;
+  const id = trending?.results[0]?.id ?? 0;
+  const mediaType = trending?.results[0]?.media_type ?? "";
+
   return (
     <Wrapper>
       {isLoading ? (
         <Loading />
       ) : (
         <React.Fragment>
-          <MainBanner id={trending?.results[0]?.id ?? 0} media_type={trending?.results[0]?.media_type ?? ""} />
+          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+            <MainBanner id={id} media_type={mediaType} />
+          </BannerCoverImage>
           <SlideContainer>
             <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
             <Slide title="상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
