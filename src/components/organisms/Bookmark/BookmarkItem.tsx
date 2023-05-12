@@ -2,7 +2,7 @@ import { Variants, motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { IContent } from "../../../interface/Interface";
-import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
+import { ItemCaptionWrapper } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 import { ButtonBox, ImageBanner, InfoBox, TagBox } from "../../molecules/Item";
 
 /** 아이템 전체 Variants */

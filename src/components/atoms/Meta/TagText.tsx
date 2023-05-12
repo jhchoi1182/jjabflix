@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ChildrenProps } from "../../interface/type";
+import { ChildrenProps } from "../../../interface/type";
 
 const TagText: React.FC<ChildrenProps> = ({ children }) => {
   return <Text>{children}</Text>;

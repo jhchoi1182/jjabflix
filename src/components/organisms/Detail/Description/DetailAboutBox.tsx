@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { mid2rem } from "../../../../styles/Fonts";
 import { IContent } from "../../../../interface/Interface";
 import { AdultIcon, Age15 } from "../../../atoms/Icons";
-import TagLabel from "../../../atoms/TagLabel";
-import TagText from "../../../atoms/TagText";
+import { TagLabel, TagText } from "../../../atoms/Meta";
 
 const DetailAboutBox = forwardRef<HTMLDivElement, IContent>(
   ({ title, name, adult, production_companies, production_countries, genres, tagline }, ref) => {

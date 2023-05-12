@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Genre } from "../../../interface/Interface";
 import * as fonts from "../../../styles/Fonts";
-import { Tag } from "../../atoms/Layout/Item/ItemCaptionLayouts";
+import { Tag } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 
 type TagBoxProps = {
   genres: Genre[];

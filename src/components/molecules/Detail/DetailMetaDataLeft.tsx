@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Rating from "../../atoms/Slide/Rating";
-import ReleaseDate from "../../atoms/Slide/ReleaseDate";
-import { RunningTime, Seasons } from "../../atoms/Slide/RunningTime";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { normal2, normal3 } from "../../../styles/Fonts";
+import { Rating, ReleaseDate, RunningTime, Seasons } from "../../atoms/Meta";
 
 interface IDetailMetaDataLeft {
   vote_average: number;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { small3 } from "../../../styles/Fonts";
 import FooterIconBox from "../../molecules/Footer/FooterIconBox";
 import FooterMenuBox from "../../molecules/Footer/FooterMenuBox";
-import ServiceCode from "../../atoms/ServiceCode";
+import ServiceCode from "../../atoms/UI/ServiceCode";
 
 const Footer = () => {
   return (

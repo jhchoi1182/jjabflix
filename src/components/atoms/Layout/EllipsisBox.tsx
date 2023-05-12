@@ -1,5 +1,5 @@
 import React from "react";
-import { ChildrenProps } from "../../interface/type";
+import { ChildrenProps } from "../../../interface/type";
 import styled from "styled-components";
 
 type EllipsisBoxProps = {

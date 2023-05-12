@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { FavoriteAtom, detailSelector } from "../../../lib/atoms";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
-import { FlexDivLeft, FlexDivRight, FlexPaddingContainer } from "../../atoms/Layout/Item/ItemCaptionLayouts";
+import { FlexDivLeft, FlexDivRight, FlexPaddingContainer } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 
 interface IButtonBox extends IContent {
   onMouseEnter?: () => void;

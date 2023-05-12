@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Genre, productionCompanies } from "../../../interface/Interface";
-import TagLabel from "../../atoms/TagLabel";
-import EllipsisBox from "../../atoms/EllipsisBox";
-import TagText from "../../atoms/TagText";
+import EllipsisBox from "../../atoms/Layout/EllipsisBox";
+import { TagLabel, TagText } from "../../atoms/Meta";
+
 
 interface IDetailMetaDataRight {
   production_companies: productionCompanies[];

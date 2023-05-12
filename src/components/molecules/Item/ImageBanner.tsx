@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { posterAPI } from "../../../api/Apis";
 import { flex } from "../../../styles/css";
 import * as fonts from "../../../styles/Fonts";
-import { bgImg } from "../../atoms/BannerImage";
+import { bgImg } from "../../atoms/UI/BannerImage";
 
 type ImageBannerProps = {
   backdrop: string;

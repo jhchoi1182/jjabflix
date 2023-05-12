@@ -5,7 +5,7 @@ import { detailAPI } from "../../../api/Apis";
 import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
-import { ItemCaptionWrapper } from "../../atoms/Layout/Item/ItemCaptionLayouts";
+import { ItemCaptionWrapper } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 import { ButtonBox, ImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 
 /** 아이템 전체 Variants */

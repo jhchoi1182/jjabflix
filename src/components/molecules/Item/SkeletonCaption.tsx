@@ -1,7 +1,6 @@
 import React from "react";
 import * as Button from "../Button/CircleButton";
 import { Age15, HD } from "../../atoms/Icons";
-import Rating from "../../atoms/Slide/Rating";
 import styled from "styled-components";
 import {
   FlexDivLeft,
@@ -9,7 +8,8 @@ import {
   FlexPaddingContainer,
   Information,
   Tag,
-} from "../../atoms/Layout/Item/ItemCaptionLayouts";
+} from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
+import { Rating } from "../../atoms/Meta";
 
 const SkeletonCaption = () => {
   return (

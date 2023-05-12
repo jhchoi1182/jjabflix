@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { bgImg } from "../../atoms/BannerImage";
+import { bgImg } from "../../atoms/UI/BannerImage";
 import { big1, bold } from "../../../styles/Fonts";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
 import { useRecoilValue } from "recoil";
