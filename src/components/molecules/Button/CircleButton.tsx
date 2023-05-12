@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 import styled, { css } from "styled-components";
-import { AddIcon, ContentOpenIcon, PlayIcon } from "../../atoms/Icons";
+import { AddIcon, DetailDownArrowIcon, PlayIcon } from "../../atoms/Icons";
 import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 import { CheckIcon } from "../../atoms/Icons/ButtonIcon";
 
@@ -81,7 +81,7 @@ export const CircleDetail: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMou
       onClick={onClick}
       {...props}
     >
-      <ContentOpenIcon size={iconSize[props.buttonSize]} />
+      <DetailDownArrowIcon size={iconSize[props.buttonSize]} />
     </CircleGreyButton>
   );
 };

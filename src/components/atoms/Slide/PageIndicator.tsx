@@ -11,14 +11,13 @@ type PageIndicatorProps = {
 const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page, category }) => {
   const hoveredCategory = useRecoilValue(categoryAtom);
 
+  const className = category === hoveredCategory ? "slide-hover" : "pagination-item";
   let numBox = [];
   for (let i = 0; i < maxPage + 1; i++) {
     numBox.push(<li key={i} className={i === page ? "active" : ""} />);
   }
 
-  return (
-    <IndicatorBox className={category === hoveredCategory ? "slide-hover" : "pagination-item"}>{numBox}</IndicatorBox>
-  );
+  return <IndicatorBox className={className}>{numBox}</IndicatorBox>;
 };
 
 export default PageIndicator;

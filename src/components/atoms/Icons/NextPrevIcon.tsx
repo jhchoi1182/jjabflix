@@ -13,9 +13,12 @@ const prevArrow = "\u276E"; /** ❮ */
 const Arrow: React.FC<ArrowProps> = ({ direction, category }) => {
   const hoveredCategory = useRecoilValue(categoryAtom);
 
+  /** slide-hover => opacity:전역 css 변수 */
+  /** pagination-item => opacity:0 */
+  const className = category === hoveredCategory ? "slide-hover" : "pagination-item";
   const arrow = direction === "next" ? nextArrow : prevArrow;
 
-  return <ArrowStyle className={category === hoveredCategory ? "slide-hover" : "pagination-item"}>{arrow}</ArrowStyle>;
+  return <ArrowStyle className={className}>{arrow}</ArrowStyle>;
 };
 
 export default Arrow;
