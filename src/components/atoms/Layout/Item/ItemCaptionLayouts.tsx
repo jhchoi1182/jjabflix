@@ -20,12 +20,10 @@ export const FlexPaddingContainer = styled.div`
   padding-left: 0.2rem;
   padding-right: 0.2rem;
 `;
-
 export const FlexDivLeft = styled.div`
   display: flex;
   gap: 0.5rem;
 `;
-
 export const FlexDivRight = styled.div`
   margin-left: auto;
 `;

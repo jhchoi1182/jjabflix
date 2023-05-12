@@ -20,6 +20,7 @@ export const PlayIcon = ({ size }: IconSizeProps) => {
   );
 };
 
+/** 메인 배너의 상세 정보 아이콘 */
 export const DetailIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
@@ -71,7 +72,8 @@ export const CheckIcon = ({ size }: IconSizeProps) => {
   );
 };
 
-export const ContentOpenIcon = ({ size }: IconSizeProps) => {
+/** 콘텐츠 아이템의 상세 정보 아이콘 */
+export const DetailDownArrowIcon = ({ size }: IconSizeProps) => {
   return (
     <svg
       width={`${size}vw`}
