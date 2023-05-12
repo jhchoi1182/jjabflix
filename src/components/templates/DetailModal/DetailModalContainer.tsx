@@ -11,14 +11,17 @@ import BackdropOverlay from "../../atoms/Layout/BackdropOverlay";
 
 const DetailModalContainer = () => {
   const contentData = useRecoilValue<IContent>(detailSelector);
-  const category = useRecoilValue<string>(categoryAtom);
 
+  /** 콘텐츠 아이템 눌렀을 때 해당 아이템의 layoutId와 상세 정보 모달의 layoutId를 매칭시켜 자연스럽게 모달로 연결되도록 애니메이션 구현 */
+  const category = useRecoilValue<string>(categoryAtom);
   const contentsMatch = useMatch("/:dataId");
 
+  /** 배경 눌렀을 때 navigate(-1)되는 이벤트 캡쳐링 막기 */
   const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
   };
 
+  /** 모달이 열렸을 때 모달의 스크롤과 바디의 스크롤이 중첩되지 않도록 구현 */
   useEffect(() => {
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
 

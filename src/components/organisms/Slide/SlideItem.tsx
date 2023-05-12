@@ -25,7 +25,7 @@ const contentVariants: Variants = {
   },
 };
 
-/** 초기에 보이지 말아야 할 정보 박스에 대한 Variants */
+/** 호버 전에는 보이지 말아야 할 정보 박스에 대한 Variants */
 const captionVariants: Variants = {
   normal: {
     opacity: 0,
@@ -56,23 +56,28 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
     ...dataOption,
   });
 
+  /** 아이템에 마우스 호버 시 콘텐츠 상세 정보 요청 */
+  /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
   const onMouseEnterHandler = async () => {
     await queryClient.fetchQuery(queryKey, queryFn, dataOption);
     setButtonOpacityAfterDelay(0);
   };
 
+  /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
+  /** 호버 애니메이션 초기화 */
   const onMouseLeaveHandler = () => {
     setButtonOpacityAfterDelayInvalidation();
     setButtonOpacity(1);
     control.start("normal");
   };
 
+  /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
   const setButtonOpacityHandler = () => {
     setButtonOpacity(0);
   };
 
   return (
-    <SlideContent
+    <SlideItemContainer
       layoutId={category + id}
       variants={contentVariants}
       animate={control}
@@ -101,13 +106,13 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
           <SkeletonCaption />
         )}
       </ItemCaptionWrapper>
-    </SlideContent>
+    </SlideItemContainer>
   );
 };
 
 export default SlideItem;
 
-const SlideContent = styled(motion.div)`
+const SlideItemContainer = styled(motion.div)`
   width: calc(100% / 8.2);
   &:nth-child(2) {
     transform-origin: center left !important;

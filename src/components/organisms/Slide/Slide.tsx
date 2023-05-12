@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
-import SlideMoveBtn from "../../molecules/Slide/SlidePaginationButton";
+import SlideMoveButton from "../../molecules/Slide/SlidePaginationButton";
 import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import DummyItem from "../../atoms/Slide/DummyItem";
@@ -16,12 +16,14 @@ type VariantsProps = {
   direction: string;
 };
 
+/** 슬라이드 시 공백 계산 */
 const screenWidth = window.innerWidth;
 const slideGap = () => {
   if (screenWidth === 1920) return 145;
   else return 0.0698 * screenWidth;
 };
 
+/** 슬라이드 시 생기는 공백 제거 */
 const rowVariants: Variants = {
   appearance: ({ direction }: VariantsProps) => ({
     x: direction === "next" ? screenWidth - slideGap() : -screenWidth + slideGap(),
@@ -44,6 +46,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
 
+  /** 슬라이드 로직 */
   const showContentsNum = page === 0 ? 7 : 8;
   const totalContents = data.results.length;
   const maxPage = Math.ceil(totalContents / showContentsNum);
@@ -66,6 +69,8 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
     }
   };
 
+  /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
+  /** 호버된 슬라이드가 커질 때 타 슬라이드보다 위로 올라오도록 zindex 조절 */
   const onMouseEnterHandler = () => {
     setHoveredCategory(category);
     setButtonOpacity(1);
@@ -73,7 +78,6 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
       zIndexRef.current.style.zIndex = "1";
     }
   };
-
   const onMouseLeaveHandler = () => {
     setButtonOpacity(0);
     if (zIndexRef.current) {
@@ -81,6 +85,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
     }
   };
 
+  /** 상세 정보 모달 오픈 여부에 따른 슬라이드 높이 변경으로 생기는 스크롤 제어 */
   useEffect(() => {
     if (pathnameId) setOverflowY("hidden");
     if (pathnameId === undefined) {
@@ -95,7 +100,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} category={category} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
-        <RowContainer
+        <FlexContainer
           variants={rowVariants}
           custom={{ direction }}
           initial="appearance"
@@ -116,11 +121,10 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
                 <SlideItem key={content.id} {...content} media_type={content.media_type ?? type} category={category} />
               );
             })}
-        </RowContainer>
+        </FlexContainer>
       </AnimatePresence>
-      {/* <Test /> */}
-      {page !== 0 && <SlideMoveBtn category={category} direction="prev" prevSlide={prevSlide} />}
-      {<SlideMoveBtn category={category} direction="next" nextSlide={nextSlide} />}
+      {page !== 0 && <SlideMoveButton category={category} direction="prev" prevSlide={prevSlide} />}
+      {<SlideMoveButton category={category} direction="next" nextSlide={nextSlide} />}
     </SlideContainer>
   );
 };
@@ -133,7 +137,7 @@ const SlideContainer = styled.div`
   margin-bottom: 34rem;
 `;
 
-const RowContainer = styled(motion.div)<{ overflowy: string }>`
+const FlexContainer = styled(motion.div)<{ overflowy: string }>`
   display: flex;
   position: absolute;
   gap: 8px;
