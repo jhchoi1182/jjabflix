@@ -1,16 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import { searchAPI } from "../../api/Apis";
 import { IGetData } from "../../interface/Interface";
+import { ChildrenProps } from "../../interface/type";
+import { AnimatePresence } from "framer-motion";
+import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
+import styled from "styled-components";
+import DataFetcherItem from "../organisms/Item/DataFetcherItem";
+import { ItemGridContainer } from "../atoms/Layout";
 
-const SearchResult = () => {
+const SearchResult: React.FC & {
+  Wrapper: React.FC<ChildrenProps>;
+} = () => {
+  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const location = useLocation();
   const keyword = new URLSearchParams(location.search).get("keyword");
 
-  const { data, isLoading } = useQuery<IGetData>(["searchKeyword"], () => searchAPI(keyword ?? ""));
+  const { data, isError } = useQuery<IGetData>(["searchKeyword"], () => searchAPI(keyword ?? ""));
 
-  return <React.Fragment>{data ? <div>안녕</div> : "검색결과 없음"}</React.Fragment>;
+  return (
+    <SearchResult.Wrapper>
+      <ItemGridContainer>
+        {isError ? <div>오류</div> : data?.results.map((content) => <DataFetcherItem key={content.id} {...content} />)}
+      </ItemGridContainer>
+      <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+    </SearchResult.Wrapper>
+  );
 };
 
 export default SearchResult;
+
+SearchResult.Wrapper = styled.div`
+  padding: 190px 60px;
+`;
