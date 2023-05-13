@@ -1,26 +1,19 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import BookmarkItem from "../../organisms/Bookmark/BookmarkItem";
-import styled from "styled-components";
+import Item from "../../organisms/Item/Item";
 import { FavoriteAtom } from "../../../lib/atoms";
+import { ItemGridContainer } from "../../atoms/Layout";
 
 const BookmarkList = () => {
   const favoriteContents = useRecoilValue(FavoriteAtom);
 
   return (
-    <BookmarkListContainer>
+    <ItemGridContainer>
       {favoriteContents?.map((data) => (
-        <BookmarkItem key={data.id} {...data} />
+        <Item key={data.id} {...data} />
       ))}
-    </BookmarkListContainer>
+    </ItemGridContainer>
   );
 };
 
 export default BookmarkList;
-
-const BookmarkListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 78px;
-  grid-column-gap: 8px;
-`;

@@ -1,7 +1,7 @@
 import React from "react";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { IContent } from "../../../interface/Interface";
-import { Information } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
+import { Information } from "../../atoms/Layout";
 import { Rating, RunningTime, Seasons } from "../../atoms/Meta";
 
 const InfoBox: React.FC<IContent> = ({ vote_average, adult, seasons, runtime }) => {

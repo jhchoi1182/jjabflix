@@ -8,7 +8,7 @@ import {
   FlexPaddingContainer,
   Information,
   Tag,
-} from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
+} from "../../atoms/Layout";
 import { Rating } from "../../atoms/Meta";
 
 const SkeletonCaption = () => {

@@ -4,7 +4,7 @@ import * as fonts from "../../styles/Fonts";
 import BookmarkList from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
 import { useOutletContext } from "react-router-dom";
-import DetailContainer from "../templates/DetailModal/DetailModalContainer";
+import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import { ChildrenProps } from "../../interface/type";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
@@ -24,7 +24,7 @@ const Bookmark: React.FC & {
     <Bookmark.Wrapper>
       <Bookmark.Title>내가 찜한 콘텐츠</Bookmark.Title>
       <BookmarkList />
-      <AnimatePresence>{pathnameId && <DetailContainer />}</AnimatePresence>
+      <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
     </Bookmark.Wrapper>
   );
 };

@@ -1,42 +1,13 @@
-import { Variants, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { IContent } from "../../../interface/Interface";
-import { ItemCaptionWrapper } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
+import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import { ButtonBox, ImageBanner, InfoBox, TagBox } from "../../molecules/Item";
-
-/** 아이템 전체 Variants */
-const contentVariants: Variants = {
-  normal: {
-    scale: 1,
-  },
-  hover: {
-    scale: 1.4,
-    zIndex: 1,
-    y: -70,
-    transition: {
-      type: "tween",
-      delay: 0.5,
-      duration: 0.15,
-    },
-  },
-};
-
-/** 초기에 보이지 말아야 할 정보 박스에 대한 Variants */
-const captionVariants: Variants = {
-  hover: {
-    opacity: 1,
-    pointerEvents: "auto",
-    transition: {
-      type: "tween",
-      delay: 0.5,
-      duration: 0.15,
-    },
-  },
-};
+import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
 const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
-  const { id, title, name, backdrop_path, poster_path } = data;
+  const { id, title, name, backdrop_path, poster_path, genres } = data;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -58,7 +29,7 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
       <ItemCaptionWrapper variants={captionVariants}>
         <ButtonBox {...data} />
         <InfoBox {...data} />
-        <TagBox genres={data?.genres} />
+        <TagBox genres={genres} />
       </ItemCaptionWrapper>
     </HoverBigScaleContainer>
   );
@@ -68,10 +39,5 @@ export default BookmarkItem;
 
 const HoverBigScaleContainer = styled(motion.div)`
   margin-bottom: -129px;
-  &:nth-child(6n + 1) {
-    transform-origin: center left;
-  }
-  &:nth-child(6n) {
-    transform-origin: center right;
-  }
+  ${nthChild}
 `;

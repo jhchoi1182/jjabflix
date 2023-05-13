@@ -7,7 +7,7 @@ import { categoryAtom, detailSelector } from "../../../lib/atoms";
 import { IContent } from "../../../interface/Interface";
 import Cover from "../../organisms/Detail/Cover";
 import DescriptionContainer from "../../organisms/Detail/Description/DescriptionContainer";
-import BackdropOverlay from "../../atoms/Layout/BackdropOverlay";
+import { BackdropOverlay } from "../../atoms/Layout";
 
 const DetailModalContainer = () => {
   const contentData = useRecoilValue<IContent>(detailSelector);

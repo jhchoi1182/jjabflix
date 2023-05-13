@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { homeAPI, posterAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import Loading from "../atoms/Loading/Loading";
-import Wrapper from "../atoms/Layout/Wrapper";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { useOutletContext } from "react-router-dom";
@@ -12,6 +11,7 @@ import { IGetData } from "../../interface/Interface";
 import Footer from "../organisms/Footer/Footer";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
+import { Wrapper } from "../atoms/Layout";
 
 const Home = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();

@@ -10,7 +10,7 @@ import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";
 import CloseButton from "../../atoms/Button/CloseButton";
 import { ChildrenProps } from "../../../interface/type";
-import { ContentCoverImage } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
+import { ContentCoverImage } from "../../atoms/Layout";
 
 const Cover: React.FC<IContent> & {
   Title: React.FC<ChildrenProps>;

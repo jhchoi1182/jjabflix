@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Genre, productionCompanies } from "../../../interface/Interface";
-import EllipsisBox from "../../atoms/Layout/EllipsisBox";
 import { TagLabel, TagText } from "../../atoms/Meta";
+import { EllipsisBox } from "../../atoms/Layout";
 
 
 interface IDetailMetaDataRight {
