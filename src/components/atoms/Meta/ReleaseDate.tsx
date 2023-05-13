@@ -5,9 +5,8 @@ type ReleaseDateProps = {
 };
 const ReleaseDate: React.FC<ReleaseDateProps> = ({ ReleaseDate }) => {
   const ReleaseYear = new Date(ReleaseDate).getFullYear();
-  const renderRelease = isNaN(ReleaseYear) ? "미정" : ReleaseYear;
 
-  return <span>{renderRelease}</span>;
+  return isNaN(ReleaseYear) ? null : <span>{ReleaseYear}</span>;
 };
 
 export default ReleaseDate;

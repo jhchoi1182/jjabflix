@@ -13,7 +13,7 @@ const DataFetcherItem: React.FC<IContent> = ({ ...content }) => {
   const [isHovered, setIsHovered] = useState(false);
   const queryClient = useQueryClient();
 
-  const queryKey = ["detail", title || name];
+  const queryKey = ["detail", id];
   const queryFn = () => detailAPI({ id, media_type });
   const dataOption = { cacheTime: 360000, staleTime: 360000 };
 

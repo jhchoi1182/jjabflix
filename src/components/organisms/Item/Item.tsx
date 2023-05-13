@@ -6,7 +6,7 @@ import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import { ButtonBox, ImageBanner, InfoBox, TagBox } from "../../molecules/Item";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
-const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
+const Item: React.FC<IContent> = ({ ...data }) => {
   const { id, title, name, backdrop_path, poster_path, genres } = data;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -35,7 +35,7 @@ const BookmarkItem: React.FC<IContent> = ({ ...data }) => {
   );
 };
 
-export default BookmarkItem;
+export default Item;
 
 const HoverBigScaleContainer = styled(motion.div)`
   margin-bottom: -129px;

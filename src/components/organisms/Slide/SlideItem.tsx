@@ -47,7 +47,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
   const queryClient = useQueryClient();
   const control = useAnimation();
 
-  const queryKey = ["detail", title || name];
+  const queryKey = ["detail", id];
   const queryFn = () => detailAPI({ id, media_type });
   const dataOption = { cacheTime: 360000, staleTime: 360000 };
 
