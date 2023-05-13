@@ -10,9 +10,10 @@ import { FlexDivLeft, FlexDivRight, FlexPaddingContainer } from "../../atoms/Lay
 interface IButtonBox extends IContent {
   onMouseEnter?: () => void;
   skeleton?: boolean;
+  keyword?: string;
 }
 
-const ButtonBox: React.FC<IButtonBox> = ({ onMouseEnter, skeleton, ...data }) => {
+const ButtonBox: React.FC<IButtonBox> = ({ onMouseEnter, skeleton, keyword, ...data }) => {
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);
@@ -27,7 +28,11 @@ const ButtonBox: React.FC<IButtonBox> = ({ onMouseEnter, skeleton, ...data }) =>
   const showDetailHandler = () => {
     if (data) {
       setDetail(data);
-      navigate(`${id}`);
+      if (keyword) {
+        navigate(`/search?keyword=${keyword}/${id}`);
+      } else {
+        navigate(`${id}`);
+      }
     }
   };
 

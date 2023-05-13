@@ -8,7 +8,7 @@ import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import styled from "styled-components";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
-const DataFetcherItem: React.FC<IContent> = ({ ...content }) => {
+const DataFetcherItem: React.FC<IContent & { keyword?: string }> = ({ keyword, ...content }) => {
   const { id, title, name, backdrop_path, poster_path, media_type } = content;
   const [isHovered, setIsHovered] = useState(false);
   const queryClient = useQueryClient();
@@ -49,7 +49,7 @@ const DataFetcherItem: React.FC<IContent> = ({ ...content }) => {
           <div>정보 없음</div>
         ) : data ? (
           <React.Fragment>
-            <ButtonBox {...data} />
+            <ButtonBox {...data} keyword={keyword ?? ""} />
             <InfoBox {...data} />
             {data.genres && <TagBox genres={data.genres} oneLine />}
           </React.Fragment>

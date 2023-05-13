@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <SearchResult />,
       },
       {
-        path: "search/:dataId",
+        path: "/search/:dataId",
         element: <SearchResult />,
       },
     ],

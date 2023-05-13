@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation, useOutletContext } from "react-router-dom";
+import { useLocation, useMatch, useOutletContext, useParams } from "react-router-dom";
 import { searchAPI } from "../../api/Apis";
 import { IGetData } from "../../interface/Interface";
 import { ChildrenProps } from "../../interface/type";
@@ -16,11 +16,11 @@ import Loading from "../atoms/Loading/Loading";
 const SearchResult: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
 } = () => {
-  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const location = useLocation();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
 
-  const location = useLocation();
-  const keyword = new URLSearchParams(location.search).get("keyword");
+  const pressDetailButton = location.search.split("/").length > 1;
+  const keyword = new URLSearchParams(location.search).get("keyword")?.split("/")[0];
 
   const { data, isLoading, isError } = useQuery<IGetData>(["searchKeyword", keyword], () => searchAPI(keyword ?? ""));
 
@@ -36,10 +36,10 @@ const SearchResult: React.FC & {
         ) : isError ? (
           <div>정보 없음</div>
         ) : (
-          data?.results.map((content) => <DataFetcherItem key={content.id} {...content} />)
+          data?.results.map((content) => <DataFetcherItem key={content.id} keyword={keyword ?? ""} {...content} />)
         )}
       </ItemGridContainer>
-      <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+      <AnimatePresence>{pressDetailButton && <DetailModalContainer />}</AnimatePresence>
     </SearchResult.Wrapper>
   );
 };
