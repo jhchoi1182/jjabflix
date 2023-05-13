@@ -11,16 +11,18 @@ import DataFetcherItem from "../organisms/Item/DataFetcherItem";
 import { ItemGridContainer } from "../atoms/Layout";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
+import Loading from "../atoms/Loading/Loading";
 
 const SearchResult: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
 } = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
+
   const location = useLocation();
   const keyword = new URLSearchParams(location.search).get("keyword");
 
-  const { data, isError } = useQuery<IGetData>(["searchKeyword"], () => searchAPI(keyword ?? ""));
+  const { data, isLoading, isError } = useQuery<IGetData>(["searchKeyword", keyword], () => searchAPI(keyword ?? ""));
 
   useEffect(() => {
     setHoveredCategory("search");
@@ -29,7 +31,13 @@ const SearchResult: React.FC & {
   return (
     <SearchResult.Wrapper>
       <ItemGridContainer>
-        {isError ? <div>오류</div> : data?.results.map((content) => <DataFetcherItem key={content.id} {...content} />)}
+        {isLoading ? (
+          <Loading />
+        ) : isError ? (
+          <div>정보 없음</div>
+        ) : (
+          data?.results.map((content) => <DataFetcherItem key={content.id} {...content} />)
+        )}
       </ItemGridContainer>
       <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
     </SearchResult.Wrapper>

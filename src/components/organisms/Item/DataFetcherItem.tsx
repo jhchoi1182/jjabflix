@@ -46,7 +46,7 @@ const DataFetcherItem: React.FC<IContent> = ({ ...content }) => {
       />
       <ItemCaptionWrapper variants={captionVariants}>
         {isError ? (
-          <div>에러</div>
+          <div>정보 없음</div>
         ) : data ? (
           <React.Fragment>
             <ButtonBox {...data} />
