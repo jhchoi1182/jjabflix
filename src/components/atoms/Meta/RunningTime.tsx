@@ -13,11 +13,15 @@ type RunningTimeProps = {
 };
 
 export const RunningTime: React.FC<RunningTimeProps> = ({ runtime }) => {
-  const totalMinutes = runtime || 0;
   const { hours, minutes } = {
-    hours: Math.floor(totalMinutes / 60),
-    minutes: totalMinutes % 60,
+    hours: Math.floor(runtime / 60),
+    minutes: runtime % 60,
   };
 
-  return <span>{`${hours}시간 ${minutes}분`}</span>;
+  const result = () => {
+    if (hours === 0) return `${minutes}분`;
+    else return `${hours}시간 ${minutes}분`;
+  };
+
+  return <span>{result()}</span>;
 };

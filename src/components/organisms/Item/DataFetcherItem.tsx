@@ -51,7 +51,7 @@ const DataFetcherItem: React.FC<IContent> = ({ ...content }) => {
           <React.Fragment>
             <ButtonBox {...data} />
             <InfoBox {...data} />
-            {data.genres && <TagBox genres={data.genres} />}
+            {data.genres && <TagBox genres={data.genres} oneLine />}
           </React.Fragment>
         ) : (
           <SkeletonCaption />

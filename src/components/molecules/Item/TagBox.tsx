@@ -1,20 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import { Genre } from "../../../interface/Interface";
-import * as fonts from "../../../styles/Fonts";
 import { Tag } from "../../atoms/Layout/ItemLayout/ItemCaptionLayouts";
 
 type TagBoxProps = {
   genres: Genre[];
+  oneLine?: boolean;
 };
-const TagBox: React.FC<TagBoxProps> = ({ genres }) => {
-  return (
-    <Tag>
-      {genres.map((genre, i) => (
-        <li key={`genre_${i}`}>{genre.name}</li>
-      ))}
-    </Tag>
-  );
+const TagBox: React.FC<TagBoxProps> = ({ genres, oneLine }) => {
+  const oneLineTag = genres.slice(0, 2).map((genre) => <li key={`genre_${genre.id}`}>{genre.name}</li>);
+  const tag = genres.map((genre, i) => <li key={`genre_${i}`}>{genre.name}</li>);
+
+  return <Tag>{oneLine ? oneLineTag : tag}</Tag>;
 };
 
 export default TagBox;

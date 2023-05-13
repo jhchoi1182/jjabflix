@@ -7,10 +7,11 @@ type SearchIconProps = {
   transition: { type: string };
 };
 type UIIconProps = {
-  size: "basic" | "big";
+  size: "small" | "basic" | "big";
 };
 
 const iconSize = {
+  small: "1",
   basic: "1.1",
   big: "2.4",
 };

@@ -57,7 +57,7 @@ const DetailAboutBox = forwardRef<HTMLDivElement, IContent>(
           )}
           <MetaTagBox>
             <TagLabel>관람등급:</TagLabel>
-            {!adult ? (
+            {adult ? (
               <FlexBox>
                 <AdultIcon size="basic" />
                 <span>19세이상관람가</span>
