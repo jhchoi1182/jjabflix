@@ -18,10 +18,10 @@ export const RunningTime: React.FC<RunningTimeProps> = ({ runtime }) => {
     minutes: runtime % 60,
   };
 
-  const result = () => {
+  const time = () => {
     if (hours === 0) return `${minutes}분`;
     else return `${hours}시간 ${minutes}분`;
   };
 
-  return <span>{result()}</span>;
+  return <span>{time()}</span>;
 };

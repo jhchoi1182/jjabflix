@@ -11,42 +11,48 @@ const DetailAboutBox = forwardRef<HTMLDivElement, IContent>(
       <MarginTopContainer ref={ref}>
         <Title>{`${title || name} 상세 정보`}</Title>
         <AboutContainer>
-          <MetaTagBox>
-            <div>
-              <TagLabel>제작사:</TagLabel>
-              {production_companies.map((company, i) => {
-                if (i === production_companies.length - 1) {
-                  return <TagText key={company.name}>{`${company.name}`}</TagText>;
-                } else {
-                  return <TagText key={company.name}>{`${company.name},`}</TagText>;
-                }
-              })}
-            </div>
-          </MetaTagBox>
-          <MetaTagBox>
-            <div>
-              <TagLabel>국가:</TagLabel>
-              {production_countries.map((country, i) => {
-                if (i === production_countries.length - 1) {
-                  return <TagText key={country.name}>{`${country.name}`}</TagText>;
-                } else {
-                  return <TagText key={country.name}>{`${country.name},`}</TagText>;
-                }
-              })}
-            </div>
-          </MetaTagBox>
-          <MetaTagBox>
-            <div>
-              <TagLabel>장르:</TagLabel>
-              {genres.map((genre, i) => {
-                if (i === genres.length - 1) {
-                  return <TagText key={genre.name}>{`${genre.name}`}</TagText>;
-                } else {
-                  return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
-                }
-              })}
-            </div>
-          </MetaTagBox>
+          {production_companies.length !== 0 && (
+            <MetaTagBox>
+              <div>
+                <TagLabel>제작사:</TagLabel>
+                {production_companies.map((company, i) => {
+                  if (i === production_companies.length - 1) {
+                    return <TagText key={company.name}>{`${company.name}`}</TagText>;
+                  } else {
+                    return <TagText key={company.name}>{`${company.name},`}</TagText>;
+                  }
+                })}
+              </div>
+            </MetaTagBox>
+          )}
+          {production_countries.length !== 0 && (
+            <MetaTagBox>
+              <div>
+                <TagLabel>국가:</TagLabel>
+                {production_countries.map((country, i) => {
+                  if (i === production_countries.length - 1) {
+                    return <TagText key={country.name}>{`${country.name}`}</TagText>;
+                  } else {
+                    return <TagText key={country.name}>{`${country.name},`}</TagText>;
+                  }
+                })}
+              </div>
+            </MetaTagBox>
+          )}
+          {genres.length !== 0 && (
+            <MetaTagBox>
+              <div>
+                <TagLabel>장르:</TagLabel>
+                {genres.map((genre, i) => {
+                  if (i === genres.length - 1) {
+                    return <TagText key={genre.name}>{`${genre.name}`}</TagText>;
+                  } else {
+                    return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
+                  }
+                })}
+              </div>
+            </MetaTagBox>
+          )}
           {tagline && tagline !== "" && (
             <MetaTagBox>
               <div>

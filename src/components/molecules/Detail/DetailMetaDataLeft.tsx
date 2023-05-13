@@ -25,12 +25,14 @@ const DetailMetaDataLeft: React.FC<IDetailMetaDataLeft> = ({
   title,
   name,
 }) => {
+  const isRuntime = runtime !== undefined && runtime !== null && runtime !== 0;
+
   return (
     <WidthContainer>
       <MedaDataBox>
         <Rating voteAverage={vote_average} />
         <ReleaseDate ReleaseDate={release_date} />
-        {(seasons && <Seasons seasons={seasons} />) || (runtime && <RunningTime runtime={runtime} />)}
+        {(seasons && <Seasons seasons={seasons} />) || (isRuntime && <RunningTime runtime={runtime} />)}
         <HD size="basic" />
       </MedaDataBox>
       {adult ? <AdultIcon size="basic" /> : <Age15 size="basic" />}

@@ -4,7 +4,6 @@ import { Genre, productionCompanies } from "../../../interface/Interface";
 import { TagLabel, TagText } from "../../atoms/Meta";
 import { EllipsisBox } from "../../atoms/Layout";
 
-
 interface IDetailMetaDataRight {
   production_companies: productionCompanies[];
   genres: Genre[];
@@ -20,31 +19,35 @@ const DetailMetaDataRight: React.FC<IDetailMetaDataRight> = ({
 }) => {
   return (
     <WidthContainer>
-      <MetaTagBox>
-        <TagLabel>제작사:</TagLabel>
-        <EllipsisBox>
-          {production_companies.map((company, i) => {
-            if (i === production_companies.length - 1) {
-              return <TagText key={company.name}>{`${company.name}`}</TagText>;
-            } else {
-              return <TagText key={company.name}>{`${company.name},`}</TagText>;
-            }
-          })}
-        </EllipsisBox>
-        <ItalicText onClick={toBottomScrollHandler}>더 보기</ItalicText>
-      </MetaTagBox>
-      <MetaTagBox>
-        <div>
-          <TagLabel>장르:</TagLabel>
-          {genres.map((genre, i) => {
-            if (i === genres.length - 1) {
-              return <TagText key={genre.name}>{`${genre.name}`}</TagText>;
-            } else {
-              return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
-            }
-          })}
-        </div>
-      </MetaTagBox>
+      {production_companies.length !== 0 && (
+        <MetaTagBox>
+          <TagLabel>제작사:</TagLabel>
+          <EllipsisBox>
+            {production_companies.map((company, i) => {
+              if (i === production_companies.length - 1) {
+                return <TagText key={company.name}>{`${company.name}`}</TagText>;
+              } else {
+                return <TagText key={company.name}>{`${company.name},`}</TagText>;
+              }
+            })}
+          </EllipsisBox>
+          <ItalicText onClick={toBottomScrollHandler}>더 보기</ItalicText>
+        </MetaTagBox>
+      )}
+      {genres.length !== 0 && (
+        <MetaTagBox>
+          <div>
+            <TagLabel>장르:</TagLabel>
+            {genres.map((genre, i) => {
+              if (i === genres.length - 1) {
+                return <TagText key={genre.name}>{`${genre.name}`}</TagText>;
+              } else {
+                return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
+              }
+            })}
+          </div>
+        </MetaTagBox>
+      )}
       {tagline && tagline !== "" && (
         <MetaTagBox>
           <div>
