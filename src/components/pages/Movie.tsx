@@ -11,7 +11,7 @@ import { IGetData } from "../../interface/Interface";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { movieAPI, posterAPI } from "../../api/Apis";
 import styled from "styled-components";
-import { bold, largerem } from "../../styles/Fonts";
+import { font } from "../../styles/Fonts";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useRecoilValue } from "recoil";
@@ -72,6 +72,5 @@ export default Movie;
 
 const TabLabel = styled.div`
   padding: 75px 60px 0;
-  ${largerem}
-  ${bold}
+  ${font.page_title}
 `;

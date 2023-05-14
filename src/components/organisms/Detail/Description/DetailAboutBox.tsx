@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import styled from "styled-components";
-import { mid2rem } from "../../../../styles/Fonts";
+import { font } from "../../../../styles/Fonts";
 import { IContent } from "../../../../interface/Interface";
 import { AdultIcon, Age15 } from "../../../atoms/Icons";
 import { TagLabel, TagText } from "../../../atoms/Meta";
@@ -88,7 +88,7 @@ const MarginTopContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  ${mid2rem}
+  ${font.S_title}
 `;
 
 const AboutContainer = styled.div`

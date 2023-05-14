@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { IContent } from "../../../interface/Interface";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { detailAPI } from "../../../api/Apis";
-import { ButtonBox, ImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
+import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import styled from "styled-components";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
@@ -37,7 +37,7 @@ const DataFetcherItem: React.FC<IContent & { keyword?: string }> = ({ keyword, .
       transition={{ type: "tween" }}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <ImageBanner
+      <ItemImageBanner
         onMouseEnter={BannerMouseEnterHandler}
         backdrop={backdrop_path}
         poster={poster_path}

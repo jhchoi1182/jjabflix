@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
-import { normal2, normal3 } from "../../../styles/Fonts";
 import { Rating, ReleaseDate, RunningTime, Seasons } from "../../atoms/Meta";
+import { font, fontWeight } from "../../../styles/Fonts";
 
 interface IDetailMetaDataLeft {
   vote_average: number;
@@ -33,9 +33,9 @@ const DetailMetaDataLeft: React.FC<IDetailMetaDataLeft> = ({
         <Rating voteAverage={vote_average} />
         <ReleaseDate ReleaseDate={release_date} />
         {(seasons && <Seasons seasons={seasons} />) || (isRuntime && <RunningTime runtime={runtime} />)}
-        <HD size="basic" />
+        <HD size="big" />
       </MedaDataBox>
-      {adult ? <AdultIcon size="basic" /> : <Age15 size="basic" />}
+      {adult ? <AdultIcon size="basic" /> : <Age15 size="big" />}
       <Overview>{overview === "" ? title || name : overview}</Overview>
     </WidthContainer>
   );
@@ -49,13 +49,13 @@ const WidthContainer = styled.div`
 
 const MedaDataBox = styled.div`
   display: flex;
-  ${normal2}
+  font-weight: ${fontWeight.Bold};
   gap: 1rem;
   margin-bottom: 0.5rem;
 `;
 
 const Overview = styled.p`
   margin-top: 3.2rem;
-  ${normal3}
+  ${font.S_overview}
   line-height: 1.5;
 `;

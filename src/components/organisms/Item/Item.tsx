@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
-import { ButtonBox, ImageBanner, InfoBox, TagBox } from "../../molecules/Item";
+import { ButtonBox, ItemImageBanner, InfoBox, TagBox } from "../../molecules/Item";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
 const Item: React.FC<IContent> = ({ ...data }) => {
@@ -19,7 +19,7 @@ const Item: React.FC<IContent> = ({ ...data }) => {
       transition={{ type: "tween" }}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <ImageBanner
+      <ItemImageBanner
         onMouseEnter={() => setIsHovered(true)}
         backdrop={backdrop_path}
         poster={poster_path}

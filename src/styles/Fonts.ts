@@ -1,73 +1,89 @@
 import { css } from "styled-components";
 
-/** font-weight */
-export const bold = css`
-  font-weight: 500;
-`;
+/** FontWeight */
+export const fontWeight = {
+  Bold: 500,
+  Heavy: 700,
+};
 
-export const Heavy = css`
-  font-weight: 700;
-`;
+/** FontSize */
+export const fontSize = {
+  Big1: "3.5vw",
+  Big2: "5vw",
+  Large: "2vw",
+  LargeRem: "3.8rem",
+  Mid1: "1.2vw", // RectangleButton
+  Mid2: "1.3vw",
+  Mid2Rem: "2.6rem",
+  Mid3: "1.4vw",
+  Normal1: "1.4rem", // CustomIcon
+  Normal2: "1.7rem",
+  Normal3: "0.84vw",
+  Small1: "1rem",
+  Small2: "1.1rem", // CustomIcon
+  Small3: "1.2rem",
+};
 
-/** font-size */
-export const big1 = css`
-  font-size: 3.5vw;
-`;
-
-export const big2 = css`
-  font-size: 5vw;
-`;
-
-export const large = css`
-  font-size: 2vw;
-`;
-
-export const largerem = css`
-  font-size: 3.8rem;
-`;
-
-export const mid1 = css`
-  font-size: 1.2vw;
-`;
-
-export const mid2 = css`
-  font-size: 1.3vw;
-`;
-
-export const mid2rem = css`
-  font-size: 2.6rem;
-  ${bold}
-`;
-
-export const mid3 = css`
-  font-size: 1.4vw;
-`;
-
-export const normal1 = css`
-  font-size: 1.4rem;
-  ${bold}
-`;
-
-export const normal2 = css`
-  ${bold}
-`;
-
-export const normal3 = css`
-  font-size: 1.7rem;
-  ${bold}
-`;
-
-export const small1 = css`
-  font-size: 1rem;
-  ${bold}
-`;
-
-export const small2 = css`
-  font-size: 1.1rem;
-  ${bold}
-`;
-
-export const small3 = css`
-  font-size: 1.2rem;
-  ${bold}
-`;
+/** 폰트 */
+/** R 접두사 - 반응형 폰트 */
+/** S 접두사 - 스몰 */
+/** M 접두사  - 미디움 */
+/** L 접두사 - 라지 */
+export const font = {
+  item_text: css`
+    font-size: ${fontSize.Small2};
+    font-weight: ${fontWeight.Bold};
+  `,
+  footer_menu: css`
+    font-size: ${fontSize.Normal1};
+    font-weight: ${fontWeight.Bold};
+  `,
+  footer_text: css`
+    font-size: ${fontSize.Small3};
+    font-weight: ${fontWeight.Bold};
+  `,
+  RS_tooltip_text: css`
+    font-size: ${fontSize.Normal3};
+    font-weight: ${fontWeight.Bold};
+  `,
+  RM_tooltip_text: css`
+    font-size: ${fontSize.Mid1};
+    font-weight: ${fontWeight.Bold};
+  `,
+  R_slide_title: css`
+    font-size: ${fontSize.Mid3};
+    font-weight: ${fontWeight.Bold};
+  `,
+  R_page_title: css`
+    font-size: ${fontSize.Large};
+    font-weight: ${fontWeight.Bold};
+  `,
+  page_title: css`
+    font-size: ${fontSize.LargeRem};
+    font-weight: ${fontWeight.Bold};
+  `,
+  S_overview: css`
+    font-size: ${fontSize.Normal2};
+    font-weight: ${fontWeight.Bold};
+  `,
+  L_overview: css`
+    font-size: ${fontSize.Mid2};
+    font-weight: ${fontWeight.Bold};
+  `,
+  RS_title: css`
+    font-size: ${fontSize.Mid2};
+    font-weight: ${fontWeight.Heavy};
+  `,
+  S_title: css`
+    font-size: ${fontSize.Mid2Rem};
+    font-weight: ${fontWeight.Bold};
+  `,
+  RM_title: css`
+    font-size: ${fontSize.Big1};
+    font-weight: ${fontWeight.Bold};
+  `,
+  RL_title: css`
+    font-size: ${fontSize.Big2};
+    font-weight: ${fontWeight.Bold};
+  `,
+};

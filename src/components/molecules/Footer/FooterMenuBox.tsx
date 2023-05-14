@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { normal1 } from "../../../styles/Fonts";
+import { font } from "../../../styles/Fonts";
 
 const menuItems = [
   {
@@ -81,6 +81,6 @@ const FooterMenu = styled.ul`
     }
   }
   span {
-    ${normal1}
+    ${font.footer_menu}
   }
 `;

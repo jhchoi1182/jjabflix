@@ -15,7 +15,7 @@ import Footer from "../organisms/Footer/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
-import { bold, largerem } from "../../styles/Fonts";
+import { font } from "../../styles/Fonts";
 
 const Tv = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -73,6 +73,5 @@ export default Tv;
 
 const TabLabel = styled.div`
   padding: 75px 60px 0;
-  ${largerem}
-  ${bold}
+  ${font.page_title}
 `;

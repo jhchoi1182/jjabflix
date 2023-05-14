@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { big1, bold } from "../../../styles/Fonts";
+import { font } from "../../../styles/Fonts";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
 import { useRecoilValue } from "recoil";
 import { IContent } from "../../../interface/Interface";
@@ -75,8 +75,7 @@ const CoverBox = styled.div<{ bgimg: string }>`
 `;
 
 Cover.Title = styled.h3`
-  ${big1}
-  ${bold}
+  ${font.RM_title}
   color: ${(props) => props.theme.white.lighter};
   width: 50%;
   margin-bottom: 2rem;

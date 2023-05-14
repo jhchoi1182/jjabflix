@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { small2 } from "../../../../styles/Fonts";
+import { font } from "../../../../styles/Fonts";
 import { flex } from "../../../../styles/css";
 import { motion } from "framer-motion";
 
@@ -39,7 +39,7 @@ export const FlexDivRight = styled.div`
 /** InfoBox의 레이아웃 */
 export const Information = styled.div`
   ${flex("none")}
-  ${small2}
+  ${font.item_text}
   gap: 0.6rem;
   margin-top: 1.5rem;
 `;
@@ -51,7 +51,7 @@ export const Tag = styled.ul`
   gap: 0.7rem;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  ${small2}
+  ${font.item_text}
   li {
     position: relative;
   }

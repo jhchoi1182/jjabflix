@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 import { DetailIcon, PlayIcon } from "../../atoms/Icons";
-import * as fonts from "../../../styles/Fonts";
+import { fontSize } from "../../../styles/Fonts";
 
 interface IRectangleButtonProps extends IButtonEventProps {
   buttonSize: "mainButton" | "detailButton";
@@ -33,7 +33,7 @@ const buttonSize = { mainButton, detailButton };
 
 const PlayButton = styled(Button)<IRectangleButtonProps>`
   gap: 1rem;
-  ${fonts.mid1}
+  font-size: ${fontSize.Mid1};
   ${(props) => props.buttonSize && buttonSize[props.buttonSize]};
   background-color: ${(props) => props.theme.white.lighter};
   &:hover {
@@ -52,7 +52,7 @@ export const Detail: React.FC<IRectangleButtonProps> = ({ onClick, ...props }) =
 
 const DetailButton = styled(Button)`
   gap: 1rem;
-  ${fonts.mid1}
+  font-size: ${fontSize.Mid1};
   padding: 0.65vw 1.7vw;
   background-color: rgba(109, 109, 110, 0.7);
   &:hover {

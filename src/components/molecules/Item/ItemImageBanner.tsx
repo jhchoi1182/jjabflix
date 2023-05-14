@@ -3,10 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import { posterAPI } from "../../../api/Apis";
 import { flex } from "../../../styles/css";
-import * as fonts from "../../../styles/Fonts";
 import { ContentCoverImage } from "../../atoms/Layout";
+import { font } from "../../../styles/Fonts";
 
-type ImageBannerProps = {
+type ItemImageBannerProps = {
   backdrop: string;
   poster: string;
   title: string;
@@ -14,7 +14,14 @@ type ImageBannerProps = {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 };
-const ImageBanner: React.FC<ImageBannerProps> = ({ onMouseEnter, onMouseLeave, backdrop, poster, title, name }) => {
+const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
+  onMouseEnter,
+  onMouseLeave,
+  backdrop,
+  poster,
+  title,
+  name,
+}) => {
   return (
     <Image onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} bgimg={posterAPI(backdrop ?? poster, "w500")}>
       <Title>{title ?? name}</Title>
@@ -22,7 +29,7 @@ const ImageBanner: React.FC<ImageBannerProps> = ({ onMouseEnter, onMouseLeave, b
   );
 };
 
-export default ImageBanner;
+export default ItemImageBanner;
 
 const Image = styled(motion.div)<{ bgimg: string }>`
   ${ContentCoverImage}
@@ -36,6 +43,5 @@ const Title = styled(motion.p)`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
-  ${fonts.mid2}
-  ${fonts.Heavy}
+  ${font.RS_title}
 `;

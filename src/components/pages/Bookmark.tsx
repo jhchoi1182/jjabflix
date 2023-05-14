@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import * as fonts from "../../styles/Fonts";
 import BookmarkList from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
 import { useOutletContext } from "react-router-dom";
@@ -8,6 +7,7 @@ import DetailModalContainer from "../templates/DetailModal/DetailModalContainer"
 import { ChildrenProps } from "../../interface/type";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
+import { font } from "../../styles/Fonts";
 
 const Bookmark: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
@@ -36,7 +36,6 @@ Bookmark.Wrapper = styled.div`
 `;
 
 Bookmark.Title = styled.h1`
-  ${fonts.large}
-  ${fonts.bold}
+  ${font.R_page_title}
   padding-bottom: 8.5%;
 `;

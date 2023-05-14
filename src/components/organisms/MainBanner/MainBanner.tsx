@@ -3,13 +3,13 @@ import { detailAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import * as Button from "../../molecules/Button/RectangleButton";
-import * as fonts from "../../../styles/Fonts";
 import { ChildrenProps } from "../../../interface/type";
 import { useTooltip } from "../../../utils/Hooks";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { detailSelector } from "../../../lib/atoms";
 import { categoryAtom } from "../../../lib/atoms";
+import { font } from "../../../styles/Fonts";
 
 export type MainBannerProps = {
   id: number;
@@ -67,15 +67,13 @@ MainBanner.BackgroundImage = styled.div`
 `;
 
 MainBanner.Title = styled.h2`
-  ${fonts.big2}
-  ${fonts.bold}
+  ${font.RL_title}
   margin-bottom: 2.3rem;
   width: 37%;
 `;
 
 MainBanner.Overview = styled.p`
-  ${fonts.mid2}
-  ${fonts.bold}
+  ${font.L_overview}
   width: 37%;
 `;
 

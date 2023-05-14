@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { small3 } from "../../../styles/Fonts";
+import { font } from "../../../styles/Fonts";
 import FooterIconBox from "../../molecules/Footer/FooterIconBox";
 import FooterMenuBox from "../../molecules/Footer/FooterMenuBox";
 import ServiceCode from "../../atoms/UI/ServiceCode";
@@ -41,7 +41,7 @@ const FooterInfoBox = styled.div`
   color: ${(props) => props.theme.grey.lighter};
   margin-top: 2rem;
   gap: 0.5rem;
-  ${small3}
+  ${font.footer_text}
   a {
     &:hover {
       text-decoration: underline;

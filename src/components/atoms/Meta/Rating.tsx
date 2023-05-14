@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Heavy } from "../../../styles/Fonts";
+import { fontWeight } from "../../../styles/Fonts";
 
 type RatingProps = {
   voteAverage?: number;
@@ -24,6 +24,6 @@ const RatingBox = styled.span`
   color: #45d068;
   gap: 0.3rem;
   span {
-    ${Heavy}
+    font-weight: ${fontWeight.Heavy};
   }
 `;

@@ -6,7 +6,7 @@ import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper } from "../../atoms/Layout";
-import { ButtonBox, ImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
+import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 
 /** 아이템 전체 Variants */
 const contentVariants: Variants = {
@@ -86,7 +86,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <ImageBanner
+      <ItemImageBanner
         onMouseEnter={() => control.start("hover")}
         backdrop={backdrop_path}
         poster={poster_path}

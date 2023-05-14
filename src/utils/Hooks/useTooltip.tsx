@@ -2,7 +2,7 @@
 
 import React, { useState, MouseEvent } from "react";
 import styled, { css } from "styled-components";
-import { bold, mid1, normal2 } from "../../styles/Fonts";
+import { font } from "../../styles/Fonts";
 
 interface IUseTooltip {
   isHovered: boolean;
@@ -55,12 +55,12 @@ export const useTooltip = (): IUseTooltip => {
 
 const slideTooltip = css`
   padding: 7px 20px;
-  ${normal2}
+  ${font.RS_tooltip_text}
 `;
 const detailTooltip = css`
   padding: 7px 20px;
-  ${mid1}
-  ${bold}
+  font-size: 1.7rem;
+  ${font.RM_tooltip_text}
 `;
 const tooltipSize = { slideTooltip, detailTooltip };
 
