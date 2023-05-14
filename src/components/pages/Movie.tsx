@@ -21,19 +21,15 @@ const Movie = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const favoriteItem = useRecoilValue(FavoriteAtom);
 
-  const { data: popular = { results: [] } } = useQuery<IGetData>(["popular", "movie"], movieAPI.popular, {
+  const { data: popular = { results: [] }, isLoading } = useQuery<IGetData>(["popular", "movie"], movieAPI.popular, {
     staleTime: 100000,
   });
   const { data: top_rated = { results: [] } } = useQuery<IGetData>(["top_rated", "movie"], movieAPI.top_rated, {
     staleTime: 100000,
   });
-  const { data: nowPlaying = { results: [] }, isLoading } = useQuery<IGetData>(
-    ["nowPlaying", "movie"],
-    movieAPI.nowPlaying,
-    {
-      staleTime: 100000,
-    }
-  );
+  const { data: nowPlaying = { results: [] } } = useQuery<IGetData>(["nowPlaying", "movie"], movieAPI.nowPlaying, {
+    staleTime: 100000,
+  });
   const { data: upcoming = { results: [] } } = useQuery<IGetData>(["upcoming", "movie"], movieAPI.upcoming, {
     staleTime: 100000,
   });
