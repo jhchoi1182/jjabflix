@@ -12,19 +12,19 @@ export const fontSize = {
   Big2: "5vw",
   Large: "2vw",
   LargeRem: "3.8rem",
-  Mid1: "1.2vw", // RectangleButton
+  Mid1: "1.2vw",
   Mid2: "1.3vw",
   Mid2Rem: "2.6rem",
   Mid3: "1.4vw",
-  Normal1: "1.4rem", // CustomIcon
+  Normal1: "1.4rem",
   Normal2: "1.7rem",
   Normal3: "0.84vw",
   Small1: "1rem",
-  Small2: "1.1rem", // CustomIcon
+  Small2: "1.1rem",
   Small3: "1.2rem",
 };
 
-/** 폰트 */
+/** Font */
 /** R 접두사 - 반응형 폰트 */
 /** S 접두사 - 스몰 */
 /** M 접두사  - 미디움 */

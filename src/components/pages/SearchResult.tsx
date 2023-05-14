@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation, useMatch, useOutletContext, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { searchAPI } from "../../api/Apis";
 import { IGetData } from "../../interface/Interface";
 import { ChildrenProps } from "../../interface/type";
@@ -11,7 +11,7 @@ import DataFetcherItem from "../organisms/Item/DataFetcherItem";
 import { ItemGridContainer } from "../atoms/Layout";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
-import Loading from "../atoms/Loading/Loading";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const SearchResult: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
@@ -32,7 +32,7 @@ const SearchResult: React.FC & {
     <SearchResult.Wrapper>
       <ItemGridContainer>
         {isLoading ? (
-          <Loading />
+          <Loadingspinner />
         ) : isError ? (
           <div>정보 없음</div>
         ) : (

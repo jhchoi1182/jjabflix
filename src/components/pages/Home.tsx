@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { homeAPI, movieAPI, posterAPI, tvAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
-import Loading from "../atoms/Loading/Loading";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { useOutletContext } from "react-router-dom";
@@ -12,6 +11,7 @@ import Footer from "../organisms/Footer/Footer";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Home = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -49,7 +49,7 @@ const Home = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loading />
+        <Loadingspinner />
       ) : (
         <React.Fragment>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>

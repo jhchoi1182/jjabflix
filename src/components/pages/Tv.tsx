@@ -3,7 +3,6 @@ import { useOutletContext } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
 import { Wrapper } from "../atoms/Layout";
-import Loading from "../atoms/Loading/Loading";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { posterAPI, tvAPI } from "../../api/Apis";
 import MainBanner from "../organisms/MainBanner/MainBanner";
@@ -16,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { IGetData } from "../../interface/Interface";
 import styled from "styled-components";
 import { font } from "../../styles/Fonts";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Tv = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -47,7 +47,7 @@ const Tv = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loading />
+        <Loadingspinner />
       ) : (
         <React.Fragment>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>

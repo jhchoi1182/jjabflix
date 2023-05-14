@@ -1,5 +1,4 @@
 import React from "react";
-import Loading from "../atoms/Loading/Loading";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
@@ -16,6 +15,7 @@ import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Movie = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -46,7 +46,7 @@ const Movie = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loading />
+        <Loadingspinner />
       ) : (
         <React.Fragment>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
