@@ -1,12 +1,40 @@
 const BASE_URL = "https://api.themoviedb.org/3";
 const API = process.env.REACT_APP_API;
 
+export const movieAPI = {
+  nowPlaying: () => {
+    return fetch(`${BASE_URL}/movie/now_playing?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+  popular: () => {
+    return fetch(`${BASE_URL}/movie/popular?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+  top_rated: () => {
+    return fetch(`${BASE_URL}/movie/top_rated?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+  upcoming: () => {
+    return fetch(`${BASE_URL}/movie/upcoming?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+};
+
+export const tvAPI = {
+  airing_today: () => {
+    return fetch(`${BASE_URL}/tv/airing_today?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+  on_the_air: () => {
+    return fetch(`
+    ${BASE_URL}/tv/on_the_air?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+  popular: () => {
+    return fetch(`${BASE_URL}/tv/popular?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+  top_rated: () => {
+    return fetch(`${BASE_URL}/tv/top_rated?api_key=${API}&language=ko&page=1`).then((response) => response.json());
+  },
+};
+
 export const homeAPI = {
   trending: () => {
     return fetch(`${BASE_URL}/trending/all/day?api_key=${API}&language=ko`).then((response) => response.json());
-  },
-  nowPlaying: () => {
-    return fetch(`${BASE_URL}/movie/now_playing?api_key=${API}&language=ko&page=1`).then((response) => response.json());
   },
 };
 

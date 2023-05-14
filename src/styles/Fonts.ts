@@ -22,6 +22,10 @@ export const large = css`
   font-size: 2vw;
 `;
 
+export const largerem = css`
+  font-size: 3.8rem;
+`;
+
 export const mid1 = css`
   font-size: 1.2vw;
 `;
