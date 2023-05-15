@@ -13,8 +13,10 @@ type ItemImageBannerProps = {
   name?: string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  className?: string;
 };
 const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
+  className,
   onMouseEnter,
   onMouseLeave,
   backdrop,
@@ -23,7 +25,7 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   name,
 }) => {
   return (
-    <Image onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} bgimg={posterAPI(backdrop ?? poster, "w500")}>
+    <Image className={className} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} bgimg={posterAPI(backdrop ?? poster, "w500")}>
       <Title>{title ?? name}</Title>
     </Image>
   );

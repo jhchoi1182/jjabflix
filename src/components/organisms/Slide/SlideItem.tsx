@@ -10,6 +10,10 @@ import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "..
 
 /** 아이템 전체 Variants */
 const contentVariants: Variants = {
+  dummy: {
+    opacity: 0,
+    pointerEvents: "none",
+  },
   normal: {
     scale: 1,
     y: 0,
@@ -60,7 +64,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
   /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
   const onMouseEnterHandler = async () => {
     await queryClient.fetchQuery(queryKey, queryFn, dataOption);
-    setButtonOpacityAfterDelay(0);
+    if (id !== 0) setButtonOpacityAfterDelay(0);
   };
 
   /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
@@ -75,6 +79,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
   const setButtonOpacityHandler = () => {
     setButtonOpacity(0);
   };
+  console.log(id === 0 ? "dummy" : "normal");
 
   return (
     <SlideItemContainer
@@ -87,6 +92,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
       onMouseLeave={onMouseLeaveHandler}
     >
       <ItemImageBanner
+        className={id === 0 ? "dummy" : ""}
         onMouseEnter={() => control.start("hover")}
         backdrop={backdrop_path}
         poster={poster_path}
@@ -119,5 +125,9 @@ const SlideItemContainer = styled(motion.div)`
   }
   &:nth-child(7) {
     transform-origin: center right !important;
+  }
+  .dummy {
+    opacity: 0;
+    pointer-events: none;
   }
 `;

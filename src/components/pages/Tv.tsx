@@ -34,8 +34,8 @@ const Tv = () => {
     staleTime: 100000,
   });
 
-  const backgroundImg = popular?.results[0]?.backdrop_path ?? popular?.results[0]?.poster_path;
-  const id = popular?.results[0]?.id ?? 0;
+  const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
+  const id = popular?.results[1]?.id ?? 0;
 
   /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
   const favoriteTv = favoriteItem.filter((content) => content.media_type === "tv");

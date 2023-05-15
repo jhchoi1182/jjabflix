@@ -7,7 +7,6 @@ import PageIndicator from "../../atoms/Slide/PageIndicator";
 import SlideMoveButton from "../../molecules/Slide/SlidePaginationButton";
 import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
-import DummyItem from "../../atoms/Slide/DummyItem";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../../lib/atoms";
 import { useOutletContext } from "react-router-dom";
@@ -54,9 +53,13 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
   const { setButtonOpacity } = useButtonOpacity();
 
   /** 슬라이드 로직 */
-  const showContentsNum = page === 0 ? 7 : 8;
+  const showContentsNum = 8;
   const totalContents = data.results.length;
   const maxPage = Math.ceil(totalContents / showContentsNum) - (isFavoriteSlide ? 1 : 0);
+  const showContentsArray = data?.results?.slice(
+    (showContentsNum - 2) * page,
+    showContentsNum + (showContentsNum - 2) * page
+  );
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
@@ -117,17 +120,11 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
           key={category + page}
           overflowy={overflowY}
         >
-          {page === 0 && <DummyItem />}
-          {data?.results
-            ?.slice(
-              page === 0 ? 0 : (showContentsNum - 2) * page - 1,
-              page === 0 ? showContentsNum : (showContentsNum - 2) * page + showContentsNum - 1
-            )
-            .map((content) => {
-              return (
-                <SlideItem key={content.id} {...content} media_type={content.media_type ?? type} category={category} />
-              );
-            })}
+          {showContentsArray.map((content, i) => {
+            return (
+              <SlideItem key={content.id} {...content} media_type={content.media_type ?? type} category={category} />
+            );
+          })}
         </FlexContainer>
       </AnimatePresence>
       {page !== 0 && <SlideMoveButton category={category} direction="prev" prevSlide={prevSlide} />}
