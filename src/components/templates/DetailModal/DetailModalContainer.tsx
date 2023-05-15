@@ -33,7 +33,6 @@ const DetailModalContainer = () => {
       document.body.style.paddingRight = "0";
     };
   }, []);
-  console.log(!dataId);
 
   return (
     <BackdropOverlay>

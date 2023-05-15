@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
@@ -42,7 +42,10 @@ const Movie = () => {
   const favoriteMovieObject = {
     results: favoriteMovie,
   };
-  console.log(favoriteMovie);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Wrapper>
@@ -60,7 +63,13 @@ const Movie = () => {
             <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
             <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
             {favoriteMovie.length !== 0 && (
-              <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" isFavoriteSlide {...favoriteMovieObject} />
+              <Slide
+                title="내가 찜한 영화"
+                category="favoriteMovie"
+                type="movie"
+                isFavoriteSlide
+                {...favoriteMovieObject}
+              />
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>

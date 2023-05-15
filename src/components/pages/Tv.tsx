@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
@@ -42,7 +42,10 @@ const Tv = () => {
   const favoriteTvObject = {
     results: favoriteTv,
   };
-  console.log(on_the_air);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Wrapper>
