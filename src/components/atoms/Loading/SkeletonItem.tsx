@@ -21,13 +21,13 @@ const LoadingVariants: Variants = {
 };
 
 const SkeletonItem: React.FC<SkeletonItemProps> = ({ delayNum, visibleCount }) => {
-  return <Item variants={LoadingVariants} custom={delayNum} animate="animate" visibleCount={visibleCount} />;
+  return <Item variants={LoadingVariants} custom={delayNum} animate="animate" visiblecount={visibleCount} />;
 };
 
 export default SkeletonItem;
 
-const Item = styled(motion.div)<{ visibleCount: number }>`
-  width: calc(100% / (${(props) => props.visibleCount}) - 4px);
+const Item = styled(motion.div)<{ visiblecount: number }>`
+  width: calc(100% / (${(props) => props.visiblecount}) - 4px);
   height: 160px;
   border-radius: 5px;
   background-color: rgb(0, 0, 0);

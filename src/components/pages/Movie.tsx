@@ -42,6 +42,7 @@ const Movie = () => {
   const favoriteMovieObject = {
     results: favoriteMovie,
   };
+  console.log(favoriteMovie);
 
   return (
     <Wrapper>
@@ -58,7 +59,9 @@ const Movie = () => {
             <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
             <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
             <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
-            <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieObject} />
+            {favoriteMovie.length !== 0 && (
+              <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieObject} />
+            )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
         </React.Fragment>

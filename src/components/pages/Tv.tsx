@@ -59,7 +59,9 @@ const Tv = () => {
             <Slide title="평단의 찬사를 받은 시리즈" category="top_rated" type="tv" {...top_rated} />
             <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
             <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
-            <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvObject} />
+            {favoriteTv.length !== 0 && (
+              <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvObject} />
+            )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
         </React.Fragment>
