@@ -60,7 +60,7 @@ const Movie = () => {
             <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
             <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
             {favoriteMovie.length !== 0 && (
-              <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieObject} />
+              <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" isFavoriteSlide {...favoriteMovieObject} />
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>

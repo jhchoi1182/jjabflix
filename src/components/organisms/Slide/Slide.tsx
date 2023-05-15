@@ -36,7 +36,14 @@ const rowVariants: Variants = {
   }),
 };
 
-const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
+interface ISlide extends IGetData {
+  category: string;
+  title: string;
+  type?: string;
+  isFavoriteSlide?: boolean;
+}
+
+const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...data }) => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const [direction, setDirection] = useState("next");
@@ -49,7 +56,7 @@ const Slide: React.FC<IGetData> = ({ title, category, type, ...data }) => {
   /** 슬라이드 로직 */
   const showContentsNum = page === 0 ? 7 : 8;
   const totalContents = data.results.length;
-  const maxPage = Math.ceil(totalContents / showContentsNum);
+  const maxPage = Math.ceil(totalContents / showContentsNum) - (isFavoriteSlide ? 1 : 0);
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {

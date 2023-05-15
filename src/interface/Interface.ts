@@ -44,7 +44,4 @@ export interface IGetData {
   results: IContent[];
   total_pages?: number;
   total_results?: number;
-  category: string;
-  title: string;
-  type?: string;
 }
