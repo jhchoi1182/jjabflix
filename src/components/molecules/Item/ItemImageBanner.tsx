@@ -25,7 +25,12 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   name,
 }) => {
   return (
-    <Image className={className} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} bgimg={posterAPI(backdrop ?? poster, "w500")}>
+    <Image
+      className={className}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      bgimg={posterAPI(backdrop ?? poster, "w500")}
+    >
       <Title>{title ?? name}</Title>
     </Image>
   );
@@ -35,7 +40,8 @@ export default ItemImageBanner;
 
 const Image = styled(motion.div)<{ bgimg: string }>`
   ${ContentCoverImage}
-  height: 170px;
+  /* height: 170px; */
+  height: 8.8vw;
   padding: 12px 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;

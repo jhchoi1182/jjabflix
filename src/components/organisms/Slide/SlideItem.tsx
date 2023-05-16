@@ -46,7 +46,16 @@ const captionVariants: Variants = {
   },
 };
 
-const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_path, media_type, category }) => {
+const SlideItem: React.FC<IContent & { itemNum: number }> = ({
+  id,
+  title,
+  name,
+  backdrop_path,
+  poster_path,
+  media_type,
+  category,
+  itemNum,
+}) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
   const control = useAnimation();
@@ -79,7 +88,6 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
   const setButtonOpacityHandler = () => {
     setButtonOpacity(0);
   };
-  console.log(id === 0 ? "dummy" : "normal");
 
   return (
     <SlideItemContainer
@@ -90,6 +98,7 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
       transition={{ type: "tween" }}
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
+      num={itemNum}
     >
       <ItemImageBanner
         className={id === 0 ? "dummy" : ""}
@@ -118,8 +127,8 @@ const SlideItem: React.FC<IContent> = ({ id, title, name, backdrop_path, poster_
 
 export default SlideItem;
 
-const SlideItemContainer = styled(motion.div)`
-  width: calc(100% / 8.2);
+const SlideItemContainer = styled(motion.div)<{ num: number }>`
+  width: calc(100% / ${(props) => props.num});
   &:nth-child(2) {
     transform-origin: center left !important;
   }

@@ -37,7 +37,6 @@ const MainBanner: React.FC<MainBannerProps> & {
       navigate(`${id}`);
     }
   };
-  console.log(data);
 
   return (
     <MainBanner.BackgroundImage>

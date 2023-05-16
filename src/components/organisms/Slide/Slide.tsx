@@ -120,9 +120,15 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
           key={category + page}
           overflowy={overflowY}
         >
-          {showContentsArray.map((content, i) => {
+          {showContentsArray.map((content) => {
             return (
-              <SlideItem key={content.id} {...content} media_type={content.media_type ?? type} category={category} />
+              <SlideItem
+                key={content.id}
+                {...content}
+                media_type={content.media_type ?? type}
+                category={category}
+                itemNum={showContentsNum}
+              />
             );
           })}
         </FlexContainer>
@@ -138,7 +144,7 @@ export default Slide;
 const SlideContainer = styled.div`
   position: relative;
   margin: -65px -12% 0px -12%;
-  margin-bottom: 34rem;
+  margin-bottom: 18.7vw;
 `;
 
 const FlexContainer = styled(motion.div)<{ overflowy: string }>`
