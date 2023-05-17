@@ -13,20 +13,22 @@ import { font } from "../../../styles/Fonts";
 
 export type MainBannerProps = {
   id: number;
-  media_type: string;
+  media_type: "movie" | "tv";
   category: string;
 };
 
 const MainBanner: React.FC<MainBannerProps> & {
+  Wrapper: React.FC<ChildrenProps>;
   Title: React.FC<ChildrenProps>;
   Overview: React.FC<ChildrenProps>;
-  BackgroundImage: React.FC<ChildrenProps>;
 } = ({ id, media_type, category }) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const setDetail = useSetRecoilState(detailSelector);
   const navigate = useNavigate();
-  const { data } = useQuery<IContent | undefined>(["bannerDetail"], () => detailAPI({ id, media_type }));
+  const { data, isError } = useQuery<IContent | undefined>(["bannerDetail", id], () =>
+    detailAPI({ id, media_type })
+  );
   const { title, name, overview } = data || {};
 
   /** 상세 정보 모달 띄우기 */
@@ -38,8 +40,10 @@ const MainBanner: React.FC<MainBannerProps> & {
     }
   };
 
-  return (
-    <MainBanner.BackgroundImage>
+  return isError ? (
+    <div>에러</div>
+  ) : (
+    <MainBanner.Wrapper>
       <MainBanner.Title>{title ?? name}</MainBanner.Title>
       <MainBanner.Overview>{overview}</MainBanner.Overview>
       <ButtonBox>
@@ -52,13 +56,13 @@ const MainBanner: React.FC<MainBannerProps> & {
         <Button.Detail onClick={showDetailHandler} buttonSize="mainButton" />
       </ButtonBox>
       {isHovered && renderTooltip()}
-    </MainBanner.BackgroundImage>
+    </MainBanner.Wrapper>
   );
 };
 
 export default MainBanner;
 
-MainBanner.BackgroundImage = styled.div`
+MainBanner.Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

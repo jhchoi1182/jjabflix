@@ -51,7 +51,7 @@ export const posterAPI = (path?: string, size?: string) => {
 
 type detailAPIParameter = {
   id: number;
-  media_type: string;
+  media_type: "movie" | "tv";
 };
 
 export const detailAPI = ({ id, media_type }: detailAPIParameter) => {

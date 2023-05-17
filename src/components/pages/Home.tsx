@@ -25,8 +25,8 @@ const Home = () => {
   const { data: on_the_air, isError: OnTheAirTVError } = OnTheAirTV;
 
   const backgroundImg = trending?.results[1]?.backdrop_path ?? trending?.results[1]?.poster_path;
-  const id = trending?.results[1]?.id;
-  const mediaType = trending?.results[1]?.media_type;
+  const id = trending?.results[1]?.id ?? 0;
+  const mediaType = trending?.results[1]?.media_type ?? "movie";
 
   useEffect(() => {
     window.scrollTo(0, 0);
