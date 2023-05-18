@@ -142,7 +142,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   );
 };
 
-export default Slide;
+export default React.memo(Slide);
 
 const SlideContainer = styled.div`
   position: relative;
