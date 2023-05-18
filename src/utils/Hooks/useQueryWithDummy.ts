@@ -29,11 +29,12 @@ export const useQueryWithDummy = () => {
   const useCreateQuery = (queryKey: string[], queryFn: () => Promise<IGetData>): IUseQueryWithDummyResult => {
     const { data = { results: [] }, isError } = useQuery<IGetData>(queryKey, queryFn, {
       select: (data) => {
-        if (data.results[0].id === 0) {
-          return data;
+        const copyData = Object.assign({}, data);
+        if (copyData.results[0].id === 0) {
+          return copyData;
         } else {
-          data.results.unshift(dummyData);
-          return data;
+          copyData.results.unshift(dummyData);
+          return copyData;
         }
       },
       staleTime: 100000,
