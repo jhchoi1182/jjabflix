@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
@@ -13,7 +13,8 @@ import DetailModalContainer from "../templates/DetailModal/DetailModalContainer"
 import Footer from "../organisms/Footer/Footer";
 import styled from "styled-components";
 import { font } from "../../styles/Fonts";
-import { useQueryWithDummy } from "../../utils/Hooks";
+import { dummyData, useQueryWithDummy } from "../../utils/Hooks";
+import { IGetData } from "../../interface/Interface";
 
 const Tv = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -30,9 +31,27 @@ const Tv = () => {
 
   /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
   const favoriteTv = favoriteItem.filter((content) => content.media_type === "tv");
-  const favoriteTvObject = {
-    results: favoriteTv,
-  };
+  const favoriteTvObject = useMemo<IGetData>(() => {
+    return { results: favoriteTv };
+  }, [favoriteTv]);
+  /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
+  // const unshiftDummyFavoriteTvObject = useCallback(() => {
+  //   if (favoriteTvObject?.results[0]?.id === 0) return favoriteTvObject;
+  //   else return favoriteTvObject?.results.unshift(dummyData);
+  // }, [favoriteTvObject]);
+
+  const unshiftDummyFavoriteTvObject = useCallback(() => {
+    const favoriteTvCopy = [...favoriteTv];
+    if (favoriteTvCopy[0]?.id === 0) return favoriteTvObject;
+    else {
+      favoriteTvCopy.unshift(dummyData);
+      return { results: favoriteTvCopy };
+    }
+  }, [favoriteTv, favoriteTvObject]);
+
+  useEffect(() => {
+    unshiftDummyFavoriteTvObject();
+  }, [unshiftDummyFavoriteTvObject]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,7 +66,7 @@ const Tv = () => {
             <MainBanner id={id} media_type={"tv"} category="popular" />
           </BannerCoverImage>
           <SlideContainer marginTop="-7rem">
-            {PopularTvError ? (
+            {/* {PopularTvError ? (
               <div>에러</div>
             ) : (
               <Slide title="지금 뜨고 있는 시리즈" category="popular" type="tv" {...popular} />
@@ -61,7 +80,7 @@ const Tv = () => {
               <div>에러</div>
             ) : (
               <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
-            )}
+            )} */}
             {AiringTodayTVError ? (
               <div>에러</div>
             ) : (

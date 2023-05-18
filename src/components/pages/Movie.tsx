@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
@@ -13,7 +13,8 @@ import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
-import { useQueryWithDummy } from "../../utils/Hooks";
+import { dummyData, useQueryWithDummy } from "../../utils/Hooks";
+import { IGetData } from "../../interface/Interface";
 
 const Movie = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -30,13 +31,23 @@ const Movie = () => {
 
   /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
   const favoriteMovie = favoriteItem.filter((content) => content.media_type === "movie");
-  const favoriteMovieObject = {
-    results: favoriteMovie,
-  };
+  const favoriteMovieObject = useMemo<IGetData>(() => {
+    return { results: favoriteMovie };
+  }, [favoriteMovie]);
+
+  const unshiftDummyFavoriteMovieObject = useCallback(() => {
+    if (favoriteMovieObject?.results[0]?.id === 0) return favoriteMovieObject;
+    else return favoriteMovieObject?.results.unshift(dummyData);
+  }, [favoriteMovieObject]);
+
+  useEffect(() => {
+    unshiftDummyFavoriteMovieObject();
+  }, [unshiftDummyFavoriteMovieObject]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
 
   return (
     <Wrapper>

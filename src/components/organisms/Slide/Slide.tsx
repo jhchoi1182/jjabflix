@@ -53,13 +53,19 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
   const { setButtonOpacity } = useButtonOpacity();
 
   /** 슬라이드 로직 */
-  const showContentsNum = 8;
+  const slideContentsNum = 8;
+  const showContentsNum = 6;
   const totalContents = data.results.length;
-  const maxPage = Math.ceil(totalContents / showContentsNum) - (isFavoriteSlide ? 1 : 0);
+  const maxPage = Math.ceil(totalContents / showContentsNum);
   const showContentsArray = data?.results?.slice(
-    (showContentsNum - 2) * page,
-    showContentsNum + (showContentsNum - 2) * page
+    (slideContentsNum - 2) * page,
+    slideContentsNum + (slideContentsNum - 2) * page
   );
+  console.log(data.results);
+  console.log("data.results.length:", totalContents);
+  console.log("page", page);
+
+  console.log("maxPage", maxPage);
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
@@ -75,7 +81,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
       if (isSliding) return;
       await setDirection("next");
       slidePrevent();
-      setPage((prev) => (prev === maxPage ? 0 : prev + 1));
+      setPage((prev) => (prev === maxPage - 1 ? 0 : prev + 1));
     }
   };
 
@@ -127,7 +133,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
                 {...content}
                 media_type={content.media_type ?? type}
                 category={category}
-                itemNum={showContentsNum}
+                itemNum={slideContentsNum}
               />
             );
           })}

@@ -13,7 +13,7 @@ const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page, category }
 
   const className = category === hoveredCategory ? "slide-hover" : "pagination-item";
   let numBox = [];
-  for (let i = 0; i < maxPage + 1; i++) {
+  for (let i = 0; i < maxPage; i++) {
     numBox.push(<li key={i} className={i === page ? "active" : ""} />);
   }
 

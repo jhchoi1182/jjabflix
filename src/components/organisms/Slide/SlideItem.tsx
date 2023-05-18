@@ -128,7 +128,7 @@ const SlideItem: React.FC<IContent & { itemNum: number }> = ({
 export default SlideItem;
 
 const SlideItemContainer = styled(motion.div)<{ num: number }>`
-  width: calc(100% / ${(props) => props.num});
+  width: calc(100% / ${(props) => props.num} - 4px);
   &:nth-child(2) {
     transform-origin: center left !important;
   }
