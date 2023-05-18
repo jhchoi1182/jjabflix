@@ -39,10 +39,9 @@ interface ISlide extends IGetData {
   category: string;
   title: string;
   type?: string;
-  isFavoriteSlide?: boolean;
 }
 
-const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...data }) => {
+const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const [direction, setDirection] = useState("next");
@@ -55,17 +54,15 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
   /** 슬라이드 로직 */
   const slideContentsNum = 8;
   const showContentsNum = 6;
-  const totalContents = data.results.length;
+  const totalContents = data?.results?.length;
   const maxPage = Math.ceil(totalContents / showContentsNum);
   const showContentsArray = data?.results?.slice(
     (slideContentsNum - 2) * page,
     slideContentsNum + (slideContentsNum - 2) * page
   );
-  console.log(data.results);
-  console.log("data.results.length:", totalContents);
-  console.log("page", page);
-
-  console.log("maxPage", maxPage);
+  // console.log(data.results);
+  // console.log(showContentsArray);
+  // console.log("data.results.length:", totalContents);
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
@@ -126,7 +123,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, isFavoriteSlide, ...da
           key={category + page}
           overflowy={overflowY}
         >
-          {showContentsArray.map((content) => {
+          {showContentsArray?.map((content) => {
             return (
               <SlideItem
                 key={content.id}

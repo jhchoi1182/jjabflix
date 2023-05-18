@@ -31,23 +31,22 @@ const Movie = () => {
 
   /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
   const favoriteMovie = favoriteItem.filter((content) => content.media_type === "movie");
-  const favoriteMovieObject = useMemo<IGetData>(() => {
-    return { results: favoriteMovie };
-  }, [favoriteMovie]);
 
-  const unshiftDummyFavoriteMovieObject = useCallback(() => {
-    if (favoriteMovieObject?.results[0]?.id === 0) return favoriteMovieObject;
-    else return favoriteMovieObject?.results.unshift(dummyData);
-  }, [favoriteMovieObject]);
+  /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
+  const unshiftDummyFavoriteMovieCopyObject = () => {
+    const favoriteMovieCopy = { results: JSON.parse(JSON.stringify(favoriteMovie)) };
+    if (favoriteMovieCopy?.results[0]?.id === 0) return favoriteMovieCopy;
+    else {
+      favoriteMovieCopy?.results.unshift(dummyData);
+      return favoriteMovieCopy;
+    }
+  };
 
-  useEffect(() => {
-    unshiftDummyFavoriteMovieObject();
-  }, [unshiftDummyFavoriteMovieObject]);
+  const favoriteMovieCopyWithDummy = unshiftDummyFavoriteMovieCopyObject();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
 
   return (
     <Wrapper>
@@ -78,14 +77,8 @@ const Movie = () => {
             ) : (
               <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
             )}
-            {favoriteMovie.length !== 0 && (
-              <Slide
-                title="내가 찜한 영화"
-                category="favoriteMovie"
-                type="movie"
-                isFavoriteSlide
-                {...favoriteMovieObject}
-              />
+            {favoriteMovie?.length !== 0 && (
+              <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>

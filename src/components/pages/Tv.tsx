@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
@@ -14,7 +14,6 @@ import Footer from "../organisms/Footer/Footer";
 import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { dummyData, useQueryWithDummy } from "../../utils/Hooks";
-import { IGetData } from "../../interface/Interface";
 
 const Tv = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
@@ -31,27 +30,18 @@ const Tv = () => {
 
   /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
   const favoriteTv = favoriteItem.filter((content) => content.media_type === "tv");
-  const favoriteTvObject = useMemo<IGetData>(() => {
-    return { results: favoriteTv };
-  }, [favoriteTv]);
+
   /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
-  // const unshiftDummyFavoriteTvObject = useCallback(() => {
-  //   if (favoriteTvObject?.results[0]?.id === 0) return favoriteTvObject;
-  //   else return favoriteTvObject?.results.unshift(dummyData);
-  // }, [favoriteTvObject]);
-
-  const unshiftDummyFavoriteTvObject = useCallback(() => {
-    const favoriteTvCopy = [...favoriteTv];
-    if (favoriteTvCopy[0]?.id === 0) return favoriteTvObject;
+  const unshiftDummyFavoriteTvCopyObject = () => {
+    const favoriteTvCopy = { results: JSON.parse(JSON.stringify(favoriteTv)) };
+    if (favoriteTvCopy?.results[0]?.id === 0) return favoriteTvCopy;
     else {
-      favoriteTvCopy.unshift(dummyData);
-      return { results: favoriteTvCopy };
+      favoriteTvCopy?.results.unshift(dummyData);
+      return favoriteTvCopy;
     }
-  }, [favoriteTv, favoriteTvObject]);
+  };
 
-  useEffect(() => {
-    unshiftDummyFavoriteTvObject();
-  }, [unshiftDummyFavoriteTvObject]);
+  const favoriteTvCopyWithDummy = unshiftDummyFavoriteTvCopyObject();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,7 +56,7 @@ const Tv = () => {
             <MainBanner id={id} media_type={"tv"} category="popular" />
           </BannerCoverImage>
           <SlideContainer marginTop="-7rem">
-            {/* {PopularTvError ? (
+            {PopularTvError ? (
               <div>에러</div>
             ) : (
               <Slide title="지금 뜨고 있는 시리즈" category="popular" type="tv" {...popular} />
@@ -80,14 +70,14 @@ const Tv = () => {
               <div>에러</div>
             ) : (
               <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
-            )} */}
+            )}
             {AiringTodayTVError ? (
               <div>에러</div>
             ) : (
               <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
             )}
-            {favoriteTv.length !== 0 && (
-              <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" isFavoriteSlide {...favoriteTvObject} />
+            {favoriteTv?.length !== 0 && (
+              <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
