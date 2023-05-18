@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { IContent, IGetData } from "../../interface/Interface";
 import { homeAPI, movieAPI, tvAPI } from "../../api/Apis";
+import { useRecoilValue } from "recoil";
+import { FavoriteAtom } from "../../lib/atoms";
 
 interface IUseQueryWithDummyResult {
   data: IGetData;
@@ -24,6 +26,8 @@ export const dummyData: IContent = {
   production_companies: [],
   production_countries: [],
 };
+
+/** 각 페이지 슬라이드들에 사용될 데이터 */
 
 export const useQueryWithDummy = () => {
   const useCreateQuery = (queryKey: string[], queryFn: () => Promise<IGetData>): IUseQueryWithDummyResult => {
@@ -54,4 +58,25 @@ export const useQueryWithDummy = () => {
     UpcomingMovie: useCreateQuery(["upcoming", "movie"], movieAPI.upcoming),
     AiringTodayTV: useCreateQuery(["airing_today", "tv"], tvAPI.airing_today),
   };
+};
+
+/** 내가 찜한 시리즈와 영화 슬라이드에 사용될 데이터 */
+
+export const useLocalWithDummy = (media_type: "movie" | "tv") => {
+  const favoriteItem = useRecoilValue(FavoriteAtom);
+  const FilteredFavoriteItem = favoriteItem.filter((content) => content.media_type === media_type);
+
+  /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
+  const unshiftDummy = () => {
+    const favoriteItemCopyObject = { results: JSON.parse(JSON.stringify(FilteredFavoriteItem)) };
+    if (favoriteItemCopyObject?.results[0]?.id === 0) return favoriteItemCopyObject;
+    else {
+      favoriteItemCopyObject?.results.unshift(dummyData);
+      return favoriteItemCopyObject;
+    }
+  };
+
+  const favoriteItemCopyWithDummy = unshiftDummy();
+
+  return favoriteItemCopyWithDummy;
 };

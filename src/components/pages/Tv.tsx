@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { FavoriteAtom } from "../../lib/atoms";
 import { Wrapper } from "../atoms/Layout";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { posterAPI } from "../../api/Apis";
@@ -13,12 +11,12 @@ import DetailModalContainer from "../templates/DetailModal/DetailModalContainer"
 import Footer from "../organisms/Footer/Footer";
 import styled from "styled-components";
 import { font } from "../../styles/Fonts";
-import { dummyData, useQueryWithDummy } from "../../utils/Hooks";
+import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
 
 const Tv = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
-  const favoriteItem = useRecoilValue(FavoriteAtom);
   const { PopularTv, TopRateTV, OnTheAirTV, AiringTodayTV } = useQueryWithDummy();
+  const favoriteTvCopyWithDummy = useLocalWithDummy("tv");
 
   const { data: popular, isError: PopularTvError } = PopularTv;
   const { data: top_rated, isError: TopRateTVError } = TopRateTV;
@@ -27,21 +25,6 @@ const Tv = () => {
 
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
-
-  /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
-  const favoriteTv = favoriteItem.filter((content) => content.media_type === "tv");
-
-  /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
-  const unshiftDummyFavoriteTvCopyObject = () => {
-    const favoriteTvCopy = { results: JSON.parse(JSON.stringify(favoriteTv)) };
-    if (favoriteTvCopy?.results[0]?.id === 0) return favoriteTvCopy;
-    else {
-      favoriteTvCopy?.results.unshift(dummyData);
-      return favoriteTvCopy;
-    }
-  };
-
-  const favoriteTvCopyWithDummy = unshiftDummyFavoriteTvCopyObject();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,7 +59,7 @@ const Tv = () => {
             ) : (
               <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
             )}
-            {favoriteTv?.length !== 0 && (
+            {favoriteTvCopyWithDummy?.results?.length !== 0 && (
               <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
             )}
           </SlideContainer>

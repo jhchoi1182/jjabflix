@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
@@ -11,15 +11,12 @@ import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
-import { useRecoilValue } from "recoil";
-import { FavoriteAtom } from "../../lib/atoms";
-import { dummyData, useQueryWithDummy } from "../../utils/Hooks";
-import { IGetData } from "../../interface/Interface";
+import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
 
 const Movie = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
-  const favoriteItem = useRecoilValue(FavoriteAtom);
   const { PopularMovie, TopRateMovie, NowPlayingMovie, UpcomingMovie } = useQueryWithDummy();
+  const favoriteMovieCopyWithDummy = useLocalWithDummy("movie");
 
   const { data: popular, isError: PopularMovieError } = PopularMovie;
   const { data: top_rated, isError: TopRateMovieError } = TopRateMovie;
@@ -28,21 +25,6 @@ const Movie = () => {
 
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
-
-  /** 즐겨찾기 콘텐츠가 담긴 배열을 Slide 타입에 맞추기 */
-  const favoriteMovie = favoriteItem.filter((content) => content.media_type === "movie");
-
-  /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
-  const unshiftDummyFavoriteMovieCopyObject = () => {
-    const favoriteMovieCopy = { results: JSON.parse(JSON.stringify(favoriteMovie)) };
-    if (favoriteMovieCopy?.results[0]?.id === 0) return favoriteMovieCopy;
-    else {
-      favoriteMovieCopy?.results.unshift(dummyData);
-      return favoriteMovieCopy;
-    }
-  };
-
-  const favoriteMovieCopyWithDummy = unshiftDummyFavoriteMovieCopyObject();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,7 +59,7 @@ const Movie = () => {
             ) : (
               <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
             )}
-            {favoriteMovie?.length !== 0 && (
+            {favoriteMovieCopyWithDummy?.results?.length !== 0 && (
               <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
             )}
           </SlideContainer>
