@@ -66,6 +66,17 @@ MainBanner.Wrapper = styled.div`
   justify-content: flex-end;
   height: 100vh;
   padding: 60px;
+  @media (max-width: 1099px) {
+    height: 80vh;
+    padding: 50px;
+  }
+  @media (max-width: 799px) {
+    padding: 40px;
+  }
+  @media (max-width: 499px) {
+    height: 75vh;
+    padding: 30px;
+  }
 `;
 
 MainBanner.Title = styled.h2`

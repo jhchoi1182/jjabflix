@@ -17,4 +17,7 @@ const ColumnContainer = styled.section<SlideContainerProps>`
   flex-direction: column;
   margin-top: ${(props) => props.marginTop};
   margin-bottom: -40px;
+  @media (max-width: 1099px) {
+    margin-top: -10rem;
+  }
 `;
