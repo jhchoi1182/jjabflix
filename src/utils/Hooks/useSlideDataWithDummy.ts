@@ -33,7 +33,7 @@ export const useQueryWithDummy = () => {
   const useCreateQuery = (queryKey: string[], queryFn: () => Promise<IGetData>): IUseQueryWithDummyResult => {
     const { data = { results: [] }, isError } = useQuery<IGetData>(queryKey, queryFn, {
       select: (data) => {
-        const copyData = Object.assign({}, data);
+        const copyData = JSON.parse(JSON.stringify(data));
         if (copyData.results[0].id === 0) {
           return copyData;
         } else {

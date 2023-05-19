@@ -20,7 +20,7 @@ export const detailSelector = selector({
   },
 });
 
-/** 즐겨찾기 */
+/** 즐겨찾기 상태관리 */
 
 export const FavoriteAtom = atom<IContent[]>({
   key: "favoriteContents",
@@ -32,4 +32,25 @@ export const FavoriteAtom = atom<IContent[]>({
 export const categoryAtom = atom({
   key: "layoutId",
   default: "",
+});
+
+/** 툴팁 상태관리 */
+
+interface ItooltipAtom {
+  isHovered: boolean;
+  text: string;
+  top: number;
+  x: number;
+  size: "slideTooltip" | "detailTooltip";
+}
+
+export const tooltipAtom = atom<ItooltipAtom>({
+  key: "isHovered",
+  default: {
+    isHovered: false,
+    text: "",
+    top: 0,
+    x: 0,
+    size: "slideTooltip",
+  },
 });

@@ -1,8 +1,10 @@
 /** 마우스 호버 시 툴팁 */
 
-import React, { useState, MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { font } from "../../styles/Fonts";
+import { useRecoilState } from "recoil";
+import { tooltipAtom } from "../../lib/atoms";
 
 interface IUseTooltip {
   isHovered: boolean;
@@ -19,12 +21,12 @@ interface IshowTooltipHandler {
 }
 
 export const useTooltip = (): IUseTooltip => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [tooltip, setTooltip] = useState<IshowTooltipHandler>({ text: "", top: 0, x: 0, size: "slideTooltip" });
+  const [tooltip, setTooltip] = useRecoilState(tooltipAtom);
+  const { isHovered } = tooltip;
 
   const showTooltipHandler = ({ top, x, size }: IshowTooltipHandler, event: MouseEvent<HTMLElement>) => {
-    setIsHovered(true);
     setTooltip({
+      isHovered: true,
       text: event.currentTarget.dataset.tooltipText ?? "",
       top: top ?? event.currentTarget.offsetTop,
       x,
@@ -33,8 +35,7 @@ export const useTooltip = (): IUseTooltip => {
   };
 
   const disappearTooltipHandler = () => {
-    setIsHovered(false);
-    setTooltip({ text: "", top: 0, x: 0, size: "slideTooltip" });
+    setTooltip({ isHovered: false, text: "", top: 0, x: 0, size: "slideTooltip" });
   };
 
   const renderTooltip = () => {
