@@ -75,6 +75,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   /** 슬라이드 시 슬라이드 페이지 간 생기는 공백 계산 */
 
   const calculateSlideGap = () => {
+    if (innerWidth === 1920) return 145;
     if (slideContentsNum === 7) return 0.0698 * innerWidth;
     if (slideContentsNum === 6) return 0.0698 * innerWidth;
     if (slideContentsNum === 5) return 0.0698 * innerWidth;
@@ -136,12 +137,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   }, [pathnameId]);
 
   return (
-    <SlideContainer
-      ref={zIndexRef}
-      onMouseEnter={onMouseEnterHandler}
-      onMouseLeave={onMouseLeaveHandler}
-      slideContentsNum={slideContentsNum}
-    >
+    <SlideContainer ref={zIndexRef} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} category={category} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
@@ -180,33 +176,30 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
 
 export default React.memo(Slide);
 
-const SlideContainer = styled.div<{ slideContentsNum: number }>`
+const SlideContainer = styled.div`
   position: relative;
-  ${({ slideContentsNum }) => {
-    switch (true) {
-      case slideContentsNum === 7:
-        return css`
-          margin: -65px -15% 0px -15%;
-        `;
-      case slideContentsNum === 6:
-        return css`
-          margin: -65px -18% 0px -18%;
-        `;
-      case slideContentsNum === 5:
-        return css`
-          margin: -65px -26% 0px -26%;
-        `;
-      case slideContentsNum === 4:
-        return css`
-          margin: -65px -40% 0px -40%;
-        `;
-      default:
-        return css`
-          margin: -65px -12% 0px -12%;
-        `;
-    }
-  }}
+  margin: -65px -12% 0px -12%;
   margin-bottom: 18.7vw;
+
+  @media (max-width: 1399px) {
+    margin: -65px -15% 0px -15%;
+    margin-bottom: 25.5rem;
+  }
+
+  @media (max-width: 1099px) {
+    margin: -65px -18% 0px -18%;
+    margin-bottom: 27%;
+  }
+
+  @media (max-width: 799px) {
+    margin: -65px -26% 0px -26%;
+    margin-bottom: calc(26% + 5.5rem);
+  }
+
+  @media (max-width: 499px) {
+    margin: -65px -40% 0px -40%;
+    margin-bottom: calc(41% + 5rem);
+  }
 `;
 
 const FlexContainer = styled(motion.div)<{ overflowy: string }>`
