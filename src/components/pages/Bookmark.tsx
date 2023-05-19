@@ -38,9 +38,21 @@ export default Bookmark;
 Bookmark.Wrapper = styled.div`
   padding: 76px 60px;
   margin-bottom: 40rem;
+  @media (max-width: 1099px) {
+    margin-bottom: 15rem;
+  }
+  @media (max-width: 799px) {
+    margin-bottom: 0rem;
+  }
 `;
 
 Bookmark.Title = styled.h1`
   ${font.R_page_title}
   padding-bottom: 8.5%;
+  @media (max-width: 1399px) {
+    padding-bottom: 10.5%;
+  }
+  @media (max-width: 1099px) {
+    padding-bottom: 14%;
+  }
 `;
