@@ -50,4 +50,7 @@ const ContentsContainer = styled(motion.div)`
   width: 902.5px;
   margin: 30px auto 0px;
   background-color: ${(props) => props.theme.black.darker};
+  @media (max-width: 950px) {
+    width: 93vw;
+  }
 `;
