@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
@@ -136,7 +136,12 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   }, [pathnameId]);
 
   return (
-    <SlideContainer ref={zIndexRef} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
+    <SlideContainer
+      ref={zIndexRef}
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
+      slideContentsNum={slideContentsNum}
+    >
       <SlideTitle>{title}</SlideTitle>
       <PageIndicator maxPage={maxPage} page={page} category={category} />
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
@@ -175,9 +180,32 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
 
 export default React.memo(Slide);
 
-const SlideContainer = styled.div`
+const SlideContainer = styled.div<{ slideContentsNum: number }>`
   position: relative;
-  margin: -65px -12% 0px -12%;
+  ${({ slideContentsNum }) => {
+    switch (true) {
+      case slideContentsNum === 7:
+        return css`
+          margin: -65px -15% 0px -15%;
+        `;
+      case slideContentsNum === 6:
+        return css`
+          margin: -65px -18% 0px -18%;
+        `;
+      case slideContentsNum === 5:
+        return css`
+          margin: -65px -26% 0px -26%;
+        `;
+      case slideContentsNum === 4:
+        return css`
+          margin: -65px -40% 0px -40%;
+        `;
+      default:
+        return css`
+          margin: -65px -12% 0px -12%;
+        `;
+    }
+  }}
   margin-bottom: 18.7vw;
 `;
 
