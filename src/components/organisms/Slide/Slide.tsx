@@ -86,7 +86,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
       return setShowContentsNum(2);
     }
   }, [innerWidth]);
-  console.log(innerWidth);
+  // console.log(innerWidth);
 
   /** 슬라이드 시 슬라이드 페이지 간 생기는 공백 계산 */
 
@@ -187,7 +187,9 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
       {page !== 0 && (
         <SlidePaginationButton category={category} isSliding={isSliding} direction="prev" prevSlide={prevSlide} />
       )}
-      {<SlidePaginationButton category={category} isSliding={isSliding} direction="next" nextSlide={nextSlide} />}
+      {page !== maxPage - 1 && (
+        <SlidePaginationButton category={category} isSliding={isSliding} direction="next" nextSlide={nextSlide} />
+      )}
     </SlideContainer>
   );
 };
