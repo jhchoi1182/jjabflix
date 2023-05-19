@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { posterAPI } from "../../../api/Apis";
 import { flex } from "../../../styles/css";
 import { ContentCoverImage } from "../../atoms/Layout";
@@ -14,6 +14,8 @@ type ItemImageBannerProps = {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   className?: string;
+  index?: number;
+  maxIndex?: number;
 };
 const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   className,
@@ -23,6 +25,8 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   poster,
   title,
   name,
+  index,
+  maxIndex,
 }) => {
   return (
     <Image
@@ -30,26 +34,39 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       bgimg={posterAPI(backdrop ?? poster, "w500")}
+      index={index}
+      maxIndex={maxIndex}
     >
-      <Title>{title ?? name}</Title>
+      <Title index={index} maxIndex={maxIndex}>
+        {title ?? name}
+      </Title>
     </Image>
   );
 };
 
 export default ItemImageBanner;
 
-const Image = styled(motion.div)<{ bgimg: string }>`
+const Image = styled(motion.div)<{ bgimg: string; index?: number; maxIndex?: number }>`
   ${ContentCoverImage}
-  /* height: 170px; */
+  ${({ index, maxIndex, bgimg }) =>
+    (index === 0 || index === maxIndex) &&
+    css`
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(${bgimg});
+    `}
   height: 8.8vw;
   padding: 12px 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;
 
-const Title = styled(motion.p)`
+const Title = styled(motion.p)<{ index?: number; maxIndex?: number }>`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
   ${font.RS_title}
+  ${({ index, maxIndex }) =>
+    (index === 0 || index === maxIndex) &&
+    css`
+      color: #727272;
+    `}
 `;

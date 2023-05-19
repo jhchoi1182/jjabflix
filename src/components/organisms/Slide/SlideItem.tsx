@@ -8,6 +8,12 @@ import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper } from "../../atoms/Layout";
 import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 
+interface ISlideItem extends IContent {
+  itemNum: number;
+  index: number;
+  maxIndex: number;
+}
+
 /** 아이템 전체 Variants */
 const contentVariants: Variants = {
   dummy: {
@@ -46,7 +52,7 @@ const captionVariants: Variants = {
   },
 };
 
-const SlideItem: React.FC<IContent & { itemNum: number }> = ({
+const SlideItem: React.FC<ISlideItem> = ({
   id,
   title,
   name,
@@ -55,6 +61,8 @@ const SlideItem: React.FC<IContent & { itemNum: number }> = ({
   media_type,
   category,
   itemNum,
+  index,
+  maxIndex,
 }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
@@ -107,6 +115,8 @@ const SlideItem: React.FC<IContent & { itemNum: number }> = ({
         poster={poster_path}
         title={title}
         name={name}
+        index={index}
+        maxIndex={maxIndex}
       />
       <ItemCaptionWrapper variants={captionVariants}>
         {isError ? (

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
-import SlideMoveButton from "../../molecules/Slide/SlidePaginationButton";
+import SlidePaginationButton from "../../molecules/Slide/SlidePaginationButton";
 import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import { useSetRecoilState } from "recoil";
@@ -123,7 +123,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
           key={category + page}
           overflowy={overflowY}
         >
-          {showContentsArray?.map((content) => {
+          {showContentsArray?.map((content, i) => {
             return (
               <SlideItem
                 key={content.id}
@@ -131,13 +131,15 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
                 media_type={content.media_type ?? type}
                 category={category}
                 itemNum={slideContentsNum}
+                index={i}
+                maxIndex={showContentsArray.length - 1}
               />
             );
           })}
         </FlexContainer>
       </AnimatePresence>
-      {page !== 0 && <SlideMoveButton category={category} direction="prev" prevSlide={prevSlide} />}
-      {<SlideMoveButton category={category} direction="next" nextSlide={nextSlide} />}
+      {page !== 0 && <SlidePaginationButton category={category} isSliding={isSliding} direction="prev" prevSlide={prevSlide} />}
+      {<SlidePaginationButton category={category} isSliding={isSliding} direction="next" nextSlide={nextSlide} />}
     </SlideContainer>
   );
 };
