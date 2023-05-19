@@ -11,7 +11,7 @@ import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "..
 interface ISlideItem extends IContent {
   itemNum: number;
   index: number;
-  maxIndex: number;
+  isSliding: boolean;
 }
 
 /** 아이템 전체 Variants */
@@ -62,7 +62,7 @@ const SlideItem: React.FC<ISlideItem> = ({
   category,
   itemNum,
   index,
-  maxIndex,
+  isSliding
 }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
@@ -116,7 +116,8 @@ const SlideItem: React.FC<ISlideItem> = ({
         title={title}
         name={name}
         index={index}
-        maxIndex={maxIndex}
+        itemNum={itemNum}
+        isSliding={isSliding}
       />
       <ItemCaptionWrapper variants={captionVariants}>
         {isError ? (

@@ -132,7 +132,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
                 category={category}
                 itemNum={slideContentsNum}
                 index={i}
-                maxIndex={showContentsArray.length - 1}
+                isSliding={isSliding}
               />
             );
           })}

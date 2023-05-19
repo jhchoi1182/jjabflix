@@ -15,7 +15,8 @@ type ItemImageBannerProps = {
   onMouseLeave?: () => void;
   className?: string;
   index?: number;
-  maxIndex?: number;
+  itemNum?: number;
+  isSliding?: boolean;
 };
 const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   className,
@@ -26,7 +27,8 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   title,
   name,
   index,
-  maxIndex,
+  itemNum,
+  isSliding,
 }) => {
   return (
     <Image
@@ -35,9 +37,10 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
       onMouseLeave={onMouseLeave}
       bgimg={posterAPI(backdrop ?? poster, "w500")}
       index={index}
-      maxIndex={maxIndex}
+      itemNum={itemNum && itemNum - 1}
+      issliding={isSliding}
     >
-      <Title index={index} maxIndex={maxIndex}>
+      <Title index={index} itemNum={itemNum && itemNum - 1} issliding={isSliding}>
         {title ?? name}
       </Title>
     </Image>
@@ -46,10 +49,11 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
 
 export default ItemImageBanner;
 
-const Image = styled(motion.div)<{ bgimg: string; index?: number; maxIndex?: number }>`
+const Image = styled(motion.div)<{ bgimg: string; index?: number; itemNum?: number; issliding?: boolean }>`
   ${ContentCoverImage}
-  ${({ index, maxIndex, bgimg }) =>
-    (index === 0 || index === maxIndex) &&
+  ${({ index, itemNum, bgimg, issliding }) =>
+    !issliding &&
+    (index === 0 || index === itemNum) &&
     css`
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(${bgimg});
     `}
@@ -59,13 +63,14 @@ const Image = styled(motion.div)<{ bgimg: string; index?: number; maxIndex?: num
   border-top-right-radius: 5px;
 `;
 
-const Title = styled(motion.p)<{ index?: number; maxIndex?: number }>`
+const Title = styled(motion.p)<{ index?: number; itemNum?: number; issliding?: boolean }>`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
   ${font.RS_title}
-  ${({ index, maxIndex }) =>
-    (index === 0 || index === maxIndex) &&
+  ${({ index, itemNum, issliding }) =>
+    !issliding &&
+    (index === 0 || index === itemNum) &&
     css`
       color: #727272;
     `}
