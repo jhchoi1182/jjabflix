@@ -73,43 +73,31 @@ const next = css`
 
 const direction = { prev, next };
 
-const SlideBtnBaseCss = css<{ direction: "prev" | "next"; issliding: boolean }>`
+const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding: boolean }>`
   position: absolute;
   ${(props) => props.direction && direction[props.direction]};
   border: none;
+  width: calc(100% / 30);
+  height: 8.8vw;
   background-color: ${({ issliding }) => (issliding ? "rgba(0, 0, 0, 0.5)" : "transparent")};
   border-radius: 8px;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
-`;
-
-const SlideBtn = styled.button`
-  ${SlideBtnBaseCss}
-  width: calc(100% / 30);
-  height: 8.8vw;
-
   @media (max-width: 1399px) {
-    ${SlideBtnBaseCss}
     width: calc(100% / 34);
     height: 13rem;
   }
-
   @media (max-width: 1099px) {
-    ${SlideBtnBaseCss}
     width: calc(100% / 30);
     height: 13.5vw;
   }
-
   @media (max-width: 799px) {
-    ${SlideBtnBaseCss}
     width: calc(100% / 33);
     height: 18vw;
   }
-
   @media (max-width: 499px) {
-    ${SlideBtnBaseCss}
     height: 26vw;
   }
 `;

@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { categoryAtom } from "../../../lib/atoms";
 
 export interface ArrowProps {
@@ -23,31 +23,24 @@ const Arrow: React.FC<ArrowProps> = ({ direction, category }) => {
 
 export default Arrow;
 
-const ArrowStyleBaseCss = css`
-  color: ${(props) => props.theme.white.lighter};
-`;
-
 const ArrowStyle = styled.div`
-  ${ArrowStyleBaseCss}
+  color: ${(props) => props.theme.white.lighter};
   font-size: 3rem;
   &:hover {
     font-size: 4rem;
   }
-
   @media (max-width: 1099px) {
     font-size: 2.5rem;
     &:hover {
       font-size: 3.5rem;
     }
   }
-
   @media (max-width: 799px) {
     font-size: 2rem;
     &:hover {
       font-size: 3rem;
     }
   }
-
   @media (max-width: 499px) {
     font-size: 1.5rem;
     &:hover {

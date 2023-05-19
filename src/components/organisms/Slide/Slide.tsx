@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import SlideItem from "./SlideItem";
 import { IGetData } from "../../../interface/Interface";
 import PageIndicator from "../../atoms/Slide/PageIndicator";
@@ -148,7 +148,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
           initial="appearance"
           animate="center"
           exit="exit"
-          transition={{ type: "tween", duration: 4 }}
+          transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
           overflowy={overflowY}
         >
@@ -181,22 +181,18 @@ const SlideContainer = styled.div`
   position: relative;
   margin: -65px -12% 0px -12%;
   margin-bottom: 18.7vw;
-
   @media (max-width: 1399px) {
     margin: -65px -15% 0px -15%;
     margin-bottom: 25.5rem;
   }
-
   @media (max-width: 1099px) {
     margin: -65px -18% 0px -18%;
     margin-bottom: 27%;
   }
-
   @media (max-width: 799px) {
     margin: -65px -26% 0px -26%;
     margin-bottom: calc(26% + 5.5rem);
   }
-
   @media (max-width: 499px) {
     margin: -65px -40% 0px -40%;
     margin-bottom: calc(41% + 5rem);

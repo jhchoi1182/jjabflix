@@ -49,7 +49,7 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
 
 export default ItemImageBanner;
 
-const ImageBaseCss = css<{ bgimg: string; index?: number; itemnum?: number; issliding?: boolean }>`
+const Image = styled(motion.div)<{ bgimg: string; index?: number; itemnum?: number; issliding?: boolean }>`
   ${ContentCoverImage}
   ${({ index, itemnum, bgimg, issliding }) =>
     !issliding &&
@@ -58,31 +58,19 @@ const ImageBaseCss = css<{ bgimg: string; index?: number; itemnum?: number; issl
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(${bgimg});
     `}
   padding: 12px 10px;
+  height: 8.8vw;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-`;
-
-const Image = styled(motion.div)`
-  ${ImageBaseCss}
-  height: 8.8vw;
-
   @media (max-width: 1399px) {
-    ${ImageBaseCss}
     height: 13rem;
   }
-
   @media (max-width: 1099px) {
-    ${ImageBaseCss}
     height: 13.5vw;
   }
-
   @media (max-width: 799px) {
-    ${ImageBaseCss}
     height: 18vw;
   }
-
   @media (max-width: 499px) {
-    ${ImageBaseCss}
     height: 26vw;
   }
 `;
