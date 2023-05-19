@@ -31,9 +31,14 @@ export default Footer;
 
 const FooterContainer = styled.section`
   width: 59vw;
-  height: 34.8rem;
   margin: 0 auto 2rem;
   overflow-y: hidden;
+  @media (max-width: 1399px) {
+    width: 70vw;
+  }
+  @media (max-width: 1099px) {
+    width: 87vw;
+  }
 `;
 
 const FooterInfoBox = styled.div`

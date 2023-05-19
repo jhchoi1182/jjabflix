@@ -83,4 +83,7 @@ const FooterMenu = styled.ul`
   span {
     ${font.footer_menu}
   }
+  @media (max-width: 799px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
