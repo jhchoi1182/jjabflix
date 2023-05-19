@@ -8,6 +8,7 @@ import { ChildrenProps } from "../../interface/type";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
 import { font } from "../../styles/Fonts";
+import Footer from "../organisms/Footer/Footer";
 
 const Bookmark: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
@@ -21,11 +22,14 @@ const Bookmark: React.FC & {
   }, [setHoveredCategory]);
 
   return (
-    <Bookmark.Wrapper>
-      <Bookmark.Title>내가 찜한 콘텐츠</Bookmark.Title>
-      <BookmarkList />
-      <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
-    </Bookmark.Wrapper>
+    <React.Fragment>
+      <Bookmark.Wrapper>
+        <Bookmark.Title>내가 찜한 콘텐츠</Bookmark.Title>
+        <BookmarkList />
+        <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+      </Bookmark.Wrapper>
+      <Footer />
+    </React.Fragment>
   );
 };
 
@@ -33,6 +37,7 @@ export default Bookmark;
 
 Bookmark.Wrapper = styled.div`
   padding: 76px 60px;
+  margin-bottom: 40rem;
 `;
 
 Bookmark.Title = styled.h1`
