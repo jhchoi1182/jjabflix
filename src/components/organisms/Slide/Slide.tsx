@@ -42,12 +42,13 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [overflowY, setOverflowY] = useState("inherit");
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const [slideContentsNum, setSlideContentsNum] = useState(8);
   const [page, setPage] = useState(0);
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
 
-  /** 슬라이드 시 공백 계산 */
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  /** 뷰 포트 너비 상태값으로 세팅 */
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -61,15 +62,27 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
     };
   }, []);
 
-  console.log(innerWidth);
+  /** 뷰 포트 너비에 따른 슬라이드 수 조절 */
+
+  useEffect(() => {
+    if (innerWidth >= 1400) return setSlideContentsNum(8);
+    if (innerWidth >= 1100) return setSlideContentsNum(7);
+    if (innerWidth >= 800) return setSlideContentsNum(6);
+    if (innerWidth >= 500) return setSlideContentsNum(5);
+    else return setSlideContentsNum(4);
+  }, [innerWidth]);
+
+  /** 슬라이드 시 슬라이드 페이지 간 생기는 공백 계산 */
 
   const calculateSlideGap = () => {
-    if (innerWidth === 1920) return 145;
+    if (slideContentsNum === 7) return 0.0698 * innerWidth;
+    if (slideContentsNum === 6) return 0.0698 * innerWidth;
+    if (slideContentsNum === 5) return 0.0698 * innerWidth;
+    if (slideContentsNum === 4) return 0.0698 * innerWidth;
     else return 0.0698 * innerWidth;
   };
 
   /** 슬라이드 로직 */
-  const slideContentsNum = 8;
   const showContentsNum = 6;
   const totalContents = data?.results?.length;
   const maxPage = Math.ceil(totalContents / showContentsNum);
@@ -77,9 +90,6 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
     (slideContentsNum - 2) * page,
     slideContentsNum + (slideContentsNum - 2) * page
   );
-  // console.log(data.results);
-  // console.log(showContentsArray);
-  // console.log("data.results.length:", totalContents);
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
