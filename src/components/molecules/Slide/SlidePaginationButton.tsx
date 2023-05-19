@@ -4,8 +4,8 @@ import { Arrow } from "../../atoms/Icons";
 import { ArrowProps } from "../../atoms/Icons/NextPrevIcon";
 
 interface SlideButtonProps extends ArrowProps {
-  prevSlide?: () => Promise<void>;
-  nextSlide?: () => Promise<void>;
+  prevSlide?: () => void;
+  nextSlide?: () => void;
   isSliding: boolean;
 }
 

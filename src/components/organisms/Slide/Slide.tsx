@@ -13,25 +13,20 @@ import { useOutletContext } from "react-router-dom";
 
 type VariantsProps = {
   direction: string;
-};
-
-/** 슬라이드 시 공백 계산 */
-const screenWidth = window.innerWidth;
-const slideGap = () => {
-  if (screenWidth === 1920) return 145;
-  else return 0.0698 * screenWidth;
+  calculateSlideGap: () => number;
+  innerWidth: number;
 };
 
 /** 슬라이드 시 생기는 공백 제거 */
 const rowVariants: Variants = {
-  appearance: ({ direction }: VariantsProps) => ({
-    x: direction === "next" ? screenWidth - slideGap() : -screenWidth + slideGap(),
+  appearance: ({ direction, innerWidth, calculateSlideGap }: VariantsProps) => ({
+    x: direction === "next" ? innerWidth - calculateSlideGap() : -innerWidth + calculateSlideGap(),
   }),
   center: () => ({
     x: 0,
   }),
-  exit: ({ direction }: VariantsProps) => ({
-    x: direction === "next" ? -screenWidth + slideGap() : screenWidth - slideGap(),
+  exit: ({ direction, innerWidth, calculateSlideGap }: VariantsProps) => ({
+    x: direction === "next" ? -innerWidth + calculateSlideGap() : innerWidth - calculateSlideGap(),
   }),
 };
 
@@ -50,6 +45,28 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   const [page, setPage] = useState(0);
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
+
+  /** 슬라이드 시 공백 계산 */
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      setInnerWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
+
+  console.log(innerWidth);
+
+  const calculateSlideGap = () => {
+    if (innerWidth === 1920) return 145;
+    else return 0.0698 * innerWidth;
+  };
 
   /** 슬라이드 로직 */
   const slideContentsNum = 8;
@@ -115,7 +132,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
       <AnimatePresence initial={false} onExitComplete={slidePrevent}>
         <FlexContainer
           variants={rowVariants}
-          custom={{ direction }}
+          custom={{ direction, innerWidth, calculateSlideGap }}
           initial="appearance"
           animate="center"
           exit="exit"
