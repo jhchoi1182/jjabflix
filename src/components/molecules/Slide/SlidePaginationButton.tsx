@@ -86,11 +86,11 @@ const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding: boolean 
     background-color: rgba(0, 0, 0, 0.5);
   }
   @media (max-width: 1399px) {
-    width: calc(100% / 34);
+    width: calc(100% / 32);
     height: 13rem;
   }
   @media (max-width: 1099px) {
-    width: calc(100% / 30);
+    width: calc(100% / 29);
     height: 13.5vw;
   }
   @media (max-width: 799px) {
