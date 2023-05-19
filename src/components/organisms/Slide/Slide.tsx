@@ -44,6 +44,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   const [overflowY, setOverflowY] = useState("inherit");
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [slideContentsNum, setSlideContentsNum] = useState(8);
+  const [showContentsNum, setShowContentsNum] = useState(6);
   const [page, setPage] = useState(0);
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
@@ -65,11 +66,25 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   /** 뷰 포트 너비에 따른 슬라이드 수 조절 */
 
   useEffect(() => {
-    if (innerWidth >= 1400) return setSlideContentsNum(8);
-    if (innerWidth >= 1100) return setSlideContentsNum(7);
-    if (innerWidth >= 800) return setSlideContentsNum(6);
-    if (innerWidth >= 500) return setSlideContentsNum(5);
-    else return setSlideContentsNum(4);
+    if (innerWidth >= 1400) {
+      setSlideContentsNum(8);
+      return setShowContentsNum(6);
+    }
+    if (innerWidth >= 1100) {
+      setSlideContentsNum(7);
+      return setShowContentsNum(5);
+    }
+    if (innerWidth >= 800) {
+      setSlideContentsNum(6);
+      return setShowContentsNum(4);
+    }
+    if (innerWidth >= 500) {
+      setSlideContentsNum(5);
+      return setShowContentsNum(3);
+    } else {
+      setSlideContentsNum(4);
+      return setShowContentsNum(2);
+    }
   }, [innerWidth]);
   console.log(innerWidth);
 
@@ -85,9 +100,11 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   };
 
   /** 슬라이드 로직 */
-  const showContentsNum = 6;
   const totalContents = data?.results?.length;
-  const maxPage = Math.ceil(totalContents / showContentsNum);
+  const maxPage =
+    totalContents % showContentsNum === 1
+      ? Math.ceil(totalContents / showContentsNum) - 1
+      : Math.ceil(totalContents / showContentsNum);
   const showContentsArray = data?.results?.slice(
     (slideContentsNum - 2) * page,
     slideContentsNum + (slideContentsNum - 2) * page
