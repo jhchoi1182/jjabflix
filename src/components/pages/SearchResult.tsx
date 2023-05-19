@@ -12,6 +12,7 @@ import { ItemGridContainer } from "../atoms/Layout";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
+import Footer from "../organisms/Footer/Footer";
 
 const SearchResult: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
@@ -29,18 +30,21 @@ const SearchResult: React.FC & {
   }, [setHoveredCategory]);
 
   return (
-    <SearchResult.Wrapper>
-      <ItemGridContainer>
-        {isLoading ? (
-          <Loadingspinner />
-        ) : isError ? (
-          <div>정보 없음</div>
-        ) : (
-          data?.results.map((content) => <DataFetcherItem key={content.id} keyword={keyword ?? ""} {...content} />)
-        )}
-      </ItemGridContainer>
-      <AnimatePresence>{pressDetailButton && <DetailModalContainer />}</AnimatePresence>
-    </SearchResult.Wrapper>
+    <React.Fragment>
+      <SearchResult.Wrapper>
+        <ItemGridContainer>
+          {isLoading ? (
+            <Loadingspinner />
+          ) : isError ? (
+            <div>정보 없음</div>
+          ) : (
+            data?.results.map((content) => <DataFetcherItem key={content.id} keyword={keyword ?? ""} {...content} />)
+          )}
+        </ItemGridContainer>
+        <AnimatePresence>{pressDetailButton && <DetailModalContainer />}</AnimatePresence>
+      </SearchResult.Wrapper>
+      <Footer />
+    </React.Fragment>
   );
 };
 
@@ -48,4 +52,7 @@ export default SearchResult;
 
 SearchResult.Wrapper = styled.div`
   padding: 190px 60px;
+  @media (max-width: 1399px) {
+    margin-bottom: -5rem;
+  }
 `;

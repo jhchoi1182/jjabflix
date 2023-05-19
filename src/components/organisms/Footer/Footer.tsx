@@ -33,6 +33,7 @@ const FooterContainer = styled.section`
   width: 59vw;
   margin: 0 auto 2rem;
   overflow-y: hidden;
+  padding-left: 10px;
   @media (max-width: 1399px) {
     width: 70vw;
   }
