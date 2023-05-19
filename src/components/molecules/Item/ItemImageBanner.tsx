@@ -37,10 +37,10 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
       onMouseLeave={onMouseLeave}
       bgimg={posterAPI(backdrop ?? poster, "w500")}
       index={index}
-      itemNum={itemNum && itemNum - 1}
-      issliding={isSliding}
+      itemnum={itemNum && itemNum - 1}
+      issliding={isSliding ? true : undefined}
     >
-      <Title index={index} itemNum={itemNum && itemNum - 1} issliding={isSliding}>
+      <Title index={index} itemnum={itemNum && itemNum - 1} issliding={isSliding ? true : undefined}>
         {title ?? name}
       </Title>
     </Image>
@@ -49,11 +49,11 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
 
 export default ItemImageBanner;
 
-const Image = styled(motion.div)<{ bgimg: string; index?: number; itemNum?: number; issliding?: boolean }>`
+const Image = styled(motion.div)<{ bgimg: string; index?: number; itemnum?: number; issliding?: boolean }>`
   ${ContentCoverImage}
-  ${({ index, itemNum, bgimg, issliding }) =>
+  ${({ index, itemnum, bgimg, issliding }) =>
     !issliding &&
-    (index === 0 || index === itemNum) &&
+    (index === 0 || index === itemnum) &&
     css`
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(${bgimg});
     `}
@@ -63,14 +63,14 @@ const Image = styled(motion.div)<{ bgimg: string; index?: number; itemNum?: numb
   border-top-right-radius: 5px;
 `;
 
-const Title = styled(motion.p)<{ index?: number; itemNum?: number; issliding?: boolean }>`
+const Title = styled(motion.p)<{ index?: number; itemnum?: number; issliding?: boolean }>`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
   ${font.RS_title}
-  ${({ index, itemNum, issliding }) =>
+  ${({ index, itemnum, issliding }) =>
     !issliding &&
-    (index === 0 || index === itemNum) &&
+    (index === 0 || index === itemnum) &&
     css`
       color: #727272;
     `}

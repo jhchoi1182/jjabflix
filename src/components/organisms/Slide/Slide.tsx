@@ -138,7 +138,9 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
           })}
         </FlexContainer>
       </AnimatePresence>
-      {page !== 0 && <SlidePaginationButton category={category} isSliding={isSliding} direction="prev" prevSlide={prevSlide} />}
+      {page !== 0 && (
+        <SlidePaginationButton category={category} isSliding={isSliding} direction="prev" prevSlide={prevSlide} />
+      )}
       {<SlidePaginationButton category={category} isSliding={isSliding} direction="next" nextSlide={nextSlide} />}
     </SlideContainer>
   );
