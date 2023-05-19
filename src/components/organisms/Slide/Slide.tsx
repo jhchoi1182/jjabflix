@@ -71,15 +71,16 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
     if (innerWidth >= 500) return setSlideContentsNum(5);
     else return setSlideContentsNum(4);
   }, [innerWidth]);
+  console.log(innerWidth);
 
   /** 슬라이드 시 슬라이드 페이지 간 생기는 공백 계산 */
 
   const calculateSlideGap = () => {
     if (innerWidth === 1920) return 145;
-    if (slideContentsNum === 7) return 0.0698 * innerWidth;
-    if (slideContentsNum === 6) return 0.0698 * innerWidth;
-    if (slideContentsNum === 5) return 0.0698 * innerWidth;
-    if (slideContentsNum === 4) return 0.0698 * innerWidth;
+    if (slideContentsNum === 7) return 0.08 * innerWidth;
+    if (slideContentsNum === 6) return 0.105 * innerWidth;
+    if (slideContentsNum === 5) return 0.105 * innerWidth;
+    if (slideContentsNum === 4) return 0.125 * innerWidth;
     else return 0.0698 * innerWidth;
   };
 
@@ -147,7 +148,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
           initial="appearance"
           animate="center"
           exit="exit"
-          transition={{ type: "tween", duration: 0.75 }}
+          transition={{ type: "tween", duration: 4 }}
           key={category + page}
           overflowy={overflowY}
         >

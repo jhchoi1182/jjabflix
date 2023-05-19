@@ -33,6 +33,7 @@ const FooterContainer = styled.section`
   width: 59vw;
   height: 34.8rem;
   margin: 0 auto 2rem;
+  overflow-y: hidden;
 `;
 
 const FooterInfoBox = styled.div`

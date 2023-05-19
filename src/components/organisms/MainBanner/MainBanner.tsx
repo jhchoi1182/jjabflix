@@ -26,9 +26,7 @@ const MainBanner: React.FC<MainBannerProps> & {
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const setDetail = useSetRecoilState(detailSelector);
   const navigate = useNavigate();
-  const { data, isError } = useQuery<IContent | undefined>(["bannerDetail", id], () =>
-    detailAPI({ id, media_type })
-  );
+  const { data, isError } = useQuery<IContent | undefined>(["bannerDetail", id], () => detailAPI({ id, media_type }));
   const { title, name, overview } = data || {};
 
   /** 상세 정보 모달 띄우기 */
