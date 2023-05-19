@@ -36,4 +36,16 @@ const IndicatorBox = styled.ul`
   .active {
     background-color: #aaa;
   }
+  @media (max-width: 1399px) {
+    right: 14.4%;
+  }
+  @media (max-width: 1099px) {
+    right: 16.8%;
+  }
+  @media (max-width: 799px) {
+    right: 20.2%;
+  }
+  @media (max-width: 499px) {
+    right: 25.4%;
+  }
 `;
