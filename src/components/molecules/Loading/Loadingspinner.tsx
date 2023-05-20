@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import SkeletonItem from "../../atoms/Loading/SkeletonItem";
 import SkeletonTitle from "../../atoms/Loading/SkeletonTitle";
+import { useInnerWidth } from "../../../utils/Hooks";
 
 const Loadingspinner = () => {
   let skeletonItem = [];
-  const visibleCount = 6;
-  for (let i = 0; i < visibleCount; i++) {
-    skeletonItem.push(<SkeletonItem key={i} delayNum={i} visibleCount={visibleCount} />);
+  const { bothSideExceptSlideItemNum } = useInnerWidth();
+  for (let i = 0; i < bothSideExceptSlideItemNum; i++) {
+    skeletonItem.push(<SkeletonItem key={i} delayNum={i} bothSideExceptSlideItemNum={bothSideExceptSlideItemNum} />);
   }
 
   return (

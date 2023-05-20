@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type SkeletonItemProps = {
   delayNum: number;
-  visibleCount: number;
+  bothSideExceptSlideItemNum: number;
 };
 
 const LoadingVariants: Variants = {
@@ -20,14 +20,14 @@ const LoadingVariants: Variants = {
   }),
 };
 
-const SkeletonItem: React.FC<SkeletonItemProps> = ({ delayNum, visibleCount }) => {
-  return <Item variants={LoadingVariants} custom={delayNum} animate="animate" visiblecount={visibleCount} />;
+const SkeletonItem: React.FC<SkeletonItemProps> = ({ delayNum, bothSideExceptSlideItemNum }) => {
+  return <Item variants={LoadingVariants} custom={delayNum} animate="animate" slideitemnum={bothSideExceptSlideItemNum} />;
 };
 
 export default SkeletonItem;
 
-const Item = styled(motion.div)<{ visiblecount: number }>`
-  width: calc(100% / (${(props) => props.visiblecount}) - 4px);
+const Item = styled(motion.div)<{ slideitemnum: number }>`
+  width: calc(100% / (${(props) => props.slideitemnum}) - 4px);
   height: 160px;
   border-radius: 5px;
   background-color: rgb(0, 0, 0);
