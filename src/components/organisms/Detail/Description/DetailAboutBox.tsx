@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
 import { font } from "../../../../styles/Fonts";
 import { IContent } from "../../../../interface/Interface";
@@ -15,12 +15,8 @@ const DetailAboutBox = forwardRef<HTMLDivElement, IContent>(
             <MetaTagBox>
               <div>
                 <TagLabel>제작사:</TagLabel>
-                {production_companies.map((company, i) => {
-                  if (i === production_companies.length - 1) {
-                    return <TagText key={company.name}>{`${company.name}`}</TagText>;
-                  } else {
-                    return <TagText key={company.name}>{`${company.name},`}</TagText>;
-                  }
+                {production_companies.map((company) => {
+                  return <TagText key={company.name}>{`${company.name}`}</TagText>;
                 })}
               </div>
             </MetaTagBox>
@@ -29,12 +25,8 @@ const DetailAboutBox = forwardRef<HTMLDivElement, IContent>(
             <MetaTagBox>
               <div>
                 <TagLabel>국가:</TagLabel>
-                {production_countries.map((country, i) => {
-                  if (i === production_countries.length - 1) {
-                    return <TagText key={country.name}>{`${country.name}`}</TagText>;
-                  } else {
-                    return <TagText key={country.name}>{`${country.name},`}</TagText>;
-                  }
+                {production_countries.map((country) => {
+                  return <TagText key={country.name}>{`${country.name},`}</TagText>;
                 })}
               </div>
             </MetaTagBox>
@@ -43,17 +35,13 @@ const DetailAboutBox = forwardRef<HTMLDivElement, IContent>(
             <MetaTagBox>
               <div>
                 <TagLabel>장르:</TagLabel>
-                {genres.map((genre, i) => {
-                  if (i === genres.length - 1) {
-                    return <TagText key={genre.name}>{`${genre.name}`}</TagText>;
-                  } else {
-                    return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
-                  }
+                {genres.map((genre) => {
+                  return <TagText key={genre.name}>{`${genre.name},`}</TagText>;
                 })}
               </div>
             </MetaTagBox>
           )}
-          {tagline && tagline !== "" && (
+          {tagline && tagline.trim() !== "" && (
             <MetaTagBox>
               <div>
                 <TagLabel>태그라인:</TagLabel>

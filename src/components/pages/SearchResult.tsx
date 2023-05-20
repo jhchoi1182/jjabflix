@@ -7,7 +7,7 @@ import { ChildrenProps } from "../../interface/type";
 import { AnimatePresence } from "framer-motion";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import styled from "styled-components";
-import DataFetcherItem from "../organisms/Item/DataFetcherItem";
+import SearchedItem from "../organisms/Item/SearchedItem";
 import { ItemGridContainer } from "../atoms/Layout";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
@@ -47,7 +47,7 @@ const SearchResult: React.FC & {
                 <div>정보 없음</div>
               ) : (
                 data?.results.map((content) => (
-                  <DataFetcherItem key={content.id} keyword={keyword ?? ""} {...content} />
+                  <SearchedItem key={content.id} keyword={keyword ?? ""} {...content} />
                 ))
               )}
             </ItemGridContainer>

@@ -3,6 +3,7 @@ import { font } from "../../../styles/Fonts";
 import FooterIconBox from "../../molecules/Footer/FooterIconBox";
 import FooterMenuBox from "../../molecules/Footer/FooterMenuBox";
 import ServiceCode from "../../atoms/UI/ServiceCode";
+import { theme } from "../../../styles/theme";
 
 const Footer = () => {
   return (
@@ -45,7 +46,7 @@ const FooterContainer = styled.section`
 const FooterInfoBox = styled.div`
   display: flex;
   flex-direction: column;
-  color: ${(props) => props.theme.grey.lighter};
+  color: ${theme.grey.lighter};
   margin-top: 2rem;
   gap: 0.5rem;
   ${font.footer_text}

@@ -8,7 +8,7 @@ import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import styled from "styled-components";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
-const DataFetcherItem: React.FC<IContent & { keyword?: string }> = ({ keyword, ...content }) => {
+const SearchedItem: React.FC<IContent & { keyword?: string }> = ({ keyword, ...content }) => {
   const { id, title, name, backdrop_path, poster_path, media_type } = content;
   const [isHovered, setIsHovered] = useState(false);
   const queryClient = useQueryClient();
@@ -61,7 +61,7 @@ const DataFetcherItem: React.FC<IContent & { keyword?: string }> = ({ keyword, .
   );
 };
 
-export default DataFetcherItem;
+export default SearchedItem;
 
 const HoverBigScaleContainer = styled(motion.div)`
   margin-bottom: -129px;

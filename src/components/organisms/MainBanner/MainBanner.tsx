@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { detailAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
@@ -38,21 +39,25 @@ const MainBanner: React.FC<MainBannerProps> & {
     }
   };
 
-  return isError ? (
-    <div>에러</div>
-  ) : (
+  return (
     <MainBanner.Wrapper>
-      <MainBanner.Title>{title ?? name}</MainBanner.Title>
-      <MainBanner.Overview>{overview}</MainBanner.Overview>
-      <ButtonBox>
-        <Button.Play
-          data-tooltip-text="지원하지 않는 기능입니다."
-          onClick={(event) => showTooltipHandler({ top: 610, x: -8, size: "detailTooltip" }, event)}
-          onMouseLeave={disappearTooltipHandler}
-          buttonSize="mainButton"
-        />
-        <Button.Detail onClick={showDetailHandler} buttonSize="mainButton" />
-      </ButtonBox>
+      {isError ? (
+        <div>에러</div>
+      ) : (
+        <React.Fragment>
+          <MainBanner.Title>{title ?? name}</MainBanner.Title>
+          <MainBanner.Overview>{overview}</MainBanner.Overview>
+          <ButtonBox>
+            <Button.Play
+              data-tooltip-text="지원하지 않는 기능입니다."
+              onClick={(event) => showTooltipHandler({ top: 610, x: -8, size: "detailTooltip" }, event)}
+              onMouseLeave={disappearTooltipHandler}
+              buttonSize="mainButton"
+            />
+            <Button.Detail onClick={showDetailHandler} buttonSize="mainButton" />
+          </ButtonBox>
+        </React.Fragment>
+      )}
       {isHovered && renderTooltip()}
     </MainBanner.Wrapper>
   );

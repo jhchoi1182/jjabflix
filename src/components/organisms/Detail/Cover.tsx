@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { font } from "../../../styles/Fonts";
 import { useBookmark, useTooltip } from "../../../utils/Hooks";
@@ -11,6 +10,7 @@ import { posterAPI } from "../../../api/Apis";
 import CloseButton from "../../atoms/Button/CloseButton";
 import { ChildrenProps } from "../../../interface/type";
 import { ContentCoverImage } from "../../atoms/Layout";
+import { theme } from "../../../styles/theme";
 
 const Cover: React.FC<IContent> & {
   Title: React.FC<ChildrenProps>;
@@ -64,7 +64,7 @@ const CoverBox = styled.div<{ bgimg: string }>`
   position: relative;
   ${ContentCoverImage}
   background-image: linear-gradient(rgba(24, 24, 24, 0), rgba(24, 24, 24, 0), rgba(24, 24, 24, 1)),
-    url(${(props) => props.bgimg});
+    url(${({ bgimg }) => bgimg});
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -76,7 +76,7 @@ const CoverBox = styled.div<{ bgimg: string }>`
 
 Cover.Title = styled.h3`
   ${font.RM_title}
-  color: ${(props) => props.theme.white.lighter};
+  color: ${theme.white.lighter};
   width: 50%;
   margin-bottom: 2rem;
 `;

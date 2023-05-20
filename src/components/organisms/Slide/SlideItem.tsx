@@ -9,7 +9,7 @@ import { ItemCaptionWrapper } from "../../atoms/Layout";
 import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "../../molecules/Item";
 
 interface ISlideItem extends IContent {
-  itemNum: number;
+  totalSlideItemNum: number;
   index: number;
   isSliding: boolean;
 }
@@ -60,9 +60,9 @@ const SlideItem: React.FC<ISlideItem> = ({
   poster_path,
   media_type,
   category,
-  itemNum,
+  totalSlideItemNum,
   index,
-  isSliding
+  isSliding,
 }) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
@@ -106,7 +106,7 @@ const SlideItem: React.FC<ISlideItem> = ({
       transition={{ type: "tween" }}
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
-      itemnum={itemNum}
+      totalslideitemnum={totalSlideItemNum}
     >
       <ItemImageBanner
         className={id === 0 ? "dummy" : ""}
@@ -116,7 +116,7 @@ const SlideItem: React.FC<ISlideItem> = ({
         title={title}
         name={name}
         index={index}
-        itemNum={itemNum}
+        totalSlideItemNum={totalSlideItemNum}
         isSliding={isSliding}
       />
       <ItemCaptionWrapper variants={captionVariants}>
@@ -138,13 +138,13 @@ const SlideItem: React.FC<ISlideItem> = ({
 
 export default SlideItem;
 
-const SlideItemContainer = styled(motion.div)<{ itemnum: number }>`
-  width: calc(100% / ${(props) => props.itemnum} - 4px);
+const SlideItemContainer = styled(motion.div)<{ totalslideitemnum: number }>`
+  width: calc(100% / ${({ totalslideitemnum }) => totalslideitemnum} - 4px);
   &:nth-child(2) {
-    transform-origin: center left !important;
+    transform-origin: center left;
   }
   &:nth-child(7) {
-    transform-origin: center right !important;
+    transform-origin: center right;
   }
   .dummy {
     opacity: 0;

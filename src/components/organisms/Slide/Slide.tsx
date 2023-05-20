@@ -135,7 +135,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
                 {...content}
                 media_type={content.media_type ?? type}
                 category={category}
-                itemNum={totalSlideItemNum}
+                totalSlideItemNum={totalSlideItemNum}
                 index={i}
                 isSliding={isSliding}
               />
@@ -183,5 +183,5 @@ const FlexContainer = styled(motion.div)<{ overflowy: string }>`
   gap: 8px;
   width: 100%;
   height: 170px;
-  overflow-y: ${(props) => props.overflowy};
+  overflow-y: ${({ overflowy }) => overflowy};
 `;

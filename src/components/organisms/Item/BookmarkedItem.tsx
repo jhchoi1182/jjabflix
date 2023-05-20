@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import { ButtonBox, ItemImageBanner, InfoBox, TagBox } from "../../molecules/Item";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
-const Item: React.FC<IContent> = ({ ...data }) => {
+const BookmarkedItem: React.FC<IContent> = ({ ...data }) => {
   const { id, title, name, backdrop_path, poster_path, genres } = data;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -35,7 +35,7 @@ const Item: React.FC<IContent> = ({ ...data }) => {
   );
 };
 
-export default Item;
+export default BookmarkedItem;
 
 const HoverBigScaleContainer = styled(motion.div)`
   margin-bottom: -129px;
