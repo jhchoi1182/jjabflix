@@ -28,7 +28,6 @@ const Bookmark = () => {
         <BookmarkList />
         <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
       </Bookmark.Wrapper>
-      <Footer />
     </React.Fragment>
   );
 };

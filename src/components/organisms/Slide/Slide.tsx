@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import SlideItem from "./SlideItem";
@@ -16,7 +16,7 @@ interface VariantsProps {
   direction: string;
   calculateSlideGap: () => number;
   innerWidth: number;
-};
+}
 
 /** 슬라이드 시 생기는 공백 제거 */
 const rowVariants: Variants = {
@@ -141,7 +141,7 @@ const Slide = ({ title, category, type, ...data }: ISlide) => {
   );
 };
 
-export default React.memo(Slide);
+export default Slide;
 
 const SlideContainer = styled.div`
   position: relative;

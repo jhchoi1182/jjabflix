@@ -33,9 +33,6 @@ const Tv = () => {
 
   return (
     <React.Fragment>
-      {PopularTvLoading && TopRateTVLoading && OnTheAirTVLoading && AiringTodayTVLoading ? (
-        <Loadingspinner />
-      ) : (
         <Wrapper>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
             <TabLabel>시리즈</TabLabel>
@@ -67,9 +64,7 @@ const Tv = () => {
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-          <Footer />
         </Wrapper>
-      )}
     </React.Fragment>
   );
 };

@@ -49,7 +49,6 @@ const SearchResult = () => {
             </ItemGridContainer>
             <AnimatePresence>{pressDetailButton && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
           </SearchResult.Wrapper>
-          <Footer />
         </React.Fragment>
       )}
     </React.Fragment>

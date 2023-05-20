@@ -8,5 +8,5 @@ const Wrapper = ({ children }: ChildrenProps) => {
 export default Wrapper;
 
 const WrapperDiv = styled.div`
-  overflow-x: hidden;
+  overflow: hidden;
 `;

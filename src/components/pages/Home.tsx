@@ -35,57 +35,45 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      {TrendingLoading &&
-      PopularMovieLoading &&
-      PopularTvLoading &&
-      TopRateMovieLoading &&
-      TopRateTVLoading &&
-      NowPlayingMovieLoading &&
-      OnTheAirTVLoading ? (
-        <Loadingspinner />
-      ) : (
-        <Wrapper>
-          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-            <MainBanner id={id} media_type={mediaType} category="trending" />
-          </BannerCoverImage>
-          <SlideContainer>
-            {TrendingError ? <div>에러</div> : <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />}
-            {PopularMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="인기 있는 영화" category="popularMovie" type="movie" {...popularMovie} />
-            )}
-            {PopularTvError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="안 보면 유행에 뒤처지는 시리즈" category="popularTv" type="tv" {...popularTv} />
-            )}
-            {TopRateMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="평점 높은 영화" category="top_rated_movie" type="movie" {...top_rated_movie} />
-            )}
-            {TopRateTVError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="호평 받은 시리즈" category="top_rated_tv" type="tv" {...top_rated_tv} />
-            )}
-            {NowPlayingMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="개봉 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
-            )}
-            {OnTheAirTVError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="상영 중인 시리즈" category="on_the_air" type="tv" {...on_the_air} />
-            )}
-          </SlideContainer>
-          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-
-          <Footer />
-        </Wrapper>
-      )}
+      <Wrapper>
+        <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+          <MainBanner id={id} media_type={mediaType} category="trending" />
+        </BannerCoverImage>
+        <SlideContainer>
+          {TrendingError ? <div>에러</div> : <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />}
+          {PopularMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="인기 있는 영화" category="popularMovie" type="movie" {...popularMovie} />
+          )}
+          {PopularTvError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="안 보면 유행에 뒤처지는 시리즈" category="popularTv" type="tv" {...popularTv} />
+          )}
+          {TopRateMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="평점 높은 영화" category="top_rated_movie" type="movie" {...top_rated_movie} />
+          )}
+          {TopRateTVError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="호평 받은 시리즈" category="top_rated_tv" type="tv" {...top_rated_tv} />
+          )}
+          {NowPlayingMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="개봉 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+          )}
+          {OnTheAirTVError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="상영 중인 시리즈" category="on_the_air" type="tv" {...on_the_air} />
+          )}
+        </SlideContainer>
+        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+      </Wrapper>
     </React.Fragment>
   );
 };

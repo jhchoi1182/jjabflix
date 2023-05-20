@@ -33,9 +33,6 @@ const Movie = () => {
 
   return (
     <React.Fragment>
-      {PopularMovieLoading && TopRateMovieLoading && NowPlayingMovieLoading && UpcomingMovieLoading ? (
-        <Loadingspinner />
-      ) : (
         <Wrapper>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
             <TabLabel>영화</TabLabel>
@@ -67,9 +64,7 @@ const Movie = () => {
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-          <Footer />
         </Wrapper>
-      )}
     </React.Fragment>
   );
 };
