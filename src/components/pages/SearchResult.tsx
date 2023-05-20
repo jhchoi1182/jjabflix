@@ -35,19 +35,27 @@ const SearchResult: React.FC & {
 
   return (
     <React.Fragment>
-      <SearchResult.Wrapper>
-        <ItemGridContainer>
-          {isLoading ? (
-            <Loadingspinner />
-          ) : isError ? (
-            <div>정보 없음</div>
-          ) : (
-            data?.results.map((content) => <DataFetcherItem key={content.id} keyword={keyword ?? ""} {...content} />)
-          )}
-        </ItemGridContainer>
-        <AnimatePresence>{pressDetailButton && <DetailModalContainer />}</AnimatePresence>
-      </SearchResult.Wrapper>
-      <Footer />
+      {isLoading ? (
+        <Loadingspinner />
+      ) : (
+        <React.Fragment>
+          <SearchResult.Wrapper>
+            <ItemGridContainer>
+              {isLoading ? (
+                <Loadingspinner />
+              ) : isError ? (
+                <div>정보 없음</div>
+              ) : (
+                data?.results.map((content) => (
+                  <DataFetcherItem key={content.id} keyword={keyword ?? ""} {...content} />
+                ))
+              )}
+            </ItemGridContainer>
+            <AnimatePresence>{pressDetailButton && <DetailModalContainer />}</AnimatePresence>
+          </SearchResult.Wrapper>
+          <Footer />
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 };

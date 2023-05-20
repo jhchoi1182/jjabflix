@@ -6,6 +6,7 @@ import { FavoriteAtom } from "../../lib/atoms";
 
 interface IUseQueryWithDummyResult {
   data: IGetData;
+  isLoading: boolean;
   isError: boolean;
 }
 
@@ -31,7 +32,11 @@ export const dummyData: IContent = {
 
 export const useQueryWithDummy = () => {
   const useCreateQuery = (queryKey: string[], queryFn: () => Promise<IGetData>): IUseQueryWithDummyResult => {
-    const { data = { results: [] }, isError } = useQuery<IGetData>(queryKey, queryFn, {
+    const {
+      data = { results: [] },
+      isLoading,
+      isError,
+    } = useQuery<IGetData>(queryKey, queryFn, {
       select: (data) => {
         const copyData = JSON.parse(JSON.stringify(data));
         if (copyData.results[0].id === 0) {
@@ -44,7 +49,7 @@ export const useQueryWithDummy = () => {
       staleTime: 100000,
     });
 
-    return { data, isError };
+    return { data, isLoading, isError };
   };
 
   return {

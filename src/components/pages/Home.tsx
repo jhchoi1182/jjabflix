@@ -10,19 +10,20 @@ import SlideContainer from "../atoms/Slide/SlideContainer";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useQueryWithDummy } from "../../utils/Hooks";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Home = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const { Trending, PopularMovie, PopularTv, TopRateMovie, TopRateTV, NowPlayingMovie, OnTheAirTV } =
     useQueryWithDummy();
 
-  const { data: trending, isError: TrendingError } = Trending;
-  const { data: popularMovie, isError: PopularMovieError } = PopularMovie;
-  const { data: popularTv, isError: PopularTvError } = PopularTv;
-  const { data: top_rated_movie, isError: TopRateMovieError } = TopRateMovie;
-  const { data: top_rated_tv, isError: TopRateTVError } = TopRateTV;
-  const { data: nowPlaying, isError: NowPlayingMovieError } = NowPlayingMovie;
-  const { data: on_the_air, isError: OnTheAirTVError } = OnTheAirTV;
+  const { data: trending, isLoading: TrendingLoading, isError: TrendingError } = Trending;
+  const { data: popularMovie, isLoading: PopularMovieLoading, isError: PopularMovieError } = PopularMovie;
+  const { data: popularTv, isLoading: PopularTvLoading, isError: PopularTvError } = PopularTv;
+  const { data: top_rated_movie, isLoading: TopRateMovieLoading, isError: TopRateMovieError } = TopRateMovie;
+  const { data: top_rated_tv, isLoading: TopRateTVLoading, isError: TopRateTVError } = TopRateTV;
+  const { data: nowPlaying, isLoading: NowPlayingMovieLoading, isError: NowPlayingMovieError } = NowPlayingMovie;
+  const { data: on_the_air, isLoading: OnTheAirTVLoading, isError: OnTheAirTVError } = OnTheAirTV;
 
   const backgroundImg = trending?.results[1]?.backdrop_path ?? trending?.results[1]?.poster_path;
   const id = trending?.results[1]?.id ?? 0;
@@ -33,9 +34,17 @@ const Home = () => {
   }, []);
 
   return (
-    <Wrapper>
-      {
-        <React.Fragment>
+    <React.Fragment>
+      {TrendingLoading &&
+      PopularMovieLoading &&
+      PopularTvLoading &&
+      TopRateMovieLoading &&
+      TopRateTVLoading &&
+      NowPlayingMovieLoading &&
+      OnTheAirTVLoading ? (
+        <Loadingspinner />
+      ) : (
+        <Wrapper>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
             <MainBanner id={id} media_type={mediaType} category="trending" />
           </BannerCoverImage>
@@ -73,10 +82,11 @@ const Home = () => {
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
-        </React.Fragment>
-      }
-      <Footer />
-    </Wrapper>
+
+          <Footer />
+        </Wrapper>
+      )}
+    </React.Fragment>
   );
 };
 

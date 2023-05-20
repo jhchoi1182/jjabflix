@@ -12,16 +12,17 @@ import { font } from "../../styles/Fonts";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Movie = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const { PopularMovie, TopRateMovie, NowPlayingMovie, UpcomingMovie } = useQueryWithDummy();
   const favoriteMovieCopyWithDummy = useLocalWithDummy("movie");
 
-  const { data: popular, isError: PopularMovieError } = PopularMovie;
-  const { data: top_rated, isError: TopRateMovieError } = TopRateMovie;
-  const { data: nowPlaying, isError: NowPlayingMovieError } = NowPlayingMovie;
-  const { data: upcoming, isError: UpcomingMovieError } = UpcomingMovie;
+  const { data: popular, isLoading: PopularMovieLoading, isError: PopularMovieError } = PopularMovie;
+  const { data: top_rated, isLoading: TopRateMovieLoading, isError: TopRateMovieError } = TopRateMovie;
+  const { data: nowPlaying, isLoading: NowPlayingMovieLoading, isError: NowPlayingMovieError } = NowPlayingMovie;
+  const { data: upcoming, isLoading: UpcomingMovieLoading, isError: UpcomingMovieError } = UpcomingMovie;
 
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
@@ -31,9 +32,11 @@ const Movie = () => {
   }, []);
 
   return (
-    <Wrapper>
-      {
-        <React.Fragment>
+    <React.Fragment>
+      {PopularMovieLoading && TopRateMovieLoading && NowPlayingMovieLoading && UpcomingMovieLoading ? (
+        <Loadingspinner />
+      ) : (
+        <Wrapper>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
             <TabLabel>영화</TabLabel>
             <MainBanner id={id} media_type={"movie"} category="popular" />
@@ -64,10 +67,10 @@ const Movie = () => {
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
-        </React.Fragment>
-      }
-      <Footer />
-    </Wrapper>
+          <Footer />
+        </Wrapper>
+      )}
+    </React.Fragment>
   );
 };
 

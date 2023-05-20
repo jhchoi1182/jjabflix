@@ -12,16 +12,17 @@ import Footer from "../organisms/Footer/Footer";
 import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
+import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Tv = () => {
   const { pathnameId } = useOutletContext<{ pathnameId: number }>();
   const { PopularTv, TopRateTV, OnTheAirTV, AiringTodayTV } = useQueryWithDummy();
   const favoriteTvCopyWithDummy = useLocalWithDummy("tv");
 
-  const { data: popular, isError: PopularTvError } = PopularTv;
-  const { data: top_rated, isError: TopRateTVError } = TopRateTV;
-  const { data: on_the_air, isError: OnTheAirTVError } = OnTheAirTV;
-  const { data: airing_today, isError: AiringTodayTVError } = AiringTodayTV;
+  const { data: popular, isLoading: PopularTvLoading, isError: PopularTvError } = PopularTv;
+  const { data: top_rated, isLoading: TopRateTVLoading, isError: TopRateTVError } = TopRateTV;
+  const { data: on_the_air, isLoading: OnTheAirTVLoading, isError: OnTheAirTVError } = OnTheAirTV;
+  const { data: airing_today, isLoading: AiringTodayTVLoading, isError: AiringTodayTVError } = AiringTodayTV;
 
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
@@ -31,9 +32,11 @@ const Tv = () => {
   }, []);
 
   return (
-    <Wrapper>
-      {
-        <React.Fragment>
+    <React.Fragment>
+      {PopularTvLoading && TopRateTVLoading && OnTheAirTVLoading && AiringTodayTVLoading ? (
+        <Loadingspinner />
+      ) : (
+        <Wrapper>
           <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
             <TabLabel>시리즈</TabLabel>
             <MainBanner id={id} media_type={"tv"} category="popular" />
@@ -64,10 +67,10 @@ const Tv = () => {
             )}
           </SlideContainer>
           <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
-        </React.Fragment>
-      }
-      <Footer />
-    </Wrapper>
+          <Footer />
+        </Wrapper>
+      )}
+    </React.Fragment>
   );
 };
 
