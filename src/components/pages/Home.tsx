@@ -3,7 +3,7 @@ import { posterAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Footer from "../organisms/Footer/Footer";
 import SlideContainer from "../atoms/Slide/SlideContainer";
@@ -13,7 +13,7 @@ import { useQueryWithDummy } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Home = () => {
-  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const { pathnameId } = useParams();
   const { Trending, PopularMovie, PopularTv, TopRateMovie, TopRateTV, NowPlayingMovie, OnTheAirTV } =
     useQueryWithDummy();
 
@@ -81,7 +81,7 @@ const Home = () => {
               <Slide title="상영 중인 시리즈" category="on_the_air" type="tv" {...on_the_air} />
             )}
           </SlideContainer>
-          <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
 
           <Footer />
         </Wrapper>

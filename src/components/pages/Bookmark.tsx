@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import BookmarkList from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import { ChildrenProps } from "../../interface/type";
 import { useSetRecoilState } from "recoil";
@@ -14,7 +14,7 @@ const Bookmark: React.FC & {
   Wrapper: React.FC<ChildrenProps>;
   Title: React.FC<ChildrenProps>;
 } = () => {
-  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const { pathnameId } = useParams();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Bookmark: React.FC & {
       <Bookmark.Wrapper>
         <Bookmark.Title>내가 찜한 콘텐츠</Bookmark.Title>
         <BookmarkList />
-        <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
       </Bookmark.Wrapper>
       <Footer />
     </React.Fragment>

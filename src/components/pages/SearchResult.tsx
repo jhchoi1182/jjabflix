@@ -21,6 +21,7 @@ const SearchResult: React.FC & {
   const setHoveredCategory = useSetRecoilState(categoryAtom);
 
   const pressDetailButton = location.search.split("/").length > 1;
+  const pathnameId = location.search.split("/")[1];
   const keyword = new URLSearchParams(location.search).get("keyword")?.split("/")[0];
 
   const { data, isLoading, isError } = useQuery<IGetData>(["searchKeyword", keyword], () => searchAPI(keyword ?? ""));
@@ -46,12 +47,10 @@ const SearchResult: React.FC & {
               ) : isError ? (
                 <div>정보 없음</div>
               ) : (
-                data?.results.map((content) => (
-                  <SearchedItem key={content.id} keyword={keyword ?? ""} {...content} />
-                ))
+                data?.results.map((content) => <SearchedItem key={content.id} keyword={keyword ?? ""} {...content} />)
               )}
             </ItemGridContainer>
-            <AnimatePresence>{pressDetailButton && <DetailModalContainer />}</AnimatePresence>
+            <AnimatePresence>{pressDetailButton && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
           </SearchResult.Wrapper>
           <Footer />
         </React.Fragment>

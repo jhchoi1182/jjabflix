@@ -4,7 +4,7 @@ import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import Footer from "../organisms/Footer/Footer";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { posterAPI } from "../../api/Apis";
 import styled from "styled-components";
@@ -15,7 +15,7 @@ import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Movie = () => {
-  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const { pathnameId } = useParams();
   const { PopularMovie, TopRateMovie, NowPlayingMovie, UpcomingMovie } = useQueryWithDummy();
   const favoriteMovieCopyWithDummy = useLocalWithDummy("movie");
 
@@ -66,7 +66,7 @@ const Movie = () => {
               <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
             )}
           </SlideContainer>
-          <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
           <Footer />
         </Wrapper>
       )}

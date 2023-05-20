@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/:dataId",
+        path: "/:pathnameId",
         element: <Home />,
       },
       {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <Tv />,
       },
       {
-        path: "/tv/:dataId",
+        path: "/tv/:pathnameId",
         element: <Tv />,
       },
       {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         element: <Movie />,
       },
       {
-        path: "/movie/:dataId",
+        path: "/movie/:pathnameId",
         element: <Movie />,
       },
       {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <Bookmark />,
       },
       {
-        path: "/bookmark/:dataId",
+        path: "/bookmark/:pathnameId",
         element: <Bookmark />,
       },
       {
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <SearchResult />,
       },
       {
-        path: "/search/:dataId",
+        path: "/search/:pathnameId",
         element: <SearchResult />,
       },
     ],

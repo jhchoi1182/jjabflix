@@ -9,7 +9,7 @@ import { useButtonOpacity } from "../../../utils/Hooks/useButtonOpacity";
 import SlideTitle from "../../atoms/Slide/SlideTitle";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../../lib/atoms";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useInnerWidth } from "../../../utils/Hooks";
 
 type VariantsProps = {
@@ -38,7 +38,7 @@ interface ISlide extends IGetData {
 }
 
 const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
-  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const { pathnameId } = useParams();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);

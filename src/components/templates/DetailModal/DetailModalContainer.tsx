@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { useLocation, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom, detailSelector } from "../../../lib/atoms";
@@ -10,13 +9,15 @@ import DescriptionContainer from "../../organisms/Detail/Description/Description
 import { BackdropOverlay } from "../../atoms/Layout";
 import { theme } from "../../../styles/theme";
 
-const DetailModalContainer = () => {
+interface IDetailModalContainer {
+  pathnameId: string;
+}
+
+const DetailModalContainer = ({ pathnameId }: IDetailModalContainer) => {
   const contentData = useRecoilValue<IContent>(detailSelector);
 
   /** 콘텐츠 아이템 눌렀을 때 해당 아이템의 layoutId와 상세 정보 모달의 layoutId를 매칭시켜 자연스럽게 모달로 연결되도록 애니메이션 구현 */
   const category = useRecoilValue<string>(categoryAtom);
-  const { dataId } = useParams();
-  const pressDetailButton = useLocation().search.split("/")[1];
 
   /** 배경 눌렀을 때 navigate(-1)되는 이벤트 캡쳐링 막기 */
   const stopPropagationHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -37,7 +38,7 @@ const DetailModalContainer = () => {
 
   return (
     <BackdropOverlay>
-      <ContentsContainer layoutId={category + (dataId ?? pressDetailButton)} onClick={stopPropagationHandler}>
+      <ContentsContainer layoutId={category + pathnameId} onClick={stopPropagationHandler}>
         <Cover {...contentData} />
         <DescriptionContainer {...contentData} />
       </ContentsContainer>

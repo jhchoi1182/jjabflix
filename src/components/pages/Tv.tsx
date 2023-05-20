@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Wrapper } from "../atoms/Layout";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { posterAPI } from "../../api/Apis";
@@ -15,7 +15,7 @@ import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Tv = () => {
-  const { pathnameId } = useOutletContext<{ pathnameId: number }>();
+  const { pathnameId } = useParams();
   const { PopularTv, TopRateTV, OnTheAirTV, AiringTodayTV } = useQueryWithDummy();
   const favoriteTvCopyWithDummy = useLocalWithDummy("tv");
 
@@ -66,7 +66,7 @@ const Tv = () => {
               <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
             )}
           </SlideContainer>
-          <AnimatePresence>{pathnameId && <DetailModalContainer />}</AnimatePresence>
+          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
           <Footer />
         </Wrapper>
       )}
