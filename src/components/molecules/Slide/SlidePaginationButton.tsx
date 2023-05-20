@@ -71,11 +71,11 @@ const next = css`
   }
 `;
 
-const direction = { prev, next };
+const directions = { prev, next };
 
 const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding: boolean }>`
   position: absolute;
-  ${(props) => props.direction && direction[props.direction]};
+  ${({ direction }) => direction && directions[direction]};
   border: none;
   width: calc(100% / 30);
   height: 8.8vw;

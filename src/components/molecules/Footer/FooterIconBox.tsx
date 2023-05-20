@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import { FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon } from "../../atoms/Icons";
+import { theme } from "../../../styles/theme";
 
 const FooterIconBox = () => {
   return (
@@ -31,7 +31,7 @@ const FooterIcons = styled.div`
   display: flex;
   gap: 1.9rem;
   margin-bottom: 7px;
-  color: ${(props) => props.theme.white.lighter};
+  color: ${theme.white.lighter};
   a {
     width: 3.2rem;
     height: 3.7rem;

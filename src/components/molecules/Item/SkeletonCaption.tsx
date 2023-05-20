@@ -1,4 +1,3 @@
-import React from "react";
 import * as Button from "../Button/CircleButton";
 import { Age15, HD } from "../../atoms/Icons";
 import styled from "styled-components";

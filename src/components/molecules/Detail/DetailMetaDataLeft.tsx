@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { Rating, ReleaseDate, RunningTime, Seasons } from "../../atoms/Meta";

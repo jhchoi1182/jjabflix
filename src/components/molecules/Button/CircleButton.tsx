@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { AddIcon, DetailDownArrowIcon, PlayIcon } from "../../atoms/Icons";
 import Button, { IButtonEventProps } from "../../atoms/Button/Button";
 import { CheckIcon } from "../../atoms/Icons/ButtonIcon";
+import { theme } from "../../../styles/theme";
 
 interface ICircleButtonProps extends IButtonEventProps {
   buttonSize: "slideButton" | "detailButton";
@@ -92,12 +93,12 @@ const slideButton = css`
 const detailButton = css`
   padding: 0.5rem;
 `;
-const buttonSize = { slideButton, detailButton };
+const buttonSizes = { slideButton, detailButton };
 
 const CircleGreyButton = styled(Button)<ICircleButtonProps>`
-  background-color: ${(props) => props.theme.black.lighter};
-  ${(props) => props.buttonSize && buttonSize[props.buttonSize]};
+  background-color: ${theme.black.lighter};
+  ${({ buttonSize }) => buttonSize && buttonSizes[buttonSize]};
   &:hover {
-    border: 2px solid ${(props) => props.theme.white.lighter};
+    border: 2px solid ${theme.white.lighter};
   }
 `;

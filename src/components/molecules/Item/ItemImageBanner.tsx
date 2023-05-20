@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import styled, { css } from "styled-components";
 import { posterAPI } from "../../../api/Apis";
 import { flex } from "../../../styles/css";
@@ -15,7 +14,7 @@ type ItemImageBannerProps = {
   onMouseLeave?: () => void;
   className?: string;
   index?: number;
-  itemNum?: number;
+  totalSlideItemNum?: number;
   isSliding?: boolean;
 };
 const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
@@ -27,7 +26,7 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   title,
   name,
   index,
-  itemNum,
+  totalSlideItemNum,
   isSliding,
 }) => {
   return (
@@ -37,10 +36,10 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
       onMouseLeave={onMouseLeave}
       bgimg={posterAPI(backdrop ?? poster, "w500")}
       index={index}
-      itemnum={itemNum}
+      totalslideitemnum={totalSlideItemNum}
       issliding={isSliding ? true : undefined}
     >
-      <Title index={index} itemnum={itemNum} issliding={isSliding ? true : undefined}>
+      <Title index={index} totalslideitemnum={totalSlideItemNum} issliding={isSliding ? true : undefined}>
         {title ?? name}
       </Title>
     </Image>
@@ -49,17 +48,17 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
 
 export default ItemImageBanner;
 
-const Image = styled(motion.div)<{ bgimg: string; index?: number; itemnum?: number; issliding?: boolean }>`
+const Image = styled(motion.div)<{ bgimg: string; index?: number; totalslideitemnum?: number; issliding?: boolean }>`
   ${ContentCoverImage}
   padding: 12px 10px;
   height: 8.8vw;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  /** 슬라이드 상태가 아닐 때 색상 */
-  ${({ index, itemnum, bgimg, issliding }) =>
+  /** 슬라이드를 넘기고 있는 상태가 아닐 때 색상 */
+  ${({ index, totalslideitemnum, bgimg, issliding }) =>
     index !== undefined &&
     !issliding &&
-    (index === 0 || index === (itemnum && itemnum - 1)) &&
+    (index === 0 || index === (totalslideitemnum && totalslideitemnum - 1)) &&
     css`
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(${bgimg});
     `}
@@ -77,16 +76,16 @@ const Image = styled(motion.div)<{ bgimg: string; index?: number; itemnum?: numb
   }
 `;
 
-const Title = styled(motion.p)<{ index?: number; itemnum?: number; issliding?: boolean }>`
+const Title = styled(motion.p)<{ index?: number; totalslideitemnum?: number; issliding?: boolean }>`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
   ${font.RS_title}
-  /** 슬라이드 상태가 아닐 때 색상 */
-  ${({ index, itemnum, issliding }) =>
+  /** 슬라이드를 넘기고 있는 상태가 아닐 때 색상 */
+  ${({ index, totalslideitemnum, issliding }) =>
     index !== undefined &&
     !issliding &&
-    (index === 0 || index === (itemnum && itemnum - 1)) &&
+    (index === 0 || index === (totalslideitemnum && totalslideitemnum - 1)) &&
     css`
       color: #727272;
     `}

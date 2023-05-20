@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import { font } from "../../../styles/Fonts";
+import { theme } from "../../../styles/theme";
 
 const menuItems = [
   {
@@ -73,7 +73,7 @@ const FooterMenu = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 18px;
-  color: ${(props) => props.theme.grey.lighter};
+  color: ${theme.grey.lighter};
   margin-bottom: 3rem;
   a {
     &:hover {

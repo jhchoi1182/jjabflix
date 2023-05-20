@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { flex } from "../../../styles/css";
 import { SearchIcon } from "../../atoms/Icons";
+import { theme } from "../../../styles/theme";
 
 interface IForm {
   keyword: string;
@@ -55,5 +56,5 @@ const SearchInput = styled(motion.input)`
   z-index: -1;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
-  border: 1px solid ${(props) => props.theme.white.lighter};
+  border: 1px solid ${theme.white.lighter};
 `;

@@ -1,4 +1,3 @@
-import React from "react";
 import { AdultIcon, Age15, HD } from "../../atoms/Icons";
 import { IContent } from "../../../interface/Interface";
 import { Information } from "../../atoms/Layout";

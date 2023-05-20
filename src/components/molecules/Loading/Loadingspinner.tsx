@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import SkeletonItem from "../../atoms/Loading/SkeletonItem";
 import SkeletonTitle from "../../atoms/Loading/SkeletonTitle";
