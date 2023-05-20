@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import styled from "styled-components";
 
-type SkeletonItemProps = {
+interface SkeletonItemProps {
   delayNum: number;
   bothSideExceptSlideItemNum: number;
 };
@@ -20,14 +20,16 @@ const LoadingVariants: Variants = {
   }),
 };
 
-const SkeletonItem: React.FC<SkeletonItemProps> = ({ delayNum, bothSideExceptSlideItemNum }) => {
-  return <Item variants={LoadingVariants} custom={delayNum} animate="animate" slideitemnum={bothSideExceptSlideItemNum} />;
+const SkeletonItem = ({ delayNum, bothSideExceptSlideItemNum }: SkeletonItemProps) => {
+  return (
+    <Item variants={LoadingVariants} custom={delayNum} animate="animate" slideitemnum={bothSideExceptSlideItemNum} />
+  );
 };
 
 export default SkeletonItem;
 
 const Item = styled(motion.div)<{ slideitemnum: number }>`
-  width: calc(100% / (${({slideitemnum}) => slideitemnum}) - 4px);
+  width: calc(100% / (${({ slideitemnum }) => slideitemnum}) - 4px);
   height: 160px;
   border-radius: 5px;
   background-color: rgb(0, 0, 0);

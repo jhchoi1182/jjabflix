@@ -52,7 +52,7 @@ const captionVariants: Variants = {
   },
 };
 
-const SlideItem: React.FC<ISlideItem> = ({
+const SlideItem = ({
   id,
   title,
   name,
@@ -63,7 +63,7 @@ const SlideItem: React.FC<ISlideItem> = ({
   totalSlideItemNum,
   index,
   isSliding,
-}) => {
+}: ISlideItem) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
   const control = useAnimation();

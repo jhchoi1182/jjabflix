@@ -11,22 +11,12 @@ interface IDetailMetaDataRight {
   toBottomScrollHandler: () => void;
 }
 
-const DetailMetaDataRight: React.FC<IDetailMetaDataRight> = ({
+const DetailMetaDataRight = ({
   production_companies,
   genres,
   tagline,
   toBottomScrollHandler,
-}) => {
-  const renderTags = (tags: string[]) => {
-    return (
-      <div>
-        {tags.map((tag, index) => (
-          <TagText key={tag}>{`${tag}${index !== tags.length - 1 ? "," : ""}`}</TagText>
-        ))}
-      </div>
-    );
-  };
-
+}: IDetailMetaDataRight) => {
   return (
     <WidthContainer>
       {production_companies.length !== 0 && (

@@ -45,3 +45,7 @@ export interface IGetData {
   total_pages?: number;
   total_results?: number;
 }
+
+export interface ChildrenProps {
+  children: React.ReactNode;
+}

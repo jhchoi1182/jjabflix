@@ -8,13 +8,11 @@ import { CircleAdd, CircleCheck } from "../../molecules/Button/CircleButton";
 import { Play } from "../../molecules/Button/RectangleButton";
 import { posterAPI } from "../../../api/Apis";
 import CloseButton from "../../atoms/Button/CloseButton";
-import { ChildrenProps } from "../../../interface/type";
 import { ContentCoverImage } from "../../atoms/Layout";
 import { theme } from "../../../styles/theme";
 
-const Cover: React.FC<IContent> & {
-  Title: React.FC<ChildrenProps>;
-} = ({ ...contentData }) => {
+
+const Cover = ({ ...contentData }: IContent) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);

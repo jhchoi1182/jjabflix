@@ -14,7 +14,7 @@ interface IDetailMetaDataLeft {
   name?: string;
 }
 
-const DetailMetaDataLeft: React.FC<IDetailMetaDataLeft> = ({
+const DetailMetaDataLeft = ({
   vote_average,
   release_date,
   seasons,
@@ -23,7 +23,7 @@ const DetailMetaDataLeft: React.FC<IDetailMetaDataLeft> = ({
   adult,
   title,
   name,
-}) => {
+}: IDetailMetaDataLeft) => {
   const isRuntime = runtime !== undefined && runtime !== null && runtime !== 0;
 
   return (

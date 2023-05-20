@@ -16,7 +16,7 @@ const iconSize = {
   detailButton: 1.4,
 };
 
-export const CirclePlay: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
+export const CirclePlay = ({ onMouseEnter, onMouseLeave, onClick, ...props }: ICircleButtonProps) => {
   return (
     <CirclePlayButton
       circle
@@ -39,7 +39,7 @@ const CirclePlayButton = styled(Button)<ICircleButtonProps>`
   }
 `;
 
-export const CircleAdd: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
+export const CircleAdd = ({ onMouseEnter, onMouseLeave, onClick, ...props }: ICircleButtonProps) => {
   return (
     <CircleGreyButton
       circle
@@ -55,7 +55,7 @@ export const CircleAdd: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseL
   );
 };
 
-export const CircleCheck: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
+export const CircleCheck = ({ onMouseEnter, onMouseLeave, onClick, ...props }: ICircleButtonProps) => {
   return (
     <CircleGreyButton
       circle
@@ -71,7 +71,7 @@ export const CircleCheck: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMous
   );
 };
 
-export const CircleDetail: React.FC<ICircleButtonProps> = ({ onMouseEnter, onMouseLeave, onClick, ...props }) => {
+export const CircleDetail = ({ onMouseEnter, onMouseLeave, onClick, ...props }: ICircleButtonProps) => {
   return (
     <CircleGreyButton
       circle

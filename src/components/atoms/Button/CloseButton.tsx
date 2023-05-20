@@ -8,7 +8,7 @@ interface ICloseButton {
   size: "detailButton";
 }
 
-const CloseButton: React.FC<ICloseButton> = ({ top, right, size }) => {
+const CloseButton = ({ top, right, size }: ICloseButton) => {
   const navigate = useNavigate();
 
   return (

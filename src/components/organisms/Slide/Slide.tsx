@@ -12,7 +12,7 @@ import { categoryAtom } from "../../../lib/atoms";
 import { useParams } from "react-router-dom";
 import { useInnerWidth } from "../../../utils/Hooks";
 
-type VariantsProps = {
+interface VariantsProps {
   direction: string;
   calculateSlideGap: () => number;
   innerWidth: number;
@@ -37,7 +37,7 @@ interface ISlide extends IGetData {
   type?: string;
 }
 
-const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
+const Slide = ({ title, category, type, ...data }: ISlide) => {
   const { pathnameId } = useParams();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const [direction, setDirection] = useState("next");

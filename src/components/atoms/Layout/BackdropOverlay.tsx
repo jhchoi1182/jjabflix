@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ChildrenProps } from "../../../interface/type";
+import { ChildrenProps } from "../../../interface/Interface";
 
-const BackdropOverlay: React.FC<ChildrenProps> = ({ children }) => {
+const BackdropOverlay = ({ children }: ChildrenProps) => {
   const navigate = useNavigate();
 
   return <Wrapper onClick={() => navigate(-1)}>{children}</Wrapper>;

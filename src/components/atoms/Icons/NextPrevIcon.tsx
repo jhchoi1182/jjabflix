@@ -11,7 +11,7 @@ export interface ArrowProps {
 const nextArrow = "\u276F"; /** ❯ */
 const prevArrow = "\u276E"; /** ❮ */
 
-const Arrow: React.FC<ArrowProps> = ({ direction, category }) => {
+const Arrow = ({ direction, category }: ArrowProps) => {
   const hoveredCategory = useRecoilValue(categoryAtom);
 
   /** slide-hover => opacity:전역 css 변수 */

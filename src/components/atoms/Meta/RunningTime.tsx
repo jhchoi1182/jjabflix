@@ -1,16 +1,8 @@
-interface SeasonsProps {
-  seasons: [];
-};
-
-export const Seasons: React.FC<SeasonsProps> = ({ seasons }) => {
+export const Seasons = ({ seasons }: { seasons: [] }) => {
   return <span>{`시즌 ${seasons?.length}개`}</span>;
 };
 
-interface RunningTimeProps {
-  runtime: number;
-};
-
-export const RunningTime: React.FC<RunningTimeProps> = ({ runtime }) => {
+export const RunningTime = ({ runtime }: { runtime: number }) => {
   const { hours, minutes } = {
     hours: Math.floor(runtime / 60),
     minutes: runtime % 60,

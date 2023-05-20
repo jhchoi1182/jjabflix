@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ChildrenProps } from "../../../interface/type";
+import { ChildrenProps } from "../../../interface/Interface";
 
-const Wrapper: React.FC<ChildrenProps> = ({ children }) => {
+const Wrapper = ({ children }: ChildrenProps) => {
   return <WrapperDiv>{children}</WrapperDiv>;
 };
 

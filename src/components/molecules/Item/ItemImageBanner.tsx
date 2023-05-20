@@ -5,7 +5,7 @@ import { flex } from "../../../styles/css";
 import { ContentCoverImage } from "../../atoms/Layout";
 import { font } from "../../../styles/Fonts";
 
-type ItemImageBannerProps = {
+interface ItemImageBannerProps {
   backdrop: string;
   poster: string;
   title: string;
@@ -16,8 +16,8 @@ type ItemImageBannerProps = {
   index?: number;
   totalSlideItemNum?: number;
   isSliding?: boolean;
-};
-const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
+}
+const ItemImageBanner = ({
   className,
   onMouseEnter,
   onMouseLeave,
@@ -28,7 +28,7 @@ const ItemImageBanner: React.FC<ItemImageBannerProps> = ({
   index,
   totalSlideItemNum,
   isSliding,
-}) => {
+}: ItemImageBannerProps) => {
   return (
     <Image
       className={className}

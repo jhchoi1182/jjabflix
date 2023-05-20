@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import { searchAPI } from "../../api/Apis";
 import { IGetData } from "../../interface/Interface";
-import { ChildrenProps } from "../../interface/type";
 import { AnimatePresence } from "framer-motion";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import styled from "styled-components";
@@ -14,9 +13,7 @@ import { categoryAtom } from "../../lib/atoms";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
 import Footer from "../organisms/Footer/Footer";
 
-const SearchResult: React.FC & {
-  Wrapper: React.FC<ChildrenProps>;
-} = () => {
+const SearchResult = () => {
   const location = useLocation();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
 

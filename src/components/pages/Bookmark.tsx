@@ -4,16 +4,12 @@ import BookmarkList from "../templates/Bookmark/BookmarkList";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
-import { ChildrenProps } from "../../interface/type";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
 import { font } from "../../styles/Fonts";
 import Footer from "../organisms/Footer/Footer";
 
-const Bookmark: React.FC & {
-  Wrapper: React.FC<ChildrenProps>;
-  Title: React.FC<ChildrenProps>;
-} = () => {
+const Bookmark = () => {
   const { pathnameId } = useParams();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
 

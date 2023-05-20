@@ -3,7 +3,11 @@ import { IContent } from "../../../interface/Interface";
 import { Information } from "../../atoms/Layout";
 import { Rating, RunningTime, Seasons } from "../../atoms/Meta";
 
-const InfoBox: React.FC<IContent & { noHD?: Boolean }> = ({ vote_average, adult, seasons, runtime, noHD }) => {
+interface IInfoBox extends IContent {
+  noHD?: Boolean;
+}
+
+const InfoBox = ({ vote_average, adult, seasons, runtime, noHD }: IInfoBox) => {
   const isRuntime = runtime !== undefined && runtime !== null && runtime !== 0;
 
   return (

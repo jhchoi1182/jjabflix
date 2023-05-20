@@ -16,7 +16,7 @@ const iconSize = {
   big: "2.4",
 };
 
-export const Logo: React.FC<{ marginRight: string }> = ({ marginRight }) => {
+export const Logo = ({ marginRight }: { marginRight: string }) => {
   return (
     <NetflixLogo
       xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const NetflixLogo = styled.svg<{ marginRight: string }>`
   margin-right: ${({ marginRight }) => marginRight};
 `;
 
-export const SearchIcon: React.FC<SearchIconProps> = ({ onClick, animate, transition }) => {
+export const SearchIcon = ({ onClick, animate, transition }: SearchIconProps) => {
   return (
     <Search
       onClick={onClick}

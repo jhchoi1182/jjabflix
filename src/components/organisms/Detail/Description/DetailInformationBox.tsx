@@ -7,7 +7,7 @@ interface ItoBottomScrollHandler extends IContent {
   toBottomScrollHandler: () => void;
 }
 
-const DetailInformationBox: React.FC<ItoBottomScrollHandler> = ({
+const DetailInformationBox = ({
   vote_average,
   release_date,
   seasons,
@@ -20,7 +20,7 @@ const DetailInformationBox: React.FC<ItoBottomScrollHandler> = ({
   genres,
   tagline,
   toBottomScrollHandler,
-}) => {
+}: ItoBottomScrollHandler) => {
   return (
     <FlexContainer>
       <DetailMetaDataLeft

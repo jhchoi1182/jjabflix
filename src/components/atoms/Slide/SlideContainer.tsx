@@ -1,12 +1,11 @@
-import React from "react";
 import styled from "styled-components";
-import { ChildrenProps } from "../../../interface/type";
+import { ChildrenProps } from "../../../interface/Interface";
 
-type SlideContainerProps = {
+interface SlideContainerProps extends ChildrenProps {
   marginTop?: string;
-};
+}
 
-const SlideContainer: React.FC<ChildrenProps & SlideContainerProps> = ({ marginTop, children }) => {
+const SlideContainer = ({ marginTop, children }: SlideContainerProps) => {
   return <ColumnContainer marginTop={marginTop}>{children}</ColumnContainer>;
 };
 

@@ -5,7 +5,7 @@ interface RatingProps {
   voteAverage?: number;
 }
 
-const Rating: React.FC<RatingProps> = ({ voteAverage }) => {
+const Rating = ({ voteAverage }: RatingProps) => {
   const rating = voteAverage ? voteAverage.toFixed(1) : "없음";
 
   return (

@@ -8,7 +8,7 @@ type PageIndicatorProps = {
   category: string;
 };
 
-const PageIndicator: React.FC<PageIndicatorProps> = ({ maxPage, page, category }) => {
+const PageIndicator = ({ maxPage, page, category }: PageIndicatorProps) => {
   const hoveredCategory = useRecoilValue(categoryAtom);
 
   const className = category === hoveredCategory ? "slide-hover" : "pagination-item";

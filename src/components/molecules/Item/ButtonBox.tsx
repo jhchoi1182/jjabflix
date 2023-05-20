@@ -12,7 +12,7 @@ interface IButtonBox extends IContent {
   keyword?: string;
 }
 
-const ButtonBox: React.FC<IButtonBox> = ({ onMouseEnter, skeleton, keyword, ...data }) => {
+const ButtonBox = ({ onMouseEnter, skeleton, keyword, ...data }:IButtonBox) => {
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const favoriteContents = useRecoilValue(FavoriteAtom);

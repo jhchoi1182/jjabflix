@@ -6,7 +6,7 @@ import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
 import { ButtonBox, ItemImageBanner, InfoBox, TagBox } from "../../molecules/Item";
 import { captionVariants, contentVariants } from "../../atoms/Variants/Variants";
 
-const BookmarkedItem: React.FC<IContent> = ({ ...data }) => {
+const BookmarkedItem = ({ ...data }: IContent) => {
   const { id, title, name, backdrop_path, poster_path, genres } = data;
   const [isHovered, setIsHovered] = useState(false);
 

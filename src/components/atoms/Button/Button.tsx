@@ -13,7 +13,7 @@ interface IButtonProps extends IButtonEventProps {
   children?: React.ReactNode;
 }
 
-const Button: React.FC<IButtonProps> = ({ children, onClick, borderColor, whiteFont, circle, ...rest }) => {
+const Button = ({ children, onClick, borderColor, whiteFont, circle, ...rest }: IButtonProps) => {
   const styles = { whiteFont, borderColor, circle };
 
   return (

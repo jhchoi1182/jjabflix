@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { ChildrenProps } from "../../../interface/type";
 import { theme } from "../../../styles/theme";
 import { font } from "../../../styles/Fonts";
+import { ChildrenProps } from "../../../interface/Interface";
 
-const SlideTitle: React.FC<ChildrenProps> = ({ children }) => {
+const SlideTitle = ({ children }: ChildrenProps) => {
   return <Title>{children}</Title>;
 };
 

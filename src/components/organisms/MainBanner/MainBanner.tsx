@@ -4,7 +4,6 @@ import { detailAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import * as Button from "../../molecules/Button/RectangleButton";
-import { ChildrenProps } from "../../../interface/type";
 import { useTooltip } from "../../../utils/Hooks";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -12,17 +11,13 @@ import { detailSelector } from "../../../lib/atoms";
 import { categoryAtom } from "../../../lib/atoms";
 import { font } from "../../../styles/Fonts";
 
-export type MainBannerProps = {
+interface MainBannerProps {
   id: number;
   media_type: "movie" | "tv";
   category: string;
-};
+}
 
-const MainBanner: React.FC<MainBannerProps> & {
-  Wrapper: React.FC<ChildrenProps>;
-  Title: React.FC<ChildrenProps>;
-  Overview: React.FC<ChildrenProps>;
-} = ({ id, media_type, category }) => {
+const MainBanner = ({ id, media_type, category }: MainBannerProps) => {
   const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const setDetail = useSetRecoilState(detailSelector);

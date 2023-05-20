@@ -50,10 +50,10 @@ export const posterAPI = (path?: string, size?: string) => {
   return `https://image.tmdb.org/t/p/${size ?? "original"}/${path}`;
 };
 
-type detailAPIParameter = {
+interface detailAPIParameter {
   id: number;
   media_type: "movie" | "tv";
-};
+}
 
 export const detailAPI = ({ id, media_type }: detailAPIParameter) => {
   if (id === 0) return;

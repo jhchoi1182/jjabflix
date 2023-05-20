@@ -1,11 +1,11 @@
-import { ChildrenProps } from "../../../interface/type";
 import styled from "styled-components";
+import { ChildrenProps } from "../../../interface/Interface";
 
-type EllipsisBoxProps = {
+interface EllipsisBoxProps extends ChildrenProps {
   width?: string;
-};
+}
 
-const EllipsisBox: React.FC<EllipsisBoxProps & ChildrenProps> = ({ children, width }) => {
+const EllipsisBox = ({ children, width }: EllipsisBoxProps) => {
   return <EllipsisDiv width={width}>{children}</EllipsisDiv>;
 };
 

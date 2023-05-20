@@ -1,7 +1,7 @@
 interface ReleaseDateProps {
   ReleaseDate: Date;
 }
-const ReleaseDate: React.FC<ReleaseDateProps> = ({ ReleaseDate }) => {
+const ReleaseDate = ({ ReleaseDate }: ReleaseDateProps) => {
   const ReleaseYear = new Date(ReleaseDate).getFullYear();
 
   return isNaN(ReleaseYear) ? null : <span>{ReleaseYear}</span>;

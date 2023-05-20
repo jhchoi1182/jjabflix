@@ -1,4 +1,4 @@
-export type IconSizeProps = {
+export interface IconSizeProps {
   size: number;
 };
 

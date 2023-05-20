@@ -14,7 +14,7 @@ const IconSize = {
   detailButton: 1.75,
 };
 
-export const Play: React.FC<IRectangleButtonProps> = ({ onMouseLeave, onClick, ...props }) => {
+export const Play = ({ onMouseLeave, onClick, ...props }:IRectangleButtonProps) => {
   return (
     <PlayButton borderColor="none" {...props} onMouseLeave={onMouseLeave} onClick={onClick}>
       <PlayIcon size={IconSize[props.buttonSize]} />
@@ -42,7 +42,7 @@ const PlayButton = styled(Button)<IRectangleButtonProps>`
   }
 `;
 
-export const Detail: React.FC<IRectangleButtonProps> = ({ onClick, ...props }) => {
+export const Detail = ({ onClick, ...props } : IRectangleButtonProps) => {
   return (
     <DetailButton borderColor="none" whiteFont onClick={onClick}>
       <DetailIcon size={IconSize[props.buttonSize]} />

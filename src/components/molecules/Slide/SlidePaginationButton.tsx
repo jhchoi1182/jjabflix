@@ -9,13 +9,7 @@ interface SlideButtonProps extends ArrowProps {
   isSliding: boolean;
 }
 
-const SlidePaginationButton: React.FC<SlideButtonProps> = ({
-  prevSlide,
-  nextSlide,
-  direction,
-  category,
-  isSliding,
-}) => {
+const SlidePaginationButton = ({ prevSlide, nextSlide, direction, category, isSliding }: SlideButtonProps) => {
   const { setButtonOpacity } = useButtonOpacity();
 
   return (
