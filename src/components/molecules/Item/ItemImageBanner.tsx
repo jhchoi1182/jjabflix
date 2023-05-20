@@ -37,18 +37,22 @@ const ItemImageBanner = ({
       bgimg={posterAPI(backdrop ?? poster, "w500")}
       index={index}
       totalslideitemnum={totalSlideItemNum}
-      issliding={isSliding ? true : undefined}
+      issliding={isSliding ? "true" : "false"}
     >
-      <Title index={index} totalslideitemnum={totalSlideItemNum} issliding={isSliding ? true : undefined}>
+      <ItemImageBanner.Title
+        index={index}
+        totalslideitemnum={totalSlideItemNum}
+        issliding={isSliding ? "true" : "false"}
+      >
         {title ?? name}
-      </Title>
+      </ItemImageBanner.Title>
     </Image>
   );
 };
 
 export default ItemImageBanner;
 
-const Image = styled(motion.div)<{ bgimg: string; index?: number; totalslideitemnum?: number; issliding?: boolean }>`
+const Image = styled(motion.div)<{ bgimg: string; index?: number; totalslideitemnum?: number; issliding?: string }>`
   ${ContentCoverImage}
   padding: 12px 10px;
   height: 8.8vw;
@@ -76,7 +80,7 @@ const Image = styled(motion.div)<{ bgimg: string; index?: number; totalslideitem
   }
 `;
 
-const Title = styled(motion.p)<{ index?: number; totalslideitemnum?: number; issliding?: boolean }>`
+ItemImageBanner.Title = styled(motion.p)<{ index?: number; totalslideitemnum?: number; issliding?: string }>`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;

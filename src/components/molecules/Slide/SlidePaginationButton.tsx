@@ -18,7 +18,7 @@ const SlidePaginationButton = ({ prevSlide, nextSlide, direction, category, isSl
       onMouseOver={() => setButtonOpacity(1)}
       onMouseOut={() => setButtonOpacity(0)}
       direction={direction}
-      issliding={isSliding}
+      issliding={isSliding ? "true" : "false"}
     >
       <Arrow direction={direction} category={category} />
     </SlideBtn>
@@ -67,7 +67,7 @@ const next = css`
 
 const directions = { prev, next };
 
-const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding: boolean }>`
+const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding?: string }>`
   position: absolute;
   ${({ direction }) => direction && directions[direction]};
   border: none;
