@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import SlideItem from "./SlideItem";
@@ -42,7 +42,6 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
-  const [overflowY, setOverflowY] = useState("inherit");
   const [page, setPage] = useState(0);
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
@@ -103,16 +102,6 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
     }
   };
 
-  /** 상세 정보 모달 오픈 여부에 따른 슬라이드 높이 변경으로 생기는 스크롤 제어 */
-  useEffect(() => {
-    if (pathnameId) setOverflowY("hidden");
-    if (pathnameId === undefined) {
-      setTimeout(() => {
-        setOverflowY("inherit");
-      }, 500);
-    }
-  }, [pathnameId]);
-
   return (
     <SlideContainer ref={zIndexRef} onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <SlideTitle>{title}</SlideTitle>
@@ -126,7 +115,6 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
           exit="exit"
           transition={{ type: "tween", duration: 0.75 }}
           key={category + page}
-          overflowy={overflowY}
         >
           {showContentsArray?.map((content, i) => {
             return (
@@ -177,11 +165,10 @@ const SlideContainer = styled.div`
   }
 `;
 
-const FlexContainer = styled(motion.div)<{ overflowy: string }>`
+const FlexContainer = styled(motion.div)`
   display: flex;
   position: absolute;
   gap: 8px;
   width: 100%;
   height: 170px;
-  overflow-y: ${({ overflowy }) => overflowy};
 `;
