@@ -21,6 +21,10 @@ const Bookmark: React.FC & {
     setHoveredCategory("bookmark");
   }, [setHoveredCategory]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <React.Fragment>
       <Bookmark.Wrapper>

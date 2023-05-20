@@ -29,6 +29,10 @@ const SearchResult: React.FC & {
     setHoveredCategory("search");
   }, [setHoveredCategory]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <React.Fragment>
       <SearchResult.Wrapper>
