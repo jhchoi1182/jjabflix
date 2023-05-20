@@ -1,6 +1,5 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
-import Item from "../../organisms/Item/Item";
+import BookmarkedItem from "../../organisms/Item/BookmarkedItem";
 import { FavoriteAtom } from "../../../lib/atoms";
 import { ItemGridContainer } from "../../atoms/Layout";
 
@@ -10,7 +9,7 @@ const BookmarkList = () => {
   return (
     <ItemGridContainer>
       {favoriteContents?.map((data) => (
-        <Item key={data.id} {...data} />
+        <BookmarkedItem key={data.id} {...data} />
       ))}
     </ItemGridContainer>
   );

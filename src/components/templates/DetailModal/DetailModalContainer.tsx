@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLocation, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -8,6 +8,7 @@ import { IContent } from "../../../interface/Interface";
 import Cover from "../../organisms/Detail/Cover";
 import DescriptionContainer from "../../organisms/Detail/Description/DescriptionContainer";
 import { BackdropOverlay } from "../../atoms/Layout";
+import { theme } from "../../../styles/theme";
 
 const DetailModalContainer = () => {
   const contentData = useRecoilValue<IContent>(detailSelector);
@@ -49,7 +50,7 @@ export default DetailModalContainer;
 const ContentsContainer = styled(motion.div)`
   width: 902.5px;
   margin: 30px auto 0px;
-  background-color: ${(props) => props.theme.black.darker};
+  background-color: ${theme.black.darker};
   @media (max-width: 950px) {
     width: 93vw;
   }
