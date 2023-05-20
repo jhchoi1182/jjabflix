@@ -1,13 +1,14 @@
+import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
 import { font } from "../../../styles/Fonts";
 import { ChildrenProps } from "../../../interface/Interface";
 
-const SlideTitle = ({ children }: ChildrenProps) => {
+const SlideTitle = ({ children }: ChildrenProps) => {  
   return <Title>{children}</Title>;
 };
 
-export default SlideTitle;
+export default React.memo(SlideTitle);
 
 const Title = styled.label`
   position: absolute;
