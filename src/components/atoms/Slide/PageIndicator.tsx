@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom } from "../../../lib/atoms";
@@ -12,12 +13,16 @@ const PageIndicator = ({ maxPage, page, category }: PageIndicatorProps) => {
   const hoveredCategory = useRecoilValue(categoryAtom);
 
   const className = category === hoveredCategory ? "slide-hover" : "pagination-item";
-  let numBox = [];
-  for (let i = 0; i < maxPage; i++) {
-    numBox.push(<li key={i} className={i === page ? "active" : ""} />);
-  }
 
-  return <IndicatorBox className={className}>{numBox}</IndicatorBox>;
+  const createIndicator = useMemo(() => {
+    let numBox = [];
+    for (let i = 0; i < maxPage; i++) {
+      numBox.push(<li key={i} className={i === page ? "active" : ""} />);
+    }
+    return numBox;
+  }, [page, maxPage]);
+
+  return <IndicatorBox className={className}>{createIndicator}</IndicatorBox>;
 };
 
 export default PageIndicator;
