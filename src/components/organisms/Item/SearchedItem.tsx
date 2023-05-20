@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { IContent } from "../../../interface/Interface";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { detailAPI } from "../../../api/Apis";
@@ -14,8 +14,8 @@ interface ISearchedItem extends IContent {
 
 const SearchedItem = ({ keyword, ...content }: ISearchedItem) => {
   const { id, title, name, backdrop_path, poster_path, media_type } = content;
-  const [isHovered, setIsHovered] = useState(false);
   const queryClient = useQueryClient();
+  const control = useAnimation();
 
   const queryKey = ["detail", id];
   const queryFn = () => detailAPI({ id, media_type });
@@ -27,19 +27,19 @@ const SearchedItem = ({ keyword, ...content }: ISearchedItem) => {
   });
 
   /** searchAPI에 없는 데이터 추가 요청 */
-  const BannerMouseEnterHandler = async () => {
-    await queryClient.fetchQuery(queryKey, queryFn, dataOption);
-    setIsHovered(true);
+  const BannerMouseEnterHandler = () => {
+    queryClient.fetchQuery(queryKey, queryFn, dataOption);
+    control.start("hover");
   };
 
   return (
     <HoverBigScaleContainer
       layoutId={"search" + id}
       variants={contentVariants}
-      whileHover={isHovered ? "hover" : "normal"}
+      animate={control}
       initial="normal"
       transition={{ type: "tween" }}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => control.start("normal")}
     >
       <ItemImageBanner
         onMouseEnter={BannerMouseEnterHandler}
