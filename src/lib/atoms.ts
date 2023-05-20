@@ -2,13 +2,13 @@ import { atom, selector } from "recoil";
 import { bookmarkedLocalStorage, detailLocalStorage, saveDetailDataToLocalStorage } from "../utils/Local";
 import { IContent } from "../interface/Interface";
 
-/** 상세 정보 */
-
+/** 각 아이템의 상세 정보 */
 const detailAtom = atom<IContent>({
   key: "detail",
   default: detailLocalStorage,
 });
 
+/** 새로고침 시에도 상세 정보 모달이 유지될 수 있다록 로컬 스토리지에 저장 */
 export const detailSelector = selector({
   key: "detailSelector",
   get: ({ get }) => {
@@ -21,21 +21,18 @@ export const detailSelector = selector({
 });
 
 /** 즐겨찾기 상태관리 */
-
 export const FavoriteAtom = atom<IContent[]>({
   key: "favoriteContents",
   default: bookmarkedLocalStorage,
 });
 
 /** 레이아웃id */
-
 export const categoryAtom = atom({
-  key: "layoutId",
+  key: "category",
   default: "",
 });
 
 /** 툴팁 상태관리 */
-
 interface ItooltipAtom {
   isHovered: boolean;
   text: string;
