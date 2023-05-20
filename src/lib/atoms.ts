@@ -51,3 +51,12 @@ export const tooltipAtom = atom<ItooltipAtom>({
     size: "slideTooltip",
   },
 });
+
+/** 뷰 포트 너비에 따른 슬라이드 아이템 수 */
+export const slideItemCountAtom = atom({
+  key: "slideItem",
+  default: {
+    totalSlideItemNum: 8,
+    bothSideExceptSlideItemNum: 6,
+  },
+});

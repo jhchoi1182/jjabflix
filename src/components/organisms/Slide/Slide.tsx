@@ -10,6 +10,7 @@ import SlideTitle from "../../atoms/Slide/SlideTitle";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../../lib/atoms";
 import { useOutletContext } from "react-router-dom";
+import { useInnerWidth } from "../../../utils/Hooks";
 
 type VariantsProps = {
   direction: string;
@@ -42,72 +43,30 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
   const [direction, setDirection] = useState("next");
   const [isSliding, setIsSliding] = useState(false);
   const [overflowY, setOverflowY] = useState("inherit");
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  const [slideContentsNum, setSlideContentsNum] = useState(8);
-  const [showContentsNum, setShowContentsNum] = useState(6);
   const [page, setPage] = useState(0);
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
-
-  /** 뷰 포트 너비 상태값으로 세팅 */
-
-  useEffect(() => {
-    const resizeHandler = () => {
-      setInnerWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", resizeHandler);
-
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-    };
-  }, []);
-
-  /** 뷰 포트 너비에 따른 슬라이드 수 조절 */
-
-  useEffect(() => {
-    if (innerWidth >= 1400) {
-      setSlideContentsNum(8);
-      return setShowContentsNum(6);
-    }
-    if (innerWidth >= 1100) {
-      setSlideContentsNum(7);
-      return setShowContentsNum(5);
-    }
-    if (innerWidth >= 800) {
-      setSlideContentsNum(6);
-      return setShowContentsNum(4);
-    }
-    if (innerWidth >= 500) {
-      setSlideContentsNum(5);
-      return setShowContentsNum(3);
-    } else {
-      setSlideContentsNum(4);
-      return setShowContentsNum(2);
-    }
-  }, [innerWidth]);
-  // console.log(innerWidth);
+  const { innerWidth, totalSlideItemNum, bothSideExceptSlideItemNum } = useInnerWidth();
 
   /** 슬라이드 시 슬라이드 페이지 간 생기는 공백 계산 */
-
   const calculateSlideGap = () => {
     if (innerWidth === 1920) return 145;
-    if (slideContentsNum === 7) return 0.08 * innerWidth;
-    if (slideContentsNum === 6) return 0.105 * innerWidth;
-    if (slideContentsNum === 5) return 0.105 * innerWidth;
-    if (slideContentsNum === 4) return 0.125 * innerWidth;
+    if (totalSlideItemNum === 7) return 0.08 * innerWidth;
+    if (totalSlideItemNum === 6) return 0.105 * innerWidth;
+    if (totalSlideItemNum === 5) return 0.105 * innerWidth;
+    if (totalSlideItemNum === 4) return 0.125 * innerWidth;
     else return 0.0698 * innerWidth;
   };
 
   /** 슬라이드 로직 */
   const totalContents = data?.results?.length;
   const maxPage =
-    totalContents % showContentsNum === 1
-      ? Math.ceil(totalContents / showContentsNum) - 1
-      : Math.ceil(totalContents / showContentsNum);
+    totalContents % bothSideExceptSlideItemNum === 1
+      ? Math.ceil(totalContents / bothSideExceptSlideItemNum) - 1
+      : Math.ceil(totalContents / bothSideExceptSlideItemNum);
   const showContentsArray = data?.results?.slice(
-    (slideContentsNum - 2) * page,
-    slideContentsNum + (slideContentsNum - 2) * page
+    (totalSlideItemNum - 2) * page,
+    totalSlideItemNum + (totalSlideItemNum - 2) * page
   );
 
   const slidePrevent = () => setIsSliding((prev) => !prev);
@@ -176,7 +135,7 @@ const Slide: React.FC<ISlide> = ({ title, category, type, ...data }) => {
                 {...content}
                 media_type={content.media_type ?? type}
                 category={category}
-                itemNum={slideContentsNum}
+                itemNum={totalSlideItemNum}
                 index={i}
                 isSliding={isSliding}
               />
