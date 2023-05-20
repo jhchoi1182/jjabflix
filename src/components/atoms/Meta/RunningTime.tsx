@@ -1,6 +1,4 @@
-import React from "react";
-
-type SeasonsProps = {
+interface SeasonsProps {
   seasons: [];
 };
 
@@ -8,7 +6,7 @@ export const Seasons: React.FC<SeasonsProps> = ({ seasons }) => {
   return <span>{`시즌 ${seasons?.length}개`}</span>;
 };
 
-type RunningTimeProps = {
+interface RunningTimeProps {
   runtime: number;
 };
 

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
 
 const ServiceCode = () => {
   const [serviceCode, setServiceCode] = useState<string>("서비스 코드");
@@ -12,7 +13,7 @@ const ServiceCode = () => {
 
   return (
     <ServiceCodeBox>
-      <button disabled={serviceCode !== "서비스 코드" && true} onClick={serviceCodeGenerator}>
+      <button disabled={serviceCode !== "서비스 코드"} onClick={serviceCodeGenerator}>
         {serviceCode}
       </button>
     </ServiceCodeBox>
@@ -25,12 +26,12 @@ const ServiceCodeBox = styled.div`
   button {
     height: 3.2rem;
     background-color: transparent;
-    color: ${(props) => props.theme.grey.lighter};
+    color: ${theme.grey.lighter};
     border: 1px solid;
     cursor: pointer;
     &:hover {
-      color: ${(props) => props.theme.white.darker};
-      border: 1px solid ${(props) => props.theme.grey.lighter};
+      color: ${theme.white.darker};
+      border: 1px solid ${theme.grey.lighter};
     }
   }
 `;

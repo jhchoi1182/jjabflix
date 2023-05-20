@@ -34,7 +34,7 @@ export const Logo: React.FC<{ marginRight: string }> = ({ marginRight }) => {
 };
 
 const NetflixLogo = styled.svg<{ marginRight: string }>`
-  margin-right: ${(props) => props.marginRight};
+  margin-right: ${({ marginRight }) => marginRight};
 `;
 
 export const SearchIcon: React.FC<SearchIconProps> = ({ onClick, animate, transition }) => {

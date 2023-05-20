@@ -1,8 +1,6 @@
-import React from "react";
-
-type ReleaseDateProps = {
+interface ReleaseDateProps {
   ReleaseDate: Date;
-};
+}
 const ReleaseDate: React.FC<ReleaseDateProps> = ({ ReleaseDate }) => {
   const ReleaseYear = new Date(ReleaseDate).getFullYear();
 

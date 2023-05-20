@@ -27,7 +27,7 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({ delayNum, bothSideExceptSli
 export default SkeletonItem;
 
 const Item = styled(motion.div)<{ slideitemnum: number }>`
-  width: calc(100% / (${(props) => props.slideitemnum}) - 4px);
+  width: calc(100% / (${({slideitemnum}) => slideitemnum}) - 4px);
   height: 160px;
   border-radius: 5px;
   background-color: rgb(0, 0, 0);

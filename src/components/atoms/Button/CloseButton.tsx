@@ -1,6 +1,6 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { theme } from "../../../styles/theme";
 
 interface ICloseButton {
   top: string;
@@ -26,16 +26,16 @@ const detailButton = css`
   font-size: 2rem;
 `;
 
-const size = { detailButton };
+const sizes = { detailButton };
 
 const Close = styled.button<ICloseButton>`
   position: absolute;
-  top: ${(props) => props.top};
-  right: ${(props) => props.right};
-  ${(props) => props.size && size[props.size]}
+  top: ${({ top }) => top};
+  right: ${({ right }) => right};
+  ${({ size }) => size && sizes[size]}
   border-radius: 100%;
-  background-color: ${(props) => props.theme.black.darker};
-  color: ${(props) => props.theme.white.lighter};
+  background-color: ${theme.black.darker};
+  color: ${theme.white.lighter};
   border: none;
   cursor: pointer;
 `;

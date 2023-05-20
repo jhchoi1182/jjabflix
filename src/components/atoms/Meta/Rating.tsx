@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import { fontWeight } from "../../../styles/Fonts";
 
-type RatingProps = {
+interface RatingProps {
   voteAverage?: number;
-};
+}
 
 const Rating: React.FC<RatingProps> = ({ voteAverage }) => {
   const rating = voteAverage ? voteAverage.toFixed(1) : "없음";

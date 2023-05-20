@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { theme } from "../../../styles/theme";
 import { fontSize } from "../../../styles/Fonts";
 
 type CustomIconProps = {
@@ -23,8 +24,8 @@ const big = css`
 const FontSize = { basic, big };
 
 const SmallRectangle = styled.button<CustomIconProps>`
-  ${(props) => props.size && FontSize[props.size]};
+  ${({ size }) => size && FontSize[size]};
   background-color: transparent;
-  color: ${(props) => props.theme.white.lighter};
-  border: 0.1px solid ${(props) => props.theme.grey.darker};
+  color: ${theme.white.lighter};
+  border: 0.1px solid ${theme.grey.darker};
 `;

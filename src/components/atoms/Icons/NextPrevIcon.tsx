@@ -1,6 +1,7 @@
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { categoryAtom } from "../../../lib/atoms";
+import { theme } from "../../../styles/theme";
 
 export interface ArrowProps {
   direction: "prev" | "next";
@@ -24,7 +25,7 @@ const Arrow: React.FC<ArrowProps> = ({ direction, category }) => {
 export default Arrow;
 
 const ArrowStyle = styled.div`
-  color: ${(props) => props.theme.white.lighter};
+  color: ${theme.white.lighter};
   font-size: 3rem;
   &:hover {
     font-size: 4rem;

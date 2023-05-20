@@ -1,17 +1,16 @@
-import React from "react";
-import { ChildrenProps } from "../../../interface/type";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { ChildrenProps } from "../../../interface/type";
 
 const BackdropOverlay: React.FC<ChildrenProps> = ({ children }) => {
   const navigate = useNavigate();
 
-  return <WrapperContainer onClick={() => navigate(-1)}>{children}</WrapperContainer>;
+  return <Wrapper onClick={() => navigate(-1)}>{children}</Wrapper>;
 };
 
 export default BackdropOverlay;
 
-const WrapperContainer = styled.div`
+const Wrapper = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
