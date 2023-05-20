@@ -4,7 +4,6 @@ import { detailAPI } from "../../../api/Apis";
 import { useQuery } from "@tanstack/react-query";
 import { IContent } from "../../../interface/Interface";
 import * as Button from "../../molecules/Button/RectangleButton";
-import { useTooltip } from "../../../utils/Hooks";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { detailSelector } from "../../../lib/atoms";
@@ -18,7 +17,6 @@ interface MainBannerProps {
 }
 
 const MainBanner = ({ id, media_type, category }: MainBannerProps) => {
-  const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const setHoveredCategory = useSetRecoilState(categoryAtom);
   const setDetail = useSetRecoilState(detailSelector);
   const navigate = useNavigate();
@@ -43,22 +41,16 @@ const MainBanner = ({ id, media_type, category }: MainBannerProps) => {
           <MainBanner.Title>{title ?? name}</MainBanner.Title>
           <MainBanner.Overview>{overview}</MainBanner.Overview>
           <ButtonBox>
-            <Button.Play
-              data-tooltip-text="지원하지 않는 기능입니다."
-              onClick={(event) => showTooltipHandler({ top: 610, x: -8, size: "detailTooltip" }, event)}
-              onMouseLeave={disappearTooltipHandler}
-              buttonSize="mainButton"
-            />
+            <Button.Play buttonSize="mainButton" />
             <Button.Detail onClick={showDetailHandler} buttonSize="mainButton" />
           </ButtonBox>
         </React.Fragment>
       )}
-      {isHovered && renderTooltip()}
     </MainBanner.Wrapper>
   );
 };
 
-export default MainBanner;
+export default React.memo(MainBanner);
 
 MainBanner.Wrapper = styled.div`
   display: flex;

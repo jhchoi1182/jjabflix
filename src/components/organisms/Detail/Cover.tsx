@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { font } from "../../../styles/Fonts";
-import { useBookmark, useTooltip } from "../../../utils/Hooks";
+import { useBookmark } from "../../../utils/Hooks";
 import { useRecoilValue } from "recoil";
 import { IContent } from "../../../interface/Interface";
 import { FavoriteAtom } from "../../../lib/atoms";
@@ -11,9 +11,7 @@ import CloseButton from "../../atoms/Button/CloseButton";
 import { ContentCoverImage } from "../../atoms/Layout";
 import { theme } from "../../../styles/theme";
 
-
 const Cover = ({ ...contentData }: IContent) => {
-  const { isHovered, showTooltipHandler, disappearTooltipHandler, renderTooltip } = useTooltip();
   const { addFavoriteContents, removeFavoriteContents } = useBookmark();
   const favoriteContents = useRecoilValue<IContent[]>(FavoriteAtom);
 
@@ -27,30 +25,12 @@ const Cover = ({ ...contentData }: IContent) => {
       <CloseButton top="17px" right="17px" size="detailButton" />
       <Cover.Title>{title || name}</Cover.Title>
       <ButtonBox>
-        <Play
-          data-tooltip-text="지원하지 않는 기능입니다."
-          onClick={(event) => showTooltipHandler({ top: 390, x: -15, size: "detailTooltip" }, event)}
-          onMouseLeave={disappearTooltipHandler}
-          buttonSize="detailButton"
-        />
+        <Play buttonSize="detailButton" />
         {isAdded ? (
-          <CircleCheck
-            data-tooltip-text="내가 찜한 콘텐츠에서 삭제"
-            onMouseEnter={(event) => showTooltipHandler({ top: 390, x: 130, size: "detailTooltip" }, event)}
-            onMouseLeave={disappearTooltipHandler}
-            buttonSize="detailButton"
-            onClick={() => removeFavoriteContents(contentData)}
-          />
+          <CircleCheck buttonSize="detailButton" onClick={() => removeFavoriteContents(contentData)} />
         ) : (
-          <CircleAdd
-            data-tooltip-text="내가 찜한 콘텐츠에 추가"
-            onMouseEnter={(event) => showTooltipHandler({ top: 390, x: 121, size: "detailTooltip" }, event)}
-            onMouseLeave={disappearTooltipHandler}
-            buttonSize="detailButton"
-            onClick={() => addFavoriteContents(contentData)}
-          />
+          <CircleAdd buttonSize="detailButton" onClick={() => addFavoriteContents(contentData)} />
         )}
-        {isHovered && renderTooltip()}
       </ButtonBox>
     </CoverBox>
   );
