@@ -4,7 +4,7 @@ export const useButtonOpacity = () => {
   let opacitySetTimeout: ReturnType<typeof setTimeout>;
 
   const setButtonOpacity = (opacity: number) => {
-    document.documentElement.style.setProperty("--opacity", `${opacity}`);
+    document.documentElement.style.setProperty("--slideHoverOpacity", `${opacity}`);
   };
 
   const setButtonOpacityAfterDelay = (opacity: number) => {

@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 :root {
-  --opacity: 0
+  --slideHoverOpacity: 0
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -66,7 +66,7 @@ a {
   color:inherit;
 }
 .slide-hover {
-  opacity: var(--opacity);
+  opacity: var(--slideHoverOpacity);
 }
 .pagination-item {
   opacity: 0;
