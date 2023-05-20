@@ -1,42 +1,24 @@
 import { css } from "styled-components";
 
-/** Layouts */
+/** display:flex랑 같이 자주 쓰이는 css 함수화 */
 export const flex = (justifyContent = "center", alignItems = "center") => {
-  const jc = () => {
-    switch (justifyContent) {
-      case "space-between":
-        return "space-between";
-      case "space-evenly":
-        return "space-evenly";
-      case "flex-start":
-        return "flex-start";
-      case "center":
-        return "center";
-      case "none":
-        return "none";
-      default:
-        throw new Error(`설정된 ${justifyContent}값이 없습니다. ${justifyContent}를 추가해주세요.`);
-    }
-  };
+  const justifyContentValue = {
+    "space-between": "space-between",
+    "space-evenly": "space-evenly",
+    "flex-start": "flex-start",
+    center: "center",
+    none: "none",
+  }[justifyContent];
 
-  const ai = () => {
-    switch (alignItems) {
-      case "flex-start":
-        return "flex-start";
-      case "end":
-        return "end";
-      case "center":
-        return "center";
-      default:
-        throw new Error(`설정된 ${alignItems}값이 없습니다. ${alignItems}를 추가해주세요.`);
-    }
-  };
-
-  const justifyContentValue = justifyContent === "none" ? "" : `justify-content: ${jc()};`;
+  const alignItemsValue = {
+    "flex-start": "flex-start",
+    end: "end",
+    center: "center",
+  }[alignItems];
 
   return css`
     display: flex;
-    ${justifyContentValue}
-    align-items: ${ai()};
+    ${justifyContentValue && `justify-content: ${justifyContentValue};`}
+    align-items: ${alignItemsValue};
   `;
 };
