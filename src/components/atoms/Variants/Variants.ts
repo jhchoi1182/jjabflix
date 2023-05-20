@@ -4,10 +4,11 @@ import { Variants } from "framer-motion";
 export const contentVariants: Variants = {
   normal: {
     scale: 1,
+    y: 0,
   },
   hover: {
     scale: 1.4,
-    zIndex: 1,
+    // zIndex: 1,
     y: -70,
     transition: {
       type: "tween",
@@ -19,6 +20,10 @@ export const contentVariants: Variants = {
 
 /** 초기에 보이지 말아야 할 정보 박스에 대한 Variants */
 export const captionVariants: Variants = {
+  normal: {
+    opacity: 0,
+    pointerEvents: "none",
+  },
   hover: {
     opacity: 1,
     pointerEvents: "auto",

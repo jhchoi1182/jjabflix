@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 import styled from "styled-components";
 import { IContent } from "../../../interface/Interface";
 import { ItemCaptionWrapper, nthChild } from "../../atoms/Layout";
@@ -8,19 +7,19 @@ import { captionVariants, contentVariants } from "../../atoms/Variants/Variants"
 
 const BookmarkedItem = ({ ...data }: IContent) => {
   const { id, title, name, backdrop_path, poster_path, genres } = data;
-  const [isHovered, setIsHovered] = useState(false);
+  const control = useAnimation();
 
   return (
     <HoverBigScaleContainer
       layoutId={"bookmark" + id}
       variants={contentVariants}
-      whileHover={isHovered ? "hover" : "normal"}
+      animate={control}
       initial="normal"
       transition={{ type: "tween" }}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => control.start("normal")}
     >
       <ItemImageBanner
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={() => control.start("hover")}
         backdrop={backdrop_path}
         poster={poster_path}
         title={title}
