@@ -46,7 +46,6 @@ const Slide = ({ title, category, type, ...data }: ISlide) => {
   const zIndexRef = useRef<HTMLDivElement>(null);
   const { setButtonOpacity } = useButtonOpacity();
   const { innerWidth, totalSlideItemNum, bothSideExceptSlideItemNum } = useInnerWidth();
-  console.log(innerWidth);
 
   /** 슬라이드 시 슬라이드 페이지 간 생기는 공백 계산 */
   const calculateSlideGap = () => {
