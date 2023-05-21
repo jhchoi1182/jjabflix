@@ -140,11 +140,11 @@ export default React.memo(SlideItem);
 
 const SlideItemContainer = styled(motion.div)<{ totalslideitemnum: number }>`
   width: calc(100% / ${({ totalslideitemnum }) => totalslideitemnum} - 4px);
-  &:nth-child(2) {
-    transform-origin: center left;
+  &:nth-child(${({ totalslideitemnum }) => totalslideitemnum}n + 2) {
+    transform-origin: center left !important;
   }
-  &:nth-child(7) {
-    transform-origin: center right;
+  &:nth-child(${({ totalslideitemnum }) => totalslideitemnum}n - 1) {
+    transform-origin: center right !important;
   }
   .dummy {
     opacity: 0;
