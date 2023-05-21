@@ -29,41 +29,42 @@ const Movie = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  console.log();
 
   return (
     <React.Fragment>
-        <Wrapper>
-          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-            <TabLabel>영화</TabLabel>
-            <MainBanner id={id} media_type={"movie"} category="popular" />
-          </BannerCoverImage>
-          <SlideContainer marginTop="-7rem">
-            {PopularMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="지금 뜨고 있는 영화" category="popular" type="movie" {...popular} />
-            )}
-            {TopRateMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
-            )}
-            {NowPlayingMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
-            )}
-            {UpcomingMovieError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
-            )}
-            {favoriteMovieCopyWithDummy?.results?.length !== 0 && (
-              <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
-            )}
-          </SlideContainer>
-          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-        </Wrapper>
+      <Wrapper>
+        <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+          <TabLabel>영화</TabLabel>
+          <MainBanner id={id} media_type={"movie"} category="popular" />
+        </BannerCoverImage>
+        <SlideContainer marginTop="-7rem">
+          {PopularMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="지금 뜨고 있는 영화" category="popular" type="movie" {...popular} />
+          )}
+          {TopRateMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
+          )}
+          {NowPlayingMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+          )}
+          {UpcomingMovieError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
+          )}
+          {favoriteMovieCopyWithDummy?.results?.length !== 0 && favoriteMovieCopyWithDummy?.results[0]?.id !== 0 && (
+            <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
+          )}
+        </SlideContainer>
+        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+      </Wrapper>
     </React.Fragment>
   );
 };

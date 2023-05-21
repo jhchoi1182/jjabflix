@@ -32,38 +32,38 @@ const Tv = () => {
 
   return (
     <React.Fragment>
-        <Wrapper>
-          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-            <TabLabel>시리즈</TabLabel>
-            <MainBanner id={id} media_type={"tv"} category="popular" />
-          </BannerCoverImage>
-          <SlideContainer marginTop="-7rem">
-            {PopularTvError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="지금 뜨고 있는 시리즈" category="popular" type="tv" {...popular} />
-            )}
-            {TopRateTVError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="평단의 찬사를 받은 시리즈" category="top_rated" type="tv" {...top_rated} />
-            )}
-            {OnTheAirTVError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
-            )}
-            {AiringTodayTVError ? (
-              <div>에러</div>
-            ) : (
-              <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
-            )}
-            {favoriteTvCopyWithDummy?.results?.length !== 0 && (
-              <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
-            )}
-          </SlideContainer>
-          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-        </Wrapper>
+      <Wrapper>
+        <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+          <TabLabel>시리즈</TabLabel>
+          <MainBanner id={id} media_type={"tv"} category="popular" />
+        </BannerCoverImage>
+        <SlideContainer marginTop="-7rem">
+          {PopularTvError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="지금 뜨고 있는 시리즈" category="popular" type="tv" {...popular} />
+          )}
+          {TopRateTVError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="평단의 찬사를 받은 시리즈" category="top_rated" type="tv" {...top_rated} />
+          )}
+          {OnTheAirTVError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
+          )}
+          {AiringTodayTVError ? (
+            <div>에러</div>
+          ) : (
+            <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
+          )}
+          {favoriteTvCopyWithDummy?.results?.length !== 0 && favoriteTvCopyWithDummy?.results[0]?.id !== 0 && (
+            <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
+          )}
+        </SlideContainer>
+        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+      </Wrapper>
     </React.Fragment>
   );
 };
