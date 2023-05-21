@@ -43,58 +43,62 @@ const Movie = () => {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-          <TabLabel>영화</TabLabel>
-          <MainBanner id={id} media_type={"movie"} category="popular" />
-        </BannerCoverImage>
-        <SlideContainer marginTop="-7rem">
-          {PopularMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 0 && (
-              <div ref={slide1Ref}>
-                <Slide title="지금 뜨고 있는 영화" category="popular" type="movie" {...popular} />
+      {PopularMovieLoading && TopRateMovieLoading && NowPlayingMovieLoading && UpcomingMovieLoading ? (
+        <Loadingspinner />
+      ) : (
+        <Wrapper>
+          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+            <TabLabel>영화</TabLabel>
+            <MainBanner id={id} media_type={"movie"} category="popular" />
+          </BannerCoverImage>
+          <SlideContainer marginTop="-7rem">
+            {PopularMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 0 && (
+                <div ref={slide1Ref}>
+                  <Slide title="지금 뜨고 있는 영화" category="popular" type="movie" {...popular} />
+                </div>
+              )
+            )}
+            {TopRateMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 1 && (
+                <div ref={slide2Ref}>
+                  <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
+                </div>
+              )
+            )}
+            {NowPlayingMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 2 && (
+                <div ref={slide3Ref}>
+                  <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+                </div>
+              )
+            )}
+            {UpcomingMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 3 && (
+                <div ref={slide4Ref}>
+                  <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
+                </div>
+              )
+            )}
+            {currentSlide >= 4 && (
+              <div ref={slide5Ref}>
+                {favoriteMovieCopyWithDummy?.results?.length > 1 && (
+                  <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
+                )}
               </div>
-            )
-          )}
-          {TopRateMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 1 && (
-              <div ref={slide2Ref}>
-                <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
-              </div>
-            )
-          )}
-          {NowPlayingMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 2 && (
-              <div ref={slide3Ref}>
-                <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
-              </div>
-            )
-          )}
-          {UpcomingMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 3 && (
-              <div ref={slide4Ref}>
-                <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
-              </div>
-            )
-          )}
-          {currentSlide >= 4 && (
-            <div ref={slide5Ref}>
-              {favoriteMovieCopyWithDummy?.results?.length > 1 && (
-                <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
-              )}
-            </div>
-          )}
-        </SlideContainer>
-        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-      </Wrapper>
+            )}
+          </SlideContainer>
+          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+        </Wrapper>
+      )}
     </React.Fragment>
   );
 };

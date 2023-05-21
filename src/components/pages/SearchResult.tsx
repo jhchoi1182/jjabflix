@@ -34,12 +34,10 @@ const SearchResult = () => {
   }, []);
 
   return (
-    <React.Fragment>
-      <SearchResult.Wrapper>
-        <SearchResultList {...data} keyword={keyword} />
-        <AnimatePresence>{pressDetailButton && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-      </SearchResult.Wrapper>
-    </React.Fragment>
+    <SearchResult.Wrapper>
+      {isLoading ? <Loadingspinner /> : isError ? <div>에러</div> : <SearchResultList {...data} keyword={keyword} />}
+      <AnimatePresence>{pressDetailButton && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+    </SearchResult.Wrapper>
   );
 };
 

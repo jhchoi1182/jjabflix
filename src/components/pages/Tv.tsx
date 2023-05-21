@@ -42,58 +42,62 @@ const Tv = () => {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-          <TabLabel>시리즈</TabLabel>
-          <MainBanner id={id} media_type={"tv"} category="popular" />
-        </BannerCoverImage>
-        <SlideContainer marginTop="-7rem">
-          {PopularTvError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 0 && (
-              <div ref={slide1Ref}>
-                <Slide title="지금 뜨고 있는 시리즈" category="popular" type="tv" {...popular} />
+      {PopularTvLoading && TopRateTVLoading && OnTheAirTVLoading && AiringTodayTVLoading ? (
+        <Loadingspinner />
+      ) : (
+        <Wrapper>
+          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+            <TabLabel>시리즈</TabLabel>
+            <MainBanner id={id} media_type={"tv"} category="popular" />
+          </BannerCoverImage>
+          <SlideContainer marginTop="-7rem">
+            {PopularTvError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 0 && (
+                <div ref={slide1Ref}>
+                  <Slide title="지금 뜨고 있는 시리즈" category="popular" type="tv" {...popular} />
+                </div>
+              )
+            )}
+            {TopRateTVError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 1 && (
+                <div ref={slide2Ref}>
+                  <Slide title="평단의 찬사를 받은 시리즈" category="top_rated" type="tv" {...top_rated} />
+                </div>
+              )
+            )}
+            {OnTheAirTVError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 2 && (
+                <div ref={slide3Ref}>
+                  <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
+                </div>
+              )
+            )}
+            {AiringTodayTVError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 3 && (
+                <div ref={slide4Ref}>
+                  <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
+                </div>
+              )
+            )}
+            {currentSlide >= 4 && (
+              <div ref={slide5Ref}>
+                {favoriteTvCopyWithDummy?.results?.length > 1 && (
+                  <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
+                )}
               </div>
-            )
-          )}
-          {TopRateTVError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 1 && (
-              <div ref={slide2Ref}>
-                <Slide title="평단의 찬사를 받은 시리즈" category="top_rated" type="tv" {...top_rated} />
-              </div>
-            )
-          )}
-          {OnTheAirTVError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 2 && (
-              <div ref={slide3Ref}>
-                <Slide title="지금 방영 중인 시리즈" category="nowPlaying" type="tv" {...on_the_air} />
-              </div>
-            )
-          )}
-          {AiringTodayTVError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 3 && (
-              <div ref={slide4Ref}>
-                <Slide title="오늘 방영 예정인 시리즈" category="upcoming" type="tv" {...airing_today} />
-              </div>
-            )
-          )}
-          {currentSlide >= 4 && (
-            <div ref={slide5Ref}>
-              {favoriteTvCopyWithDummy?.results?.length > 1 && (
-                <Slide title="내가 찜한 시리즈" category="favoriteTv" type="tv" {...favoriteTvCopyWithDummy} />
-              )}
-            </div>
-          )}
-        </SlideContainer>
-        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-      </Wrapper>
+            )}
+          </SlideContainer>
+          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+        </Wrapper>
+      )}
     </React.Fragment>
   );
 };

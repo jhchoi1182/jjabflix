@@ -46,77 +46,87 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
-          <MainBanner id={id} media_type={mediaType} category="trending" />
-        </BannerCoverImage>
-        <SlideContainer>
-          {TrendingError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 0 && (
-              <div ref={slide1Ref}>
-                <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
-              </div>
-            )
-          )}
-          {PopularMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 1 && (
-              <div ref={slide2Ref}>
-                <Slide title="인기 있는 영화" category="popularMovie" type="movie" {...popularMovie} />
-              </div>
-            )
-          )}
-          {PopularTvError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 2 && (
-              <div ref={slide3Ref}>
-                <Slide title="안 보면 유행에 뒤처지는 시리즈" category="popularTv" type="tv" {...popularTv} />
-              </div>
-            )
-          )}
-          {TopRateMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 3 && (
-              <div ref={slide4Ref}>
-                <Slide title="평점 높은 영화" category="top_rated_movie" type="movie" {...top_rated_movie} />
-              </div>
-            )
-          )}
-          {TopRateTVError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 4 && (
-              <div ref={slide5Ref}>
-                <Slide title="호평 받은 시리즈" category="top_rated_tv" type="tv" {...top_rated_tv} />
-              </div>
-            )
-          )}
-          {NowPlayingMovieError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 5 && (
-              <div ref={slide6Ref}>
-                <Slide title="개봉 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
-              </div>
-            )
-          )}
-          {OnTheAirTVError ? (
-            <div>에러</div>
-          ) : (
-            currentSlide >= 6 && (
-              <div ref={slide7Ref}>
-                <Slide title="상영 중인 시리즈" category="on_the_air" type="tv" {...on_the_air} />
-              </div>
-            )
-          )}
-        </SlideContainer>
-        <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-      </Wrapper>
+      {TrendingLoading &&
+      PopularMovieLoading &&
+      PopularTvLoading &&
+      TopRateMovieLoading &&
+      TopRateTVLoading &&
+      NowPlayingMovieLoading &&
+      OnTheAirTVLoading ? (
+        <Loadingspinner />
+      ) : (
+        <Wrapper>
+          <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
+            <MainBanner id={id} media_type={mediaType} category="trending" />
+          </BannerCoverImage>
+          <SlideContainer>
+            {TrendingError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 0 && (
+                <div ref={slide1Ref}>
+                  <Slide title="지금 뜨는 콘텐츠" category="trending" {...trending} />
+                </div>
+              )
+            )}
+            {PopularMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 1 && (
+                <div ref={slide2Ref}>
+                  <Slide title="인기 있는 영화" category="popularMovie" type="movie" {...popularMovie} />
+                </div>
+              )
+            )}
+            {PopularTvError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 2 && (
+                <div ref={slide3Ref}>
+                  <Slide title="안 보면 유행에 뒤처지는 시리즈" category="popularTv" type="tv" {...popularTv} />
+                </div>
+              )
+            )}
+            {TopRateMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 3 && (
+                <div ref={slide4Ref}>
+                  <Slide title="평점 높은 영화" category="top_rated_movie" type="movie" {...top_rated_movie} />
+                </div>
+              )
+            )}
+            {TopRateTVError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 4 && (
+                <div ref={slide5Ref}>
+                  <Slide title="호평 받은 시리즈" category="top_rated_tv" type="tv" {...top_rated_tv} />
+                </div>
+              )
+            )}
+            {NowPlayingMovieError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 5 && (
+                <div ref={slide6Ref}>
+                  <Slide title="개봉 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+                </div>
+              )
+            )}
+            {OnTheAirTVError ? (
+              <div>에러</div>
+            ) : (
+              currentSlide >= 6 && (
+                <div ref={slide7Ref}>
+                  <Slide title="상영 중인 시리즈" category="on_the_air" type="tv" {...on_the_air} />
+                </div>
+              )
+            )}
+          </SlideContainer>
+          <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+        </Wrapper>
+      )}
     </React.Fragment>
   );
 };
