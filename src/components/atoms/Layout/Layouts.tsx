@@ -35,9 +35,9 @@ export const ItemGridContainer = styled.div`
 
 export const nthChild = css`
   &:nth-child(6n + 1) {
-    transform-origin: center left;
+    transform-origin: center left !important;
   }
   &:nth-child(6n) {
-    transform-origin: center right;
+    transform-origin: center right !important;
   }
 `;
