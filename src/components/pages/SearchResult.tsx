@@ -4,14 +4,12 @@ import { useLocation } from "react-router-dom";
 import { searchAPI } from "../../api/Apis";
 import { IGetData } from "../../interface/Interface";
 import { AnimatePresence } from "framer-motion";
-import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import styled from "styled-components";
-import SearchedItem from "../organisms/Item/SearchedItem";
-import { ItemGridContainer } from "../atoms/Layout";
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
-import Footer from "../organisms/Footer/Footer";
+import SearchResultList from "../templates/SearchResult/SearchResultList";
+import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -21,7 +19,11 @@ const SearchResult = () => {
   const pathnameId = location.search.split("/")[1];
   const keyword = new URLSearchParams(location.search).get("keyword")?.split("/")[0];
 
-  const { data, isLoading, isError } = useQuery<IGetData>(["searchKeyword", keyword], () => searchAPI(keyword ?? ""));
+  const {
+    data = { results: [] },
+    isLoading,
+    isError,
+  } = useQuery<IGetData>(["searchKeyword", keyword], () => searchAPI(keyword ?? ""));
 
   useEffect(() => {
     setHoveredCategory("search");
@@ -33,24 +35,10 @@ const SearchResult = () => {
 
   return (
     <React.Fragment>
-      {isLoading ? (
-        <Loadingspinner />
-      ) : (
-        <React.Fragment>
-          <SearchResult.Wrapper>
-            <ItemGridContainer>
-              {isLoading ? (
-                <Loadingspinner />
-              ) : isError ? (
-                <div>정보 없음</div>
-              ) : (
-                data?.results.map((content) => <SearchedItem key={content.id} keyword={keyword ?? ""} {...content} />)
-              )}
-            </ItemGridContainer>
-            <AnimatePresence>{pressDetailButton && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
-          </SearchResult.Wrapper>
-        </React.Fragment>
-      )}
+      <SearchResult.Wrapper>
+        <SearchResultList {...data} keyword={keyword} />
+        <AnimatePresence>{pressDetailButton && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
+      </SearchResult.Wrapper>
     </React.Fragment>
   );
 };
