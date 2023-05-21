@@ -79,8 +79,8 @@ const SlideItem = ({
 
   /** 아이템에 마우스 호버 시 콘텐츠 상세 정보 요청 */
   /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
-  const onMouseEnterHandler = async () => {
-    await queryClient.fetchQuery(queryKey, queryFn, dataOption);
+  const onMouseEnterHandler = () => {
+    queryClient.fetchQuery(queryKey, queryFn, dataOption);
     if (id !== 0) setButtonOpacityAfterDelay(0);
   };
 
@@ -136,7 +136,7 @@ const SlideItem = ({
   );
 };
 
-export default SlideItem;
+export default React.memo(SlideItem);
 
 const SlideItemContainer = styled(motion.div)<{ totalslideitemnum: number }>`
   width: calc(100% / ${({ totalslideitemnum }) => totalslideitemnum} - 4px);

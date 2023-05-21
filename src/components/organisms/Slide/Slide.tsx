@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import styled from "styled-components";
 import SlideItem from "./SlideItem";
@@ -57,17 +57,20 @@ const Slide = ({ title, category, type, ...data }: ISlide) => {
     else return 0.0698 * innerWidth;
   };
 
-  /** 슬라이드 로직 */
-  const totalContents = data?.results?.length;
-  const maxPage =
-    totalContents % bothSideExceptSlideItemNum === 1
-      ? Math.ceil(totalContents / bothSideExceptSlideItemNum) - 1
-      : Math.ceil(totalContents / bothSideExceptSlideItemNum);
-  const showContentsArray = data?.results?.slice(
-    (totalSlideItemNum - 2) * page,
-    totalSlideItemNum + (totalSlideItemNum - 2) * page
-  );
+  /** 슬라이드 구성 로직 */
+  const totalContents = useMemo(() => data?.results?.length, [data?.results?.length]);
 
+  const maxPage = useMemo(() => {
+    if (totalContents % bothSideExceptSlideItemNum === 1)
+      return Math.ceil(totalContents / bothSideExceptSlideItemNum) - 1;
+    else return Math.ceil(totalContents / bothSideExceptSlideItemNum);
+  }, [bothSideExceptSlideItemNum, totalContents]);
+
+  const showContentsArray = useMemo(() => {
+    return data?.results?.slice((totalSlideItemNum - 2) * page, totalSlideItemNum + (totalSlideItemNum - 2) * page);
+  }, [data?.results, page, totalSlideItemNum]);
+
+  /** 슬라이드 넘기는 로직 */
   const slidePrevent = () => setIsSliding((prev) => !prev);
   const prevSlide = async () => {
     if (data) {
