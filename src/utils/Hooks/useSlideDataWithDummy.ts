@@ -4,7 +4,7 @@ import { homeAPI, movieAPI, tvAPI } from "../../api/Apis";
 import { useRecoilValue } from "recoil";
 import { FavoriteAtom } from "../../lib/atoms";
 
-interface IUseQueryWithDummyResult {
+export interface IUseQueryWithDummyResult {
   data: IGetData;
   isLoading: boolean;
   isError: boolean;
@@ -38,7 +38,7 @@ export const useQueryWithDummy = () => {
       isError,
     } = useQuery<IGetData>(queryKey, queryFn, {
       select: (data) => {
-        const copyData = JSON.parse(JSON.stringify(data));
+        const copyData :IGetData = JSON.parse(JSON.stringify(data));
         if (copyData.results[0].id === 0) {
           return copyData;
         } else {
@@ -71,7 +71,9 @@ export const useLocalWithDummy = (media_type: "movie" | "tv") => {
   const FilteredFavoriteItem = favoriteItem.filter((content) => content.media_type === media_type);
 
   /** 즐겨찾기 슬라이드의 맨 앞에 더미 데이터 넣기 */
-  const unshiftDummy = () => {
+  const unshiftDummy = (): {
+    results: IContent[];
+  } => {
     const favoriteItemCopyObject = { results: JSON.parse(JSON.stringify(FilteredFavoriteItem)) };
     if (favoriteItemCopyObject?.results[0]?.id === 0) return favoriteItemCopyObject;
     else {
