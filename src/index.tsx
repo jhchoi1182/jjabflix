@@ -9,19 +9,26 @@ import { theme } from "./styles/theme";
 import GlobalStyle from "./styles/GlobalStyle";
 import router from "./Router";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 3600000,
+      cacheTime: 3600000,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <RouterProvider router={router} />
-        </ThemeProvider>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </RecoilRoot>
-  
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </RecoilRoot>
 );

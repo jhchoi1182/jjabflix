@@ -19,16 +19,14 @@ const SearchedItem = ({ keyword, ...content }: ISearchedItem) => {
 
   const queryKey = ["detail", id];
   const queryFn = () => detailAPI({ id, media_type });
-  const dataOption = { cacheTime: 360000, staleTime: 360000 };
 
   const { data, isError } = useQuery<IContent | undefined>(queryKey, queryFn, {
     enabled: false,
-    ...dataOption,
   });
 
   /** searchAPI에 없는 데이터 추가 요청 */
   const BannerMouseEnterHandler = () => {
-    queryClient.fetchQuery(queryKey, queryFn, dataOption);
+    queryClient.fetchQuery(queryKey, queryFn);
     control.start("hover");
   };
 

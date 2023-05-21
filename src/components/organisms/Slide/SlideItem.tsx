@@ -70,17 +70,15 @@ const SlideItem = ({
 
   const queryKey = ["detail", id];
   const queryFn = () => detailAPI({ id, media_type });
-  const dataOption = { cacheTime: 360000, staleTime: 360000 };
 
   const { data, isError } = useQuery<IContent | undefined>(queryKey, queryFn, {
     enabled: false,
-    ...dataOption,
   });
 
   /** 아이템에 마우스 호버 시 콘텐츠 상세 정보 요청 */
   /** 슬라이드 이동 버튼, 페이지 인디케이터 투명도 조절 */
   const onMouseEnterHandler = () => {
-    queryClient.fetchQuery(queryKey, queryFn, dataOption);
+    queryClient.fetchQuery(queryKey, queryFn);
     if (id !== 0) setButtonOpacityAfterDelay(0);
   };
 

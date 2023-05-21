@@ -46,7 +46,6 @@ export const useQueryWithDummy = () => {
           return copyData;
         }
       },
-      staleTime: 100000,
     });
 
     return { data, isLoading, isError };
