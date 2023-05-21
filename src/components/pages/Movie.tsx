@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
-import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
+import { useLazyLoad, useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Movie = () => {
@@ -26,10 +26,20 @@ const Movie = () => {
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
 
+  /** 스크롤 시 슬라이드 추가 렌더링되는 로직 */
+  const slide1Ref = useRef(null);
+  const slide2Ref = useRef(null);
+  const slide3Ref = useRef(null);
+  const slide4Ref = useRef(null);
+  const slide5Ref = useRef(null);
+
+  const slideRefs = [slide1Ref, slide2Ref, slide3Ref, slide4Ref, slide5Ref];
+  const currentSlide = useLazyLoad(slideRefs);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  console.log();
+  console.log(favoriteMovieCopyWithDummy?.results?.length > 1 && favoriteMovieCopyWithDummy?.results[0]?.id !== 0);
 
   return (
     <React.Fragment>
@@ -42,25 +52,45 @@ const Movie = () => {
           {PopularMovieError ? (
             <div>에러</div>
           ) : (
-            <Slide title="지금 뜨고 있는 영화" category="popular" type="movie" {...popular} />
+            currentSlide >= 0 && (
+              <div ref={slide1Ref}>
+                <Slide title="지금 뜨고 있는 영화" category="popular" type="movie" {...popular} />
+              </div>
+            )
           )}
           {TopRateMovieError ? (
             <div>에러</div>
           ) : (
-            <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
+            currentSlide >= 1 && (
+              <div ref={slide2Ref}>
+                <Slide title="평단의 찬사를 받은 영화" category="top_rated" type="movie" {...top_rated} />
+              </div>
+            )
           )}
           {NowPlayingMovieError ? (
             <div>에러</div>
           ) : (
-            <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+            currentSlide >= 2 && (
+              <div ref={slide3Ref}>
+                <Slide title="지금 상영 중인 영화" category="nowPlaying" type="movie" {...nowPlaying} />
+              </div>
+            )
           )}
           {UpcomingMovieError ? (
             <div>에러</div>
           ) : (
-            <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
+            currentSlide >= 3 && (
+              <div ref={slide4Ref}>
+                <Slide title="상영 예정작" category="upcoming" type="movie" {...upcoming} />
+              </div>
+            )
           )}
-          {favoriteMovieCopyWithDummy?.results?.length !== 0 && favoriteMovieCopyWithDummy?.results[0]?.id !== 0 && (
-            <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
+          {currentSlide >= 4 && (
+            <div ref={slide5Ref}>
+              {favoriteMovieCopyWithDummy?.results?.length > 1 && (
+                <Slide title="내가 찜한 영화" category="favoriteMovie" type="movie" {...favoriteMovieCopyWithDummy} />
+              )}
+            </div>
           )}
         </SlideContainer>
         <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
