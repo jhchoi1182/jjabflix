@@ -1,30 +1,24 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
-export const useLazyLoad = (slideRefs: React.RefObject<HTMLElement>[]): number => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
+export const useLazyLoad = (slideRefs: React.RefObject<HTMLElement>[]) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const handleIntersection = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
         if (entry.isIntersecting) {
-          const currentIndex = slideRefs.findIndex((ref) => {
-            return ref.current === entry.target;
-          });
+          const currentIndex = slideRefs.findIndex((ref) => ref.current === entry.target);
           if (currentIndex === currentSlide) {
             setCurrentSlide((prev) => prev + 1);
           }
         }
-      });
-    },
-    [currentSlide, slideRefs]
-  );
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(handleIntersection, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5,
-    });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.5,
+      }
+    );
 
     slideRefs.forEach((slideRef) => {
       if (slideRef.current) {
@@ -39,7 +33,7 @@ export const useLazyLoad = (slideRefs: React.RefObject<HTMLElement>[]): number =
         }
       });
     };
-  }, [handleIntersection, slideRefs]);
+  }, [currentSlide, slideRefs]);
 
   return currentSlide;
 };
