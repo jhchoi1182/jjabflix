@@ -8,7 +8,6 @@ import SlideContainer from "../atoms/Slide/SlideContainer";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
-import Footer from "../organisms/Footer/Footer";
 import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { useLocalWithDummy, useQueryWithDummy } from "../../utils/Hooks";

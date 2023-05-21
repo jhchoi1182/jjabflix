@@ -1,10 +1,12 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import SearchResult from "./components/pages/SearchResult";
-import Bookmark from "./components/pages/Bookmark";
-import Movie from "./components/pages/Movie";
-import Home from "./components/pages/Home";
 import Root from "./Root";
-import Tv from "./components/pages/Tv";
+
+const Home = React.lazy(() => import("./components/pages/Home"));
+const Tv = React.lazy(() => import("./components/pages/Tv"));
+const Movie = React.lazy(() => import("./components/pages/Movie"));
+const Bookmark = React.lazy(() => import("./components/pages/Bookmark"));
+const SearchResult = React.lazy(() => import("./components/pages/SearchResult"));
 
 const router = createBrowserRouter([
   {

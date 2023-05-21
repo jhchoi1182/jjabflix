@@ -3,7 +3,6 @@ import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { AnimatePresence } from "framer-motion";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
-import Footer from "../organisms/Footer/Footer";
 import { useParams } from "react-router-dom";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { posterAPI } from "../../api/Apis";

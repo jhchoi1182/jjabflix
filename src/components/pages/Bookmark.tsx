@@ -7,7 +7,6 @@ import DetailModalContainer from "../templates/DetailModal/DetailModalContainer"
 import { useSetRecoilState } from "recoil";
 import { categoryAtom } from "../../lib/atoms";
 import { font } from "../../styles/Fonts";
-import Footer from "../organisms/Footer/Footer";
 
 const Bookmark = () => {
   const { pathnameId } = useParams();

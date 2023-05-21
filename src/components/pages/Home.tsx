@@ -5,7 +5,6 @@ import MainBanner from "../organisms/MainBanner/MainBanner";
 import Slide from "../organisms/Slide/Slide";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Footer from "../organisms/Footer/Footer";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
