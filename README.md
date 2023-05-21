@@ -1,46 +1,120 @@
-# Getting Started with Create React App
+## ✨ 잡플릭스
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+넷플릭스 클론 코딩
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+## 🐻 기능 구현
 
-### `npm start`
+<details>
+<summary>
+슬라이드 기능
+</summary>
+<div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![image](https://github.com/jhchoi1182/jjabflix/assets/116577489/7c4472d9-1de4-4598-947b-6feac22fb242)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+</details>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<details>
+<summary>
+북마크 기능
+</summary>
+<div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image](https://github.com/jhchoi1182/jjabflix/assets/116577489/0106ebda-e2b7-4b3e-8781-57868f972f58)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+</details>
 
-### `npm run eject`
+<details>
+<summary>
+검색 기능
+</summary>
+<div>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![image](https://github.com/jhchoi1182/jjabflix/assets/116577489/770201fc-1290-4746-afb3-c9d47b817742)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<details>
+<summary>
+상세 정보 모달
+</summary>
+<div>
 
-## Learn More
+![image](https://github.com/jhchoi1182/jjabflix/assets/116577489/5d49cd03-b3f6-4972-acd3-8012001298af)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+</details>
+
+<details>
+<summary>
+반응형 레이아웃
+</summary>
+<div>
+
+
+![image](https://github.com/jhchoi1182/jjabflix/assets/116577489/7bc57cd3-a620-4fd7-9d42-72808e4e8f57)
+  
+![image](https://github.com/jhchoi1182/jjabflix/assets/116577489/5f4a7493-09d1-4aa6-b4af-1da25c9412b4)
+
+
+</details>
+
+
+<br><br>
+
+## ⚙ 기술 스택
+
+### ✔ Frond-end
+
+<div>
+
+<img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=black"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/>
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
+<img src="https://img.shields.io/badge/react_query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white"/>
+<img src="https://img.shields.io/badge/styledcomponent-DB7093?style=for-the-badge&logo=styledcomponent&logoColor=white">
+  <img src="https://img.shields.io/badge/recoil-f26b00?style=for-the-badge&logo=&logoColor=white">
+
+
+</div>
+
+
+<br><br>
+
+
+## 🔆 트러블슈팅
+
+<details>
+<summary>
+최적화 일지
+</summary>
+<div>
+https://jhchoi1182.tistory.com/185
+<div>
+</details>
+<details>
+<summary>
+레이아웃 세로 너비
+</summary>
+<div>
+https://jhchoi1182.tistory.com/180
+<div>
+</details>
+  <details>
+<summary>
+DOM 프로퍼티를 통한 전역 css 변수 조작
+</summary>
+<div>
+https://jhchoi1182.tistory.com/176
+<div>
+</details>
+
