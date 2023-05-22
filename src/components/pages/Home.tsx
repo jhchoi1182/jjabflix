@@ -2,13 +2,12 @@ import { useEffect, useRef } from "react";
 import { posterAPI } from "../../api/Apis";
 import DetailModalContainer from "../templates/DetailModal/DetailModalContainer";
 import MainBanner from "../organisms/MainBanner/MainBanner";
-import Slide from "../organisms/Slide/Slide";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
-import { useLazyLoad, useQueryWithDummy } from "../../utils/Hooks";
+import { useQueryWithDummy, useRenderSlide } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
 
 const Home = () => {
@@ -31,23 +30,7 @@ const Home = () => {
     { ref: useRef(null), title: "상영 중인 시리즈", category: "on_the_air", type: "tv", data: OnTheAirTV },
   ];
 
-  /** 스크롤 시 슬라이드 추가 렌더링되는 로직 */
-  const currentSlide = useLazyLoad(slides.map((slide) => slide.ref));
-
-  /** 슬라이드 렌더 함수 */
-  const renderSlide = (i: number) => {
-    const { ref, title, category, type, data } = slides[i];
-    const { data: categoryData, isLoading, isError } = data;
-    if (isLoading) return <Loadingspinner key={category} />;
-    if (isError) return <div key={category}>에러</div>;
-    if (currentSlide >= i) {
-      return (
-        <div key={category} ref={ref}>
-          <Slide title={title} category={category} type={type} {...categoryData} />
-        </div>
-      );
-    } else return null;
-  };
+  const renderSlide = useRenderSlide(slides);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -60,7 +43,7 @@ const Home = () => {
       <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
         <MainBanner id={id} media_type={mediaType} category="trending" />
       </BannerCoverImage>
-      <SlideContainer>{slides.map((v, i) => renderSlide(i))}</SlideContainer>
+      <SlideContainer>{renderSlide}</SlideContainer>
       <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
     </Wrapper>
   );
