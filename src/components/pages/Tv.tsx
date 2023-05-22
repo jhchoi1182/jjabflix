@@ -45,11 +45,11 @@ const Tv = () => {
     const { ref, title, category, type, data, bookmarkdata } = slides[i];
     if (data) {
       const { data: categoryData, isLoading, isError } = data;
-      if (isLoading) return <Loadingspinner />;
-      if (isError) return <div>에러</div>;
+      if (isLoading) return <Loadingspinner key={category} />;
+      if (isError) return <div key={category}>에러</div>;
       if (currentSlide >= i) {
         return (
-          <div ref={ref}>
+          <div key={category} ref={ref}>
             <Slide title={title} category={category} type={type} {...categoryData} />
           </div>
         );
