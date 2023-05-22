@@ -58,10 +58,8 @@ const Movie = () => {
     if (bookmarkdata) {
       return (
         currentSlide >= i && (
-          <div key={category} ref={ref}>
-            {bookmarkdata?.results?.length > 1 && (
-              <Slide title={title} category={category} type={type} {...bookmarkdata} />
-            )}
+          <div key={category} ref={ref} className={bookmarkdata?.results?.length > 1 ? "showSlide" : "hiddenSlide"}>
+            <Slide title={title} category={category} type={type} {...bookmarkdata} />
           </div>
         )
       );
