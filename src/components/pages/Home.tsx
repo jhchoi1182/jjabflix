@@ -34,6 +34,21 @@ const Home = () => {
   /** 스크롤 시 슬라이드 추가 렌더링되는 로직 */
   const currentSlide = useLazyLoad(slides.map((slide) => slide.ref));
 
+  /** 슬라이드 렌더 함수 */
+  const renderSlide = (i: number) => {
+    const { ref, title, category, type, data } = slides[i];
+    const { data: categoryData, isLoading, isError } = data;
+    if (isLoading) return <Loadingspinner />;
+    if (isError) return <div>에러</div>;
+    if (currentSlide >= i) {
+      return (
+        <div ref={ref}>
+          <Slide title={title} category={category} type={type} {...categoryData} />
+        </div>
+      );
+    } else return null;
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -45,22 +60,7 @@ const Home = () => {
       <BannerCoverImage bgimg={posterAPI(backgroundImg)}>
         <MainBanner id={id} media_type={mediaType} category="trending" />
       </BannerCoverImage>
-      <SlideContainer>
-        {slides.map(({ ref, title, category, type, data }, i) => {
-          const { data: categoryData, isLoading, isError } = data;
-          return isLoading ? (
-            <Loadingspinner key={category} />
-          ) : isError ? (
-            <div key={category}>에러</div>
-          ) : (
-            currentSlide >= i && (
-              <div key={category} ref={ref}>
-                <Slide title={title} category={category} type={type} {...categoryData} />
-              </div>
-            )
-          );
-        })}
-      </SlideContainer>
+      <SlideContainer>{slides.map((v, i) => renderSlide(i))}</SlideContainer>
       <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
     </Wrapper>
   );

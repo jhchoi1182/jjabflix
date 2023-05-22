@@ -40,6 +40,34 @@ const Movie = () => {
   /** 스크롤 시 슬라이드 추가 렌더링되는 로직 */
   const currentSlide = useLazyLoad(slides.map((slide) => slide.ref));
 
+  /** 슬라이드 렌더 함수 */
+  const renderSlide = (i: number) => {
+    const { ref, title, category, type, data, bookmarkdata } = slides[i];
+    if (data) {
+      const { data: categoryData, isLoading, isError } = data;
+      if (isLoading) return <Loadingspinner />;
+      if (isError) return <div>에러</div>;
+      if (currentSlide >= i) {
+        return (
+          <div ref={ref}>
+            <Slide title={title} category={category} type={type} {...categoryData} />
+          </div>
+        );
+      } else return null;
+    }
+    if (bookmarkdata) {
+      return (
+        currentSlide >= i && (
+          <div key={category} ref={ref}>
+            {bookmarkdata?.results?.length > 1 && (
+              <Slide title={title} category={category} type={type} {...bookmarkdata} />
+            )}
+          </div>
+        )
+      );
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -52,35 +80,7 @@ const Movie = () => {
         <TabLabel>영화</TabLabel>
         <MainBanner id={id} media_type={"movie"} category="popular" />
       </BannerCoverImage>
-      <SlideContainer marginTop="-7rem">
-        {slides.map(({ ref, title, category, type, data, bookmarkdata }, i) => {
-          if (data) {
-            const { data: categoryData, isLoading, isError } = data;
-            return isLoading ? (
-              <Loadingspinner key={category} />
-            ) : isError ? (
-              <div key={category}>에러</div>
-            ) : (
-              currentSlide >= i && (
-                <div key={category} ref={ref}>
-                  <Slide title={title} category={category} type={type} {...categoryData} />
-                </div>
-              )
-            );
-          }
-          if (bookmarkdata) {
-            return (
-              currentSlide >= i && (
-                <div key={category} ref={ref}>
-                  {bookmarkdata?.results?.length > 1 && (
-                    <Slide title={title} category={category} type={type} {...bookmarkdata} />
-                  )}
-                </div>
-              )
-            );
-          } else return null;
-        })}
-      </SlideContainer>
+      <SlideContainer marginTop="-7rem">{slides.map((v, i) => renderSlide(i))}</SlideContainer>
       <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>
     </Wrapper>
   );
