@@ -11,29 +11,24 @@ import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useLocalWithDummy, useQueryWithDummy, useRenderSlide } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
+import { SlideObject } from "../../utils/Hooks/useRenderSlide";
 
 const Movie = () => {
   const { pathnameId } = useParams();
   const { PopularMovie, TopRateMovie, NowPlayingMovie, UpcomingMovie } = useQueryWithDummy();
   const favoriteMovieCopyWithDummy = useLocalWithDummy("movie");
 
+  /** 메인 배너에 사용될 데이터 */
   const { data: popular, isLoading: PopularMovieLoading } = PopularMovie;
-
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
 
-  const slides = [
-    { ref: useRef(null), title: "지금 뜨고 있는 영화", category: "popular", type: "movie", data: PopularMovie },
-    { ref: useRef(null), title: "평단의 찬사를 받은 영화", category: "top_rated", type: "movie", data: TopRateMovie },
-    { ref: useRef(null), title: "지금 상영 중인 영화", category: "nowPlaying", type: "movie", data: NowPlayingMovie },
-    { ref: useRef(null), title: "상영 예정작", category: "upcoming", type: "movie", data: UpcomingMovie },
-    {
-      ref: useRef(null),
-      title: "내가 찜한 영화",
-      category: "favoriteMovie",
-      type: "movie",
-      bookmarkdata: favoriteMovieCopyWithDummy,
-    },
+  const slides: SlideObject[] = [
+    new SlideObject(useRef(null), "지금 뜨고 있는 영화", "popular", "movie", PopularMovie),
+    new SlideObject(useRef(null), "평단의 찬사를 받은 영화", "top_rated", "movie", TopRateMovie),
+    new SlideObject(useRef(null), "지금 상영 중인 영화", "nowPlaying", "movie", NowPlayingMovie),
+    new SlideObject(useRef(null), "상영 예정작", "upcoming", "movie", UpcomingMovie),
+    new SlideObject(useRef(null), "내가 찜한 영화", "favoriteMovie", "movie", undefined, favoriteMovieCopyWithDummy),
   ];
 
   const renderSlide = useRenderSlide(slides);

@@ -9,25 +9,27 @@ import { BannerCoverImage } from "../atoms/UI/BannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
 import { useQueryWithDummy, useRenderSlide } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
+import { SlideObject } from "../../utils/Hooks/useRenderSlide";
 
 const Home = () => {
   const { pathnameId } = useParams();
   const { Trending, PopularMovie, PopularTv, TopRateMovie, TopRateTV, NowPlayingMovie, OnTheAirTV } =
     useQueryWithDummy();
-  const { data: trending, isLoading: TrendingLoading } = Trending;
 
+  /** 메인 배너에 사용될 데이터 */
+  const { data: trending, isLoading: TrendingLoading } = Trending;
   const backgroundImg = trending?.results[1]?.backdrop_path ?? trending?.results[1]?.poster_path;
   const id = trending?.results[1]?.id ?? 0;
   const mediaType = trending?.results[1]?.media_type ?? "movie";
 
-  const slides = [
-    { ref: useRef(null), title: "지금 뜨는 콘텐츠", category: "trending", type: "trending", data: Trending },
-    { ref: useRef(null), title: "인기 있는 영화", category: "popularMovie", type: "movie", data: PopularMovie },
-    { ref: useRef(null), title: "안 보면 유행에 뒤처지는 시리즈", category: "popularTv", type: "tv", data: PopularTv },
-    { ref: useRef(null), title: "평점 높은 영화", category: "top_rated_movie", type: "movie", data: TopRateMovie },
-    { ref: useRef(null), title: "호평 받은 시리즈", category: "top_rated_tv", type: "tv", data: TopRateTV },
-    { ref: useRef(null), title: "개봉 중인 영화", category: "nowPlaying", type: "movie", data: NowPlayingMovie },
-    { ref: useRef(null), title: "상영 중인 시리즈", category: "on_the_air", type: "tv", data: OnTheAirTV },
+  const slides: SlideObject[] = [
+    new SlideObject(useRef(null), "지금 뜨는 콘텐츠", "trending", "trending", Trending),
+    new SlideObject(useRef(null), "인기 있는 영화", "popularMovie", "movie", PopularMovie),
+    new SlideObject(useRef(null), "안 보면 유행에 뒤처지는 시리즈", "popularTv", "tv", PopularTv),
+    new SlideObject(useRef(null), "평점 높은 영화", "top_rated_movie", "movie", TopRateMovie),
+    new SlideObject(useRef(null), "호평 받은 시리즈", "top_rated_tv", "tv", TopRateTV),
+    new SlideObject(useRef(null), "개봉 중인 영화", "nowPlaying", "movie", NowPlayingMovie),
+    new SlideObject(useRef(null), "상영 중인 시리즈", "on_the_air", "tv", OnTheAirTV),
   ];
 
   const renderSlide = useRenderSlide(slides);

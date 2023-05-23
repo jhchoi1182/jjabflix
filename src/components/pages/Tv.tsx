@@ -11,29 +11,24 @@ import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { useLocalWithDummy, useQueryWithDummy, useRenderSlide } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
+import { SlideObject } from "../../utils/Hooks/useRenderSlide";
 
 const Tv = () => {
   const { pathnameId } = useParams();
   const { PopularTv, TopRateTV, OnTheAirTV, AiringTodayTV } = useQueryWithDummy();
   const favoriteTvCopyWithDummy = useLocalWithDummy("tv");
 
+  /** 메인 배너에 사용될 데이터 */
   const { data: popular, isLoading: PopularTvLoading } = PopularTv;
-
   const backgroundImg = popular?.results[1]?.backdrop_path ?? popular?.results[1]?.poster_path;
   const id = popular?.results[1]?.id ?? 0;
 
-  const slides = [
-    { ref: useRef(null), title: "지금 뜨고 있는 시리즈", category: "popular", type: "tv", data: PopularTv },
-    { ref: useRef(null), title: "평단의 찬사를 받은 시리즈", category: "top_rated", type: "tv", data: TopRateTV },
-    { ref: useRef(null), title: "지금 방영 중인 시리즈", category: "nowPlaying", type: "tv", data: OnTheAirTV },
-    { ref: useRef(null), title: "오늘 방영 예정인 시리즈", category: "upcoming", type: "tv", data: AiringTodayTV },
-    {
-      ref: useRef(null),
-      title: "내가 찜한 시리즈",
-      category: "favoriteTv",
-      type: "tv",
-      bookmarkdata: favoriteTvCopyWithDummy,
-    },
+  const slides: SlideObject[] = [
+    new SlideObject(useRef(null), "지금 뜨고 있는 시리즈", "popular", "tv", PopularTv),
+    new SlideObject(useRef(null), "평단의 찬사를 받은 시리즈", "top_rated", "tv", TopRateTV),
+    new SlideObject(useRef(null), "지금 방영 중인 시리즈", "nowPlaying", "tv", OnTheAirTV),
+    new SlideObject(useRef(null), "오늘 방영 예정인 시리즈", "upcoming", "tv", AiringTodayTV),
+    new SlideObject(useRef(null), "내가 찜한 시리즈", "favoriteTv", "tv", undefined, favoriteTvCopyWithDummy),
   ];
 
   const renderSlide = useRenderSlide(slides);

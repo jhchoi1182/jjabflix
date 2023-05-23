@@ -14,6 +14,16 @@ interface IuseRenderSlide {
     results: IContent[];
   };
 }
+export class SlideObject implements IuseRenderSlide {
+  constructor(
+    public ref: React.RefObject<HTMLDivElement>,
+    public title: string,
+    public category: string,
+    public type: string,
+    public data?: IUseQueryWithDummyResult,
+    public bookmarkdata?: { results: IContent[] }
+  ) {}
+}
 
 export const useRenderSlide = (slides: IuseRenderSlide[]) => {
   /** 스크롤 시 슬라이드 추가 렌더링되는 로직 */
