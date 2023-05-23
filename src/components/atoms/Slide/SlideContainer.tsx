@@ -18,6 +18,7 @@ const ColumnContainer = styled.section<SlideContainerProps>`
   margin-bottom: -40px;
   .hiddenSlide {
     opacity: 0;
+    margin-bottom: -290px;
   }
   .showSlide {
     opacity: 1;
