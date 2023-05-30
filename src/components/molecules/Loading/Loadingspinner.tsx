@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   overflow-x: hidden;
+  height: 100vh;
 `;
 
 const FlexDiv = styled.div`

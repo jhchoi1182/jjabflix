@@ -42,7 +42,7 @@ const Movie = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [PopularMovieLoading]);
 
   return PopularMovieLoading ? (
     <Loadingspinner />
@@ -50,7 +50,7 @@ const Movie = () => {
     <Wrapper>
       <MainBannerCoverImage bgimg={posterAPI(backgroundImg)}>
         <TabLabel>영화</TabLabel>
-        <MainBanner id={id} media_type={"movie"} category="popular" />
+        <MainBanner id={id} media_type="movie" category="popular" />
       </MainBannerCoverImage>
       <SlideContainer marginTop="-7rem">{renderSlide}</SlideContainer>
       <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>

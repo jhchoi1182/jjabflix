@@ -31,7 +31,7 @@ const SearchResult = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [isLoading]);
 
   return (
     <SearchResult.Wrapper>

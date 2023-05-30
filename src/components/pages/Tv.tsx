@@ -27,7 +27,7 @@ const Tv = () => {
       backgroundImg,
       id,
     };
-  }, [popular]);
+  }, [popular?.results]);
   const { backgroundImg, id } = memoizedPopular;
 
   /** 슬라이드 렌더링에 사용될 데이터 */
@@ -42,7 +42,7 @@ const Tv = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [PopularTvLoading]);
 
   return PopularTvLoading ? (
     <Loadingspinner />
@@ -50,7 +50,7 @@ const Tv = () => {
     <Wrapper>
       <MainBannerCoverImage bgimg={posterAPI(backgroundImg)}>
         <TabLabel>시리즈</TabLabel>
-        <MainBanner id={id} media_type={"tv"} category="popular" />
+        <MainBanner id={id} media_type="tv" category="popular" />
       </MainBannerCoverImage>
       <SlideContainer marginTop="-7rem">{renderSlide}</SlideContainer>
       <AnimatePresence>{pathnameId && <DetailModalContainer pathnameId={pathnameId} />}</AnimatePresence>

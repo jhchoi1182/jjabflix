@@ -44,7 +44,7 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [TrendingLoading]);
 
   return TrendingLoading ? (
     <Loadingspinner />
