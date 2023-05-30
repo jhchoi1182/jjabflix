@@ -6,14 +6,14 @@ export const flex = (justifyContent = "center", alignItems = "center") => {
     "space-between": "space-between",
     "space-evenly": "space-evenly",
     "flex-start": "flex-start",
-    center: "center",
-    none: "none",
+    "center": "center",
+    "none": "none",
   }[justifyContent];
 
   const alignItemsValue = {
     "flex-start": "flex-start",
-    end: "end",
-    center: "center",
+    "end": "end",
+    "center": "center",
   }[alignItems];
 
   return css`
