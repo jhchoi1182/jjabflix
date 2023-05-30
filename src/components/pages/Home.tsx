@@ -29,7 +29,6 @@ const Home = () => {
     };
   }, [trending?.results]);
   const { backgroundImg, id, mediaType } = memoizedTrending;
-  console.log(Trending.data);
 
   /** 슬라이드 렌더링에 사용될 데이터 */
   const slides: SlideObject[] = [
