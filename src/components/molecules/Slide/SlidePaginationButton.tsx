@@ -77,7 +77,7 @@ const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding?: string 
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
   }
   @media (max-width: 1399px) {
     width: calc(100% / 32);
