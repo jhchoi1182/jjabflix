@@ -34,7 +34,7 @@ const Bookmark = () => {
 export default Bookmark;
 
 Bookmark.Wrapper = styled.div`
-  padding: 76px 60px;
+  padding: 76px 5vw;
   margin-bottom: 40rem;
   @media (max-width: 1099px) {
     margin-bottom: 15rem;
