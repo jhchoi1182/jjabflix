@@ -18,7 +18,7 @@ const MobileNavMenu = () => {
   return (
     <>
       <MobileNavContainer onClick={NavMenuModalHandler}>
-        <label>메뉴</label>
+        <h5>메뉴</h5>
         <span>&#9662;</span>
         {isModal && <NavMenuModal XY={XY} />}
       </MobileNavContainer>
