@@ -6,10 +6,9 @@ import { ArrowProps } from "../../atoms/Icons/NextPrevIcon";
 interface SlideButtonProps extends ArrowProps {
   prevSlide?: () => void;
   nextSlide?: () => void;
-  isSliding: boolean;
 }
 
-const SlidePaginationButton = ({ prevSlide, nextSlide, direction, category, isSliding }: SlideButtonProps) => {
+const SlidePaginationButton = ({ prevSlide, nextSlide, direction, category }: SlideButtonProps) => {
   const { setButtonOpacity } = useButtonOpacity();
 
   return (
@@ -18,7 +17,6 @@ const SlidePaginationButton = ({ prevSlide, nextSlide, direction, category, isSl
       onMouseOver={() => setButtonOpacity(1)}
       onMouseOut={() => setButtonOpacity(0)}
       direction={direction}
-      issliding={isSliding ? "true" : "false"}
     >
       <Arrow direction={direction} category={category} />
     </SlideBtn>
@@ -67,13 +65,13 @@ const next = css`
 
 const directions = { prev, next };
 
-const SlideBtn = styled.button<{ direction: "prev" | "next"; issliding?: string }>`
+const SlideBtn = styled.button<ArrowProps>`
   position: absolute;
   ${({ direction }) => direction && directions[direction]};
   border: none;
   width: calc(100% / 30);
   height: 8.8vw;
-  background-color: ${({ issliding }) => (issliding ? "rgba(0, 0, 0, 0.5)" : "transparent")};
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   cursor: pointer;
   &:hover {

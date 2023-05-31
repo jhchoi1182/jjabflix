@@ -127,19 +127,13 @@ const Slide = ({ title, category, type, ...data }: ISlide) => {
                 media_type={content.media_type ?? type}
                 category={category}
                 totalSlideItemNum={totalSlideItemNum}
-                index={i}
-                isSliding={isSliding}
               />
             );
           })}
         </FlexContainer>
       </AnimatePresence>
-      {page !== 0 && (
-        <SlidePaginationButton category={category} isSliding={isSliding} direction="prev" prevSlide={prevSlide} />
-      )}
-      {page !== maxPage - 1 && (
-        <SlidePaginationButton category={category} isSliding={isSliding} direction="next" nextSlide={nextSlide} />
-      )}
+      {page !== 0 && <SlidePaginationButton category={category} direction="prev" prevSlide={prevSlide} />}
+      {page !== maxPage - 1 && <SlidePaginationButton category={category} direction="next" nextSlide={nextSlide} />}
     </SlideContainer>
   );
 };

@@ -13,9 +13,6 @@ interface ItemImageBannerProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   className?: string;
-  index?: number;
-  totalSlideItemNum?: number;
-  isSliding?: boolean;
 }
 const ItemImageBanner = ({
   className,
@@ -25,9 +22,6 @@ const ItemImageBanner = ({
   poster,
   title,
   name,
-  index,
-  totalSlideItemNum,
-  isSliding,
 }: ItemImageBannerProps) => {
   return (
     <Image
@@ -35,37 +29,20 @@ const ItemImageBanner = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       bgimg={posterAPI(backdrop ?? poster, "w500")}
-      index={index}
-      totalslideitemnum={totalSlideItemNum}
-      issliding={isSliding ? "true" : "false"}
     >
-      <ItemImageBanner.Title
-        index={index}
-        totalslideitemnum={totalSlideItemNum}
-        issliding={isSliding ? "true" : "false"}
-      >
-        {title ?? name}
-      </ItemImageBanner.Title>
+      <ItemImageBanner.Title>{title ?? name}</ItemImageBanner.Title>
     </Image>
   );
 };
 
 export default ItemImageBanner;
 
-const Image = styled(motion.div)<{ bgimg: string; index?: number; totalslideitemnum?: number; issliding?: string }>`
+const Image = styled(motion.div)<{ bgimg: string }>`
   ${ContentCoverImage}
   padding: 12px 10px;
   height: 8.8vw;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  /** 슬라이드를 넘기고 있는 상태가 아닐 때 색상 */
-  ${({ index, totalslideitemnum, bgimg, issliding }) =>
-    index !== undefined &&
-    !issliding &&
-    (index === 0 || index === (totalslideitemnum && totalslideitemnum - 1)) &&
-    css`
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(${bgimg});
-    `}
   @media (max-width: 1399px) {
     height: 13rem;
   }
@@ -80,17 +57,9 @@ const Image = styled(motion.div)<{ bgimg: string; index?: number; totalslideitem
   }
 `;
 
-ItemImageBanner.Title = styled(motion.p)<{ index?: number; totalslideitemnum?: number; issliding?: string }>`
+ItemImageBanner.Title = styled(motion.p)`
   height: 100%;
   ${flex("none", "end")}
   white-space: pre-wrap;
   ${font.RS_title}
-  /** 슬라이드를 넘기고 있는 상태가 아닐 때 색상 */
-  ${({ index, totalslideitemnum, issliding }) =>
-    index !== undefined &&
-    !issliding &&
-    (index === 0 || index === (totalslideitemnum && totalslideitemnum - 1)) &&
-    css`
-      color: #727272;
-    `}
 `;

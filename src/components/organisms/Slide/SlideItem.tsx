@@ -10,8 +10,6 @@ import { ButtonBox, ItemImageBanner, InfoBox, SkeletonCaption, TagBox } from "..
 
 interface ISlideItem extends IContent {
   totalSlideItemNum: number;
-  index: number;
-  isSliding: boolean;
 }
 
 /** 아이템 전체 Variants */
@@ -61,8 +59,6 @@ const SlideItem = ({
   media_type,
   category,
   totalSlideItemNum,
-  index,
-  isSliding,
 }: ISlideItem) => {
   const { setButtonOpacity, setButtonOpacityAfterDelay, setButtonOpacityAfterDelayInvalidation } = useButtonOpacity();
   const queryClient = useQueryClient();
@@ -113,9 +109,6 @@ const SlideItem = ({
         poster={poster_path}
         title={title}
         name={name}
-        index={index}
-        totalSlideItemNum={totalSlideItemNum}
-        isSliding={isSliding}
       />
       <ItemCaptionWrapper variants={captionVariants}>
         {isError ? (
