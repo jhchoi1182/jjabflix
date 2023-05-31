@@ -4,6 +4,7 @@ import { slideItemCountAtom } from "../../lib/atoms";
 
 export const useInnerWidth = () => {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(false);
   const [slideItemCount, setSlideItemCount] = useRecoilState(slideItemCountAtom);
   const { totalSlideItemNum, bothSideExceptSlideItemNum } = slideItemCount;
 
@@ -29,5 +30,10 @@ export const useInnerWidth = () => {
     else return setSlideItemCount({ totalSlideItemNum: 4, bothSideExceptSlideItemNum: 2 });
   }, [innerWidth, setSlideItemCount]);
 
-  return { innerWidth, totalSlideItemNum, bothSideExceptSlideItemNum };
+  useEffect(() => {
+    if (innerWidth >= 800) return setIsMobile(false);
+    if (innerWidth < 800) return setIsMobile(true);
+  }, [innerWidth]);
+
+  return { isMobile, innerWidth, totalSlideItemNum, bothSideExceptSlideItemNum };
 };
