@@ -61,6 +61,6 @@ const Movie = () => {
 export default Movie;
 
 const TabLabel = styled.div`
-  padding: 75px 60px 0;
+  padding: 75px 5vw 0;
   ${font.page_title}
 `;
