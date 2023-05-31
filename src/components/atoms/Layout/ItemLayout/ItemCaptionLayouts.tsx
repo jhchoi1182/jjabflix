@@ -8,6 +8,7 @@ import { theme } from "../../../../styles/theme";
 export const ContentCoverImage = css<{ bgimg: string }>`
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${({ bgimg }) => bgimg});
   background-size: cover;
+  background-position: center center;
 `;
 
 /** 콘텐츠 아이템 상세 정보 레이아웃 */

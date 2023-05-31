@@ -51,6 +51,9 @@ const MedaDataBox = styled.div`
   font-weight: ${fontWeight.Bold};
   gap: 1rem;
   margin-bottom: 0.5rem;
+  @media (max-width: 525px) {
+    display: block;
+  }
 `;
 
 const Overview = styled.p`

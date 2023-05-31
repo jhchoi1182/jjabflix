@@ -62,6 +62,9 @@ const WidthContainer = styled.div`
 const MetaTagBox = styled.div`
   display: flex;
   margin-bottom: 1.7rem;
+  @media (max-width: 940px) {
+    display: block;
+  }
 `;
 
 const ItalicText = styled.span`

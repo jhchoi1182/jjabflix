@@ -50,6 +50,7 @@ export default DetailModalContainer;
 
 const ContentsContainer = styled(motion.div)`
   width: 902.5px;
+  min-width: 400px;
   margin: 30px auto 0px;
   background-color: ${theme.black.darker};
   @media (max-width: 950px) {
