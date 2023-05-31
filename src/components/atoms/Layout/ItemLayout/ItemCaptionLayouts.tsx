@@ -42,6 +42,9 @@ export const Information = styled.div`
   ${font.item_text}
   gap: 0.6rem;
   margin-top: 1.5rem;
+  @media (max-width: 432px) {
+    display: block;
+  }
 `;
 
 /** TagBox의 레이아웃 */

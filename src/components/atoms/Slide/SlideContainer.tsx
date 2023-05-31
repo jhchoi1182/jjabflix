@@ -15,10 +15,9 @@ const ColumnContainer = styled.section<SlideContainerProps>`
   display: flex;
   flex-direction: column;
   margin-top: ${({ marginTop }) => marginTop};
-  margin-bottom: -40px;
   .hiddenSlide {
     opacity: 0;
-    margin-bottom: -290px;
+    margin-bottom: -15vw;
   }
   .showSlide {
     opacity: 1;
