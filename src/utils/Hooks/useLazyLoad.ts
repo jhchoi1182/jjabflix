@@ -11,6 +11,10 @@ export const useLazyLoad = (slideRefs: React.RefObject<HTMLElement>[]) => {
           if (currentIndex === currentSlide) {
             setCurrentSlide((prev) => prev + 1);
           }
+          /** 모바일 예외처리 */
+          if (currentSlide === 1) {
+            setCurrentSlide((prev) => prev + 1);
+          }
         }
       },
       {
