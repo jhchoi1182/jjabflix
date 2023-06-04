@@ -9,9 +9,8 @@ import styled from "styled-components";
 import { font } from "../../styles/Fonts";
 import { MainBannerCoverImage } from "../atoms/UI/MainBannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
-import { useLocalWithDummy, useQueryWithDummy, useRenderSlide } from "../../utils/Hooks";
+import { useLocalWithDummy, useQueryWithDummy, useRenderSlide, SlideObject } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
-import { SlideObject } from "../../utils/Hooks/useRenderSlide";
 
 const Movie = () => {
   const { pathnameId } = useParams();

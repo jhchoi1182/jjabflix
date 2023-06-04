@@ -7,9 +7,8 @@ import { AnimatePresence } from "framer-motion";
 import SlideContainer from "../atoms/Slide/SlideContainer";
 import { MainBannerCoverImage } from "../atoms/UI/MainBannerCoverImage";
 import { Wrapper } from "../atoms/Layout";
-import { useQueryWithDummy, useRenderSlide } from "../../utils/Hooks";
+import { useQueryWithDummy, useRenderSlide, SlideObject } from "../../utils/Hooks";
 import Loadingspinner from "../molecules/Loading/Loadingspinner";
-import { SlideObject } from "../../utils/Hooks/useRenderSlide";
 
 const Home = () => {
   const { pathnameId } = useParams();
