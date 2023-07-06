@@ -1,6 +1,19 @@
 ## ✨ 잡플릭스
 
 넷플릭스 클론 코딩
+특징: 넷플릭스 공식 홈페이지와 똑같음, 넷플릭스 공식 홈페이지의 버그 없음
+
+<details>
+<summary>
+공식 홈페이지 버그
+</summary>
+<div>
+  
+![img](https://github.com/jhchoi1182/jjabflix/assets/116577489/2db70f39-3c22-42df-8b49-3663347b2e7b)
+
+
+</details>
+
 
 <br>
 
